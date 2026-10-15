@@ -1,0 +1,104 @@
+# 固定实验定义 v1；论文未公布随机种子的具体数值。
+experiment_id: neurolm_b_six_tasks_v1
+status: specification_only
+paper:
+  title: "NeuroLM: A Universal Multi-task Foundation Model for Bridging the Gap between Language and EEG Signals"
+  version: arXiv:2409.00101v3
+  url: https://arxiv.org/pdf/2409.00101
+  targets_file: results/paper_neurolm_b.csv
+source_code:
+  repository: https://github.com/935963004/NeuroLM
+  commit: 0cda9876d8ce6ee07ed0c43eee5e9a6f5c24b177
+model:
+  variant: NeuroLM-B
+  parameters_millions_including_vq: 254
+  base_language_model: GPT-2
+  initial_checkpoint:
+    repository: https://huggingface.co/Weibang/NeuroLM
+    revision: eddfff5c64a4139442f826d6c67c8369fd00f45a
+    file: checkpoints/NeuroLM-B.pt
+    sha256: ffe098bc138b89f8817d3710a3604498d8ecd15135080e2ca27735d05c6d29ab
+  vq_checkpoint:
+    file: checkpoints/VQ.pt
+    sha256: e792c39a6a9e6d1bf4604cf63090730424f1d37f942597883d0c0a1375a2663a
+    role: upstream_tokenizer_reference_not_loaded_by_pretrained_instruction_branch
+training:
+  mode: joint_six_task_instruction_tuning
+  evaluation_checkpoint: final_instruction_tuned_model_per_seed
+  paper_prediction_description: largest_logit
+  author_code_prediction: top_k_1_token_generation_then_parse_class
+  evaluation_difference_status: greedy_token_choice_matches_largest_logit_description; answer_parsing_still_requires_audit
+  project_seeds: [42, 43, 44]
+  seed_provenance: project_chosen_paper_reports_three_seeds_without_values
+  author_default_training_seed: 1337
+  author_tuev_preprocessing_seed: 4523
+  text_corpus_split_seed: 2357
+  paper_summary: mean_and_standard_deviation_over_three_runs
+  split_manifest_policy: record_train_val_test_ids_and_sha256_for_each_realized_split_before_training
+  measured_results_file: results/measured_neurolm_b.csv
+  instruction_tuning_paper:
+    global_eeg_batch_size: 512
+    global_text_batch_size: 128
+    peak_learning_rate: 0.0005
+    min_learning_rate: 0.00005
+    scheduler: cosine
+    optimizer: AdamW
+    betas: [0.9, 0.95]
+    weight_decay: 0.1
+    epochs: 5
+    warmup_ratio: 0.1
+    gradient_clip_norm: 1
+  author_cli_defaults_per_process:
+    eeg_batch_size: 64
+    text_batch_size: 16
+    gradient_accumulation_steps: 1
+    num_workers: 10
+    block_size: 1024
+    eval_batch_multiplier: 1.5
+    eeg_max_len: 276
+    text_max_len: 80
+    train_drop_last: true
+metric_implementation_at_pinned_code:
+  balanced_accuracy: sklearn.metrics.balanced_accuracy_score_on_predicted_classes
+  auc_pr: sklearn.metrics.average_precision_score_on_binary_parsed_class_0_or_1
+  auroc: sklearn.metrics.roc_auc_score_on_binary_parsed_class_0_or_1
+  cohen_kappa: sklearn.metrics.cohen_kappa_score_on_predicted_classes
+  weighted_f1: sklearn.metrics.f1_score_average_weighted_on_predicted_classes
+datasets:
+  TUAB:
+    task: abnormal_detection
+    classes: 2
+    split: original_test_set; original_training_patients_random_80_20_train_val
+    split_unit: patient
+    metrics: [balanced_accuracy, auc_pr, auroc]
+  TUEV:
+    task: event_type_classification
+    classes: 6
+    split: original_test_set; original_training_patients_random_80_20_train_val
+    split_unit: patient
+    metrics: [balanced_accuracy, cohen_kappa, weighted_f1]
+  SEED:
+    task: emotion_recognition
+    classes: 3
+    split: chronological_trials_1_to_9_train_10_to_12_val_13_to_15_test_per_session_then_merge_sessions
+    split_unit: trial_within_session
+    metrics: [balanced_accuracy, cohen_kappa, weighted_f1]
+  HMC:
+    task: sleep_stage_classification
+    classes: 5
+    split: first_100_subjects_train_next_25_val_last_26_test_in_paper_order
+    split_unit: subject
+    metrics: [balanced_accuracy, cohen_kappa, weighted_f1]
+  Workload:
+    task: workload_detection
+    classes: 2
+    split: subjects_0_to_25_train_26_to_30_val_31_to_35_test
+    split_unit: subject
+    metrics: [balanced_accuracy, auc_pr, auroc]
+  TUSL:
+    task: slowing_event_classification
+    classes: 3
+    split: source_file_order_first_60pct_train_next_20pct_test_final_20pct_val
+    split_unit: source_edf_file
+    split_warning: source_files_are_not_sorted_before_slicing; exact_membership_is_not_reproducible_without_manifest
+    metrics: [balanced_accuracy, cohen_kappa, weighted_f1]

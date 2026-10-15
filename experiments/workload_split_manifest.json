@@ -1,0 +1,56 @@
+{
+  "train": {
+    "samples": 1508,
+    "subjects": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25
+    ],
+    "filenames_sha256": "3458c28a3a8aa21753befb31f279be1f92f0fa2487ee476446e44c09cc6bbb4f"
+  },
+  "eval": {
+    "samples": 290,
+    "subjects": [
+      26,
+      27,
+      28,
+      29,
+      30
+    ],
+    "filenames_sha256": "e90f06063c9eecf5fe573aedf4af897ce09e2436c95cb11445743bf425cf2188"
+  },
+  "test": {
+    "samples": 290,
+    "subjects": [
+      31,
+      32,
+      33,
+      34,
+      35
+    ],
+    "filenames_sha256": "cabb5759ca1904c62f1adad65ffaa7f7dd443dd738190289e1f49e274e1c74cf"
+  }
+}

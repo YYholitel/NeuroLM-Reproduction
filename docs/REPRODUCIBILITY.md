@@ -14,12 +14,22 @@
 | 项目 | 论文或作者说明 | 本次实测（2026-10-15） |
 | --- | --- | --- |
 | GPU | 论文：8 × A100 80 GB | 8 × RTX 3090 24 GB |
-| Python | 论文：3.11.8；作者 README：3.12 | `python3` 3.10.12；尚未创建隔离环境 |
-| PyTorch / CUDA | 论文：2.2.2 / 12.1；作者 README：2.5.0 / 12.4 | 待检查和安装 |
-| 包管理 | 作者 README 使用 conda | 数据盘上已找到 conda；非交互 SSH 环境的 `PATH` 中未包含它 |
+| Python | 论文：3.11.8；作者 README：3.12 | 数据盘独立环境：3.11.8 |
+| PyTorch / CUDA | 论文：2.2.2 / 12.1；作者 README：2.5.0 / 12.4 | 2.2.2 / 12.1；CUDA 已识别 |
+| 包管理 | 作者 README 使用 conda | 使用数据盘上的 conda 建立独立环境；包缓存与临时文件在数据盘 |
 | 存储 | 论文未说明 | 系统盘空间紧张；数据盘有可用空间，具体工作目录保留在本地运维记录 |
 
-论文及作者 README 的环境版本不同。首次复现将记录最终采用的组合、安装命令与版本锁定文件。
+论文及作者 README 的环境版本不同。本次采用论文的 Python/PyTorch/CUDA 版本。`conda` 默认解出的 MKL 2025 使 PyTorch 2.2.2 导入报 `iJIT_NotifyEvent`；按 [PyTorch issue](https://github.com/pytorch/pytorch/issues/123097)固定 MKL 2023.1.0（低于有问题的 2024.1）及 NumPy 1.26.4 后，PyTorch、CUDA、MNE 和其余主要依赖导入成功，`pip check` 无冲突。作者 README 中的 torchvision/torchaudio 最初随 conda 依赖进入环境，但实验入口无需调用它们。
+
+直接依赖版本见 [`env/requirements.txt`](../env/requirements.txt)，当前 Linux conda 包的显式列表见 [`env/conda-linux-64.lock`](../env/conda-linux-64.lock)，已安装 Python 包的版本快照见 [`env/pip-versions.lock`](../env/pip-versions.lock)。后两者是本次环境快照；在其他主机重建时仍须检查平台和包源可用性。
+
+## 最小运行记录（2026-10-15）
+
+1. 从固定修订下载并校验 B 与 VQ 权重。B 权重以 `scripts/smoke_model_load.py` 在加载前再次核对 SHA-256，然后对模型权重执行 `strict=True` 加载。
+2. 从 [PhysioNet EEGMAT v1.0.0](https://physionet.org/content/eegmat/1.0.0/) 下载 72 份 EDF，并用来源的 `SHA256SUMS.txt` 校验。作者 Workload 预处理仅应用 [`0001-workload-paths.patch`](../patches/0001-workload-paths.patch) 参数化路径；实际输出 1508/290/290 个样本，划分摘要见[清单](../experiments/workload_split_manifest.json)。
+3. `scripts/smoke_model_load.py` 使用 B 起始权重、PyTorch 2.2.2 和一张 RTX 3090，完成文本前向（输入 `[1,8]`，logits `[1,1,58496]`），再对测试集两条真实 EEG 样本贪心生成 5 个 token 并调用作者 `get_pred()`。`Subject31_1-0.pkl` 的标签为 0、解析预测为 `-1`；`Subject31_2-0.pkl` 的标签为 1、解析预测也为 `-1`。命令退出码 0，标准错误为空。运行输出保存在服务器数据盘；公开仓库只记录不含 EEG 内容的摘要。
+
+这两条样本只验证了数据加载、模型生成及答案解析链路。`-1` 是作者解析器未识别生成答案的返回值，既不算正确预测，也不构成 Workload 测试集指标。B 权重仍需六任务联合指令微调，才能与论文表 2–4 对照。
 
 ## 尚需补齐的证据
 

@@ -17,3 +17,10 @@
 
 - 仓库：[YYholitel/NeuroLM-Reproduction](https://github.com/YYholitel/NeuroLM-Reproduction)。
 - 仅公开脚本、配置、日志摘要与可分享结果；原始 EEG、权重、凭据和内部服务器路径不进入 Git 历史。
+
+## 2026-10-15：先以 Workload 验证数据到模型链路
+
+- 采用 PhysioNet 开放访问的 EEGMAT v1.0.0 固定版本，先按来源 SHA-256 校验，再运行作者 Workload 预处理。
+- 作者脚本的输入与输出硬编码路径由独立补丁参数化；排序、窗口和受试者划分逻辑未修改。
+- Workload 的原始文件及预处理结果仅在服务器数据盘，公开仓库只保留命令、补丁、受试者划分和校验摘要。
+- 使用预训练起始 B 权重做的加载或推理只算运行链路烟测，不作为论文表 2–4 的复现数值。
