@@ -8,6 +8,8 @@
 
 - 先验证 NeuroLM-B 的完整运行链路，再按数据可用性复现六项下游任务与三次随机种子结果。
 - [论文指标对照](docs/PAPER_TARGETS.md)
+- [数据清单](docs/DATASETS.md)与[作者权重](docs/WEIGHTS.md)
+- [作者代码审计](docs/CODE_AUDIT.md)
 - [项目进度](docs/STATUS.md)
 - [复现步骤与环境记录](docs/REPRODUCIBILITY.md)
 - [范围与协作](docs/PROJECT_CHARTER.md)
