@@ -1,0 +1,29 @@
+diff --git a/train_instruction.py b/train_instruction.py
+--- a/train_instruction.py
++++ b/train_instruction.py
+@@ -493,6 +493,7 @@ def evaluate(model, dataset_info, dataloader, decode):
+     model.eval()
+     preds = []
+     targets = []
++    parse_failures = 0
+     for _, (batch) in enumerate(dataloader):
+         X_eeg, X_text, label, input_chans, input_time, input_mask, gpt_mask = batch
+         X_eeg = X_eeg.float().to(device, non_blocking=True)
+@@ -509,7 +510,9 @@ def evaluate(model, dataset_info, dataloader, decode):
+             for i, t in enumerate(text):
+                 pred_string = decode(t.tolist())
+ 
+                 pred = get_pred(pred_string, dataset_info)
++                if pred == -1:
++                    parse_failures += 1
+                 if not dataset_info['is_binary']:
+                     pred = np.eye(dataset_info['num_classes'])[pred]
+                 preds.append(pred)
+@@ -521,6 +524,7 @@ def evaluate(model, dataset_info, dataloader, decode):
+     targets = torch.cat(targets, dim=0).numpy()
+     preds = np.array(preds)
+     results = get_metrics(preds, targets, dataset_info['metrics'], dataset_info['is_binary'])
++    results['parse_failures'] = parse_failures
+ 
+     return results
+ 

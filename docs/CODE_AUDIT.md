@@ -21,7 +21,7 @@ Workload 预处理脚本的原始输入路径为作者机器上的固定绝对�
 
 - 固定提交的 `evaluate()` 调用 `model.generate()`，解码后由 `get_pred()` 解析类别。`generate()` 默认 `top_k=1`，逐 token 保留最大 logit，与论文第 3.2 节的选取最大 logit 描述相符；答案解析仍需单独核查。
 - TUAB、Workload 的 `pr_auc` 与 `roc_auc` 分别调用 sklearn 的 `average_precision_score`、`roc_auc_score`，但输入是解析后的 0/1 类别，因此仅有两个分数档位。与使用连续概率计算的曲线面积不应混用。
-- 多分类任务把解析类别变成 one-hot 后计算 balanced accuracy、Cohen's kappa 和 weighted F1。若解析失败，`get_pred()` 返回 `-1`，`np.eye(num_classes)[-1]` 会把它当作最后一类；运行时应记录解析失败数。
+- 多分类任务把解析类别变成 one-hot 后计算 balanced accuracy、Cohen's kappa 和 weighted F1。若解析失败，`get_pred()` 返回 `-1`，`np.eye(num_classes)[-1]` 会把它当作最后一类；正式评估应另存生成文本及解析失败数，再核对指标，不可只保留聚合值。[`0004-parse-failure-count.patch`](../patches/0004-parse-failure-count.patch)仅在返回的评估字典中增加 `parse_failures` 计数，不改变作者指标计算。
 
 ## 后续审计
 
