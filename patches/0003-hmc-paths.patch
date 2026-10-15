@@ -1,0 +1,25 @@
+diff --git a/dataset_maker/prepare_HMC.py b/dataset_maker/prepare_HMC.py
+--- a/dataset_maker/prepare_HMC.py
++++ b/dataset_maker/prepare_HMC.py
+@@ -9,5 +9,6 @@
+ import pickle
+ import pandas as pd
++import argparse
+ 
+ drop_channels = ['EMG chin', 'EOG E1-M2', 'EOG E2-M2', 'ECG']
+ chOrder_standard = ['EEG F4-M1', 'EEG C4-M1', 'EEG O2-M1', 'EEG C3-M2']
+@@ -93,8 +94,12 @@
+         pickle.dump(object, f)
+ 
+ 
+-root = "/D_data/weibangjiang/HMC/physionet.org/files/hmc-sleep-staging/1.1/recordings"
+-out_dir = '../teamdrive/HMC'
++parser = argparse.ArgumentParser()
++parser.add_argument('--raw_dir', required=True)
++parser.add_argument('--out_dir', required=True)
++args = parser.parse_args()
++root = args.raw_dir
++out_dir = args.out_dir
+ train_out_dir = os.path.join(out_dir, "train")
+ eval_out_dir = os.path.join(out_dir, "eval")
+ test_out_dir = os.path.join(out_dir, "test")
