@@ -18,6 +18,12 @@
 - SEED 官方[下载说明](https://bcmi.sjtu.edu.cn/home/seed/downloads.html)要求提交签署的许可协议并经审核；[许可协议](https://bcmi.sjtu.edu.cn/~seed/resource/license/license.pdf)限制使用与分发。项目使用者表示机构已有授权，但授权由他人办理，尚无可核对的授权范围或候选副本来源记录。该目录暂不计为已准备数据，也不用于实验。
 - 专用数据目录仍未找到六项任务所需的预处理文件。其余共享卷候选尚无足以确认论文版本的数据与许可记录。
 
+## 2026-10-20 共享卷补充核验
+
+- 共享数据集合中找到 TUAB v3.0.1、TUEV v2.0.1、TUSL v2.0.1 的 EDF 原始文件，当前只读计数分别为 2993、518、112。集合的迁移说明显示这些文件从旧共享目录搬迁而来；另一共享卷也有相同版本的目录。尚未核验两处副本是否一致、是否完整、申请人的使用范围，以及它们与论文实际版本及划分是否一致。原始文件未复制到项目目录，也未用于训练。
+- 作者 TUAB 预处理脚本指定 v3.0.0；共享卷主版本为 v3.0.1。其随附说明称 v3.0.1 修改 EDF 文件头、信号数据未变，但仍须记录此版本差异并实测预处理结果。
+- 共享卷的 SEED 系列集合含 SEED-V、SEED-IV 等变体；另有两个名为 SEED 的归档临时目录，主要包含 `.mat` 特征和预处理文件。对这两个目录的扫描未发现作者预处理所需的 `.cnt`。SEED-V 等变体的 `.cnt` 不能当作论文所用原版 SEED；许可范围也尚未核实。
+
 ## Workload 原始数据
 
 - 来源：[PhysioNet EEG During Mental Arithmetic Tasks v1.0.0](https://physionet.org/content/eegmat/1.0.0/)，开放访问，Open Data Commons Attribution License v1.0。固定版本含 36 名受试者、每人休息与心算各 1 份 EDF，共 72 份。
