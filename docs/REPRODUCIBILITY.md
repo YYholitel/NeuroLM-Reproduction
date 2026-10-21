@@ -31,6 +31,25 @@
 
 这两条样本只验证了数据加载、模型生成及答案解析链路。`-1` 是作者解析器未识别生成答案的返回值，既不算正确预测，也不构成 Workload 测试集指标。B 权重仍需六任务联合指令微调，才能与论文表 2–4 对照。
 
+2026-10-21 另对 TUAB、TUEV、TUSL 预处理输出分别用作者对应的 `downstream_dataset.py` 指令加载器读取一个真实样本。TUAB/TUEV 返回 7 个张量；EEG 张量为 `276×200`，文本输入与目标各为 80 token，说明输出键和训练入口的样本接口衔接。TUSL 的单文件与全量输出也通过加载检查。这些检查不产生模型预测或论文指标。
+
+## 2026-10-21 数据准备入口
+
+TUH 三套原始副本使用 `rsync -rtcn` 与共享来源逐文件比较通过；患者/文件划分的计数与哈希见[数据清单](DATASETS.md)。TUAB 需依次应用 [`0006`](../patches/0006-tuh-preprocess.patch) 和 [`0008`](../patches/0008-tuab-patient-split.patch)；TUSL 需应用 `0006` 和 [`0007`](../patches/0007-tusl-output-stem.patch)。这些补丁只用于固定作者提交的独立源码副本。
+
+文本准备依次应用 [`0005`](../patches/0005-text-output-revision.patch) 和 [`0009`](../patches/0009-text-local-parquet.patch)。固定修订的 80 份 Parquet 在数据盘按原编号排序，元数据合计 8,013,769 行；其中经本机传输的 16 份已在服务器逐份通过 SHA-256 对照。运行命令模板如下，`DATA_ROOT` 与 `RUN_ROOT` 均应位于有充足空间的数据盘：
+
+```bash
+python text_dataset_maker/prepare.py \
+  --local_parquet_dir "$DATA_ROOT/raw/openwebtext-parquet" \
+  --out_dir "$DATA_ROOT/text" \
+  --revision 79d93d786212f7344586290adb811d4ae6a1762c \
+  --download_workers 1
+ln -s "$DATA_ROOT/text" "$RUN_ROOT/text"
+```
+
+作者指令入口从 `--out_dir/text/` 读取 `train.bin` 和 `val.bin`，因此运行目录中的 `text` 链接指向数据目录；训练输出与原始数据仍分别存放。文本二进制文件生成完毕后使用 [`verify_text_bins.py`](../scripts/verify_text_bins.py) 记录大小、token 数和 SHA-256。
+
 ## 单步训练与显存探针（2026-10-15）
 
 [`scripts/probe_train_step.py`](../scripts/probe_train_step.py)以已校验的 B 权重初始化模型，取一条真实的 Workload 训练样本，配一批确定性的**合成文本**，按作者训练入口计算 EEG 指令损失与文本损失之和，完成一次反向传播、梯度裁剪及 AdamW 更新。探针不写权重，不使用 OpenWebText，重复样本仅用于测显存，不构成论文训练或结果。
