@@ -40,7 +40,7 @@
 
 - 官方 v1.1 `RECORDS` 列出 151 份 `recordings/SN*.edf`；同一目录下有对应 `_sleepscoring.txt`，来源 `SHA256SUMS.txt` 为两类文件提供校验值。许可文件为 CC BY 4.0。
 - `SN001.edf` 文件头列出四个 `EEG F4-M1 / C4-M1 / O2-M1 / C3-M2` 通道，以及作者脚本要丢弃的 EMG、两路 EOG 和 ECG；其标注文本列名及 30 秒睡眠阶段行与作者脚本读取方式一致。
-- [`scripts/download_hmc.sh`](../scripts/download_hmc.sh)按清单获取 151 组 EDF 与标注文本，逐文件对照官方 SHA-256。服务器下载日志于 2026-10-16 记录“Verified 151 HMC v1.1 EDF and sleep scoring text pairs against PhysioNet SHA256SUMS.txt”；2026-10-20 只读复核确认目录中有 151 份 EDF、151 份标注文件。2026-10-21 作者预处理脚本在独立源码副本中运行结束，输出训练/验证/测试窗口 91,248/22,124/23,871，总计 137,243；各划分分别含 100/25/26 名受试者，日志没有出现异常窗口提示。抽查样本字段为 `X`、`ch_names`、`y`，`X` 形状为 4×6000。
+- [`scripts/download_hmc.sh`](../scripts/download_hmc.sh)按清单获取 151 组 EDF 与标注文本，逐文件对照官方 SHA-256。服务器下载日志于 2026-10-16 记录“Verified 151 HMC v1.1 EDF and sleep scoring text pairs against PhysioNet SHA256SUMS.txt”；2026-10-20 只读复核确认目录中有 151 份 EDF、151 份标注文件。2026-10-21 作者预处理脚本在独立源码副本中运行结束，输出训练/验证/测试窗口 91,248/22,124/23,871，总计 137,243；各划分分别含 100/25/26 名受试者，日志没有出现异常窗口提示。抽查样本字段为 `X`、`ch_names`、`y`，`X` 形状为 4×6000；作者 `HMCLoader` 已成功读取并形成 7 个训练输入张量。
 - [`0003-hmc-paths.patch`](../patches/0003-hmc-paths.patch)只把作者 HMC 预处理脚本的输入、输出绝对路径改为参数，未改动滤波、标签或划分逻辑。当前只核对了受试者数和窗口计数；逐样本标签及划分清单仍待保存。
 
 作者代码还读取 `--out_dir/text/train.bin`，这是语言数据的 token 文件，并非上述六个 EEG 数据集之一。作者 `text_dataset_maker/prepare.py` 使用 OpenWebText，预计先产生约 54 GB 下载缓存，再产生约 17 GB 的 `train.bin`；其输出目录与训练入口期望目录不同，须显式衔接并记录文件校验。
