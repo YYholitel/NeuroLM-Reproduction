@@ -1,6 +1,6 @@
 # 作者代码审计
 
-审计版本：作者仓库提交 `0cda9876d8ce6ee07ed0c43eee5e9a6f5c24b177`。以下为静态代码检查结果，尚未执行训练。
+审计版本：作者仓库提交 `0cda9876d8ce6ee07ed0c43eee5e9a6f5c24b177`。以下为代码检查结果；已运行单步显存探针，尚未执行论文所需完整训练。
 
 ## 指令微调入口
 
@@ -13,10 +13,11 @@
 
 ## 数据目录接口
 
-详见[数据清单](DATASETS.md)。Workload/HMC 已预处理；TUAB/TUEV/TUSL 原始副本已复制，仍需完成内容校验、授权范围核对及预处理；SEED 尚缺作者代码所需输入。
+详见[数据清单](DATASETS.md)。Workload/HMC/TUSL 已预处理；TUAB/TUEV 原始副本已复制，仍需完成内容校验、授权范围核对及预处理；SEED 尚缺作者代码所需输入。
 SEED 预处理脚本要求原始 `.cnt`，并含固定的绝对输入与输出路径；共享卷发现的 `.mat` 候选不能直接用于该脚本或训练入口。
 Workload 预处理脚本的原始输入路径为作者机器上的固定绝对路径；[`0001-workload-paths.patch`](../patches/0001-workload-paths.patch)增加 `--raw_dir` 与 `--out_dir`，保留原有预处理及排序划分逻辑。
 三个 TUH 预处理脚本也含作者机器上的固定路径。[`0006-tuh-preprocess.patch`](../patches/0006-tuh-preprocess.patch)参数化输入输出；TUAB 固定种子并排序受试者、TUEV 固定遍历及划分顺序、TUSL 固定文件排序，因此可能与作者未记录的实际划分不同。TUSL 一份 EDF 的对应标注扩展名为 `.tse_ag`，补丁仅在 `.tse_agg` 不存在时读取该文件。正式运行须保存划分清单并明确这些差异。
+TUSL 全量试运行还发现 `fname.split(".")[0]` 在 `v2.0.1` 路径上截断为 `v2`，覆盖同一目录的所有样本。[`0007-tusl-output-stem.patch`](../patches/0007-tusl-output-stem.patch)改为 EDF basename 的 stem；修复后独立重跑得到 245 个样本，旧碰撞输出保留在服务器审计目录。作者脚本的 `-REF` 通道检查跳过 24 份 `tcp_le` EDF，未放宽此检查；见[划分清单](../experiments/tusl_split_manifest.json)。
 
 ## 指标实现与论文口径
 

@@ -1,5 +1,5 @@
 diff --git a/text_dataset_maker/prepare.py b/text_dataset_maker/prepare.py
-index 2a9b975..7d3ebd1 100644
+index 2a9b975..c59e78e 100644
 --- a/text_dataset_maker/prepare.py
 +++ b/text_dataset_maker/prepare.py
 @@ -2,6 +2,8 @@
@@ -11,23 +11,26 @@ index 2a9b975..7d3ebd1 100644
  from tqdm import tqdm
  import numpy as np
  import tiktoken
-@@ -19,8 +21,14 @@ num_proc_load_dataset = num_proc
+@@ -19,8 +21,17 @@ num_proc_load_dataset = num_proc
  enc = tiktoken.get_encoding("gpt2")
  
  if __name__ == '__main__':
 +    parser = argparse.ArgumentParser()
 +    parser.add_argument('--out_dir', type=Path, default=Path(__file__).parent)
 +    parser.add_argument('--revision', default=None)
++    parser.add_argument('--download_workers', type=int, default=num_proc_load_dataset)
 +    args = parser.parse_args()
++    if args.download_workers < 1:
++        parser.error('--download_workers must be positive')
 +    args.out_dir.mkdir(parents=True, exist_ok=True)
 +
      # takes 54GB in huggingface .cache dir, about 8M documents (8,013,769)
 -    dataset = load_dataset("openwebtext", num_proc=num_proc_load_dataset)
-+    dataset = load_dataset("openwebtext", revision=args.revision, num_proc=num_proc_load_dataset)
++    dataset = load_dataset("openwebtext", revision=args.revision, num_proc=args.download_workers)
  
      # owt by default only contains the 'train' split, so create a test split
      split_dataset = dataset["train"].train_test_split(test_size=0.0005, seed=2357, shuffle=True)
-@@ -58,7 +66,7 @@ if __name__ == '__main__':
+@@ -58,7 +69,7 @@ if __name__ == '__main__':
      # concatenate all the ids in each dataset into one large file we can use for training
      for split, dset in tokenized.items():
          arr_len = np.sum(dset['len'], dtype=np.uint64)

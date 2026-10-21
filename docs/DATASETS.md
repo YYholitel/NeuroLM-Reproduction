@@ -9,7 +9,7 @@
 | SEED | `h5data/seed-3.hdf5` | 每个 session 的试次按时间顺序 9:3:3 | 未准备 |
 | HMC | `HMC/{train,eval,test}` | 前 100 人训练、中间 25 人验证、后 26 人测试 | v1.1 原始 151 组已校验；预处理完成，输出 91,248/22,124/23,871 个窗口；尚无论文指标 |
 | Workload | `EEGWorkload/{train,eval,test}` | 受试者 0–25 训练、26–30 验证、31–35 测试 | 原始文件校验、预处理、划分计数及起始权重烟测已完成；尚无论文指标 |
-| TUSL | `TUSL/{train,eval,test}` | 60%/20%/20% | v2.0.1 原始副本已放在服务器数据盘，复制校验及预处理待完成 |
+| TUSL | `TUSL/{train,eval,test}` | 60%/20%/20% | v2.0.1 原始副本内容比较通过；按固定排序预处理得 119/66/60 个样本，24 份 EDF 被作者通道检查跳过；尚无论文指标 |
 
 ## 2026-10-15 服务器候选数据核验
 
@@ -22,7 +22,9 @@
 
 - 共享数据集合中找到 TUAB v3.0.1、TUEV v2.0.1、TUSL v2.0.1 的 EDF 原始文件，计数分别为 2993、518、112。集合的迁移说明显示这些文件从旧共享目录搬迁而来；另一共享卷也有相同版本的目录。2026-10-21 已从该共享集合复制到服务器项目数据盘，对应 EDF 计数为 2993、518、112；逐文件内容比较仍在运行。申请人的使用范围、两处共享副本是否一致，以及它们与论文实际版本及划分是否一致，尚未核实；未用于训练。
 - 作者 TUAB 预处理脚本指定 v3.0.0；共享卷主版本为 v3.0.1。其随附说明称 v3.0.1 修改 EDF 文件头、信号数据未变，但仍须记录此版本差异并实测预处理结果。
+- 作者 TUEV 预处理脚本指定 v2.0.0，当前副本是 v2.0.1；尚无足以证明两版信号与标注完全等价的逐项证据，正式结果必须注明该版本差异。
 - 已制作 [`0006-tuh-preprocess.patch`](../patches/0006-tuh-preprocess.patch)，使三个脚本从项目数据盘读取原始文件、向独立预处理目录写出，并固定此前依赖集合或文件系统顺序的划分。TUEV 的 518 份 EDF 均有同名 `.rec`；TUSL 的 112 份 EDF 中，111 份有 `.tse_agg`，1 份只有同格式的 `.tse_ag`，补丁对后一种名称作回退。上述版本及划分差异尚待实际预处理结果核对。
+- TUSL 原始副本使用 `rsync -rtcn` 与共享源逐文件比较通过。第一次全量预处理发现作者脚本以路径中的第一个句点截取文件名，输入路径含 `v2.0.1` 时产生覆盖；[`0007-tusl-output-stem.patch`](../patches/0007-tusl-output-stem.patch)改为取 EDF basename 的 stem。修复后重新运行，67/23/22 份输入 EDF 分别在训练/验证/测试目录产生 119/66/60 个样本。训练目录的 24 份 `tcp_le` EDF 因作者脚本要求固定的 `-REF` 通道名而被跳过；未改动通道处理。可重查的计数和文件名哈希在[划分清单](../experiments/tusl_split_manifest.json)。该划分与论文实际运行是否相同仍未知。
 - 共享卷的 SEED 系列集合含 SEED-V、SEED-IV 等变体；另有两个名为 SEED 的归档临时目录，主要包含 `.mat` 特征和预处理文件。对这两个目录的扫描未发现作者预处理所需的 `.cnt`。SEED-V 等变体的 `.cnt` 不能当作论文所用原版 SEED；许可范围也尚未核实。
 - 另发现原版三分类 SEED 的 15 个按受试者分开的 HDF5 衍生文件。其说明记录 200 Hz、0.1–75 Hz、50 Hz 陷波及 2 秒无重叠片段；抽查文件为 `trial/segment/eeg` 层级，单段形状 62×400。逐文件元数据检查显示每名受试者有 3 个 session、共 39 个 trial；官方原版说明为每 session 15 个 trial，共 45 个。作者 `SEEDDataset` 则要求单个 `seed-3.hdf5`，每个受试者组含连续 `eeg`、`trialStart`、`trialEnd`、`label` 等属性。这批 HDF5 不能直接传给作者加载器；其原始文件来源、缺少的 trial 和许可范围尚待核对。
 
@@ -44,7 +46,7 @@
 - [`scripts/download_hmc.sh`](../scripts/download_hmc.sh)按清单获取 151 组 EDF 与标注文本，逐文件对照官方 SHA-256。服务器下载日志于 2026-10-16 记录“Verified 151 HMC v1.1 EDF and sleep scoring text pairs against PhysioNet SHA256SUMS.txt”；2026-10-20 只读复核确认目录中有 151 份 EDF、151 份标注文件。2026-10-21 作者预处理脚本在独立源码副本中运行结束，输出训练/验证/测试窗口 91,248/22,124/23,871，总计 137,243；各划分分别含 100/25/26 名受试者，日志没有出现异常窗口提示。抽查样本字段为 `X`、`ch_names`、`y`，`X` 形状为 4×6000；作者 `HMCLoader` 已成功读取并形成 7 个训练输入张量。
 - [`0003-hmc-paths.patch`](../patches/0003-hmc-paths.patch)只把作者 HMC 预处理脚本的输入、输出绝对路径改为参数，未改动滤波、标签或划分逻辑。[`verify_hmc_split.py`](../scripts/verify_hmc_split.py)已核对 151 名受试者按排序后的 100/25/26 划分、每人的窗口编号连续且无重复；[划分清单](../experiments/hmc_split_manifest.json)保存受试者名单、逐人窗口计数及文件名哈希。文件名哈希不代表 EEG 内容校验；逐样本标签尚未审计。
 
-作者代码还读取 `--out_dir/text/train.bin`，这是语言数据的 token 文件，并非上述六个 EEG 数据集之一。作者 `text_dataset_maker/prepare.py` 使用 OpenWebText，预计先产生约 54 GB 下载缓存，再产生约 17 GB 的 `train.bin`。[`0005-text-output-revision.patch`](../patches/0005-text-output-revision.patch)允许固定数据集修订并直接写入训练入口期望目录，不改变分割、分词或二进制格式。2026-10-21 已核对固定修订 `79d93d786212f7344586290adb811d4ae6a1762c` 有 8,013,769 条文本；下载仍在运行，未生成 token 文件。
+作者代码还读取 `--out_dir/text/train.bin`，这是语言数据的 token 文件，并非上述六个 EEG 数据集之一。作者 `text_dataset_maker/prepare.py` 使用 OpenWebText，预计先产生约 54 GB 下载缓存，再产生约 17 GB 的 `train.bin`。[`0005-text-output-revision.patch`](../patches/0005-text-output-revision.patch)允许固定数据集修订、控制下载并发数并直接写入训练入口期望目录，不改变分割、分词或二进制格式。2026-10-21 已核对固定修订 `79d93d786212f7344586290adb811d4ae6a1762c` 有 8,013,769 条文本；服务器对其中部分分片的直连请求失败，改由本机从来源下载后传至服务器数据盘缓存。GPT-2 tokenizer 的两份官方资源经 `tiktoken` 内置 SHA-256 校验后也放入数据盘缓存。尚未生成 token 文件。
 
 ## 数据接收规则
 

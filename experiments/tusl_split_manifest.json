@@ -1,0 +1,53 @@
+{
+  "raw_edf": 112,
+  "splits": {
+    "train": {
+      "input_recordings": 67,
+      "output_recordings": 43,
+      "samples": 119,
+      "skipped_recordings": 24,
+      "input_stem_sha256": "61aa93842473c63a6ecd30d37c427f0b6a456502ee99d5bf89ee6a831536202b",
+      "skipped_stem_sha256": "ff7879bc24575de4cb1d1aef997c7c5a272f22cb6464b31407fb8700afe9d6b5",
+      "labels": {
+        "0": 34,
+        "1": 47,
+        "2": 38
+      },
+      "shapes": {
+        "(23, 2000)": 119
+      }
+    },
+    "test": {
+      "input_recordings": 22,
+      "output_recordings": 22,
+      "samples": 60,
+      "skipped_recordings": 0,
+      "input_stem_sha256": "639dd2c30cbdaa4c52544423bc1d10eab1b5a7bae395fc55d7faa78fc917c3b0",
+      "skipped_stem_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "labels": {
+        "0": 33,
+        "1": 3,
+        "2": 24
+      },
+      "shapes": {
+        "(23, 2000)": 60
+      }
+    },
+    "eval": {
+      "input_recordings": 23,
+      "output_recordings": 23,
+      "samples": 66,
+      "skipped_recordings": 0,
+      "input_stem_sha256": "4edc9c09e148a5dfe6ef9bd1eb7ea5178d03585fb5f3eacf9b2be9e6147ee52e",
+      "skipped_stem_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "labels": {
+        "0": 17,
+        "1": 20,
+        "2": 29
+      },
+      "shapes": {
+        "(23, 2000)": 66
+      }
+    }
+  }
+}

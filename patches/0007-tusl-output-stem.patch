@@ -1,0 +1,11 @@
+diff --git a/dataset_maker/prepare_TUSL.py b/dataset_maker/prepare_TUSL.py
+--- a/dataset_maker/prepare_TUSL.py
++++ b/dataset_maker/prepare_TUSL.py
+@@ -88,6 +88,6 @@ def load_up_objects(fileList, Features, Labels, OutDir):
+             save_pickle(
+                 sample,
+                 os.path.join(
+-                    OutDir, fname.split(".")[0].split("/")[-1] + "-" + str(idx) + ".pkl"
++                    OutDir, os.path.splitext(os.path.basename(fname))[0] + "-" + str(idx) + ".pkl"
+                 ),
+             )
