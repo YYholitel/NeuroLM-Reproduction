@@ -87,7 +87,10 @@ def main():
             row["skipped_stem_sha256"] = sha(missing)
             row["labels_from_source"] = dict(sorted(Counter(str(source[split][name]) for name in stems).items()))
         result["splits"][split] = row
-    assert not ({subject(x) for x in seen["train"]} & {subject(x) for x in seen["val"]})
+    people = {split: {subject(name) for name in stems} for split, stems in seen.items()}
+    for left, right in (("train", "val"), ("train", "test"), ("val", "test")):
+        assert not (people[left] & people[right]), f"patient overlap: {left}/{right}"
+    result["patient_overlap_all_splits"] = 0
     if args.kind == "tuev":
         result["train_input_recordings"] = len(source["train"])
         result["test_input_recordings"] = len(source["test"])

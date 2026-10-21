@@ -27,6 +27,7 @@
       "output_subject_sha256": "ca7376150f26b439135542ab1d16ddcf24052f0f1f36edc9488c6f22489094a6"
     }
   },
+  "patient_overlap_all_splits": 0,
   "train_input_recordings": 359,
   "test_input_recordings": 159,
   "unrepresented_train_recordings": 0,
