@@ -1,15 +1,15 @@
 # 下游数据清单
 
-论文第 3.1 节使用六个数据集。下表目录是作者 `train_instruction.py` 和 `utils.py` 相对 `--dataset_dir` 读取的预处理后布局；原始数据获取方式和实际样本数尚未核对。
+论文第 3.1 节使用六个数据集。下表目录是作者 `train_instruction.py` 和 `utils.py` 相对 `--dataset_dir` 读取的预处理后布局；各项原始数据与样本数的核对进度见下文。
 
 | 数据集 | 代码期望的相对位置 | 论文划分 | 当前状态 |
 | --- | --- | --- | --- |
-| TUAB | `TUAB/processed/{train,val,test}` | 原测试集；训练患者再按 80%/20% 分训练/验证 | 未准备 |
-| TUEV | `TUEV/{processed_train,processed_eval,processed_test}` | 原测试集；训练患者再按 80%/20% 分训练/验证 | 未准备 |
+| TUAB | `TUAB/processed/{train,val,test}` | 原测试集；训练患者再按 80%/20% 分训练/验证 | v3.0.1 原始副本已放在服务器数据盘，复制校验及预处理待完成 |
+| TUEV | `TUEV/{processed_train,processed_eval,processed_test}` | 原测试集；训练患者再按 80%/20% 分训练/验证 | v2.0.1 原始副本已放在服务器数据盘，复制校验及预处理待完成 |
 | SEED | `h5data/seed-3.hdf5` | 每个 session 的试次按时间顺序 9:3:3 | 未准备 |
-| HMC | `HMC/{train,eval,test}` | 前 100 人训练、中间 25 人验证、后 26 人测试 | v1.1 原始 151 组 EDF 与标注已校验；尚未预处理 |
+| HMC | `HMC/{train,eval,test}` | 前 100 人训练、中间 25 人验证、后 26 人测试 | v1.1 原始 151 组已校验；预处理完成，输出 91,248/22,124/23,871 个窗口；尚无论文指标 |
 | Workload | `EEGWorkload/{train,eval,test}` | 受试者 0–25 训练、26–30 验证、31–35 测试 | 原始文件校验、预处理、划分计数及起始权重烟测已完成；尚无论文指标 |
-| TUSL | `TUSL/{train,eval,test}` | 60%/20%/20% | 未准备 |
+| TUSL | `TUSL/{train,eval,test}` | 60%/20%/20% | v2.0.1 原始副本已放在服务器数据盘，复制校验及预处理待完成 |
 
 ## 2026-10-15 服务器候选数据核验
 
@@ -20,7 +20,7 @@
 
 ## 2026-10-20 共享卷补充核验
 
-- 共享数据集合中找到 TUAB v3.0.1、TUEV v2.0.1、TUSL v2.0.1 的 EDF 原始文件，当前只读计数分别为 2993、518、112。集合的迁移说明显示这些文件从旧共享目录搬迁而来；另一共享卷也有相同版本的目录。尚未核验两处副本是否一致、是否完整、申请人的使用范围，以及它们与论文实际版本及划分是否一致。原始文件未复制到项目目录，也未用于训练。
+- 共享数据集合中找到 TUAB v3.0.1、TUEV v2.0.1、TUSL v2.0.1 的 EDF 原始文件，计数分别为 2993、518、112。集合的迁移说明显示这些文件从旧共享目录搬迁而来；另一共享卷也有相同版本的目录。2026-10-21 已从该共享集合复制到服务器项目数据盘，对应 EDF 计数为 2993、518、112；逐文件内容比较仍在运行。申请人的使用范围、两处共享副本是否一致，以及它们与论文实际版本及划分是否一致，尚未核实；未用于训练。
 - 作者 TUAB 预处理脚本指定 v3.0.0；共享卷主版本为 v3.0.1。其随附说明称 v3.0.1 修改 EDF 文件头、信号数据未变，但仍须记录此版本差异并实测预处理结果。
 - 共享卷的 SEED 系列集合含 SEED-V、SEED-IV 等变体；另有两个名为 SEED 的归档临时目录，主要包含 `.mat` 特征和预处理文件。对这两个目录的扫描未发现作者预处理所需的 `.cnt`。SEED-V 等变体的 `.cnt` 不能当作论文所用原版 SEED；许可范围也尚未核实。
 - 另发现原版三分类 SEED 的 15 个按受试者分开的 HDF5 衍生文件。其说明记录 200 Hz、0.1–75 Hz、50 Hz 陷波及 2 秒无重叠片段；抽查文件为 `trial/segment/eeg` 层级，单段形状 62×400。逐文件元数据检查显示每名受试者有 3 个 session、共 39 个 trial；官方原版说明为每 session 15 个 trial，共 45 个。作者 `SEEDDataset` 则要求单个 `seed-3.hdf5`，每个受试者组含连续 `eeg`、`trialStart`、`trialEnd`、`label` 等属性。这批 HDF5 不能直接传给作者加载器；其原始文件来源、缺少的 trial 和许可范围尚待核对。
@@ -34,14 +34,14 @@
 ## 其余数据的官方入口
 
 - [NEDC 的 TUH EEG 数据页面](https://isip.piconepress.com/projects/nedc/html/tuh_eeg/)列有 TUAB、TUEV、TUSL 的当前发布版本和申请流程；页面要求提交访问表并取得专用凭据。当前发布版本不能自动视为论文使用的版本。
-- [PhysioNet HMC sleep staging v1.1](https://physionet.org/content/hmc-sleep-staging/1.1/)为开放访问，含 151 名受试者、下载文件清单和 SHA-256 清单。原始文件已校验；还需核对作者预处理脚本的实际输出与划分。
+- [PhysioNet HMC sleep staging v1.1](https://physionet.org/content/hmc-sleep-staging/1.1/)为开放访问，含 151 名受试者、下载文件清单和 SHA-256 清单。原始文件已校验，预处理输出的受试者数和窗口计数已核对。
 
 ## HMC 原始数据核对（2026-10-20 更新）
 
 - 官方 v1.1 `RECORDS` 列出 151 份 `recordings/SN*.edf`；同一目录下有对应 `_sleepscoring.txt`，来源 `SHA256SUMS.txt` 为两类文件提供校验值。许可文件为 CC BY 4.0。
 - `SN001.edf` 文件头列出四个 `EEG F4-M1 / C4-M1 / O2-M1 / C3-M2` 通道，以及作者脚本要丢弃的 EMG、两路 EOG 和 ECG；其标注文本列名及 30 秒睡眠阶段行与作者脚本读取方式一致。
-- [`scripts/download_hmc.sh`](../scripts/download_hmc.sh)按清单获取 151 组 EDF 与标注文本，逐文件对照官方 SHA-256。服务器下载日志于 2026-10-16 记录“Verified 151 HMC v1.1 EDF and sleep scoring text pairs against PhysioNet SHA256SUMS.txt”；2026-10-20 只读复核确认目录中有 151 份 EDF、151 份标注文件，下载进程已结束。尚未运行作者预处理，因此 HMC 仍不计作可用训练数据。
-- [`0003-hmc-paths.patch`](../patches/0003-hmc-paths.patch)只把作者 HMC 预处理脚本的输入、输出绝对路径改为参数，未改动滤波、标签或划分逻辑。后续需保留实际 100/25/26 名单及窗口计数。
+- [`scripts/download_hmc.sh`](../scripts/download_hmc.sh)按清单获取 151 组 EDF 与标注文本，逐文件对照官方 SHA-256。服务器下载日志于 2026-10-16 记录“Verified 151 HMC v1.1 EDF and sleep scoring text pairs against PhysioNet SHA256SUMS.txt”；2026-10-20 只读复核确认目录中有 151 份 EDF、151 份标注文件。2026-10-21 作者预处理脚本在独立源码副本中运行结束，输出训练/验证/测试窗口 91,248/22,124/23,871，总计 137,243；各划分分别含 100/25/26 名受试者，日志没有出现异常窗口提示。抽查样本字段为 `X`、`ch_names`、`y`，`X` 形状为 4×6000。
+- [`0003-hmc-paths.patch`](../patches/0003-hmc-paths.patch)只把作者 HMC 预处理脚本的输入、输出绝对路径改为参数，未改动滤波、标签或划分逻辑。当前只核对了受试者数和窗口计数；逐样本标签及划分清单仍待保存。
 
 作者代码还读取 `--out_dir/text/train.bin`，这是语言数据的 token 文件，并非上述六个 EEG 数据集之一。作者 `text_dataset_maker/prepare.py` 使用 OpenWebText，预计先产生约 54 GB 下载缓存，再产生约 17 GB 的 `train.bin`；其输出目录与训练入口期望目录不同，须显式衔接并记录文件校验。
 
