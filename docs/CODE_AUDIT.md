@@ -6,6 +6,7 @@
 
 - `train_instruction.py` 的 `main()` 固定依次构建 TUAB、TUEV、SEED、HMC、Workload、TUSL 六个数据集；当前没有选择单个数据集的 CLI 参数。
 - 程序从 `out_dir/text/train.bin` 读取文本 token；即使使用 `--eval_only`，也会先初始化文本批次。作者的 `text_dataset_maker/prepare.py` 使用 OpenWebText，说明文件估计下载缓存约 54 GB、输出训练 token 文件约 17 GB；该脚本把文件写到自身目录，需要另行放到入口期望的 `out_dir/text/`。
+- [`0005-text-output-revision.patch`](../patches/0005-text-output-revision.patch)添加目标目录、固定修订和下载并发参数；[`0009-text-local-parquet.patch`](../patches/0009-text-local-parquet.patch)允许从已核对的 80 份本地 Parquet 加载。后者只改变下载/读取入口，保留作者的 2357 划分种子、GPT-2 编码和 token 写出逻辑；它检查 8,013,769 行，但尚须核对生成 token 的最终数量和散列。
 - `--NeuroLM_path` 默认指向 `checkpoints/NeuroLM-B.pt`，作者 README 将其用于指令微调的起始权重。仅评估该起始权重不能等同于论文表 2–4 的微调结果。
 - `train_instruction.py`、`train_pretrain.py` 和 `train_vq.py` 均使用 `if compile:`，引用 Python 内置函数而不是 `args.compile`；按当前写法会尝试执行 `torch.compile(model)`。修改前需保留补丁并记录差异。
 - `--tokenizer_path` 的默认值为 `checkpoints/VQ.py`，而作者提供的权重文件名是 `VQ.pt`。指令入口从 `NeuroLM-B.pt` 初始化时不会读取这个参数；它只出现在当前不可由 CLI 选择的 `init_from == 'gpt'` 分支。B 权重自身的 `model` 中已有 tokenizer 参数。补丁仍修正默认扩展名，避免以后启用该分支时读取错误文件。
@@ -17,6 +18,7 @@
 SEED 预处理脚本要求原始 `.cnt`，并含固定的绝对输入与输出路径；共享卷发现的 `.mat` 候选不能直接用于该脚本或训练入口。
 Workload 预处理脚本的原始输入路径为作者机器上的固定绝对路径；[`0001-workload-paths.patch`](../patches/0001-workload-paths.patch)增加 `--raw_dir` 与 `--out_dir`，保留原有预处理及排序划分逻辑。
 三个 TUH 预处理脚本也含作者机器上的固定路径。[`0006-tuh-preprocess.patch`](../patches/0006-tuh-preprocess.patch)参数化输入输出；TUAB 固定种子并排序受试者、TUEV 固定遍历及划分顺序、TUSL 固定文件排序，因此可能与作者未记录的实际划分不同。TUSL 一份 EDF 的对应标注扩展名为 `.tse_ag`，补丁仅在 `.tse_agg` 不存在时读取该文件。正式运行须保存划分清单并明确这些差异。
+TUAB 首次全量运行发现：原始训练集有 54 名患者同时出现在正常与异常文件夹，作者脚本对两类分别执行 80%/20% 划分，导致 21 名患者同时进入训练和验证输出。该运行已保留为审计证据，不能作为患者独立验证集。[`0008-tuab-patient-split.patch`](../patches/0008-tuab-patient-split.patch)改为合并患者 ID 后统一按种子 4523 划分，再将各类记录分配到对应集合；这是对作者代码的实质性划分修正，须与原实现结果分开报告。
 TUSL 全量试运行还发现 `fname.split(".")[0]` 在 `v2.0.1` 路径上截断为 `v2`，覆盖同一目录的所有样本。[`0007-tusl-output-stem.patch`](../patches/0007-tusl-output-stem.patch)改为 EDF basename 的 stem；修复后独立重跑得到 245 个样本，旧碰撞输出保留在服务器审计目录。作者脚本的 `-REF` 通道检查跳过 24 份 `tcp_le` EDF，未放宽此检查；见[划分清单](../experiments/tusl_split_manifest.json)。
 
 ## 指标实现与论文口径

@@ -1,0 +1,42 @@
+diff --git a/dataset_maker/prepare_TUAB.py b/dataset_maker/prepare_TUAB.py
+--- a/dataset_maker/prepare_TUAB.py
++++ b/dataset_maker/prepare_TUAB.py
+@@ -99,27 +99,25 @@
+     out_root = args.out_dir
+     channel_std = "01_tcp_ar"
+ 
+-    # train, val abnormal subjects
++    # Group all training recordings by patient before splitting. Some patients
++    # appear in both class folders, so class-wise splitting leaks patients.
+     train_val_abnormal = os.path.join(root, "train", "abnormal", channel_std)
+     train_val_a_sub = sorted(
+         set([item.split("_")[0] for item in os.listdir(train_val_abnormal)])
+     )
+-    np.random.shuffle(train_val_a_sub)
+-    train_a_sub, val_a_sub = (
+-        train_val_a_sub[: int(len(train_val_a_sub) * 0.8)],
+-        train_val_a_sub[int(len(train_val_a_sub) * 0.8) :],
+-    )
+-
+-    # train, val normal subjects
+     train_val_normal = os.path.join(root, "train", "normal", channel_std)
+     train_val_n_sub = sorted(
+         set([item.split("_")[0] for item in os.listdir(train_val_normal)])
+     )
+-    np.random.shuffle(train_val_n_sub)
+-    train_n_sub, val_n_sub = (
+-        train_val_n_sub[: int(len(train_val_n_sub) * 0.8)],
+-        train_val_n_sub[int(len(train_val_n_sub) * 0.8) :],
+-    )
++    all_subjects = sorted(set(train_val_a_sub) | set(train_val_n_sub))
++    np.random.shuffle(all_subjects)
++    split_at = int(len(all_subjects) * 0.8)
++    train_subjects = set(all_subjects[:split_at])
++    val_subjects = set(all_subjects[split_at:])
++    train_a_sub = sorted(train_subjects & set(train_val_a_sub))
++    val_a_sub = sorted(val_subjects & set(train_val_a_sub))
++    train_n_sub = sorted(train_subjects & set(train_val_n_sub))
++    val_n_sub = sorted(val_subjects & set(train_val_n_sub))
+ 
+     # test abnormal subjects
+     test_abnormal = os.path.join(root, "eval", "abnormal", channel_std)

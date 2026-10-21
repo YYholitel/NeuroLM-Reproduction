@@ -1,0 +1,34 @@
+{
+  "kind": "tuev",
+  "seed": 4523,
+  "splits": {
+    "train": {
+      "input_recordings": 359,
+      "output_recordings": 286,
+      "samples": 68270,
+      "output_subjects": 232,
+      "output_stem_sha256": "7518d73f5641e687d3eab2c61d624dc16d36566b69a495d9a183be3c2a7ea5da",
+      "output_subject_sha256": "2aed943e2f54074b21abfc1cbb84f027c735666a8b8c30cabe5b89fcf8c3f83f"
+    },
+    "val": {
+      "input_recordings": 359,
+      "output_recordings": 73,
+      "samples": 15662,
+      "output_subjects": 58,
+      "output_stem_sha256": "b5933c94603737cc92c6bc9aa80a78041f3cc300421485d0c645edeb0f76a6c1",
+      "output_subject_sha256": "99b86354ede32293c5736007e7666cc1f8c64113c9ee12048a4bc3dc397bb21e"
+    },
+    "test": {
+      "input_recordings": 159,
+      "output_recordings": 158,
+      "samples": 28305,
+      "output_subjects": 4,
+      "output_stem_sha256": "978e4b7f785fe6392ad1c3085ff6afb1ec5816fc7cba391b7a1f1dee8fdd576c",
+      "output_subject_sha256": "ca7376150f26b439135542ab1d16ddcf24052f0f1f36edc9488c6f22489094a6"
+    }
+  },
+  "train_input_recordings": 359,
+  "test_input_recordings": 159,
+  "unrepresented_train_recordings": 0,
+  "unrepresented_test_recordings": 1
+}

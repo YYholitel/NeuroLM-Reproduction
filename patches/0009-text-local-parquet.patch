@@ -1,0 +1,28 @@
+diff --git a/text_dataset_maker/prepare.py b/text_dataset_maker/prepare.py
+--- a/text_dataset_maker/prepare.py
++++ b/text_dataset_maker/prepare.py
+@@ -25,13 +25,23 @@
+     parser.add_argument('--out_dir', type=Path, default=Path(__file__).parent)
+     parser.add_argument('--revision', default=None)
+     parser.add_argument('--download_workers', type=int, default=num_proc_load_dataset)
++    parser.add_argument('--local_parquet_dir', type=Path, default=None)
+     args = parser.parse_args()
+     if args.download_workers < 1:
+         parser.error('--download_workers must be positive')
+     args.out_dir.mkdir(parents=True, exist_ok=True)
+ 
+     # takes 54GB in huggingface .cache dir, about 8M documents (8,013,769)
+-    dataset = load_dataset("openwebtext", revision=args.revision, num_proc=args.download_workers)
++    if args.local_parquet_dir is None:
++        dataset = load_dataset("openwebtext", revision=args.revision, num_proc=args.download_workers)
++    else:
++        shards = sorted(args.local_parquet_dir.glob('train-*-of-00080.parquet'))
++        if len(shards) != 80:
++            parser.error(f'expected 80 OpenWebText Parquet shards, found {len(shards)}')
++        dataset = load_dataset("parquet", data_files={'train': [str(p) for p in shards]},
++                               num_proc=args.download_workers)
++        if len(dataset['train']) != 8013769:
++            raise ValueError(f'OpenWebText row count differs: {len(dataset["train"])}')
+ 
+     # owt by default only contains the 'train' split, so create a test split
+     split_dataset = dataset["train"].train_test_split(test_size=0.0005, seed=2357, shuffle=True)
