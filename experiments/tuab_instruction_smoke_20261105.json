@@ -1,0 +1,94 @@
+{
+  "check": "TUAB_single_instruction_batch_forward_and_answer_loss",
+  "source_sample_sha256": "48ed347233d04365dc04df82bf72adbc733bc7f9a87048497c83de59f12a36fe",
+  "checkpoint_sha256": "ffe098bc138b89f8817d3710a3604498d8ecd15135080e2ca27735d05c6d29ab",
+  "batch_size": 1,
+  "model_mode": "eval",
+  "precision": "float32_without_autocast",
+  "source_X_shape": [
+    23,
+    2000
+  ],
+  "eeg_input_shape": [
+    1,
+    276,
+    200
+  ],
+  "text_input_shape": [
+    1,
+    80
+  ],
+  "eeg_text_mask_shape": [
+    1,
+    1,
+    356,
+    356
+  ],
+  "valid_eeg_tokens": 230,
+  "eeg_padding_tokens": 46,
+  "valid_text_tokens_including_sep": 14,
+  "prompt_tokens_including_sep": 11,
+  "text_padding_tokens": 66,
+  "total_sequence_length": 356,
+  "nonpadding_sequence_length": 244,
+  "sep_global_index": 276,
+  "sep_token_id": 50257,
+  "vocab_offset": 50304,
+  "Y_eeg_fill_value": -50305,
+  "targets_shape": [
+    1,
+    356
+  ],
+  "nonignored_target_count": 3,
+  "supervised_global_logit_positions": [
+    286,
+    287,
+    288
+  ],
+  "supervised_global_source_token_positions": [
+    287,
+    288,
+    289
+  ],
+  "supervised_token_ids": [
+    3363,
+    220,
+    50256
+  ],
+  "supervised_token_pieces": [
+    " Yes",
+    " ",
+    "<|endoftext|>"
+  ],
+  "decoded_supervised_text": " Yes <|endoftext|>",
+  "loss": 17.527101516723633,
+  "answer_only_recomputed_loss": 17.527103424072266,
+  "loss_absolute_difference": 1.9073486328125e-06,
+  "ignored_position_loss_all_zero": true,
+  "logits_finite": true,
+  "logits_shape": [
+    1,
+    356,
+    58496
+  ],
+  "forward_intermediate_shapes": {
+    "eeg_encoder": [
+      1,
+      276,
+      768
+    ],
+    "gpt_hidden": [
+      1,
+      356,
+      768
+    ]
+  },
+  "model_forward_calls": 1,
+  "backward_or_optimizer_step": false,
+  "external_vq_target_model_loaded": false,
+  "source_code_sha256": {
+    "downstream_dataset.py": "9781d5033aae0c9a6589fa78417c6f3ce865a94de58a9784d699a50832614cfb",
+    "model/model_neurolm.py": "18d4ee8ae9e9cc2f6afef38340fc4cafbffe23f63fbf2fd4a08b7802f02fc2d0",
+    "model/model.py": "549987093133355f3af329c7f9d3b3dd17e72d4d9a74ad68962554ab6ce1a321"
+  }
+}
