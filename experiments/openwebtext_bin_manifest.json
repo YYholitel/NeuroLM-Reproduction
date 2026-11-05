@@ -1,0 +1,19 @@
+{
+  "dataset": "Skylion007/openwebtext",
+  "revision": "79d93d786212f7344586290adb811d4ae6a1762c",
+  "source_rows": 8013769,
+  "dtype": "uint16",
+  "split_seed": 2357,
+  "splits": {
+    "train": {
+      "bytes": 18071164978,
+      "tokens": 9035582489,
+      "sha256": "68a352b5dbd52e85b7a8a1556c1ccae65ce14b02e4913788b0883b89ceddc1d1"
+    },
+    "val": {
+      "bytes": 8869212,
+      "tokens": 4434606,
+      "sha256": "009ecdd6da34f1ae915ff1f0f3aeb0416b02f2252356505b32ce44166dd5cfcc"
+    }
+  }
+}

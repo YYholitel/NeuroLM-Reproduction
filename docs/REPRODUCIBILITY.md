@@ -48,7 +48,7 @@ python text_dataset_maker/prepare.py \
 ln -s "$DATA_ROOT/text" "$RUN_ROOT/text"
 ```
 
-作者指令入口从 `--out_dir/text/` 读取 `train.bin` 和 `val.bin`，因此运行目录中的 `text` 链接指向数据目录；训练输出与原始数据仍分别存放。文本二进制文件生成完毕后使用 [`verify_text_bins.py`](../scripts/verify_text_bins.py) 记录大小、token 数和 SHA-256。
+作者指令入口从 `--out_dir/text/` 读取 `train.bin` 和 `val.bin`，因此运行目录中的 `text` 链接指向数据目录；训练输出与原始数据仍分别存放。文本二进制文件已生成，使用 [`verify_text_bins.py`](../scripts/verify_text_bins.py) 核对大小、token 数、SHA-256 及末尾 EOT token，审计退出码为 0。结果见[文本清单](../experiments/openwebtext_bin_manifest.json)：`train.bin` 为 9,035,582,489 token、18,071,164,978 字节；`val.bin` 为 4,434,606 token、8,869,212 字节。TUAB 患者级修正后的预处理与审计也以退出码 0 完成，三划分患者无交叉，见[划分清单](../experiments/tuab_split_manifest.json)。上述完成状态只说明预处理链路可用，尚未产生指令微调或论文指标。
 
 ## 单步训练与显存探针（2026-10-15）
 

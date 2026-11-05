@@ -1,0 +1,49 @@
+{
+  "kind": "tuab",
+  "seed": 4523,
+  "splits": {
+    "train": {
+      "input_recordings": 2174,
+      "output_recordings": 2171,
+      "samples": 298511,
+      "output_subjects": 1659,
+      "output_stem_sha256": "b464897c4c4146d3ab737f4c183c88daa0b39d44cc684590bf9dac78e36c76ab",
+      "output_subject_sha256": "13ba84dbc991810b117368fd2745c1f8dea0d4b8ab4e3e898374e26772797925",
+      "skipped_recordings": 3,
+      "skipped_stem_sha256": "e6318fa30ecb8c65ae970eafbc6b39d6e5b5ece0756b29fff5b04d51fc159b33",
+      "labels_from_source": {
+        "0": 149030,
+        "1": 149481
+      }
+    },
+    "val": {
+      "input_recordings": 543,
+      "output_recordings": 543,
+      "samples": 73627,
+      "output_subjects": 416,
+      "output_stem_sha256": "9569cd4577ad84e486caf667d5acef63aa8938da34006c608d3d8391eae3424c",
+      "output_subject_sha256": "2e882dc73eb743ccf509071d9a7712e7792b93acc231a595825c9fd29af19b82",
+      "skipped_recordings": 0,
+      "skipped_stem_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "labels_from_source": {
+        "0": 34679,
+        "1": 38948
+      }
+    },
+    "test": {
+      "input_recordings": 276,
+      "output_recordings": 276,
+      "samples": 36945,
+      "output_subjects": 253,
+      "output_stem_sha256": "ebff5debb2accf4671b164fc4df6ca20b9f93a7810e2f125b776f0df0acb344d",
+      "output_subject_sha256": "650cd24f7b59975a2a961c14ca08c5d4866c651b4e1e81c398486034f2e35b5c",
+      "skipped_recordings": 0,
+      "skipped_stem_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "labels_from_source": {
+        "0": 19907,
+        "1": 17038
+      }
+    }
+  },
+  "patient_overlap_all_splits": 0
+}

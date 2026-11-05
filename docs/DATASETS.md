@@ -4,7 +4,7 @@
 
 | 数据集 | 代码期望的相对位置 | 论文划分 | 当前状态 |
 | --- | --- | --- | --- |
-| TUAB | `TUAB/processed/{train,val,test}` | 原测试集；训练患者再按 80%/20% 分训练/验证 | v3.0.1 原始副本内容比较通过；发现作者按类别划分会泄漏 21 名患者，患者级修正后重跑中 |
+| TUAB | `TUAB/processed/{train,val,test}` | 原测试集；训练患者再按 80%/20% 分训练/验证 | v3.0.1 原始副本内容比较通过；患者级修正后预处理与划分审计完成，298,511/73,627/36,945 窗口，患者无交叉；尚无论文指标 |
 | TUEV | `TUEV/{processed_train,processed_eval,processed_test}` | 原测试集；训练患者再按 80%/20% 分训练/验证 | v2.0.1 原始副本内容比较通过；预处理 68,270/15,662/28,305 个样本，训练/验证患者无交叉；尚无论文指标 |
 | SEED | `h5data/seed-3.hdf5` | 每个 session 的试次按时间顺序 9:3:3 | 未准备 |
 | HMC | `HMC/{train,eval,test}` | 前 100 人训练、中间 25 人验证、后 26 人测试 | v1.1 原始 151 组已校验；预处理完成，输出 91,248/22,124/23,871 个窗口；尚无论文指标 |
@@ -26,7 +26,7 @@
 - 已制作 [`0006-tuh-preprocess.patch`](../patches/0006-tuh-preprocess.patch)，使三个脚本从项目数据盘读取原始文件、向独立预处理目录写出，并固定此前依赖集合或文件系统顺序的划分。TUEV 的 518 份 EDF 均有同名 `.rec`；TUSL 的 112 份 EDF 中，111 份有 `.tse_agg`，1 份只有同格式的 `.tse_ag`，补丁对后一种名称作回退。上述版本及划分差异尚待实际预处理结果核对。
 - TUSL 原始副本使用 `rsync -rtcn` 与共享源逐文件比较通过。第一次全量预处理发现作者脚本以路径中的第一个句点截取文件名，输入路径含 `v2.0.1` 时产生覆盖；[`0007-tusl-output-stem.patch`](../patches/0007-tusl-output-stem.patch)改为取 EDF basename 的 stem。修复后重新运行，67/23/22 份输入 EDF 分别在训练/验证/测试目录产生 119/66/60 个样本。训练目录的 24 份 `tcp_le` EDF 因作者脚本要求固定的 `-REF` 通道名而被跳过；未改动通道处理。可重查的计数和文件名哈希在[划分清单](../experiments/tusl_split_manifest.json)。该划分与论文实际运行是否相同仍未知。
 - TUEV 全量预处理产出 68,270/15,662/28,305 个训练/验证/测试事件样本，总数 112,237，较论文表 1 的 112,491 少 254。359 份原训练 EDF 全有输出，159 份原测试 EDF 中 1 份因作者通道检查跳过；版本差异、作者实际预处理和跳过文件共同使得样本数不能直接对应，尚未确认差额来源。训练和验证输出按患者 ID 无交叉；详见[划分清单](../experiments/tuev_split_manifest.json)。
-- TUAB 原脚本按正常/异常两类分别划分患者，而 54 名患者在原训练集两类目录中均有记录；第一次预处理产生 293,853/78,285/36,945 个窗口，但训练与验证输出重叠 21 名患者，因此不能用于患者独立验证。已保留该输出作审计，并用[`0008-tuab-patient-split.patch`](../patches/0008-tuab-patient-split.patch)改为合并患者后统一 80%/20% 划分，正在重新预处理。这个修正会改变作者脚本的实际训练/验证成员，应在结果中单独标注。
+- TUAB 原脚本按正常/异常两类分别划分患者，而 54 名患者在原训练集两类目录中均有记录；第一次预处理产生 293,853/78,285/36,945 个窗口，但训练与验证输出重叠 21 名患者，因此不能用于患者独立验证。用[`0008-tuab-patient-split.patch`](../patches/0008-tuab-patient-split.patch)改为合并患者后统一 80%/20% 划分，重新预处理产生 298,511/73,627/36,945 个窗口，总数 409,083。训练输入 2,174 份 EDF 中 3 份无输出；三划分患者交叉数为零，详见[划分清单](../experiments/tuab_split_manifest.json)。这个修正改变了作者脚本的实际训练/验证成员，正式结果须单独标注。旧的类别级输出已记录计数与泄漏问题，因数据盘空间紧张，于 2026-11-05 清理；可从原始 EDF 重建。
 - 共享卷的 SEED 系列集合含 SEED-V、SEED-IV 等变体；另有两个名为 SEED 的归档临时目录，主要包含 `.mat` 特征和预处理文件。对这两个目录的扫描未发现作者预处理所需的 `.cnt`。SEED-V 等变体的 `.cnt` 不能当作论文所用原版 SEED；许可范围也尚未核实。
 - 另发现原版三分类 SEED 的 15 个按受试者分开的 HDF5 衍生文件。其说明记录 200 Hz、0.1–75 Hz、50 Hz 陷波及 2 秒无重叠片段；抽查文件为 `trial/segment/eeg` 层级，单段形状 62×400。逐文件元数据检查显示每名受试者有 3 个 session、共 39 个 trial；官方原版说明为每 session 15 个 trial，共 45 个。作者 `SEEDDataset` 则要求单个 `seed-3.hdf5`，每个受试者组含连续 `eeg`、`trialStart`、`trialEnd`、`label` 等属性。这批 HDF5 不能直接传给作者加载器；其原始文件来源、缺少的 trial 和许可范围尚待核对。
 
@@ -48,7 +48,7 @@
 - [`scripts/download_hmc.sh`](../scripts/download_hmc.sh)按清单获取 151 组 EDF 与标注文本，逐文件对照官方 SHA-256。服务器下载日志于 2026-10-16 记录“Verified 151 HMC v1.1 EDF and sleep scoring text pairs against PhysioNet SHA256SUMS.txt”；2026-10-20 只读复核确认目录中有 151 份 EDF、151 份标注文件。2026-10-21 作者预处理脚本在独立源码副本中运行结束，输出训练/验证/测试窗口 91,248/22,124/23,871，总计 137,243；各划分分别含 100/25/26 名受试者，日志没有出现异常窗口提示。抽查样本字段为 `X`、`ch_names`、`y`，`X` 形状为 4×6000；作者 `HMCLoader` 已成功读取并形成 7 个训练输入张量。
 - [`0003-hmc-paths.patch`](../patches/0003-hmc-paths.patch)只把作者 HMC 预处理脚本的输入、输出绝对路径改为参数，未改动滤波、标签或划分逻辑。[`verify_hmc_split.py`](../scripts/verify_hmc_split.py)已核对 151 名受试者按排序后的 100/25/26 划分、每人的窗口编号连续且无重复；[划分清单](../experiments/hmc_split_manifest.json)保存受试者名单、逐人窗口计数及文件名哈希。文件名哈希不代表 EEG 内容校验；逐样本标签尚未审计。
 
-作者代码还读取 `--out_dir/text/train.bin`，这是语言数据的 token 文件，并非上述六个 EEG 数据集之一。作者 `text_dataset_maker/prepare.py` 使用 OpenWebText，预计先产生约 54 GB 下载缓存，再产生约 17 GB 的 `train.bin`。[`0005-text-output-revision.patch`](../patches/0005-text-output-revision.patch)允许固定数据集修订、控制下载并发数并直接写入训练入口期望目录。2026-10-21 固定修订 `79d93d786212f7344586290adb811d4ae6a1762c` 的 80 份 Parquet 已在服务器数据盘备齐，可读元数据合计 8,013,769 条；服务器对部分分片的直连请求失败，16 份经本机从来源下载并传至服务器，再作 SHA-256 传输校验。GPT-2 tokenizer 的两份官方资源经 `tiktoken` 内置 SHA-256 校验后也放入数据盘缓存。由于库的完全离线模式需要已建好的 Arrow 缓存，[`0009-text-local-parquet.patch`](../patches/0009-text-local-parquet.patch)允许直接按编号加载这 80 份本地 Parquet，并检查总行数；原有的划分、分词和二进制写出逻辑未改。token 文件正在生成。
+作者代码还读取 `--out_dir/text/train.bin`，这是语言数据的 token 文件，并非上述六个 EEG 数据集之一。作者 `text_dataset_maker/prepare.py` 使用 OpenWebText，预计先产生约 54 GB 下载缓存，再产生约 17 GB 的 `train.bin`。[`0005-text-output-revision.patch`](../patches/0005-text-output-revision.patch)允许固定数据集修订、控制下载并发数并直接写入训练入口期望目录。固定修订 `79d93d786212f7344586290adb811d4ae6a1762c` 的 80 份 Parquet 已在服务器数据盘备齐，可读元数据合计 8,013,769 条；服务器对部分分片的直连请求失败，16 份经本机从来源下载并传至服务器，再作 SHA-256 传输校验。GPT-2 tokenizer 的两份官方资源经 `tiktoken` 内置 SHA-256 校验后也放入数据盘缓存。由于库的完全离线模式需要已建好的 Arrow 缓存，[`0009-text-local-parquet.patch`](../patches/0009-text-local-parquet.patch)允许直接按编号加载这 80 份本地 Parquet，并检查总行数；原有的划分、分词和二进制写出逻辑未改。2026-10-21 已生成 `train.bin` 与 `val.bin`；2026-11-05 核对预处理和校验进程退出码均为 0。两个文件分别含 9,035,582,489 和 4,434,606 个 `uint16` token，大小、SHA-256 见[文本清单](../experiments/openwebtext_bin_manifest.json)。
 
 ## 数据接收规则
 
