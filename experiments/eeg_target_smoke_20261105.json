@@ -1,0 +1,142 @@
+{
+  "check": "PickleLoader_GPT_training_EEG_only_forward_no_training",
+  "source_sample_sha256": "48ed347233d04365dc04df82bf72adbc733bc7f9a87048497c83de59f12a36fe",
+  "source_keys": [
+    "X",
+    "y"
+  ],
+  "source_X_shape": [
+    23,
+    2000
+  ],
+  "ch_names": [
+    "FP1",
+    "FP2",
+    "F3",
+    "F4",
+    "C3",
+    "C4",
+    "P3",
+    "P4",
+    "O1",
+    "O2",
+    "F7",
+    "F8",
+    "T3",
+    "T4",
+    "T5",
+    "T6",
+    "A1",
+    "A2",
+    "FZ",
+    "CZ",
+    "PZ",
+    "T1",
+    "T2"
+  ],
+  "adapter": "added_ch_names_from_author_TUAB_enforced_order; EEG_values_unchanged",
+  "loader_output": {
+    "X": {
+      "shape": [
+        1024,
+        200
+      ],
+      "dtype": "torch.float32"
+    },
+    "input_chans": {
+      "shape": [
+        1024
+      ],
+      "dtype": "torch.int32"
+    },
+    "input_time": {
+      "shape": [
+        1024
+      ],
+      "dtype": "torch.int32"
+    },
+    "input_mask": {
+      "shape": [
+        1024
+      ],
+      "dtype": "torch.bool"
+    },
+    "gpt_mask": {
+      "shape": [
+        1,
+        1024,
+        1024
+      ],
+      "dtype": "torch.bool"
+    },
+    "num_chans": 23,
+    "data.size(0)": 230
+  },
+  "valid_tokens": 230,
+  "padding_tokens": 794,
+  "valid_time_range": [
+    0,
+    9
+  ],
+  "pretraining_targets": {
+    "vq_checkpoint_sha256": "e792c39a6a9e6d1bf4604cf63090730424f1d37f942597883d0c0a1375a2663a",
+    "codebook_indices_shape": [
+      1,
+      1024
+    ],
+    "codebook_size": 8192,
+    "Y_eeg_shape": [
+      1,
+      1024
+    ],
+    "Y_eeg_dtype": "torch.int64",
+    "shift_patches": 23,
+    "supervised_positions": 207,
+    "ignored_positions": 817,
+    "vocab_offset": 50304,
+    "ignore_value_before_offset": -50305,
+    "ignore_value_in_cross_entropy": -1,
+    "requires_grad": false
+  },
+  "checkpoint_sha256": "ffe098bc138b89f8817d3710a3604498d8ecd15135080e2ca27735d05c6d29ab",
+  "parameters": 255107712,
+  "torch": "2.2.2",
+  "device": "cuda:0",
+  "precision": "float32_without_autocast",
+  "forward_intermediates": {
+    "tokenizer_features": {
+      "shape": [
+        1,
+        1024,
+        768
+      ],
+      "finite": true
+    },
+    "gpt_hidden_states": {
+      "shape": [
+        1,
+        1024,
+        768
+      ],
+      "finite": true
+    }
+  },
+  "logits_shape": [
+    1,
+    1024,
+    58496
+  ],
+  "logits_finite": true,
+  "loss": 4.88232946395874,
+  "logits_position": "all_1024_positions_with_VQ_targets",
+  "model_forward_calls": 1,
+  "backward_or_optimizer_step": false,
+  "num_chans_and_num_tokens_role": "loader_metadata_for_target_construction; not_model_forward_arguments",
+  "source_code_sha256": {
+    "dataset.py": "15902ec90488bb8a229b7e2b225f1971488ea633b992f30d5537e951b1a07ca2",
+    "model/model_neurolm.py": "18d4ee8ae9e9cc2f6afef38340fc4cafbffe23f63fbf2fd4a08b7802f02fc2d0",
+    "model/model.py": "549987093133355f3af329c7f9d3b3dd17e72d4d9a74ad68962554ab6ce1a321",
+    "model/model_vq.py": "8a66bc966a49390bb889ab0ddb761b56294ab0a259d6a6f62908788647bed7ec",
+    "model/norm_ema_quantizer.py": "58c5420935fa72653eb8a28f664da70cd0bdf2bc8d9906a78f86f57d20bf116a"
+  }
+}

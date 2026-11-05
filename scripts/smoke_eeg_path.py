@@ -13,11 +13,32 @@ import numpy as np
 import torch
 
 EXPECTED_SHA256 = "ffe098bc138b89f8817d3710a3604498d8ecd15135080e2ca27735d05c6d29ab"
+VQ_SHA256 = "e792c39a6a9e6d1bf4604cf63090730424f1d37f942597883d0c0a1375a2663a"
 
 
 def sha256(path):
     with path.open("rb") as source:
         return hashlib.file_digest(source, "sha256").hexdigest()
+
+
+def load_target_tokenizer(path, device):
+    """Use the same VQ construction and state-dict mapping as train_pretrain.py."""
+    from model.model_neural_transformer import NTConfig
+    from model.model_vq import VQ
+
+    assert sha256(path) == VQ_SHA256, "VQ.pt SHA-256 mismatch"
+    checkpoint = torch.load(path, map_location="cpu", weights_only=False)
+    encoder = dict(n_layer=12, n_head=12, n_embd=768, block_size=1024,
+                   bias=False, dropout=0., num_classes=0, in_chans=1, out_chans=16)
+    decoder = dict(n_layer=4, n_head=12, n_embd=768, block_size=1024,
+                   bias=False, dropout=0., num_classes=0, in_chans=128)
+    for key in ["n_layer", "n_head", "n_embd", "block_size", "bias"]:
+        encoder[key] = checkpoint["encoder_args"][key]
+        decoder[key] = checkpoint["decoder_args"][key]
+    tokenizer = VQ(NTConfig(**encoder), NTConfig(**decoder))
+    weights = {k.removeprefix("_orig_mod."): v for k, v in checkpoint["model"].items()}
+    tokenizer.load_state_dict({k[3:]: v for k, v in weights.items() if k.startswith("VQ.")}, strict=True)
+    return tokenizer.requires_grad_(False).to(device).eval()
 
 
 def main():
@@ -27,6 +48,8 @@ def main():
     parser.add_argument("--sample-dir", required=True, type=Path)
     parser.add_argument("--run-dir", required=True, type=Path)
     parser.add_argument("--device", default="cuda:0")
+    parser.add_argument("--vq-checkpoint", type=Path,
+                        help="Generate real next-time-step EEG targets and return full logits plus loss.")
     args = parser.parse_args()
     args.run_dir.mkdir(parents=True, exist_ok=True)
     torch.set_num_threads(4)
@@ -124,17 +147,51 @@ def main():
         model.tokenizer.register_forward_hook(capture("tokenizer_features")),
         model.GPT2.transformer.ln_f.register_forward_hook(capture("gpt_hidden_states")),
     ]
+    X_batch = X.unsqueeze(0).to(args.device)
+    chans_batch = input_chans.unsqueeze(0).to(args.device)
+    times_batch = input_time.unsqueeze(0).to(args.device)
+    mask_batch = input_mask.unsqueeze(0).to(args.device)
+    Y_eeg = None
+    target_tokenizer = load_target_tokenizer(args.vq_checkpoint, args.device) if args.vq_checkpoint else None
     with torch.inference_mode():
+        if target_tokenizer is not None:
+            assert num_tokens > num_chans, "Need at least two time steps for EEG prediction targets"
+            ids = target_tokenizer.get_codebook_indices(X_batch, chans_batch, times_batch, mask_batch)
+            vocab_offset = model.GPT2.config.vocab_size
+            Y_eeg = torch.full((1, 1024), -1 - vocab_offset, dtype=torch.long, device=args.device)
+            Y_eeg[0, :num_tokens - num_chans] = ids[0, num_chans:num_tokens]
+            effective_targets = Y_eeg + vocab_offset
+            assert ids.shape == (1, 1024)
+            codebook_size = target_tokenizer.quantize.num_tokens
+            assert int(ids.min()) >= 0 and int(ids.max()) < codebook_size
+            assert int((effective_targets != -1).sum()) == num_tokens - num_chans
+            summary["pretraining_targets"] = {
+                "vq_checkpoint_sha256": VQ_SHA256,
+                "codebook_indices_shape": list(ids.shape),
+                "codebook_size": codebook_size,
+                "Y_eeg_shape": list(Y_eeg.shape),
+                "Y_eeg_dtype": str(Y_eeg.dtype),
+                "shift_patches": num_chans,
+                "supervised_positions": num_tokens - num_chans,
+                "ignored_positions": 1024 - (num_tokens - num_chans),
+                "vocab_offset": vocab_offset,
+                "ignore_value_before_offset": -1 - vocab_offset,
+                "ignore_value_in_cross_entropy": -1,
+                "requires_grad": Y_eeg.requires_grad,
+            }
         loss, log, logits = model(
-            x_eeg=X.unsqueeze(0).to(args.device),
-            input_chans=input_chans.unsqueeze(0).to(args.device),
-            input_time=input_time.unsqueeze(0).to(args.device),
-            input_mask=input_mask.unsqueeze(0).to(args.device),
+            x_eeg=X_batch,
+            y_eeg=Y_eeg,
+            input_chans=chans_batch,
+            input_time=times_batch,
+            input_mask=mask_batch,
             eeg_mask=gpt_mask.unsqueeze(0).to(args.device),
         )
     for handle in handles:
         handle.remove()
-    assert logits.shape == (1, 1, 58496)
+    assert logits.shape == (1, 1024 if args.vq_checkpoint else 1, 58496)
+    if args.vq_checkpoint:
+        assert loss is not None and torch.isfinite(loss)
     assert torch.isfinite(logits).all() and all(v["finite"] for v in intermediates.values())
     summary.update({
         "checkpoint_sha256": actual,
@@ -146,11 +203,13 @@ def main():
         "logits_shape": list(logits.shape),
         "logits_finite": True,
         "loss": None if loss is None else float(loss),
-        "logits_position": "last_of_1024_positions_is_padding; upstream_no_target_forward_returns_last_position_only",
+        "logits_position": "all_1024_positions_with_VQ_targets" if args.vq_checkpoint else "last_of_1024_positions_is_padding; upstream_no_target_forward_returns_last_position_only",
+        "model_forward_calls": 1,
+        "backward_or_optimizer_step": False,
         "num_chans_and_num_tokens_role": "loader_metadata_for_target_construction; not_model_forward_arguments",
         "source_code_sha256": {
             name: sha256(args.author_dir / name)
-            for name in ["dataset.py", "model/model_neurolm.py", "model/model.py"]
+            for name in ["dataset.py", "model/model_neurolm.py", "model/model.py", "model/model_vq.py", "model/norm_ema_quantizer.py"]
         },
     })
     (args.run_dir / "eeg_path_summary.json").write_text(json.dumps(summary, indent=2) + "\n")

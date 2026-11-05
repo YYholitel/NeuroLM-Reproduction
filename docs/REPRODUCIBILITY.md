@@ -51,6 +51,16 @@ loss, log, logits = model(
 
 `num_chans` 和有效 patch 数是构建预训练目标时使用的元数据，无目标前向无需传入。tokenizer 输出与 GPT 最终隐状态均为 `[1,1024,768]`，logits 为 `[1,1,58496]`，全部为有限值；进程退出码 0。作者无目标推理只对最后一个位置计算 logits，此次该位置是 padding，因此这里验证的是完整 EEG 前向通路和张量形状，不涉及类别预测质量。完整数值摘要、源样本哈希和代码哈希见[运行清单](../experiments/eeg_path_smoke_20261105.json)。
 
+### 同一样本的 VQ 目标与完整预训练前向
+
+同一诊断脚本增加 `--vq-checkpoint` 后，按作者 `train_pretrain.py` 的构造方式严格加载已校验的 `VQ.pt`。`PickleLoader` 的七项返回值中，前五项组成模型 EEG 输入，两个整数用于构建目标。VQ 在 eval/no-grad 下通过 `get_codebook_indices` 生成 `[1,1024]` 个码本编号，码本大小为 8192。样本按时间、通道排列，`Y_eeg[0,:207] = codebook_indices[0,23:230]`，即向前移一秒对应的 23 个通道位置，预测下一秒；最后一秒的 23 个位置及 794 个 padding 不计算损失。
+
+`Y_eeg` 初值为 `-1 - model.GPT2.config.vocab_size = -50305`。模型内部加上词表偏移 50304，使有效目标进入 EEG 词表区间，忽略位置变为交叉熵使用的 `-1`。这是从 EEG 本身产生的预训练目标，不使用 TUAB 的正常/异常类别标签。
+
+实际调用 `model(x_eeg=X_batch, y_eeg=Y_eeg, input_chans=chans_batch, input_time=times_batch, input_mask=mask_batch, eeg_mask=gpt_mask.unsqueeze(0))` 一次，得到 logits `[1,1024,58496]`，全部为有限值；207 个有效目标上的 loss 为 `4.88232946395874`。tokenizer 特征和 GPT 隐状态均为 `[1,1024,768]`，进程退出码 0；未反向传播、未更新模型参数。这个单样本 loss 用于检查计算链路，不是任务评估指标。[完整运行摘要](../experiments/eeg_target_smoke_20261105.json)保留源样本、权重与代码哈希。
+
+首次诊断在调用作者未用于训练主循环的 `get_number_of_tokens()` 辅助函数时退出：其读取的 `quantize.n_e` 字段不存在。诊断脚本改为读取实际的 `quantize.num_tokens` 后通过；作者模型代码未改，首次失败日志保留在服务器。
+
 ## 2026-10-21 数据准备入口
 
 TUH 三套原始副本使用 `rsync -rtcn` 与共享来源逐文件比较通过；患者/文件划分的计数与哈希见[数据清单](DATASETS.md)。TUAB 需依次应用 [`0006`](../patches/0006-tuh-preprocess.patch) 和 [`0008`](../patches/0008-tuab-patient-split.patch)；TUSL 需应用 `0006` 和 [`0007`](../patches/0007-tusl-output-stem.patch)。这些补丁只用于固定作者提交的独立源码副本。
