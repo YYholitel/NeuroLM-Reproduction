@@ -1,0 +1,44 @@
+{
+  "date": "2026-11-05",
+  "status": "prepared_not_submitted",
+  "training_started": false,
+  "measured_training_metrics": null,
+  "upstream_commit": "0cda9876d8ce6ee07ed0c43eee5e9a6f5c24b177",
+  "code_bundle": {
+    "bytes": 53683,
+    "sha256": "374878c0cf7cd5319371798e71e176fcb2f9bcdaf926744484e6a50d8c2ee344",
+    "destination_hash_matched": true
+  },
+  "checks": {
+    "patch_compiles": true,
+    "five_task_cli": true,
+    "bash_syntax_on_target": true,
+    "tikit_sdk_parameter_build": true,
+    "tikit_version": "1.9.1.250324",
+    "cpu_gloo_two_ranks": {
+      "python": "3.12.4",
+      "torch": "2.11.0+cpu",
+      "uneven_shards": "passed",
+      "empty_shard": "passed",
+      "prediction_index_coverage": "passed",
+      "two_forwards_combined_backward": "passed",
+      "uses_real_neurolm": false
+    },
+    "summary_synthetic_fixture": "complete accepted; missing prediction rejected",
+    "h20_nccl_runtime": "not_run"
+  },
+  "data_migration": {
+    "Workload_and_TUSL": {"files": 2333, "all_file_sizes_and_sha256_matched": true},
+    "TUAB_TUEV_HMC_text": "not_migrated"
+  },
+  "environment_archive": {
+    "sha256": "921e3a953356c939c20e60413ef4629ad8f01e0a56ed004530c2435362def277",
+    "created": true,
+    "migrated": false,
+    "target_validated": false,
+    "packaging_note": "conda-pack --ignore-missing-files; missing tbb-devel headers and llvm-openmp static library; actual training environment unchanged"
+  },
+  "platform_auth": "SSH login works; notebook STS unavailable in SSH session; no create API call",
+  "gpu_availability": "not_verified",
+  "paper_comparable": false
+}

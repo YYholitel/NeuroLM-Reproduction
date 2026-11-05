@@ -1,0 +1,46 @@
+experiment_id: neurolm_b_five_task_minimal_s42_e1
+status: prepared_not_submitted
+category: five_task_exploratory_modified_protocol
+paper_comparable: false
+purpose: one_full_epoch_then_all_validation_and_test_splits_and_checkpoint
+datasets: [TUAB, TUEV, HMC, Workload, TUSL]
+excluded: [SEED]
+seed: 42
+epochs: 1
+hardware_plan:
+  platform: Tencent_TI_ONE
+  nodes: 1
+  gpus_per_node: 8
+  gpu: H20
+  availability: not_yet_verified
+runtime:
+  python: 3.11.8
+  torch: 2.2.2
+  cuda: '12.1'
+  numpy: 1.26.4
+  migration: relocated_copy_of_verified_environment
+training:
+  per_rank_eeg_batch: 64
+  per_rank_text_batch: 16
+  gradient_accumulation: 1
+  nominal_global_eeg_batch: 512
+  nominal_global_text_batch: 128
+  peak_lr: 0.0005
+  min_lr: 0.00005
+  warmup_ratio: 0.1
+  weight_decay: 0.1
+  grad_clip: 1.0
+  compile: false
+  drop_last: true
+  train_samples_available: 459656
+  microsteps_per_epoch: 897
+  train_samples_consumed_per_epoch: 459264
+  sampler_note: DistributedSampler shuffles; DataLoader drops incomplete batches, matching author policy.
+source:
+  commit: 0cda9876d8ce6ee07ed0c43eee5e9a6f5c24b177
+  runtime_patches:
+    - patches/0002-runtime-compat.patch
+    - patches/0004-parse-failure-count.patch
+    - patches/0010-instruction-task-selection-and-run-records.patch
+entrypoint: scripts/run_five_task_minimal.sh
+completion_requires: [full_validation_and_test_coverage, checkpoint_sha256, summary_json, zero_exit_code]

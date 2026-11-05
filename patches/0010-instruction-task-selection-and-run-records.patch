@@ -1,0 +1,354 @@
+--- a/train_instruction.py
++++ b/train_instruction.py
+@@ -6,12 +6,14 @@
+ import os
+ import time
+ import argparse
++import json
++import random
+ from contextlib import nullcontext
+ 
+ import numpy as np
+ import torch
+ from torch.nn.parallel import DistributedDataParallel as DDP
+-from torch.distributed import init_process_group, destroy_process_group
++from torch.distributed import init_process_group, destroy_process_group, all_gather_object
+ 
+ from model.model_neurolm import NeuroLM
+ from model.model import GPTConfig
+@@ -50,6 +52,8 @@
+         seed_offset = 0
+         ddp_world_size = 1
+ 
++    random.seed(args.seed + seed_offset)
++    np.random.seed(args.seed + seed_offset)
+     torch.manual_seed(args.seed + seed_offset)
+     torch.backends.cuda.matmul.allow_tf32 = True # allow tf32 on matmul
+     torch.backends.cudnn.allow_tf32 = True # allow tf32 on cudnn
+@@ -118,6 +122,10 @@
+             dataset_info['result_idx'] = 9
+             dataset_info['label_dic'] = {'Yes': 1, 'No': 0}
+ 
++        # Stable filename order across filesystems before seeded sampling.
++        for split_dataset in (dataset_train, dataset_val, dataset_test):
++            if hasattr(split_dataset, 'files'):
++                split_dataset.files = sorted(split_dataset.files)
+         dataset_info['dataset_train'] = dataset_train
+         dataset_info['dataset_val'] = dataset_val
+         dataset_info['dataset_test'] = dataset_test
+@@ -129,23 +137,23 @@
+             data_loader_train = torch.utils.data.DataLoader(
+                 dataset_train, sampler=sampler_train,
+                 batch_size=args.eeg_batch_size,
+-                num_workers=10,
++                num_workers=args.num_workers,
+                 pin_memory=True,
+                 drop_last=True,
+             )
+-            sampler_val = torch.utils.data.SequentialSampler(dataset_val)
++            sampler_val = range(ddp_rank, len(dataset_val), ddp_world_size)
+             data_loader_val = torch.utils.data.DataLoader(
+                 dataset_val, sampler=sampler_val,
+                 batch_size=int(args.eeg_batch_size * 1.5),
+-                num_workers=10,
++                num_workers=args.num_workers,
+                 pin_memory=True,
+                 drop_last=False,
+             )
+-            sampler_test = torch.utils.data.SequentialSampler(dataset_test)
++            sampler_test = range(ddp_rank, len(dataset_test), ddp_world_size)
+             data_loader_test = torch.utils.data.DataLoader(
+                 dataset_test, sampler=sampler_test,
+                 batch_size=int(args.eeg_batch_size * 1.5),
+-                num_workers=10,
++                num_workers=args.num_workers,
+                 pin_memory=True,
+                 drop_last=False,
+             )
+@@ -153,7 +161,7 @@
+             data_loader_train = torch.utils.data.DataLoader(
+                 dataset_train,
+                 batch_size=args.eeg_batch_size,
+-                num_workers=10,
++                num_workers=args.num_workers,
+                 pin_memory=True,
+                 drop_last=True,
+                 shuffle=True
+@@ -161,7 +169,7 @@
+             data_loader_val = torch.utils.data.DataLoader(
+                 dataset_val,
+                 batch_size=int(args.eeg_batch_size * 1.5),
+-                num_workers=10,
++                num_workers=args.num_workers,
+                 pin_memory=True,
+                 drop_last=False,
+                 shuffle=False
+@@ -169,7 +177,7 @@
+             data_loader_test = torch.utils.data.DataLoader(
+                 dataset_test,
+                 batch_size=int(args.eeg_batch_size * 1.5),
+-                num_workers=10,
++                num_workers=args.num_workers,
+                 pin_memory=True,
+                 drop_last=False,
+                 shuffle=False
+@@ -210,7 +218,7 @@
+ 
+     concat_datasets = True
+     all_datasets = []
+-    for name in ['TUAB', 'TUEV', 'SEED', 'HMC', 'Workload', 'TUSL']:
++    for name in args.datasets:
+         all_datasets.append(get_instruct_datasets(args, name, eeg_max_len=276, text_max_len=80))
+     if concat_datasets:
+         merge_datasets = ConcatDataset([dataset_info['dataset_train'] for dataset_info in all_datasets])
+@@ -221,7 +229,7 @@
+             data_loader_merge = torch.utils.data.DataLoader(
+                 merge_datasets, sampler=sampler_merge,
+                 batch_size=args.eeg_batch_size,
+-                num_workers=10,
++                num_workers=args.num_workers,
+                 pin_memory=True,
+                 drop_last=True
+             )
+@@ -229,7 +237,7 @@
+             data_loader_merge = torch.utils.data.DataLoader(
+                 merge_datasets,
+                 batch_size=args.eeg_batch_size,
+-                num_workers=10,
++                num_workers=args.num_workers,
+                 pin_memory=True,
+                 drop_last=True,
+                 shuffle=True
+@@ -256,7 +264,7 @@
+         print(f"Resuming training from {args.out_dir}")
+         # resume training from a checkpoint.
+         ckpt_path = os.path.join(checkpoint_out_dir, 'ckpt.pt')
+-        checkpoint = torch.load(ckpt_path, map_location=device)
++        checkpoint = torch.load(ckpt_path, map_location="cpu", weights_only=False)
+         checkpoint_model_args = checkpoint['model_args']
+         # force these config attributes to be equal otherwise we can't even resume training
+         # the rest of the attributes (e.g. dropout) can stay as desired from command line
+@@ -264,7 +272,7 @@
+             model_args[k] = checkpoint_model_args[k]
+         # create the model
+         gptconf = GPTConfig(**model_args)
+-        model = NeuroLM(gptconf, init_from='gpt2')
++        model = NeuroLM(gptconf, init_from='scratch')
+         state_dict = checkpoint['model']
+         # fix the keys of the state dictionary :(
+         # honestly no idea how checkpoints sometimes get this prefix, have to debug more
+@@ -288,7 +296,7 @@
+         print(f"Initializing training from {args.NeuroLM_path}")
+         # resume training from a checkpoint.
+         ckpt_path = os.path.join(args.out_dir, args.NeuroLM_path)
+-        checkpoint = torch.load(ckpt_path, map_location=device)
++        checkpoint = torch.load(ckpt_path, map_location="cpu", weights_only=False)
+         checkpoint_model_args = checkpoint['model_args']
+         # force these config attributes to be equal otherwise we can't even resume training
+         # the rest of the attributes (e.g. dropout) can stay as desired from command line
+@@ -316,6 +324,7 @@
+     optimizer = model.configure_optimizers(args.weight_decay, args.learning_rate, (args.beta1, args.beta2), device_type)
+     if init_from == 'resume':
+         optimizer.load_state_dict(checkpoint['optimizer'])
++    del state_dict
+     checkpoint = None # free up memory
+ 
+     # compile the model
+@@ -335,7 +344,22 @@
+         wandb.init(project=args.wandb_project, name=args.wandb_runname, dir=os.path.join(args.out_dir, 'wandb'), resume=True)
+ 
+ 
+-    num_training_steps_per_epoch = sum([len(dataset['dataset_train']) for dataset in all_datasets]) // args.eeg_batch_size // ddp_world_size
++    num_training_steps_per_epoch = len(data_loader_merge)
++    if num_training_steps_per_epoch == 0:
++        raise ValueError('Training split is smaller than the distributed batch')
++    if master_process:
++        manifest = {
++            'category': 'modified_protocol_exploratory', 'paper_comparable': False,
++            'args': vars(args), 'world_size': ddp_world_size,
++            'torch': torch.__version__, 'cuda': torch.version.cuda, 'dtype': dtype,
++            'gpu': torch.cuda.get_device_name(),
++            'global_eeg_batch': args.eeg_batch_size * ddp_world_size * args.gradient_accumulation_steps,
++            'global_text_batch': args.text_batch_size * ddp_world_size * args.gradient_accumulation_steps,
++            'microsteps_per_epoch': num_training_steps_per_epoch,
++            'dataset_counts': {d['name']: {s: len(d['dataset_' + s]) for s in ('train', 'val', 'test')} for d in all_datasets},
++            'evaluation': 'greedy_top_k_1_max_5_tokens_author_parser',
++        }
++        Path(args.out_dir, 'run_manifest.json').write_text(json.dumps(manifest, indent=2))
+     lr_schedule_values = cosine_scheduler(
+         args.learning_rate, args.min_lr, args.epochs, num_training_steps_per_epoch,
+         warmup_epochs=args.warmup_epochs, warmup_steps=int(args.warmup_ratio * num_training_steps_per_epoch * args.epochs)
+@@ -353,6 +377,10 @@
+     if args.eval_only:
+         start_epoch = 0
+     for epoch in range(start_epoch, args.epochs):
++        model.train()
++        if ddp:
++            sampler_merge.set_epoch(epoch)
++        optimizer.zero_grad(set_to_none=True)
+         for dataset_info in datasets:
+             if args.eval_only:
+                 break
+@@ -376,12 +404,15 @@
+ 
+                 # forward backward update, with optional gradient accumulation to simulate larger batch size
+                 # and using the GradScaler if data type is float16
++                group_start = (step // args.gradient_accumulation_steps) * args.gradient_accumulation_steps
++                group_size = min(args.gradient_accumulation_steps, num_training_steps_per_epoch - group_start)
++                update_now = step + 1 == group_start + group_size
+                 if ddp:
+                     # in DDP training we only need to sync gradients at the last micro step.
+                     # the official way to do this is with model.no_sync() context manager, but
+                     # I really dislike that this bloats the code and forces us to repeat code
+                     # looking at the source of that context manager, it just toggles this variable
+-                    model.require_backward_grad_sync = (step + 1) % args.gradient_accumulation_steps == 0
++                    model.require_backward_grad_sync = update_now
+ 
+                 with ctx:
+                     loss1, log1, logits = model(X_eeg, Y_eeg, X_text, Y_text, input_chans, input_time, input_mask, eeg_text_mask=gpt_mask)
+@@ -389,16 +420,18 @@
+                     
+                     model.train()
+ 
+-                    loss = (loss1 + loss2) / args.gradient_accumulation_steps # scale the loss to account for gradient accumulation
++                    loss = (loss1 + loss2) / group_size # scale the loss to account for gradient accumulation
+                 # immediately async prefetch next batch while model is doing the forward pass on the GPU
+                 # backward pass, with gradient scaling if training in fp16
++                if not torch.isfinite(loss).item():
++                    raise FloatingPointError(f'Non-finite loss at epoch={epoch}, step={step}, rank={ddp_rank}')
+                 scaler.scale(loss).backward()
+ 
+-                if (step + 1) % args.gradient_accumulation_steps == 0:
++                if update_now:
+                     # clip the gradient
+                     if args.grad_clip != 0.0:
+                         scaler.unscale_(optimizer)
+-                        torch.nn.utils.clip_grad_norm_(model.parameters(), args.grad_clip)
++                        torch.nn.utils.clip_grad_norm_(model.parameters(), args.grad_clip, error_if_nonfinite=True)
+                     # step the optimizer and scaler if training in fp16
+                     scaler.step(optimizer)
+                     scaler.update()
+@@ -410,6 +443,9 @@
+                 # evaluate the loss on train/val sets and write checkpoints
+                 if (iter_num + 1) % args.log_interval == 0 and master_process:
+                     print(f"epoch {epoch} step [{step + 1}/{num_training_steps_per_epoch}]: train total loss {log1['train/loss'] + log2['train/loss']:.4f}, instruction loss {log1['train/loss']:.4f}, text loss {log2['train/loss']:.4f}")
++                    with open(Path(args.out_dir, 'train_steps.jsonl'), 'a') as stream:
++                        stream.write(json.dumps({'epoch': epoch, 'step': step + 1, 'iter_num': iter_num,
++                            'lr': float(lr), 'instruction_loss': log1['train/loss'], 'text_loss': log2['train/loss']}) + '\n')
+                     if args.wandb_log:
+                         log = {
+                             "train/total_loss": log1['train/loss']  + log2['train/loss'] ,
+@@ -448,17 +484,21 @@
+         # validation and test
+         for dataset_info in all_datasets:
+             print('Dataset:', dataset_info['name'])
+-            results_val = evaluate(raw_model, dataset_info, dataset_info['data_loader_val'], decode)
++            results_val = evaluate(raw_model, dataset_info, dataset_info['data_loader_val'], decode, args.out_dir, epoch, 'val')
+             print('=' * 10)
+             print('Eval:')
+             for metric in results_val.keys():
+                 print(metric + ':', results_val[metric])
+-            results_test = evaluate(raw_model, dataset_info, dataset_info['data_loader_test'], decode)
++            results_test = evaluate(raw_model, dataset_info, dataset_info['data_loader_test'], decode, args.out_dir, epoch, 'test')
+             print('=' * 10)
+             print('Test:')
+             for metric in results_test.keys():
+                 print(metric + ':', results_test[metric])
+             print('=' * 10)
++            if master_process:
++                with open(Path(args.out_dir, 'metrics.jsonl'), 'a') as stream:
++                    stream.write(json.dumps({'epoch': epoch, 'dataset': dataset_info['name'],
++                        'val': results_val, 'test': results_test}, default=float, allow_nan=False) + '\n')
+             if args.wandb_log and master_process:
+                 log = {}
+                 for metric in results_val.keys():
+@@ -468,6 +508,10 @@
+         if args.eval_only:
+             break
+ 
++    if master_process:
++        Path(args.out_dir, 'completed.json').write_text(json.dumps({
++            'status': 'completed', 'epochs': args.epochs, 'datasets': args.datasets,
++            'seed': args.seed, 'iter_num': iter_num, 'paper_comparable': False}, indent=2))
+     if ddp:
+         destroy_process_group()
+ 
+@@ -489,11 +533,17 @@
+     return pred
+ 
+ @torch.no_grad()
+-def evaluate(model, dataset_info, dataloader, decode):
++def evaluate(model, dataset_info, dataloader, decode, out_dir, epoch, split):
+     model.eval()
+     preds = []
+     targets = []
+     parse_failures = 0
++    rank = ddp_rank if ddp else 0
++    prediction_dir = Path(out_dir, 'predictions')
++    prediction_dir.mkdir(parents=True, exist_ok=True)
++    prediction_file = prediction_dir / f"{dataset_info['name']}-{split}-epoch{epoch}-rank{rank}.jsonl"
++    prediction_stream = prediction_file.open('w')
++    sample_indices = iter(dataloader.sampler)
+     for _, (batch) in enumerate(dataloader):
+         X_eeg, X_text, label, input_chans, input_time, input_mask, gpt_mask = batch
+         X_eeg = X_eeg.float().to(device, non_blocking=True)
+@@ -511,6 +561,8 @@
+                 pred_string = decode(t.tolist())
+ 
+                 pred = get_pred(pred_string, dataset_info)
++                prediction_stream.write(json.dumps({'index': int(next(sample_indices)),
++                    'label': int(label[i]), 'prediction': int(pred), 'generated_text': pred_string}) + '\n')
+                 if pred == -1:
+                     parse_failures += 1
+                 if not dataset_info['is_binary']:
+@@ -521,20 +573,34 @@
+     
+     model.train()
+ 
+-    targets = torch.cat(targets, dim=0).numpy()
++    prediction_stream.close()
++    targets = torch.cat(targets, dim=0).tolist() if targets else []
++    if ddp:
++        gathered = [None] * ddp_world_size
++        all_gather_object(gathered, (preds, targets, parse_failures))
++        preds = [p for shard in gathered for p in shard[0]]
++        targets = [t for shard in gathered for t in shard[1]]
++        parse_failures = sum(shard[2] for shard in gathered)
++    if len(targets) != len(dataloader.dataset):
++        raise AssertionError('Evaluation sharding lost or duplicated samples')
++    targets = np.array(targets)
+     preds = np.array(preds)
+     results = get_metrics(preds, targets, dataset_info['metrics'], dataset_info['is_binary'])
+     results['parse_failures'] = parse_failures
++    results['samples'] = len(targets)
+ 
+     return results
+ 
+ 
+ def get_args():
+-    parser = argparse.ArgumentParser('VQ training script', add_help=False)
++    parser = argparse.ArgumentParser('NeuroLM instruction training')
+     parser.add_argument('--out_dir', default='./', help='path where to save, empty for no saving')
+     parser.add_argument('--dataset_dir', default='./', help='path where to save, empty for no saving')
+     parser.add_argument('--tokenizer_path', default='checkpoints/VQ.pt', help='path where tokenizer is')
+     parser.add_argument('--NeuroLM_path', default='checkpoints/NeuroLM-B.pt', help='path where NeuroLM model is')
++    parser.add_argument('--datasets', nargs='+', choices=['TUAB', 'TUEV', 'SEED', 'HMC', 'Workload', 'TUSL'],
++                        default=['TUAB', 'TUEV', 'SEED', 'HMC', 'Workload', 'TUSL'])
++    parser.add_argument('--num_workers', default=10, type=int)
+     parser.add_argument('--log_interval', default=10, type=int)
+     parser.add_argument('--eval_only', default=False, action='store_true')
+     parser.add_argument('--wandb_log', default=False, action='store_true')
+@@ -565,7 +631,12 @@
+ 
+     parser.add_argument('--compile', default=False, action='store_true')
+ 
+-    return parser.parse_args()
++    args = parser.parse_args()
++    if len(set(args.datasets)) != len(args.datasets):
++        parser.error('Duplicate datasets are not allowed')
++    if min(args.eeg_batch_size, args.text_batch_size, args.gradient_accumulation_steps, args.epochs) < 1:
++        parser.error('Batch sizes, accumulation and epochs must be positive')
++    return args
+ 
+ 
+ if __name__ == '__main__':
