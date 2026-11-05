@@ -4,6 +4,8 @@
 
 当前状态：**准备完成代码包，尚未提交训练任务、尚无训练指标**。腾讯 SSH 登录已验证；该 SSH 会话没有 TI-ONE Notebook STS 临时凭证，技能提供的客户端鉴权失败。SDK 参数构建 dry-run 已通过，但它不证明平台权限或 GPU 可用性。完整数据和环境迁移也尚未完成。
 
+腾讯端已完成 B/VQ 两份权重的固定修订下载与 SHA-256 校验；Workload/TUSL 共 2,333 个 pickle 已全部迁移，大小和 SHA-256 与源端逐文件一致。TUAB、TUEV、HMC、文本文件和训练环境尚未就绪。详见[准备证据](../experiments/tione_minimal_preparation_20261105.json)。
+
 ## 配置与执行
 
 配置见 [`neurolm_b_five_task_minimal.yaml`](../experiments/neurolm_b_five_task_minimal.yaml)。计划申请一个 8×H20 节点，每卡 EEG/text batch 为 64/16，梯度累积 1，名义全局 batch 512/128；学习率 5e-4、最低 5e-5、warmup ratio 0.1、weight decay 0.1、裁剪 1。459,656 条训练样本在作者 `drop_last=True` 策略下产生 897 次更新，每 epoch 消费 459,264 条样本。

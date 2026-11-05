@@ -31,6 +31,18 @@
     "Workload_and_TUSL": {"files": 2333, "all_file_sizes_and_sha256_matched": true},
     "TUAB_TUEV_HMC_text": "not_migrated"
   },
+  "target_checkpoints": {
+    "NeuroLM-B.pt": {
+      "bytes": 2377399148,
+      "sha256": "ffe098bc138b89f8817d3710a3604498d8ecd15135080e2ca27735d05c6d29ab",
+      "verified": true
+    },
+    "VQ.pt": {
+      "bytes": 1904671888,
+      "sha256": "e792c39a6a9e6d1bf4604cf63090730424f1d37f942597883d0c0a1375a2663a",
+      "verified": true
+    }
+  },
   "environment_archive": {
     "sha256": "921e3a953356c939c20e60413ef4629ad8f01e0a56ed004530c2435362def277",
     "created": true,
