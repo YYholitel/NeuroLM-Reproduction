@@ -76,7 +76,30 @@ R4 验证了两条支路的衔接：输入支路为 `X → NeuroLM 内部 EEG �
 
 完整 1024×1024 mask 与独立可见性表达式 `key < 230 and floor(query / 23) >= floor(key / 23)` 逐元素相同；第 230 列起的 padding key 全部屏蔽。结论：同时间步的通道互相可见，后续时间步能看过去，过去不能看未来。作者 GPT 注意力层将此 mask 作为 `attn_mask` 传入 SDPA；本次只核对 mask 构造，不执行注意力数值扰动实验。进程退出码 0，详见[运行清单](../experiments/eeg_mask_check_20261105.json)。
 
-当前主线：[3.1] EEG 前向与监督目标检查通过（R4）；[3.3] mask 构造检查通过（R5）。下一步 [2.1]：解释 `text_logits` 的时间维，核对 `targets is None` 时只返回 `x[:,[-1],:]` 的末位输出，以及提供文本目标时的完整序列输出。
+### R6：[2.1] 文本 logits 与 [5.1] 指令目标机制
+
+实际运行副本的 `model/model.py:253` 在 `targets is None` 时执行 `logits = self.lm_head(x[:, [-1], :])`；有目标时执行 `self.lm_head(x)`。因此文本输入 `[1,8]` 的无目标输出为 `[1,1,58496]`，这是最后一个位置的切片，分支条件不由 `model.eval()` 决定。[2.1] 已关闭。
+
+指令文本目标由 `downstream_dataset.py` 构造：先以 -1 填满 `Y_text`，再执行 `Y_text[prompt_len - 1:valid_text_len - 1] = text[prompt_len:valid_text_len]`。`train_instruction.py:375` 把 EEG 目标全部设为 `-1 - vocab_size`，模型内部加回偏移后为 -1，再与 `Y_text` 拼接，交叉熵使用 `ignore_index=-1`。R6 确认了机制；TUEV/HMC 的 `prompt_len` 另减 1，其具体监督边界由 R7 核对。
+
+### R7：[5.1] 六任务精确 token 边界
+
+[`audit_instruction_labels.py`](../scripts/audit_instruction_labels.py)从实际作者源码提取并执行各类模板表达式与原始的三条标签赋值语句，使用服务器已缓存的 GPT-2 tokenizer。它核对全部六任务共 21 个类别，不加载 EEG、不运行模型，因此不依赖尚未准备的 SEED 原始数据。结果见[标签审计清单](../experiments/instruction_label_audit_20261105.json)。以下是各任务首个类别示例，索引从零开始：
+
+| 任务 | prompt token 数 P | 目标来源起点 | 解码后的监督 token 串 |
+| --- | ---: | ---: | --- |
+| TUAB | 11 | 11 | ` Yes <\|endoftext\|>` |
+| TUEV | 63 | 62 | ` (A) <\|endoftext\|>` |
+| HMC | 52 | 51 | ` (A) <\|endoftext\|>` |
+| TUSL | 32 | 32 | `A) <\|endoftext\|>` |
+| Workload | 13 | 13 | ` Yes <\|endoftext\|>` |
+| SEED | 15 | 15 | ` Positive <\|endoftext\|>` |
+
+六任务的 prompt 均是完整文本的精确 token 前缀，因此没有发生需要修正的 BPE 边界合并。选择题 prompt 末尾的 ` (` 是一个 token（ID 357）。TUEV/HMC 使用 `prompt_len = P - 1`，在 `Answer:` 的冒号位置预测 ` (`，随后预测选项字母、右括号和结束符；TUSL 使用 `prompt_len = P`，从已给出的 ` (` 位置预测选项字母。这个差异意味着 TUEV/HMC 额外监督答案开括号格式，而 TUSL 把它完全作为已给出的答案前缀；保留作者实现，不据此修改标签切片。
+
+21 个类别均通过：监督值等于对应位置的下一 token；监督来源全部位于 `Answer:` 之后；目标连续且包含 EOT；文本 padding 全被忽略。[5.1] 的目标来源、错位、忽略值和精确边界核对已完成。注意这里的“答案部分”包含格式符与结束符，TUEV/HMC 会监督已包含在生成 prompt 末尾的 ` (`。
+
+当前主线：[3.1] EEG 前向与监督目标（R4）、[3.3] mask 构造（R5）、[2.1] 文本输出语义（R6）、[5.1] 指令标签机制与边界（R6–R7）均已完成对应检查。B 与 VQ 权重已就绪，无需重新下载；下一执行检查是 TUAB 指令样本的前向/训练步骤。六任务论文配置仍依赖 SEED，TUAB 单任务检查须作为链路验证记录。
 
 ## 2026-10-21 数据准备入口
 
