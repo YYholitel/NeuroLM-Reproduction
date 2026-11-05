@@ -33,6 +33,24 @@
 
 2026-10-21 另对 TUAB、TUEV、TUSL 预处理输出分别用作者对应的 `downstream_dataset.py` 指令加载器读取一个真实样本。TUAB/TUEV 返回 7 个张量；EEG 张量为 `276×200`，文本输入与目标各为 80 token，说明输出键和训练入口的样本接口衔接。TUSL 的单文件与全量输出也通过加载检查。这些检查不产生模型预测或论文指标。
 
+## 2026-11-05：预训练 EEG token 通路最小前向
+
+[`scripts/smoke_eeg_path.py`](../scripts/smoke_eeg_path.py)取一个真实 TUAB 训练样本，通过作者原版 `PickleLoader(GPT_training=True)` 和严格加载 B 权重的 `NeuroLM` 完成一次仅 EEG 前向。源 pickle 为 `X, y`，其中 `X` 为 23×2000；诊断副本补充作者 TUAB 预处理已强制校验的通道顺序 `ch_names`，EEG 数值不变。该适配只用于本次接口检查，源 pickle 与训练数据目录不变。
+
+七项返回值为：`X (1024,200)`、`input_chans (1024,)`、`input_time (1024,)`、`input_mask (1024,)`、`gpt_mask (1,1024,1024)`、`num_chans=23`、`data.size(0)=230`。有效 patch 数为 23 通道×10 秒=230，padding 为 794；mask 中有效位置计数与此一致。加 batch 维后调用：
+
+```python
+loss, log, logits = model(
+    x_eeg=X.unsqueeze(0).to(device),
+    input_chans=input_chans.unsqueeze(0).to(device),
+    input_time=input_time.unsqueeze(0).to(device),
+    input_mask=input_mask.unsqueeze(0).to(device),
+    eeg_mask=gpt_mask.unsqueeze(0).to(device),
+)
+```
+
+`num_chans` 和有效 patch 数是构建预训练目标时使用的元数据，无目标前向无需传入。tokenizer 输出与 GPT 最终隐状态均为 `[1,1024,768]`，logits 为 `[1,1,58496]`，全部为有限值；进程退出码 0。作者无目标推理只对最后一个位置计算 logits，此次该位置是 padding，因此这里验证的是完整 EEG 前向通路和张量形状，不涉及类别预测质量。完整数值摘要、源样本哈希和代码哈希见[运行清单](../experiments/eeg_path_smoke_20261105.json)。
+
 ## 2026-10-21 数据准备入口
 
 TUH 三套原始副本使用 `rsync -rtcn` 与共享来源逐文件比较通过；患者/文件划分的计数与哈希见[数据清单](DATASETS.md)。TUAB 需依次应用 [`0006`](../patches/0006-tuh-preprocess.patch) 和 [`0008`](../patches/0008-tuab-patient-split.patch)；TUSL 需应用 `0006` 和 [`0007`](../patches/0007-tusl-output-stem.patch)。这些补丁只用于固定作者提交的独立源码副本。
