@@ -68,6 +68,15 @@ datasets:
   TUAB:
     task: abnormal_detection
     classes: 2
+    source_version_used: v3.0.1
+    raw_relative_path: raw/tuh/tuab/v3.0.1
+    processed_relative_path: TUAB/processed
+    author_preprocessor_path_version: v3.0.0
+    version_note: v3.0.1_release_notes_report_edf_header_changes_only_no_signal_data_changes
+    version_equivalence_status: not_independently_verified_against_v3.0.0
+    use_decision: user_requested_use_of_available_v3.0.1_on_2026-11-05
+    preprocessing_patches: [patches/0006-tuh-preprocess.patch, patches/0008-tuab-patient-split.patch]
+    realized_split_manifest: experiments/tuab_split_manifest.json
     split: original_test_set; original_training_patients_random_80_20_train_val
     split_unit: patient
     metrics: [balanced_accuracy, auc_pr, auroc]
