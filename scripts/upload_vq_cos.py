@@ -1,5 +1,5 @@
 """Convert frozen groups and PUT with server-scoped URLs supplied through stdin."""
-import concurrent.futures,hashlib,json,os,struct,sys,time
+import concurrent.futures,hashlib,io,json,os,struct,sys,time
 from pathlib import Path
 import requests
 from prepare_five_dataset_vq import make_group
@@ -17,7 +17,9 @@ def upload(job):
     last_status=None;error_type=None
     for attempt in range(6):
         try:
-            response=SESSION.put(url,data=payload,timeout=(10,90))
+            # Let urllib3 send bounded chunks; a single large sendall can time out
+            # under shared bandwidth even when the overall connection is healthy.
+            response=SESSION.put(url,data=io.BytesIO(payload),timeout=(10,90))
             last_status=response.status_code
             if response.status_code in (200,201):
                 return {'ok':True,'id':group['id'],'bytes':len(payload),'samples':group['count']}
@@ -29,7 +31,11 @@ def upload(job):
                 while pending_errors:
                     error=pending_errors.pop()
                     if id(error) in seen: continue
-                    seen.add(id(error));chain.append({'type':type(error).__name__,'errno':getattr(error,'errno',None)})
+                    seen.add(id(error))
+                    detail={'type':type(error).__name__,'errno':getattr(error,'errno',None)}
+                    if isinstance(error,TimeoutError):
+                        detail['operation']='write' if 'write operation timed out' in str(error) else 'other'
+                    chain.append(detail)
                     pending_errors.extend(item for item in [error.__cause__,error.__context__,getattr(error,'reason',None),*error.args] if isinstance(item,BaseException))
                 print(json.dumps({'network_attempt':attempt+1,'group':group['id'],'error_chain':chain}),flush=True)
             SESSION.close();SESSION=requests.Session();SESSION.trust_env=False

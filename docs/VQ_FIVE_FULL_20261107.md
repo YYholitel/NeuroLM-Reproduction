@@ -61,3 +61,5 @@ COS 暂存位置仅限 `omni-eeg-1442740494/lhy/neurolm-reproduction/transfer/vq
 按用户追加的 epoch 检查要求，另应用 [0016 epoch 诊断](../patches/0016-vq-epoch-diagnostics.patch)。监控辅助模块源文件见 [vq_training_monitor.py](../scripts/vq_training_monitor.py)。
 
 本次部署的控制代码也归档到 `scripts/`：`vq_tione_control.py` 对应远端 `control.py`，`vq_cos_control.py` 对应 `cos_control.py`，`vq_cos_ingest.py` 对应 `cos_ingest.py`，`inspect_vq_five_full.py` 对应 `inspect.py`。这些文件记录当前部署，运行中的协作者先用只读入口同步状态。双进程监控检查源文件为 `scripts/test_vq_monitoring_cpu.py`，结果为 `results/vq_monitor_validation_20261107.json`。
+
+2026-11-07 21:43，针对上传出现的 `ConnectionError → ProtocolError → TimeoutError`，请求体改为 `BytesIO` 流式发送，避免一次性大块写入在共享带宽下触发短超时。14,618,823 字节诊断包传输通过，接收端 payload SHA256 与原始包完全一致。保留已收到的 2,408 个包，重新签发余下 953 个包后续传，训练配置未变。见[传输验证记录](../results/vq_stream_upload_check_20261107.json)；单包时间不作为整体吞吐性能结论。
