@@ -1,0 +1,25 @@
+{
+  "ok": true,
+  "world_size": 2,
+  "device": "cpu",
+  "unchanged_loss_and_gradients": true,
+  "excluded_padding": true,
+  "valid_tokens": 16,
+  "evaluation_preserves_state_and_rng": true,
+  "probe": {
+    "reconstruction": 1.0606670081615448,
+    "frequency": 0.5193709433078766,
+    "raw": 0.5412960648536682,
+    "codebook": 0.00021502978393073136,
+    "unique_samples": 2,
+    "evaluation": true
+  },
+  "code_usage": {
+    "active_codes": 10,
+    "codebook_size": 16,
+    "active_fraction": 0.625,
+    "valid_eeg_tokens": 16,
+    "perplexity": 8.724061861322062,
+    "largest_code_fraction": 0.25
+  }
+}

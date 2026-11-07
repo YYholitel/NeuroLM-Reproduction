@@ -1,0 +1,90 @@
+--- a/train_vq.py
++++ b/train_vq.py
+@@ -90,8 +90,13 @@
+ 
+ 
+     print('prepare dataloader...')
+-    files = Path(args.dataset_dir, 'train').rglob('*.pkl')
+-    files = sorted(files)
++    dataset_root = Path(args.dataset_dir).resolve()
++    ready = json.loads(Path(args.data_ready_manifest).read_text())
++    assert ready['ready'] and ready['total_samples'] == 459656
++    relative_files = Path(args.train_manifest).read_text().splitlines()
++    assert len(relative_files) == ready['total_samples']
++    files = [dataset_root / name for name in relative_files]
++    assert all(name.startswith('train/') and '..' not in Path(name).parts for name in relative_files)
+     dataset_train = PickleLoader(files)
+     print('finished!')
+ 
+@@ -142,7 +147,7 @@
+         print(f"Resuming training from {checkpoint_out_dir}")
+         # resume training from a checkpoint.
+         ckpt_path = os.path.join(checkpoint_out_dir, 'ckpt.pt')
+-        checkpoint = torch.load(ckpt_path, map_location=device)
++        checkpoint = torch.load(ckpt_path, map_location='cpu', weights_only=False)
+         checkpoint_model_args = checkpoint['encoder_args']
+         # force these config attributes to be equal otherwise we can't even resume training
+         # the rest of the attributes (e.g. dropout) can stay as desired from command line
+@@ -201,12 +206,21 @@
+     )
+ 
+ 
++    if master_process:
++        config = dict(vars(args), world_size=ddp_world_size, steps_per_epoch=num_training_steps_per_epoch,
++                      total_updates=args.epochs*num_training_steps_per_epoch,
++                      global_eeg_batch=args.batch_size*ddp_world_size,
++                      global_text_batch=args.text_batch_size*ddp_world_size,
++                      train_samples=len(files), plan_sha256=ready['plan_sha256'])
++        with open(os.path.join(args.out_dir, 'run_config.json'), 'w') as stream:
++            json.dump(config, stream, indent=2)
++        print('VQ_RUN_CONFIG='+json.dumps(config), flush=True)
++
+     # training loop
+     X_text, Y_text = get_batch('train') # fetch the very first batch
+     t0 = time.time()
+     local_iter_num = 0 # number of iterations in the lifetime of this process
+     raw_model = model.module if ddp else model # unwrap DDP container if needed
+-    previous_reconstruction = None
+     for epoch in range(start_epoch, args.epochs):
+         if ddp:
+             sampler_train.set_epoch(epoch)
+@@ -269,16 +283,14 @@
+             if not all(math.isfinite(v) for v in values):
+                 raise RuntimeError("Non-finite globally averaged loss")
+             if master_process:
+-                row = dict(epoch=epoch, step=step, iter=iter_num, lr=lr, alpha=alpha,
++                row = dict(epoch=epoch, step=step, iter=iter_num, lr=lr, alpha=alpha, step_seconds=time.time()-t0,
+                            reconstruction=reconstruction, frequency=values[0], raw=values[1],
+                            codebook=values[2], adversarial_eeg=values[3],
+                            adversarial_text=values[4], adversarial=values[3]+values[4])
+-                print("VQ_METRICS=" + json.dumps(row), flush=True)
++                if iter_num < 20 or (iter_num + 1) % args.log_interval == 0:
++                    print("VQ_METRICS=" + json.dumps(row), flush=True)
+                 with open(os.path.join(args.out_dir, 'metrics.jsonl'), 'a') as stream:
+                     stream.write(json.dumps(row) + '\n')
+-            if previous_reconstruction is not None and reconstruction >= previous_reconstruction:
+-                raise RuntimeError(f"Smoke reconstruction did not decrease: {previous_reconstruction} -> {reconstruction}")
+-            previous_reconstruction = reconstruction
+ 
+             # evaluate the loss on train/val sets and write checkpoints
+             if (iter_num + 1) % args.log_interval == 0 and master_process:
+@@ -316,7 +328,9 @@
+                 'epoch': epoch
+             }
+             print(f"saving checkpoint to {checkpoint_out_dir}")
+-            torch.save(checkpoint, os.path.join(checkpoint_out_dir, f'ckpt.pt'))
++            checkpoint_temp = os.path.join(checkpoint_out_dir, 'ckpt.pt.partial')
++            torch.save(checkpoint, checkpoint_temp)
++            os.replace(checkpoint_temp, os.path.join(checkpoint_out_dir, 'ckpt.pt'))
+         
+             if (epoch + 1) % args.save_ckpt_freq == 0:
+                 print(f"saving checkpoint {epoch} to {checkpoint_out_dir}")
+@@ -335,6 +349,8 @@
+ def get_args():
+     parser = argparse.ArgumentParser('VQ training script', add_help=False)
+     parser.add_argument('--gpt2_embedding_path', default=None)
++    parser.add_argument('--train_manifest', required=True)
++    parser.add_argument('--data_ready_manifest', required=True)
+     parser.add_argument('--out_dir', default='./', help='path where to save, empty for no saving')
+     parser.add_argument('--dataset_dir', default='./', help='path where to save, empty for no saving')
+     parser.add_argument('--log_interval', default=10, type=int)

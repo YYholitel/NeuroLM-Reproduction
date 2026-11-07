@@ -1,0 +1,12 @@
+diff --git a/dataset_maker/prepare_TUAB.py b/dataset_maker/prepare_TUAB.py
+--- a/dataset_maker/prepare_TUAB.py
++++ b/dataset_maker/prepare_TUAB.py
+@@ -62,7 +62,7 @@
+                     raise Exception("channel order is wrong!")
+ 
+                 raw.filter(l_freq=0.1, h_freq=75.0)
+-                raw.notch_filter(50.0)
++                raw.notch_filter(60.0)
+                 raw.resample(200, n_jobs=5)
+ 
+                 ch_name = raw.ch_names

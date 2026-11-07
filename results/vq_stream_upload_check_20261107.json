@@ -1,0 +1,22 @@
+{
+  "date": "2026-11-07",
+  "timezone": "Asia/Shanghai",
+  "scope": "One diagnostic transfer; not a throughput benchmark",
+  "group": "Workload-00000",
+  "frame_bytes": 14618823,
+  "observed_error_chain": ["ConnectionError", "ProtocolError", "TimeoutError"],
+  "previous_probe_seconds_including_retry": 20.945,
+  "streaming_probe_seconds": 1.899,
+  "receiver_verification": {
+    "ok": true,
+    "payload_sha256": "63fd9324bfa09a272c89b0b0de5b0736131e25828477d42b28b21f95ff38f4c0",
+    "same_as_original_payload": true
+  },
+  "change": "Pass a fresh BytesIO request body on every attempt so urllib3 sends bounded chunks instead of one large bytes write",
+  "resume": {
+    "completed_groups_preserved": 2408,
+    "remaining_groups_at_signing": 953,
+    "source_uploader_pid": 271197,
+    "training_configuration_changed": false
+  }
+}
