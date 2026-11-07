@@ -1,0 +1,37 @@
+{
+  "session": "vq-monitor",
+  "socket": "/tmp/clawdbot-tmux-sockets/neurolm-vq.sock",
+  "first_observed_updates": 8302,
+  "latest_updates": 8432,
+  "observed_at": "2026-11-07T15:41:08.691820+00:00",
+  "epoch": 10,
+  "update_in_epoch": 359,
+  "plot_error": null,
+  "stale": false,
+  "api": {
+    "ok": true,
+    "mode": "status",
+    "tasks": [
+      {
+        "name": "neurolm-vq-five-full16-e50-20261107-r1",
+        "id": "train-1712596817713834752",
+        "status": "RUNNING"
+      }
+    ],
+    "temporary_probe_kernel_removed": true
+  },
+  "last_plotted_update": 8432,
+  "source_hash_matches": true,
+  "panes": [
+    "vq-monitor:curves.0 pid=1399386 dead=0 command=python",
+    "vq-monitor:train-log.0 pid=1399400 dead=0 command=tail"
+  ],
+  "latest_epoch_code_usage": {
+    "active_codes": 119,
+    "codebook_size": 8192,
+    "active_fraction": 0.0145263671875,
+    "valid_eeg_tokens": 9785430,
+    "perplexity": 103.49770308193958,
+    "largest_code_fraction": 0.03429987236125546
+  }
+}

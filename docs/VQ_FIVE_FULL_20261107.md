@@ -82,8 +82,18 @@ COS 暂存位置仅限 `omni-eeg-1442740494/lhy/neurolm-reproduction/transfer/vq
 
 [启动实测记录](../results/vq_full_training_start_20261107.json) 保存预检、实际优化器更新和两节点 GPU 采样。22:27 左右每卡显存约 23.6 GiB；16 卡最近 12 次采样的平均利用率约 74.1%，瞬时值有波动。这只是启动时的短时间窗口，不代表全程吞吐率。
 
-用户要求直接展示训练曲线。[第一份曲线](../results/figures/vq-five-full-20261107-r1/vq_training_curves.png) 来自 **89 次真实更新**，位于第 1 epoch 的第 89/897 步；三种 loss 均有限。重建 loss 首末为 0.477925 → 0.474470，码本为 4.32046e-5 → 7.42354e-5，对抗为 1.366386 → 1.853243。训练仍处于 warmup 初期，不能据此判定收敛或完成第 1 epoch 检查。
+用户要求直接展示训练曲线。[第一份曲线](https://github.com/YYholitel/NeuroLM-Reproduction/blob/5fe4200cc8b885df9dd2f259ad16de998daf465e/results/figures/vq-five-full-20261107-r1/vq_training_curves.png) 来自 **89 次真实更新**，位于第 1 epoch 的第 89/897 步；三种 loss 均有限。重建 loss 首末为 0.477925 → 0.474470，码本为 4.32046e-5 → 7.42354e-5，对抗为 1.366386 → 1.853243。当时仍处于 warmup 初期，不能据此判定收敛或完成第 1 epoch 检查。
 
-![五数据集 VQ 前 89 次更新](../results/figures/vq-five-full-20261107-r1/vq_training_curves.png)
+![五数据集 VQ 前 89 次更新](https://raw.githubusercontent.com/YYholitel/NeuroLM-Reproduction/5fe4200cc8b885df9dd2f259ad16de998daf465e/results/figures/vq-five-full-20261107-r1/vq_training_curves.png)
 
 图中浅线是原始逐步 loss，深线是明确标注的 8 步移动平均。[原始日志快照](../results/vq_five_full_metrics_20261107.jsonl)、[绘图来源与数值](../results/figures/vq-five-full-20261107-r1/curve_metadata.json)、[SVG](../results/figures/vq-five-full-20261107-r1/vq_training_curves.svg) 和 [PDF](../results/figures/vq-five-full-20261107-r1/vq_training_curves.pdf) 一并保存。使用 `python scripts/plot_vq_training_curves.py --fetch` 可用最新真实日志重新绘图；Git 中图片是固定快照。
+
+## 后续图片更新与 tmux
+
+用户要求上传图片并挂 tmux 后，图片和对应逐步日志更新为 **8,127 步，第 10 epoch 第 54 步** 的快照，移动平均窗口为 100 步；前述 89 步版本可在提交 `5fe4200` 查看。已有 9 个完整 epoch，重建 loss 的 epoch 均值从第 1 轮 0.372708 降到第 9 轮 0.116117。第 1 轮固定诊断从基线 2.959643 降到 2.859282；第 9 轮为 1.532391。
+
+![五数据集 VQ 前 8127 次更新](../results/figures/vq-five-full-20261107-r1/vq_training_curves.png)
+
+**存在持续的低码本利用率提示。** 第 5 轮末 LR 正确达到 5e-5，但最近 100 步仅激活 100/8192 个码（1.22%，perplexity 76.68）；第 9 轮为 119/8192（1.45%，perplexity 103.50）。第 9 轮的平均码本 loss 为 2.80659e-4，对抗 loss 为 1.390801。当前 loss 有限且重建改善，但不能据此宣布码本学习正常。这些标记按既定规则仅提示检查，不会自行修改训练目标或停止任务。
+
+完整逐轮证据见 [epoch 日志](../results/vq_five_full_epochs_20261107.jsonl)。tmux 会话 `vq-monitor` 在腾讯 Notebook 上每分钟更新曲线，第二个窗口跟随实际训练日志；连接方式和图片位置见 [交接说明](VQ_AGENT_HANDOFF.md#tmux-持续监控和图片位置)。TI-ONE 保持原任务运行，tmux 负责观察与绘图。

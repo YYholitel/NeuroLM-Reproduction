@@ -1,24 +1,24 @@
 {
   "plotted": true,
   "source": "C:\\Users\\PC\\Documents\\ChatGPT\\Neuro_LLM\\results\\vq_five_full_metrics_20261107.jsonl",
-  "source_sha256": "c8999c048ba23be51cc4a8eb262c7207b93d14adfae99cbd93474e7b41fbd613",
-  "observed_updates": 89,
+  "source_sha256": "a7cb0d1f220776b6c54ba4efe3aa8c46075e401986e7f5a0d82d052d9a5c0aab",
+  "observed_updates": 8127,
   "first_update": 1,
-  "last_update": 89,
-  "epoch": 1,
-  "update_in_epoch": 89,
-  "rolling_window": 8,
+  "last_update": 8127,
+  "epoch": 10,
+  "update_in_epoch": 54,
+  "rolling_window": 100,
   "first": {
     "reconstruction": 0.47792484052479267,
     "codebook": 4.320464188367623e-05,
     "adversarial": 1.3663857020437717
   },
   "last": {
-    "reconstruction": 0.47446965891867876,
-    "codebook": 7.423542001561145e-05,
-    "adversarial": 1.8532431200146675
+    "reconstruction": 0.12148618861101568,
+    "codebook": 0.0002889477018470643,
+    "adversarial": 1.393632173538208
   },
-  "generated_at": "2026-11-07T14:28:10.461708+00:00",
+  "generated_at": "2026-11-07T15:38:11.351825+00:00",
   "outputs": [
     "C:\\Users\\PC\\Documents\\ChatGPT\\Neuro_LLM\\results\\figures\\vq-five-full-20261107-r1\\vq_training_curves.png",
     "C:\\Users\\PC\\Documents\\ChatGPT\\Neuro_LLM\\results\\figures\\vq-five-full-20261107-r1\\vq_training_curves.svg",

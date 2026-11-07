@@ -58,4 +58,19 @@ python scripts/check_vq_full.py files
 
 用户已明确要求直接展示训练曲线。有真实更新后运行 `python scripts/plot_vq_training_curves.py --fetch`，它只读拉取本次全量 `metrics.jsonl`，绘制重建、码本、对抗 loss 三幅曲线，输出 PNG/SVG/PDF 至 `results/figures/vq-five-full-20261107-r1/`。原始点保留；足够多点时另显示明确标注窗口的移动平均。没有训练日志时仅报告暂无数据，不生成占位曲线，不将 smoke 的四步结果混入全量曲线。
 
+## tmux 持续监控和图片位置
+
+用户随后要求上传图片并挂 tmux。腾讯 Notebook 的 `lhy` 账号已创建独立 socket `/tmp/clawdbot-tmux-sockets/neurolm-vq.sock`、会话 `vq-monitor`。训练进程继续由 TI-ONE 托管；此 tmux 托管监控与绘图，不会重复启动训练。
+
+```bash
+ssh -t tencent 'tmux -S /tmp/clawdbot-tmux-sockets/neurolm-vq.sock attach -t vq-monitor'
+ssh tencent 'tmux -S /tmp/clawdbot-tmux-sockets/neurolm-vq.sock capture-pane -p -J -t vq-monitor:curves.0 -S -30'
+```
+
+`curves` 窗口运行 [watch_vq_curves.py](../scripts/watch_vq_curves.py)，每 60 秒读取真实日志、打印最新 loss/GPU 利用率/码本提示并更新 PNG、SVG、PDF；TI-ONE API 每 5 分钟只读检查一次。`train-log` 窗口显示实际 rank 0 训练日志。用 `Ctrl+b d` 分离，`Ctrl+b n` 切换窗口。
+
+运行根目录下 `monitor/figures/vq_training_curves.png` 是腾讯端最新图片；`monitor/latest.json` 和 `monitor/watch.log` 保存监控结果，`monitor/metrics_snapshot.jsonl` 保存最新绘图输入。目录和文件均位于 CFS。终态或完成标记会结束刷新进程并保留 tmux 窗口；该监控不会停止或修改训练。
+
+最新上传图片含 8,127 次更新（第 10 epoch 第 54 步），此前 9 个完整 epoch 的记录见 `results/vq_five_full_epochs_20261107.jsonl`。第 5 epoch LR 为 5e-5；最后 100 步有效码为 100/8192，第 9 epoch 为 119/8192，均触发低使用率和分配集中提示。重建 loss 下降不能单独说明码本健康，后续同步必须带上这项提示。
+
 协作者首次同步请报告：连接是否成功、数据进度、实际任务 ID/状态、是否已有优化器更新，以及本次任务的 GPU 利用率和显存。未分配节点时报告暂无指标，不能据此断言整个资源组的 GPU 利用率为 0%。
