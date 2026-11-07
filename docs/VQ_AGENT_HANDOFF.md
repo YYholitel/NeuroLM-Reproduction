@@ -33,6 +33,7 @@ python scripts/check_vq_full.py files
 ## 正在执行的工作
 
 - 任务名：`neurolm-vq-five-full16-e50-20261107-r1`。
+- 2026-11-07 22:24 实际任务 `train-1712596817713834752` 已进入 `RUNNING`；22:28 曲线快照含第 1 epoch 前 89 次真实更新。数据已完整通过预检，后续需查询最新状态。
 - 腾讯运行根目录：`/mnt/cfs-omni/lhy/neurolm-reproduction/vq-five-full-20261107-r1`。
 - 源端运行目录：`/data/lihy/NeuroLM/outputs/vq-five-full-20261107-r1`。
 - 五数据集 train 划分共 459,656 个窗口；保留验证和测试划分，不是论文 25,000 小时语料复现。

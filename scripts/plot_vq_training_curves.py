@@ -95,6 +95,8 @@ def main():
     for extension in ('png', 'svg', 'pdf'):
         path = args.output_dir / ('vq_training_curves.' + extension)
         fig.savefig(path, dpi=180, facecolor='white')
+        if extension == 'svg':
+            path.write_text('\n'.join(line.rstrip() for line in path.read_text(encoding='utf-8').splitlines()) + '\n', encoding='utf-8')
         outputs.append(str(path.resolve()))
     plt.close(fig)
     metadata = dict(plotted=True, source=str(args.input.resolve()),

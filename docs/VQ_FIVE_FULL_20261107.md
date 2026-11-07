@@ -75,3 +75,15 @@ COS 暂存位置仅限 `omni-eeg-1442740494/lhy/neurolm-reproduction/transfer/vq
 | Workload | 19 × 800 | -60.66 | 74.83 | 0.39 |
 
 这些是各数据集一个样本的统计，不代表全数据分布。TUAB/TUEV 的大幅值与负均值仍保留；格式和缩放通过不能证明所有信号都位于 ±100 µV，也不能证明所有样本质量理想。
+
+## 全量任务已启动：2026-11-07 22:24–22:28 实测
+
+3,361 个分片全部接收，完整预检通过：五数据集共 459,656 个 train 窗口，各抽查 12 个真实加载样本；文本 train/val 全文件 SHA256 与源端一致，运行代码及冻结词嵌入哈希一致。TI-ONE 任务 **`train-1712596817713834752`** 进入 `RUNNING`，实际日志确认 world size 16、全局 EEG/text batch 512/128、每轮 897 次更新、50 epochs、warmup 4,485 步、W&B 关闭。
+
+[启动实测记录](../results/vq_full_training_start_20261107.json) 保存预检、实际优化器更新和两节点 GPU 采样。22:27 左右每卡显存约 23.6 GiB；16 卡最近 12 次采样的平均利用率约 74.1%，瞬时值有波动。这只是启动时的短时间窗口，不代表全程吞吐率。
+
+用户要求直接展示训练曲线。[第一份曲线](../results/figures/vq-five-full-20261107-r1/vq_training_curves.png) 来自 **89 次真实更新**，位于第 1 epoch 的第 89/897 步；三种 loss 均有限。重建 loss 首末为 0.477925 → 0.474470，码本为 4.32046e-5 → 7.42354e-5，对抗为 1.366386 → 1.853243。训练仍处于 warmup 初期，不能据此判定收敛或完成第 1 epoch 检查。
+
+![五数据集 VQ 前 89 次更新](../results/figures/vq-five-full-20261107-r1/vq_training_curves.png)
+
+图中浅线是原始逐步 loss，深线是明确标注的 8 步移动平均。[原始日志快照](../results/vq_five_full_metrics_20261107.jsonl)、[绘图来源与数值](../results/figures/vq-five-full-20261107-r1/curve_metadata.json)、[SVG](../results/figures/vq-five-full-20261107-r1/vq_training_curves.svg) 和 [PDF](../results/figures/vq-five-full-20261107-r1/vq_training_curves.pdf) 一并保存。使用 `python scripts/plot_vq_training_curves.py --fetch` 可用最新真实日志重新绘图；Git 中图片是固定快照。

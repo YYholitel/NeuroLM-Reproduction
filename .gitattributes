@@ -1,2 +1,4 @@
 *.sh text eol=lf
 *.patch text eol=lf
+*.jsonl text eol=lf
+*.svg text eol=lf
