@@ -1,0 +1,231 @@
+--- a/train_vq.py
++++ b/train_vq.py
+@@ -6,6 +6,7 @@
+ import os
+ import time
+ import argparse
++import json
+ from contextlib import nullcontext
+ 
+ import numpy as np
+@@ -18,7 +19,7 @@
+ from model.model_neural_transformer import NTConfig
+ from dataset import PickleLoader
+ from pathlib import Path
+-from utils import cosine_scheduler
++from vq_scheduler import cosine_scheduler
+ import math
+ 
+ 
+@@ -90,7 +91,7 @@
+ 
+     print('prepare dataloader...')
+     files = Path(args.dataset_dir, 'train').rglob('*.pkl')
+-    files = [file for file in files]
++    files = sorted(files)
+     dataset_train = PickleLoader(files)
+     print('finished!')
+ 
+@@ -101,7 +102,7 @@
+         data_loader_train = torch.utils.data.DataLoader(
+             dataset_train, sampler=sampler_train,
+             batch_size=args.batch_size,
+-            num_workers=10,
++            num_workers=2,
+             pin_memory=True,
+             drop_last=True,
+         )
+@@ -109,7 +110,7 @@
+         data_loader_train = torch.utils.data.DataLoader(
+             dataset_train,
+             batch_size=args.batch_size,
+-            num_workers=10,
++            num_workers=2,
+             pin_memory=True,
+             drop_last=True,
+             shuffle=True
+@@ -135,7 +136,7 @@
+         # determine the vocab size we'll use for from-scratch training
+         encoder_conf = NTConfig(**encoder_args)
+         decoder_conf = NTConfig(**decoder_args)
+-        model = VQ_Align(encoder_conf, decoder_conf)
++        model = VQ_Align(encoder_conf, decoder_conf, gpt2_embedding_path=args.gpt2_embedding_path)
+         start_epoch = 0
+     elif init_from == 'resume':
+         print(f"Resuming training from {checkpoint_out_dir}")
+@@ -153,7 +154,7 @@
+         # create the model
+         encoder_conf = NTConfig(**encoder_args)
+         decoder_conf = NTConfig(**decoder_args)
+-        model = VQ_Align(encoder_conf, decoder_conf)
++        model = VQ_Align(encoder_conf, decoder_conf, gpt2_embedding_path=args.gpt2_embedding_path)
+         state_dict = checkpoint['model']
+         # fix the keys of the state dictionary :(
+         # honestly no idea how checkpoints sometimes get this prefix, have to debug more
+@@ -177,7 +178,7 @@
+     checkpoint = None # free up memory
+ 
+     # compile the model
+-    if compile:
++    if args.compile:
+         print("compiling the model... (takes a ~minute)")
+         unoptimized_model = model
+         model = torch.compile(model) # requires PyTorch 2.0
+@@ -192,7 +193,8 @@
+         os.environ["WANDB_API_KEY"] = args.wandb_api_keys
+         wandb.init(project=args.wandb_project, name=args.wandb_run_name, dir=os.path.join(args.out_dir, 'wandb'), resume=True)
+ 
+-    num_training_steps_per_epoch = len(dataset_train) // args.batch_size // ddp_world_size
++    num_training_steps_per_epoch = len(data_loader_train)
++    assert num_training_steps_per_epoch > 0, "Empty training loader"
+     lr_schedule_values = cosine_scheduler(
+         args.learning_rate, args.min_lr, args.epochs, num_training_steps_per_epoch,
+         warmup_epochs=args.warmup_epochs
+@@ -204,7 +206,10 @@
+     t0 = time.time()
+     local_iter_num = 0 # number of iterations in the lifetime of this process
+     raw_model = model.module if ddp else model # unwrap DDP container if needed
++    previous_reconstruction = None
+     for epoch in range(start_epoch, args.epochs):
++        if ddp:
++            sampler_train.set_epoch(epoch)
+         for step, (batch) in enumerate(data_loader_train):
+             # determine and set the learning rate for this iteration
+             lr = lr_schedule_values[iter_num] if args.decay_lr else args.learning_rate
+@@ -235,17 +240,45 @@
+                 loss = (loss + domain_loss + domain_loss2) / args.gradient_accumulation_steps # scale the loss to account for gradient accumulation
+             # immediately async prefetch next batch while model is doing the forward pass on the GPU
+             # backward pass, with gradient scaling if training in fp16
++            if not torch.isfinite(loss).all():
++                raise RuntimeError("Non-finite VQ loss")
+             scaler.scale(loss).backward()
+             if (step + 1) % args.gradient_accumulation_steps == 0:
+                 # clip the gradient
+                 if args.grad_clip != 0.0:
+                     scaler.unscale_(optimizer)
+                     torch.nn.utils.clip_grad_norm_(model.parameters(), args.grad_clip)
++                if args.grad_clip == 0.0:
++                    scaler.unscale_(optimizer)
++                    torch.nn.utils.clip_grad_norm_(model.parameters(), float('inf'), error_if_nonfinite=True)
+                 # step the optimizer and scaler if training in fp16
+                 scaler.step(optimizer)
+                 scaler.update()
+                 # flush the gradients as soon as we can, no need for this memory anymore
+                 optimizer.zero_grad(set_to_none=True)
++
++            metrics = torch.tensor([
++                log['train/rec_freq_loss'], log['train/rec_raw_loss'],
++                log['train/quant_loss'], log['train/domain_loss'], domain_loss2.detach().item()
++            ], device=device, dtype=torch.float64)
++            if ddp:
++                torch.distributed.all_reduce(metrics)
++                metrics /= ddp_world_size
++            values = metrics.tolist()
++            reconstruction = values[0] + values[1]
++            if not all(math.isfinite(v) for v in values):
++                raise RuntimeError("Non-finite globally averaged loss")
++            if master_process:
++                row = dict(epoch=epoch, step=step, iter=iter_num, lr=lr, alpha=alpha,
++                           reconstruction=reconstruction, frequency=values[0], raw=values[1],
++                           codebook=values[2], adversarial_eeg=values[3],
++                           adversarial_text=values[4], adversarial=values[3]+values[4])
++                print("VQ_METRICS=" + json.dumps(row), flush=True)
++                with open(os.path.join(args.out_dir, 'metrics.jsonl'), 'a') as stream:
++                    stream.write(json.dumps(row) + '\n')
++            if previous_reconstruction is not None and reconstruction >= previous_reconstruction:
++                raise RuntimeError(f"Smoke reconstruction did not decrease: {previous_reconstruction} -> {reconstruction}")
++            previous_reconstruction = reconstruction
+ 
+             # evaluate the loss on train/val sets and write checkpoints
+             if (iter_num + 1) % args.log_interval == 0 and master_process:
+@@ -290,11 +323,18 @@
+                 torch.save(checkpoint, os.path.join(checkpoint_out_dir, f'ckpt-{epoch}.pt'))
+ 
+     if ddp:
++        torch.distributed.barrier()
++    if master_process:
++        with open(os.path.join(args.out_dir, 'completed.json'), 'w') as stream:
++            json.dump(dict(epochs=args.epochs, steps=iter_num, decoder_layers=decoder_args['n_layer'],
++                           wandb=False, world_size=ddp_world_size), stream)
++    if ddp:
+         destroy_process_group()
+ 
+ 
+ def get_args():
+     parser = argparse.ArgumentParser('VQ training script', add_help=False)
++    parser.add_argument('--gpt2_embedding_path', default=None)
+     parser.add_argument('--out_dir', default='./', help='path where to save, empty for no saving')
+     parser.add_argument('--dataset_dir', default='./', help='path where to save, empty for no saving')
+     parser.add_argument('--log_interval', default=10, type=int)
+--- /dev/null
++++ b/vq_scheduler.py
+@@ -0,0 +1,21 @@
++import math
++import numpy as np
++
++def cosine_scheduler(base_value, final_value, epochs, niter_per_ep, warmup_epochs=0,
++                     start_warmup_value=0, warmup_steps=-1):
++    warmup_schedule = np.array([])
++    warmup_iters = warmup_epochs * niter_per_ep
++    if warmup_steps > 0:
++        warmup_iters = warmup_steps
++    print("Set warmup steps = %d" % warmup_iters)
++    if warmup_epochs > 0:
++        warmup_schedule = np.linspace(start_warmup_value, base_value, warmup_iters)
++
++    iters = np.arange(epochs * niter_per_ep - warmup_iters)
++    schedule = np.array(
++        [final_value + 0.5 * (base_value - final_value) * (1 + math.cos(math.pi * i / (len(iters)))) for i in iters])
++
++    schedule = np.concatenate((warmup_schedule, schedule))
++
++    assert len(schedule) == epochs * niter_per_ep
++    return schedule
+--- a/model/model_vq.py
++++ b/model/model_vq.py
+@@ -194,6 +194,7 @@
+     def __init__(self, 
+                  encoder_config,
+                  decoder_config,
++                 gpt2_embedding_path=None,
+                  ):
+         super(VQ_Align, self).__init__()
+         self.VQ = VQ(encoder_config, decoder_config)
+@@ -203,10 +204,14 @@
+                 nn.Linear(256, 2)
+             )
+ 
+-        model_hf = GPT2LMHeadModel.from_pretrained('gpt2')
+-        sd_hf = model_hf.state_dict()
+         self.wte = nn.Embedding(50257, 768, _freeze=True)
+-        self.wte.weight.data = sd_hf['transformer.wte.weight']
++        if gpt2_embedding_path:
++            embedding = torch.load(gpt2_embedding_path, map_location='cpu', weights_only=True)
++            assert embedding.shape == self.wte.weight.shape and torch.isfinite(embedding).all()
++            self.wte.weight.data.copy_(embedding)
++        else:
++            model_hf = GPT2LMHeadModel.from_pretrained('gpt2')
++            self.wte.weight.data.copy_(model_hf.state_dict()['transformer.wte.weight'])
+         
+         self.domain_classifier.apply(self._init_weights)
+     
+--- a/model/norm_ema_quantizer.py
++++ b/model/norm_ema_quantizer.py
+@@ -87,7 +87,16 @@
+         if self.initted:
+             return
+         print("Performing Kemans init for codebook")
+-        embed, cluster_size = kmeans(data, self.num_tokens, 10, use_cosine_sim = True)
++        if distributed.is_available() and distributed.is_initialized():
++            if distributed.get_rank() == 0:
++                embed, cluster_size = kmeans(data, self.num_tokens, 10, use_cosine_sim=True)
++            else:
++                embed = torch.empty_like(self.weight, dtype=data.dtype, device=data.device)
++                cluster_size = torch.empty(self.num_tokens, dtype=torch.long, device=data.device)
++            distributed.broadcast(embed, src=0)
++            distributed.broadcast(cluster_size, src=0)
++        else:
++            embed, cluster_size = kmeans(data, self.num_tokens, 10, use_cosine_sim=True)
+         self.weight.data.copy_(embed)
+         self.cluster_size.data.copy_(cluster_size)
+         self.initted.data.copy_(torch.Tensor([True]))

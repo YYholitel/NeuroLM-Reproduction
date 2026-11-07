@@ -1,0 +1,196 @@
+{
+  "remote_root": "/mnt/cfs-omni/lhy/neurolm-reproduction/vq-smoke-20261106-r1",
+  "configuration": {
+    "epochs": 1,
+    "warmup_epochs": 0,
+    "world_size": 16,
+    "eeg_batch_per_rank": 32,
+    "text_batch_per_rank": 8,
+    "global_eeg_batch": 512,
+    "global_text_batch": 128,
+    "steps": 4,
+    "decoder_layers": 3,
+    "wandb": false,
+    "unique_eeg_samples": 2,
+    "repeated_input_entries": 2048,
+    "diagnostic_only": true,
+    "torch": "2.7.1+cu128",
+    "gpt2_embedding_source": "frozen wte.weight from hash-verified author VQ.pt",
+    "gpt2_embedding_sha256": "a850ca8f8e1c4c8e6d6902686d5901740db9e82310bd45269cd84458d83d1bcf",
+    "text_source": "first 2 MiB of verified OpenWebText train/val token files"
+  },
+  "completion": {
+    "epochs": 1,
+    "steps": 4,
+    "decoder_layers": 3,
+    "wandb": false,
+    "world_size": 16
+  },
+  "metrics": [
+    {
+      "epoch": 0,
+      "step": 0,
+      "iter": 0,
+      "lr": 5e-05,
+      "alpha": 0.0,
+      "reconstruction": 2.950305186212063,
+      "frequency": 1.8970652371644974,
+      "raw": 1.0532399490475655,
+      "codebook": 7.698446680137749e-07,
+      "adversarial_eeg": 0.671202789992094,
+      "adversarial_text": 0.695673942565918,
+      "adversarial": 1.366876732558012
+    },
+    {
+      "epoch": 0,
+      "step": 1,
+      "iter": 1,
+      "lr": 4.4142135623730954e-05,
+      "alpha": 0.8482836399575131,
+      "reconstruction": 2.9209680557250977,
+      "frequency": 1.8801816701889038,
+      "raw": 1.0407863855361938,
+      "codebook": 0.0009802012318687048,
+      "adversarial_eeg": 0.6523201055824757,
+      "adversarial_text": 0.6947868168354034,
+      "adversarial": 1.347106922417879
+    },
+    {
+      "epoch": 0,
+      "step": 2,
+      "iter": 2,
+      "lr": 3.0000000000000004e-05,
+      "alpha": 0.9866142981514305,
+      "reconstruction": 2.8807946518063545,
+      "frequency": 1.8502231016755104,
+      "raw": 1.0305715501308441,
+      "codebook": 0.0009777590494195465,
+      "adversarial_eeg": 0.8508233241736889,
+      "adversarial_text": 0.6940103769302368,
+      "adversarial": 1.5448337011039257
+    },
+    {
+      "epoch": 0,
+      "step": 3,
+      "iter": 3,
+      "lr": 1.585786437626905e-05,
+      "alpha": 0.9988944427261528,
+      "reconstruction": 2.859861843287945,
+      "frequency": 1.8365278169512749,
+      "raw": 1.02333402633667,
+      "codebook": 0.0010468007312738337,
+      "adversarial_eeg": 1.0318575873970985,
+      "adversarial_text": 0.69352126121521,
+      "adversarial": 1.7253788486123085
+    }
+  ],
+  "node_exit_codes": {
+    "0": 0,
+    "1": 0
+  },
+  "runtime_log_headers": {
+    "0": [
+      "0, NVIDIA H20, 97871 MiB",
+      "1, NVIDIA H20, 97871 MiB",
+      "2, NVIDIA H20, 97871 MiB",
+      "3, NVIDIA H20, 97871 MiB",
+      "4, NVIDIA H20, 97871 MiB",
+      "5, NVIDIA H20, 97871 MiB",
+      "6, NVIDIA H20, 97871 MiB",
+      "7, NVIDIA H20, 97871 MiB",
+      "{\"python\": \"3.12.3 (main, Jan 17 2025, 18:03:48) [GCC 13.3.0]\", \"torch\": \"2.7.1+cu128\", \"cuda\": \"12.8\", \"gpu_count\": 8, \"wandb\": false}",
+      "prepare dataloader...",
+      "prepare dataloader...",
+      "finished!",
+      "finished!",
+      "Initializing a new model from scratchInitializing a new model from scratch",
+      "",
+      "{}",
+      "{}Final encoder config",
+      " Final encoder config NTConfig(block_size=1024, patch_size=200, num_classes=0, in_chans=1, out_chans=16, use_mean_pooling=True, init_scale=0.001, n_layer=12, n_head=12, n_embd=768, dropout=0.0, bias=False)NTConfig(block_size=1024, patch_size=200, num_classes=0, in_chans=1, out_chans=16, use_mean_pooling=True, init_scale=0.001, n_layer=12, n_head=12, n_embd=768, dropout=0.0, bias=False)"
+    ],
+    "1": [
+      "0, NVIDIA H20, 97871 MiB",
+      "1, NVIDIA H20, 97871 MiB",
+      "2, NVIDIA H20, 97871 MiB",
+      "3, NVIDIA H20, 97871 MiB",
+      "4, NVIDIA H20, 97871 MiB",
+      "5, NVIDIA H20, 97871 MiB",
+      "6, NVIDIA H20, 97871 MiB",
+      "7, NVIDIA H20, 97871 MiB",
+      "{\"python\": \"3.12.3 (main, Jan 17 2025, 18:03:48) [GCC 13.3.0]\", \"torch\": \"2.7.1+cu128\", \"cuda\": \"12.8\", \"gpu_count\": 8, \"wandb\": false}",
+      "prepare dataloader...",
+      "prepare dataloader...",
+      "finished!",
+      "finished!",
+      "Initializing a new model from scratchInitializing a new model from scratch",
+      "",
+      "{}",
+      "Final encoder config{} ",
+      "Final encoder config NTConfig(block_size=1024, patch_size=200, num_classes=0, in_chans=1, out_chans=16, use_mean_pooling=True, init_scale=0.001, n_layer=12, n_head=12, n_embd=768, dropout=0.0, bias=False)NTConfig(block_size=1024, patch_size=200, num_classes=0, in_chans=1, out_chans=16, use_mean_pooling=True, init_scale=0.001, n_layer=12, n_head=12, n_embd=768, dropout=0.0, bias=False)"
+    ]
+  },
+  "checkpoint": {
+    "path": "/mnt/cfs-omni/lhy/neurolm-reproduction/vq-smoke-20261106-r1/run/checkpoints/VQ/ckpt.pt",
+    "bytes": 1734747015,
+    "encoder_args": {
+      "n_layer": 12,
+      "n_head": 12,
+      "n_embd": 768,
+      "block_size": 1024,
+      "bias": false,
+      "dropout": 0.0,
+      "num_classes": 0,
+      "in_chans": 1,
+      "out_chans": 16
+    },
+    "decoder_args": {
+      "n_layer": 3,
+      "n_head": 12,
+      "n_embd": 768,
+      "block_size": 1024,
+      "bias": false,
+      "dropout": 0.0,
+      "num_classes": 0,
+      "in_chans": 128
+    },
+    "iter_num": 4,
+    "epoch": 0,
+    "actual_decoder_block_indices": {
+      "freq": [
+        0,
+        1,
+        2
+      ],
+      "raw": [
+        0,
+        1,
+        2
+      ]
+    }
+  },
+  "platform": {
+    "checked_at": "2026-11-07T10:48:04.349913+08:00",
+    "ok": true,
+    "task_id": "train-1711919865109687040",
+    "status": "SUCCEED",
+    "runtime_seconds": 42,
+    "start_time_utc": "2026-11-06T17:00:14Z",
+    "end_time_utc": "2026-11-06T17:00:56Z",
+    "failure_reason": "",
+    "temporary_probe_kernel_removed": true
+  },
+  "collected_at": "2026-11-07T10:48:44.061283+08:00",
+  "reconstruction_drop_percent": 3.065558890205511,
+  "interpretation": {
+    "training_loop_smoke_test_passed": true,
+    "full_corpus_training_verified": false,
+    "adversarial_convergence_verified": false,
+    "limitations": "Two unique diagnostic EEG samples repeated as 2048 entries; four optimizer updates. Not a full-corpus or convergence test.",
+    "runtime_changes": "Decoder 3 layers; W&B off; warmup 0; compile argument fix; actual loader-based schedule length; offline frozen GPT2 embedding; synchronized initial codebook across DDP ranks; finite-value and reconstruction checks.",
+    "patches": [
+      "patches/0012-vq-decoder-three-layers.patch",
+      "patches/0013-vq-smoke-runtime.patch"
+    ]
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "time": 1794058443.142412,
+  "source": {
+    "pid": 4114395,
+    "active": true,
+    "last_progress": {
+      "uploaded_groups": 2160,
+      "total": 3316,
+      "bytes": 47574912313,
+      "seconds": 4739.494842290878,
+      "last": "TUAB-aaaaaodh_s001_t000"
+    },
+    "network_failure": false,
+    "completed": false
+  },
+  "target": [
+    {
+      "time": 1794058452.555281,
+      "groups": 2208,
+      "groups_total": 3361,
+      "samples": {
+        "HMC": 89200,
+        "Workload": 1508,
+        "TUSL": 119,
+        "TUEV": 45602,
+        "TUAB": 212879
+      },
+      "compressed_GiB": 45.26422334089875,
+      "text_GiB": 0.0,
+      "first_receipt_time": 1794053015.846326,
+      "last_receipt_time": 1794058440.8209524
+    },
+    {
+      "file": "pipeline_state.json",
+      "data": {
+        "stage": "WAITING_FOR_TRANSFER",
+        "time": 1794052654.9253259,
+        "expected_samples": 459656
+      }
+    }
+  ],
+  "automatic_upload_restarts": 0
+}

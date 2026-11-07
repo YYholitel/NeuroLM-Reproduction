@@ -1,0 +1,183 @@
+--- a/model/model_vq.py
++++ b/model/model_vq.py
+@@ -160,6 +160,8 @@
+         log[f'{split}/rec_freq_loss'] = rec_freq_loss.detach().mean()
+         log[f'{split}/rec_raw_loss'] = rec_raw_loss.detach().mean()
+         log[f'{split}/total_loss'] = loss.detach().mean()
++        valid_indices = embed_ind.detach().reshape_as(input_mask)[input_mask]
++        log[f'{split}/valid_code_counts'] = torch.bincount(valid_indices, minlength=self.quantize.num_tokens)
+ 
+         return loss, encoder_features, log
+     
+--- a/train_vq.py
++++ b/train_vq.py
+@@ -21,6 +21,7 @@
+ from pathlib import Path
+ from vq_scheduler import cosine_scheduler
+ import math
++from vq_monitor import fixed_probe, epoch_summary, append_json
+ 
+ 
+ master_process = None; device = None; dtype = None
+@@ -218,12 +219,26 @@
+             json.dump(config, stream, indent=2)
+         print('VQ_RUN_CONFIG='+json.dumps(config), flush=True)
+ 
++    diagnostic_files = [Path(args.dataset_dir) / 'monitor_diagnostic' / f'source_{i}.pkl' for i in range(2)]
++    probe_dataset = PickleLoader(diagnostic_files)
++    probe_samples = [probe_dataset[i] for i in range(2)]
++    probe_batch = tuple(torch.stack([sample[k] for sample in probe_samples]) for k in range(6))
++    baseline_path = Path(args.out_dir) / 'monitor_baseline.json'
++    baseline = json.loads(baseline_path.read_text()) if baseline_path.exists() else None
++    if start_epoch > 0:
++        assert baseline is not None, 'Resume requires the original fixed diagnostic baseline'
++    epoch_path = Path(args.out_dir) / 'epoch_metrics.jsonl'
++    epoch_history = [json.loads(line) for line in epoch_path.read_text().splitlines()] if master_process and epoch_path.exists() else []
++
+     # training loop
+     X_text, Y_text = get_batch('train') # fetch the very first batch
+     t0 = time.time()
+     local_iter_num = 0 # number of iterations in the lifetime of this process
+     raw_model = model.module if ddp else model # unwrap DDP container if needed
+     for epoch in range(start_epoch, args.epochs):
++        epoch_code_counts = torch.zeros(raw_model.VQ.quantize.num_tokens, dtype=torch.long, device=device)
++        tail_code_counts = torch.zeros_like(epoch_code_counts)
++        epoch_rows = []
+         if ddp:
+             sampler_train.set_epoch(epoch)
+         for step, (batch) in enumerate(data_loader_train):
+@@ -252,6 +267,9 @@
+             with ctx:
+                 alpha = 2 / (1 + math.exp(-10 * iter_num / args.epochs / num_training_steps_per_epoch)) - 1
+                 loss, domain_loss, log = model(X, Y_freq, Y_raw, input_chans, input_time, input_mask, alpha)
++                epoch_code_counts.add_(log['train/valid_code_counts'])
++                if step >= num_training_steps_per_epoch - 100:
++                    tail_code_counts.add_(log['train/valid_code_counts'])
+                 domain_loss2 = model(X_text)
+                 loss = (loss + domain_loss + domain_loss2) / args.gradient_accumulation_steps # scale the loss to account for gradient accumulation
+             # immediately async prefetch next batch while model is doing the forward pass on the GPU
+@@ -289,10 +307,18 @@
+                            reconstruction=reconstruction, frequency=values[0], raw=values[1],
+                            codebook=values[2], adversarial_eeg=values[3],
+                            adversarial_text=values[4], adversarial=values[3]+values[4])
++                epoch_rows.append(row)
+                 if iter_num < 20 or (iter_num + 1) % args.log_interval == 0:
+                     print("VQ_METRICS=" + json.dumps(row), flush=True)
+                 with open(os.path.join(args.out_dir, 'metrics.jsonl'), 'a') as stream:
+                     stream.write(json.dumps(row) + '\n')
++
++            if baseline is None:
++                baseline = fixed_probe(raw_model.VQ, probe_batch, device, ctx)
++                baseline.update(stage='after_first_training_update',update=iter_num+1)
++                if master_process:
++                    baseline_path.write_text(json.dumps(baseline,indent=2))
++                    print('VQ_FIXED_BASELINE='+json.dumps(baseline),flush=True)
+ 
+             # evaluate the loss on train/val sets and write checkpoints
+             if (iter_num + 1) % args.log_interval == 0 and master_process:
+@@ -320,6 +346,17 @@
+             iter_num += 1
+             local_iter_num += 1
+         
++        if ddp:
++            torch.distributed.all_reduce(epoch_code_counts)
++            torch.distributed.all_reduce(tail_code_counts)
++        probe = fixed_probe(raw_model.VQ, probe_batch, device, ctx)
++        if master_process:
++            summary = epoch_summary(epoch+1,epoch_rows,epoch_code_counts,tail_code_counts,probe,baseline,epoch_history)
++            append_json(epoch_path,summary)
++            if summary['milestones'] or summary['review_flags']:
++                append_json(Path(args.out_dir)/'review_checkpoints.jsonl',summary)
++            epoch_history.append(summary)
++            print('VQ_EPOCH_METRICS='+json.dumps(summary),flush=True)
+         if master_process:
+             checkpoint = {
+                 'model': raw_model.state_dict(),
+--- /dev/null
++++ b/vq_monitor.py
+@@ -0,0 +1,85 @@
++"""VQ epoch summaries and repeatable probes; no changes to the training loss."""
++import json
++import math
++from pathlib import Path
++import torch
++import torch.distributed as dist
++
++
++def usage_summary(counts):
++    counts=counts.detach().double().cpu()
++    total=int(counts.sum().item())
++    active=int((counts>0).sum().item())
++    probabilities=counts[counts>0]/max(total,1)
++    perplexity=float(torch.exp(-(probabilities*probabilities.log()).sum())) if total else 0.0
++    return dict(active_codes=active,codebook_size=counts.numel(),active_fraction=active/counts.numel(),
++                valid_eeg_tokens=total,perplexity=perplexity,
++                largest_code_fraction=float(probabilities.max()) if total else 0.0)
++
++
++def fixed_probe(vq, batch, device, autocast_context):
++    """All DDP ranks must call this together: the upstream quantizer reduces stats."""
++    assert bool(vq.quantize.embedding.initted.item()), 'Probe must not initialize the training codebook'
++    previous_training=vq.training
++    saved_buffers={name:value.clone() for name,value in vq.quantize.named_buffers()}
++    target=torch.device(device)
++    devices=[target.index if target.index is not None else torch.cuda.current_device()] if target.type=='cuda' else []
++    try:
++        vq.eval()
++        with torch.random.fork_rng(devices=devices),torch.no_grad(),autocast_context:
++            values=[item.to(device) for item in batch]
++            _,_,log=vq(*values)
++            metrics=torch.stack([log['val/rec_freq_loss'],log['val/rec_raw_loss'],log['val/quant_loss']]).double()
++            if dist.is_available() and dist.is_initialized():
++                dist.all_reduce(metrics);metrics/=dist.get_world_size()
++        frequency,raw,codebook=metrics.tolist()
++        assert all(math.isfinite(value) for value in [frequency,raw,codebook])
++        return dict(reconstruction=frequency+raw,frequency=frequency,raw=raw,codebook=codebook,
++                    unique_samples=len(batch[0]),evaluation=True)
++    finally:
++        for name,value in vq.quantize.named_buffers(): value.copy_(saved_buffers[name])
++        vq.train(previous_training)
++
++
++def epoch_summary(epoch, rows, counts, tail_counts, probe, baseline, history):
++    window=min(100,len(rows))
++    keys=['reconstruction','frequency','raw','codebook','adversarial','adversarial_eeg','adversarial_text']
++    def average(selected): return {key:sum(row[key] for row in selected)/len(selected) for key in keys}
++    report=dict(epoch=epoch,updates=len(rows),mean=average(rows),first_window=average(rows[:window]),
++                last_window=average(rows[-window:]),window_updates=window,
++                codebook_min=min(r['codebook'] for r in rows),codebook_max=max(r['codebook'] for r in rows),
++                lr_first=rows[0]['lr'],lr_last=rows[-1]['lr'],alpha_first=rows[0]['alpha'],alpha_last=rows[-1]['alpha'],
++                code_usage=usage_summary(counts),tail_code_usage=usage_summary(tail_counts),
++                fixed_diagnostic=probe,fixed_diagnostic_baseline=baseline,
++                milestones=[x for x in [1,5,20,25,30,50] if x==epoch])
++    reference=baseline['reconstruction']
++    report['fixed_diagnostic_relative_improvement']=1-probe['reconstruction']/max(reference,1e-12)
++    flags=[]
++    if epoch==1 and report['fixed_diagnostic_relative_improvement']<=0:
++        flags.append('review_epoch_1_no_fixed_probe_improvement_during_warmup')
++    if epoch==5 and not math.isclose(report['lr_last'],5e-5,rel_tol=1e-6):
++        flags.append('warmup_peak_lr_mismatch')
++    if epoch>=5 and report['tail_code_usage']['active_codes']<512:
++        flags.append('review_low_recent_code_usage_fewer_than_512')
++    if epoch>=5 and report['tail_code_usage']['perplexity']<128:
++        flags.append('review_concentrated_code_assignments')
++    if report['last_window']['codebook']>max(0.1,100*baseline['codebook']):
++        flags.append('review_large_codebook_loss')
++    if probe['reconstruction']>10*max(reference,1e-12):
++        flags.append('review_large_fixed_probe_reconstruction')
++    if 20<=epoch<=30 and len(history)>=4:
++        recent=history[-4:]+[report]
++        probes=[r['fixed_diagnostic']['reconstruction'] for r in recent]
++        losses=[r['last_window']['reconstruction'] for r in recent]
++        probe_gain=1-min(probes)/max(probes[0],1e-12)
++        train_gain=1-min(losses)/max(losses[0],1e-12)
++        report['five_epoch_best_improvement']=dict(fixed_probe=probe_gain,training_tail=train_gain)
++        if probe_gain<0.005 and train_gain<0.005: flags.append('review_five_epoch_plateau')
++    report['review_flags']=flags
++    report['automatic_stop']=False
++    report['interpretation']='Review flags are diagnostic heuristics, not paper thresholds or automatic stop rules.'
++    return report
++
++
++def append_json(path,row):
++    with Path(path).open('a') as stream: stream.write(json.dumps(row)+'\n')

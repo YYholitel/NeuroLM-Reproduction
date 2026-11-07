@@ -1,0 +1,12 @@
+diff --git a/train_vq.py b/train_vq.py
+--- a/train_vq.py
++++ b/train_vq.py
+@@ -121,7 +121,7 @@
+     # model init
+     encoder_args = dict(n_layer=12, n_head=12, n_embd=768, block_size=1024,
+                     bias=False, dropout=0., num_classes=0, in_chans=1, out_chans=16)
+-    decoder_args = dict(n_layer=4, n_head=12, n_embd=768, block_size=1024,
++    decoder_args = dict(n_layer=3, n_head=12, n_embd=768, block_size=1024,
+                     bias=False, dropout=0., num_classes=0, in_chans=128)
+ 
+     if os.path.exists(os.path.join(checkpoint_out_dir, 'ckpt.pt')):

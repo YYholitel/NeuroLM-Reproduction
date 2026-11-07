@@ -1,0 +1,57 @@
+--- a/train_vq.py
++++ b/train_vq.py
+@@ -93,10 +93,12 @@
+     dataset_root = Path(args.dataset_dir).resolve()
+     ready = json.loads(Path(args.data_ready_manifest).read_text())
+     assert ready['ready'] and ready['total_samples'] == 459656
+-    relative_files = Path(args.train_manifest).read_text().splitlines()
+-    assert len(relative_files) == ready['total_samples']
+-    files = [dataset_root / name for name in relative_files]
+-    assert all(name.startswith('train/') and '..' not in Path(name).parts for name in relative_files)
++    files = [json.loads(line) for line in Path(args.train_manifest).read_text().splitlines()]
++    assert len(files) == ready['total_samples']
++    for item in files:
++        assert item['name'].startswith('train/') and '..' not in Path(item['name']).parts
++        assert item['shard'].startswith('shards/') and '..' not in Path(item['shard']).parts
++        item['shard'] = str(dataset_root / item['shard'])
+     dataset_train = PickleLoader(files)
+     print('finished!')
+ 
+--- a/dataset.py
++++ b/dataset.py
+@@ -7,6 +7,26 @@
+ import torch
+ from einops import rearrange
+ import pickle
++from collections import OrderedDict
++
++_shard_handles = OrderedDict()
++
++def read_pickle_sample(location):
++    if not isinstance(location, dict):
++        with open(location, 'rb') as stream:
++            return pickle.load(stream)
++    name = location['shard']
++    if name not in _shard_handles:
++        if len(_shard_handles) >= 16:
++            _shard_handles.popitem(last=False)[1].close()
++        _shard_handles[name] = open(name, 'rb')
++    stream = _shard_handles[name]
++    _shard_handles.move_to_end(name)
++    stream.seek(location['offset'])
++    payload = stream.read(location['size'])
++    if len(payload) != location['size']:
++        raise IOError('Truncated VQ shard: ' + name)
++    return pickle.loads(payload)
+ 
+ 
+ standard_1020 = [
+@@ -52,7 +72,7 @@
+             return chans
+ 
+     def __getitem__(self, index):
+-        sample = pickle.load(open(self.files[index], "rb"))
++        sample = read_pickle_sample(self.files[index])
+         data = sample["X"]
+         ch_names = sample["ch_names"]
+         data = torch.FloatTensor(data / 100)
