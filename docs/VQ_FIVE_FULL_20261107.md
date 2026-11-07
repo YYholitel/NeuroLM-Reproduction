@@ -63,3 +63,15 @@ COS 暂存位置仅限 `omni-eeg-1442740494/lhy/neurolm-reproduction/transfer/vq
 本次部署的控制代码也归档到 `scripts/`：`vq_tione_control.py` 对应远端 `control.py`，`vq_cos_control.py` 对应 `cos_control.py`，`vq_cos_ingest.py` 对应 `cos_ingest.py`，`inspect_vq_five_full.py` 对应 `inspect.py`。这些文件记录当前部署，运行中的协作者先用只读入口同步状态。双进程监控检查源文件为 `scripts/test_vq_monitoring_cpu.py`，结果为 `results/vq_monitor_validation_20261107.json`。
 
 2026-11-07 21:43，针对上传出现的 `ConnectionError → ProtocolError → TimeoutError`，请求体改为 `BytesIO` 流式发送，避免一次性大块写入在共享带宽下触发短超时。14,618,823 字节诊断包传输通过，接收端 payload SHA256 与原始包完全一致。保留已收到的 2,408 个包，重新签发余下 953 个包后续传，训练配置未变。见[传输验证记录](../results/vq_stream_upload_check_20261107.json)；单包时间不作为整体吞吐性能结论。
+
+2026-11-07，459,656 个 EEG 窗口已全部到达。独立只读检查确认五套数据的文件数量、唯一文件名和 train 划分成员 SHA256 均与冻结计划一致；各取排序后的首个 pickle，验证内容哈希、`X + ch_names`、float32、六个加载张量有限及 `/100` 精确缩放。见 [EEG 到达检查](../results/vq_eeg_arrival_check_20261107.json)。此检查不替代完整预检，文本迁移当时仍在进行，尚未提交 GPU 任务。
+
+| 首样本 | X.shape | 最小值 µV | 最大值 µV | 均值 µV |
+| --- | --- | ---: | ---: | ---: |
+| HMC | 4 × 6000 | -58.67 | 68.49 | -1.75 |
+| TUAB | 23 × 2000 | -3682.60 | 146.28 | -856.28 |
+| TUEV | 23 × 1000 | -357.69 | 121.93 | -18.65 |
+| TUSL | 23 × 2000 | -57.54 | 66.35 | -0.98 |
+| Workload | 19 × 800 | -60.66 | 74.83 | 0.39 |
+
+这些是各数据集一个样本的统计，不代表全数据分布。TUAB/TUEV 的大幅值与负均值仍保留；格式和缩放通过不能证明所有信号都位于 ±100 µV，也不能证明所有样本质量理想。
