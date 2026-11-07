@@ -55,4 +55,6 @@ python scripts/check_vq_full.py files
 
 关注第 1、5、20–30 epoch 的重建/码本/对抗 loss、LR 和排除 padding 的码本使用率。第 5 epoch 末核对 LR 为 5e-5。固定诊断评估用于比较本次运行内的变化；smoke 的 2.86 来自两个诊断样本，不是全量 loss 的早停阈值。NaN/Inf 会终止训练，其他检查标记需结合持续趋势分析。
 
+用户已明确要求直接展示训练曲线。有真实更新后运行 `python scripts/plot_vq_training_curves.py --fetch`，它只读拉取本次全量 `metrics.jsonl`，绘制重建、码本、对抗 loss 三幅曲线，输出 PNG/SVG/PDF 至 `results/figures/vq-five-full-20261107-r1/`。原始点保留；足够多点时另显示明确标注窗口的移动平均。没有训练日志时仅报告暂无数据，不生成占位曲线，不将 smoke 的四步结果混入全量曲线。
+
 协作者首次同步请报告：连接是否成功、数据进度、实际任务 ID/状态、是否已有优化器更新，以及本次任务的 GPU 利用率和显存。未分配节点时报告暂无指标，不能据此断言整个资源组的 GPU 利用率为 0%。
