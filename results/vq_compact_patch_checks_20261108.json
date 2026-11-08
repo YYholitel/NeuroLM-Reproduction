@@ -1,0 +1,7 @@
+{
+  "patch_applies": true,
+  "exact_runtime_hashes": true,
+  "runtime_files": 26,
+  "patch_sha256": "53bc021d4c9401b60b149edc0f95cf0ce82d8f498b3c4c1d83b317cb448244f7",
+  "train_vq_sha256": "fd6254a9f65c159debb884e637c58e6aa7da222ab8e15ab3b7f800f9367022a7"
+}

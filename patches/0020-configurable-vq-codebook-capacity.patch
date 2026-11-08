@@ -1,0 +1,31 @@
+--- a/train_vq.py
++++ b/train_vq.py
+@@ -139,7 +139,7 @@
+     encoder_args = dict(n_layer=12, n_head=12, n_embd=768, block_size=1024,
+                     bias=False, dropout=0., num_classes=0, in_chans=1, out_chans=16)
+     decoder_args = dict(n_layer=3, n_head=12, n_embd=768, block_size=1024,
+-                    bias=False, dropout=0., num_classes=0, in_chans=128)
++                    bias=False, dropout=0., num_classes=0, in_chans=args.vq_embed_dim)
+ 
+     if os.path.exists(os.path.join(checkpoint_out_dir, 'ckpt.pt')):
+         init_from = 'resume'
+@@ -446,7 +446,9 @@
+ 
+ 
+ def vq_options(args):
+-    return dict(beta=args.vq_beta, decay=args.vq_ema_decay,
++    assert args.vq_codebook_size > 0 and args.vq_embed_dim > 0
++    return dict(n_embed=args.vq_codebook_size, embed_dim=args.vq_embed_dim,
++                beta=args.vq_beta, decay=args.vq_ema_decay,
+                 dead_code_patience=args.vq_dead_code_patience,
+                 dead_code_interval=args.vq_dead_code_interval,
+                 init_samples_per_rank=args.vq_init_samples_per_rank)
+@@ -474,6 +476,8 @@
+     parser.add_argument('--block_size', default=1024, type=int)
+     parser.add_argument('--max_updates', default=0, type=int, help='Stop exactly after this many optimizer updates; 0 disables')
+     parser.add_argument('--usage_window', default=50, type=int)
++    parser.add_argument('--vq_codebook_size', default=8192, type=int)
++    parser.add_argument('--vq_embed_dim', default=128, type=int)
+     parser.add_argument('--vq_beta', default=1.0, type=float)
+     parser.add_argument('--vq_ema_decay', default=0.99, type=float)
+     parser.add_argument('--vq_dead_code_patience', default=100, type=int,
