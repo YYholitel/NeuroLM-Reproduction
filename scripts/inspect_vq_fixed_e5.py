@@ -10,7 +10,9 @@ metrics=rows(root/'run/metrics.jsonl');epochs=rows(root/'run/epoch_metrics.jsonl
 report=dict(checked_at=datetime.datetime.now(datetime.timezone.utc).isoformat(),
             updates=len(metrics),target_updates=4485,completed=(root/'run/completed.json').exists(),
             latest=metrics[-1] if metrics else None,
-            epochs=[{k:r[k] for k in ['epoch','updates','mean','tail_code_usage','lr_last','review_flags','dead_code_resets']} for r in epochs],nodes={})
+            epochs=[dict({k:r[k] for k in ['epoch','updates','mean','tail_code_usage','lr_last','review_flags']},
+                         dead_code_resets=sum(m['dead_code_resets'] for m in metrics if m['epoch']==r['epoch']-1))
+                    for r in epochs],nodes={})
 for rank in range(2):
     node=root/f'node-{rank}';item={}
     if (node/'exit_code.txt').exists():item['exit_code']=(node/'exit_code.txt').read_text().strip()
