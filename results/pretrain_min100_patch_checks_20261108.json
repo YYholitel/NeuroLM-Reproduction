@@ -1,0 +1,23 @@
+{
+  "patch_applies": true,
+  "exact_runtime_hashes": true,
+  "patch_sha256": "ad26643066b4b76739e6492b905ecee1f445214f26a8c400a11ebfe68e2aab0d",
+  "changed_files": {
+    "model/model.py": {
+      "before": "549987093133355f3af329c7f9d3b3dd17e72d4d9a74ad68962554ab6ce1a321",
+      "after": "001db8bbf73b18e945a6344198cebf1edee167b08f1cae5afa7af9dbfd0f8641"
+    },
+    "model/model_neurolm.py": {
+      "before": "18d4ee8ae9e9cc2f6afef38340fc4cafbffe23f63fbf2fd4a08b7802f02fc2d0",
+      "after": "138492a876c5c1b52edb2c2db93b3eac0d352b1cba1ef0acd4b57d7cade6f9d4"
+    },
+    "train_pretrain.py": {
+      "before": "86ab698591f5e769ded9e17bf97de64ce4b44a6eaa63ffa09376bd162004e829",
+      "after": "dc71058d12329eec6222bf6bcaee5ddf4ff09c3122823c4affb73ff056202345"
+    },
+    "pretrain_minimal.py": {
+      "before": null,
+      "after": "77e2ccd2770e5fba9ac2f31e1312f4f0ede29cc803154ccd796ed39f0808d742"
+    }
+  }
+}
