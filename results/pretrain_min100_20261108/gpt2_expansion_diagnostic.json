@@ -1,0 +1,13 @@
+{
+  "original_text_loss": 2.9085543155670166,
+  "expanded_text_loss": 117.92794036865234,
+  "original_accuracy": 0.4345703125,
+  "expanded_accuracy": 0.041015625,
+  "pretrained_logits_exactly_preserved": true,
+  "old_logsumexp_mean": -93.61380004882812,
+  "new_logsumexp_mean": 17.58585548400879,
+  "new_classes_win_fraction": 0.9521484375,
+  "old_logits_mean": -113.44632720947266,
+  "new_logits_mean": 0.004917522892355919,
+  "text_source": "fixed first 1024 validation-bin tokens; CPU fp32"
+}

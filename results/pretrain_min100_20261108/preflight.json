@@ -1,0 +1,12 @@
+{
+  "ok": true,
+  "worker": false,
+  "runtime_files": 28,
+  "vq_checkpoint_sha256": "546e07e0b455b15ef9374a96bc77dead226bba8d00afa6e738a625fbb266de07",
+  "vq_checkpoint_epoch": 5,
+  "gpt2_revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+  "train_samples": 459656,
+  "validation_samples": 160,
+  "torch_version": "2.7.1+cu128",
+  "gpu_names": []
+}

@@ -1,0 +1,19 @@
+{
+  "ok": true,
+  "real_checkpoint_epoch": 5,
+  "real_gpt2_initialization": true,
+  "codebook_shape": [
+    8192,
+    128
+  ],
+  "head_classes": 58496,
+  "valid_eeg_targets": 23,
+  "next_second_targets_verified": true,
+  "padding_and_final_second_ignored": true,
+  "all_trainable_gradients_present_and_finite": true,
+  "frozen_encoder_and_quantizer_unchanged": true,
+  "gpt_optimizer_update_verified": true,
+  "total_loss": 108.06116485595703,
+  "grad_norm": 367.1378479003906,
+  "diagnostic": "Disposable CPU test on a cropped training sample; not validation quality"
+}
