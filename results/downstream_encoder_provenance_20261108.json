@@ -1,0 +1,7 @@
+{
+  "compared_state_tensors": 90,
+  "all_tensors_identical": true,
+  "mismatched_state_keys": [],
+  "instruction_checkpoint_sha256": "a10a23f6f4a69058c996c01096d47b0806dafd83a0d0ca6506e274a5c6372174",
+  "official_vq_sha256": "e792c39a6a9e6d1bf4604cf63090730424f1d37f942597883d0c0a1375a2663a"
+}

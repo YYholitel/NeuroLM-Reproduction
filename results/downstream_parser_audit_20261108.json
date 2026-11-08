@@ -1,0 +1,322 @@
+[
+  {
+    "task": "TUSL",
+    "protocol": "strict",
+    "metrics": {
+      "samples": 66,
+      "parse_failures": 36,
+      "accuracy": 0.22727272727272727,
+      "balanced_accuracy": 0.2535496957403651,
+      "weighted_f1": 0.2511878365536902,
+      "cohen_kappa": 0.1081081081081081,
+      "class_support": [
+        17,
+        20,
+        29
+      ],
+      "class_recall": [
+        0.5882352941176471,
+        0.0,
+        0.1724137931034483
+      ],
+      "missing_true_classes": [],
+      "confusion_matrix": [
+        [
+          10,
+          0,
+          0,
+          7
+        ],
+        [
+          2,
+          0,
+          1,
+          17
+        ],
+        [
+          12,
+          0,
+          5,
+          12
+        ]
+      ],
+      "confusion_columns": [
+        0,
+        1,
+        2,
+        "invalid"
+      ],
+      "invalid_policy": "retain_in_denominator_and_count_wrong"
+    },
+    "source_sha256": {
+      "TUSL-val-epoch0-rank0.jsonl": "3af860b1148da2ab45f9a32544d60869db38f1aa2a06fbfc688e1f1d6283a1a4",
+      "TUSL-val-epoch0-rank1.jsonl": "ab815d74de9558ad80422dc85725b1bdc3e1eebfad6e196cc25ac22d5ccd8dc8"
+    },
+    "prediction_sha256": "452edb2b30997e064dd913f3145592a797622ab93dab86ac04912b109a5e04d2",
+    "invalid_sha256": "9ee8f2cc5e2a9d7cc15fc3921b290d766847d7cb049b6f54fd183f14f022638d",
+    "split": "val"
+  },
+  {
+    "task": "TUSL",
+    "protocol": "tolerant_missing_close_ablation",
+    "metrics": {
+      "samples": 66,
+      "parse_failures": 7,
+      "accuracy": 0.4393939393939394,
+      "balanced_accuracy": 0.4558485463150778,
+      "weighted_f1": 0.462112977960115,
+      "cohen_kappa": 0.19934426229508195,
+      "class_support": [
+        17,
+        20,
+        29
+      ],
+      "class_recall": [
+        0.5882352941176471,
+        0.4,
+        0.3793103448275862
+      ],
+      "missing_true_classes": [],
+      "confusion_matrix": [
+        [
+          10,
+          1,
+          1,
+          5
+        ],
+        [
+          2,
+          8,
+          10,
+          0
+        ],
+        [
+          12,
+          4,
+          11,
+          2
+        ]
+      ],
+      "confusion_columns": [
+        0,
+        1,
+        2,
+        "invalid"
+      ],
+      "invalid_policy": "retain_in_denominator_and_count_wrong"
+    },
+    "source_sha256": {
+      "TUSL-val-epoch0-rank0.jsonl": "3af860b1148da2ab45f9a32544d60869db38f1aa2a06fbfc688e1f1d6283a1a4",
+      "TUSL-val-epoch0-rank1.jsonl": "ab815d74de9558ad80422dc85725b1bdc3e1eebfad6e196cc25ac22d5ccd8dc8"
+    },
+    "prediction_sha256": "359bcef49ad96d915838109f770e255e332e3e0408013ba4d56f11a83773ff1a",
+    "invalid_sha256": "efa1ef178c4266c143c2efafcc90ae6cdd1fa81a1d1eed25ed896e91fd71389e",
+    "split": "val"
+  },
+  {
+    "task": "TUSL",
+    "protocol": "strict",
+    "metrics": {
+      "samples": 60,
+      "parse_failures": 42,
+      "accuracy": 0.1,
+      "balanced_accuracy": 0.06439393939393939,
+      "weighted_f1": 0.14559270516717324,
+      "cohen_kappa": -0.0650887573964497,
+      "class_support": [
+        33,
+        3,
+        24
+      ],
+      "class_recall": [
+        0.15151515151515152,
+        0.0,
+        0.041666666666666664
+      ],
+      "missing_true_classes": [],
+      "confusion_matrix": [
+        [
+          5,
+          0,
+          3,
+          25
+        ],
+        [
+          0,
+          0,
+          0,
+          3
+        ],
+        [
+          9,
+          0,
+          1,
+          14
+        ]
+      ],
+      "confusion_columns": [
+        0,
+        1,
+        2,
+        "invalid"
+      ],
+      "invalid_policy": "retain_in_denominator_and_count_wrong"
+    },
+    "source_sha256": {
+      "TUSL-test-epoch0-rank0.jsonl": "24c3b8a454559dce731accee7cc6f1841a330673383b112fa10e632a0e9c126c",
+      "TUSL-test-epoch0-rank1.jsonl": "c48be84e321f2946c4bafb8f8ca46b57a63d9cf57a29150e66752925999ee198"
+    },
+    "prediction_sha256": "24e7f9ec39ccb8c245b05f82134e2b3d1cbbd42cd81c948d4a6bfd751d4f4403",
+    "invalid_sha256": "84d8e4a3f958d958d02d7d5ec9feb24f4e7f4063a4184e97dbddd804eae2ee8a",
+    "split": "test"
+  },
+  {
+    "task": "TUSL",
+    "protocol": "tolerant_missing_close_ablation",
+    "metrics": {
+      "samples": 60,
+      "parse_failures": 8,
+      "accuracy": 0.2,
+      "balanced_accuracy": 0.4393939393939394,
+      "weighted_f1": 0.21061102018548825,
+      "cohen_kappa": -0.06312292358803985,
+      "class_support": [
+        33,
+        3,
+        24
+      ],
+      "class_recall": [
+        0.15151515151515152,
+        1.0,
+        0.16666666666666666
+      ],
+      "missing_true_classes": [],
+      "confusion_matrix": [
+        [
+          5,
+          10,
+          11,
+          7
+        ],
+        [
+          0,
+          3,
+          0,
+          0
+        ],
+        [
+          9,
+          10,
+          4,
+          1
+        ]
+      ],
+      "confusion_columns": [
+        0,
+        1,
+        2,
+        "invalid"
+      ],
+      "invalid_policy": "retain_in_denominator_and_count_wrong"
+    },
+    "source_sha256": {
+      "TUSL-test-epoch0-rank0.jsonl": "24c3b8a454559dce731accee7cc6f1841a330673383b112fa10e632a0e9c126c",
+      "TUSL-test-epoch0-rank1.jsonl": "c48be84e321f2946c4bafb8f8ca46b57a63d9cf57a29150e66752925999ee198"
+    },
+    "prediction_sha256": "915d86d438c3221a6d7bb8414f5c6f576ce706d6b680cd5aec12102032f838af",
+    "invalid_sha256": "35130e7b9f523fb925649d34bf8c5009b746e2893104ead8ce16a7dc222cd952",
+    "split": "test"
+  },
+  {
+    "task": "TUAB",
+    "protocol": "strict",
+    "metrics": {
+      "samples": 73627,
+      "parse_failures": 0,
+      "accuracy": 0.7895744767544515,
+      "balanced_accuracy": 0.796144405781746,
+      "weighted_f1": 0.787798380853377,
+      "cohen_kappa": 0.5837891521424706,
+      "class_support": [
+        34679,
+        38948
+      ],
+      "class_recall": [
+        0.9094552899449234,
+        0.6828335216185684
+      ],
+      "missing_true_classes": [],
+      "confusion_matrix": [
+        [
+          31539,
+          3140,
+          0
+        ],
+        [
+          12353,
+          26595,
+          0
+        ]
+      ],
+      "confusion_columns": [
+        0,
+        1,
+        "invalid"
+      ],
+      "invalid_policy": "retain_in_denominator_and_count_wrong"
+    },
+    "source_sha256": {
+      "TUAB-val-epoch0-rank0.jsonl": "5b187bb9da13e33208e21847befbf8be4a5b85b34524bdfc94c3485895b2997d",
+      "TUAB-val-epoch0-rank1.jsonl": "e3313614a528707db3aabcd009c61f7a90255336a12a9f835f5b4b6890b5a6e3"
+    },
+    "prediction_sha256": "c9db4ff5ecd345ee276b23e25c055d190f1d2f6e40ea6bfbd67e56c3a2dd6b44",
+    "invalid_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "split": "val"
+  },
+  {
+    "task": "TUAB",
+    "protocol": "strict",
+    "metrics": {
+      "samples": 36945,
+      "parse_failures": 0,
+      "accuracy": 0.7911219380159696,
+      "balanced_accuracy": 0.7820535860928102,
+      "weighted_f1": 0.7872992763291092,
+      "cohen_kappa": 0.5730479591651575,
+      "class_support": [
+        19907,
+        17038
+      ],
+      "class_recall": [
+        0.8988295574421058,
+        0.6652776147435145
+      ],
+      "missing_true_classes": [],
+      "confusion_matrix": [
+        [
+          17893,
+          2014,
+          0
+        ],
+        [
+          5703,
+          11335,
+          0
+        ]
+      ],
+      "confusion_columns": [
+        0,
+        1,
+        "invalid"
+      ],
+      "invalid_policy": "retain_in_denominator_and_count_wrong"
+    },
+    "source_sha256": {
+      "TUAB-test-epoch0-rank0.jsonl": "c3112a814e828b81a310783f367a777336643bca54ba66745b60655237e634c9",
+      "TUAB-test-epoch0-rank1.jsonl": "6990f1abcccd12a9d7486478819c70dd3880d8621d9e1cac655367eb39a661a4"
+    },
+    "prediction_sha256": "518f6aa9aef236a3c4b0b63dd27d97ecd4e8a613167998f2d22de100a1ab8e45",
+    "invalid_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "split": "test"
+  }
+]
