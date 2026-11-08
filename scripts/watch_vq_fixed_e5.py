@@ -14,8 +14,11 @@ while True:
                             '--output-dir',str(monitor/'figures')],check=True,timeout=120,
                            env=dict(os.environ,MPLCONFIGDIR=str(monitor/'.mplconfig'),OMP_NUM_THREADS='1',OPENBLAS_NUM_THREADS='1'))
             last_render=state['updates']
+        latest=state.get('latest') or {}
         print(json.dumps(dict(checked_at=state['checked_at'],updates=state['updates'],completed=state['completed'],
-                              epochs=len(state['epochs']),last_render=last_render)),flush=True)
+                              epochs=len(state['epochs']),last_render=last_render,
+                              losses={key:latest.get(key) for key in ['reconstruction','codebook','adversarial']},
+                              per_batch=latest.get('code_usage'),rolling_50=latest.get('rolling_code_usage'))),flush=True)
         if state['completed'] or any(node.get('exit_code','0')!='0' for node in state['nodes'].values()):break
     except Exception as exc:
         print(json.dumps(dict(monitor_error=type(exc).__name__,time=datetime.datetime.now(datetime.timezone.utc).isoformat())),flush=True)

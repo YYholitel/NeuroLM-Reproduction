@@ -30,13 +30,20 @@ def main():
                                (axes[1,1],'perplexity',1,'Codebook perplexity')]:
         ax.plot(x,[scale*r['code_usage'][key] for r in rows],color='#d77722',alpha=.2,lw=.6,label='Per batch')
         ax.plot(x,[scale*r['rolling_code_usage'][key] for r in rows],color='#d77722',lw=1.2,label='Rolling 50 updates')
-        ax.set(title=title,ylim=(0,100 if scale==100 else 8192))
+        ax.set_title(title)
+        if scale==100:
+            ax.set_ylim(0,100)
+        else:
+            ax.set_yscale('log');ax.set_ylim(1,8192)
+            ax.set_yticks([1,10,100,1000,8192],labels=['1','10','100','1000','8192'])
+            ax.set_title(title+' (log scale)')
         ax.legend(frameon=False,fontsize=8)
     axes[1,2].plot(x,[r['lr'] for r in rows],color='#458a70',lw=1.5)
     axes[1,2].set(title='Learning rate',ylim=(0,5.25e-5));axes[1,2].ticklabel_format(axis='y',style='sci',scilimits=(0,0))
     for ax in axes.flat:
         for epoch in range(1,6):ax.axvline(epoch,color='#777777',ls=':',lw=.7,alpha=.4)
-        ax.set(xlabel='Epoch (897 updates per epoch)',xlim=(0,5));ax.grid(alpha=.16)
+        ax.set(xlabel='Epoch (897 updates per epoch)',xlim=(0,min(5,max(.5,np.ceil(x[-1]*2)/2))))
+        ax.grid(alpha=.16)
     state='5 epochs recorded' if len(rows)==4485 else f'In progress: {len(rows)} / 4485 updates'
     fig.suptitle('NeuroLM VQ | valid-token EMA + dead-code reset | 2 x 8 H20',fontsize=16,weight='bold')
     fig.supxlabel(f'{state}. All usage statistics exclude padding. Loss uses valid-element normalization.\n'
