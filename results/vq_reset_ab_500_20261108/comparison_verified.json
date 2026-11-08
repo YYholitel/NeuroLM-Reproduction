@@ -1,0 +1,106 @@
+{
+  "ok": true,
+  "arms": {
+    "reset_off": {
+      "steps": 500,
+      "first_50_mean": {
+        "total_loss": 3.9494123079184376,
+        "reconstruction": 2.5735443894565107,
+        "codebook": 0.00014280515945756634,
+        "adversarial": 1.3757251133024693
+      },
+      "last_50_mean": {
+        "total_loss": 5.033176532239268,
+        "reconstruction": 1.8572533414512873,
+        "codebook": 0.00037023849839897595,
+        "adversarial": 3.175552952289581
+      },
+      "last_batch_usage": {
+        "active_codes": 1822,
+        "codebook_size": 8192,
+        "active_fraction": 0.222412109375,
+        "valid_eeg_tokens": 97111,
+        "perplexity": 1178.2512518836236,
+        "largest_code_fraction": 0.0038409654930955297
+      },
+      "last_50_usage": {
+        "active_codes": 1903,
+        "codebook_size": 8192,
+        "active_fraction": 0.2322998046875,
+        "valid_eeg_tokens": 4879914,
+        "perplexity": 1152.2758843905917,
+        "largest_code_fraction": 0.0037338772773454613
+      },
+      "dead_code_resets": 0,
+      "lr_first": 0.0,
+      "lr_last": 5.5642283675289925e-06,
+      "alpha_last": 0.055572562699584216
+    },
+    "reset_on": {
+      "steps": 500,
+      "first_50_mean": {
+        "total_loss": 3.949412464836132,
+        "reconstruction": 2.573544453158975,
+        "codebook": 0.00014280531693657394,
+        "adversarial": 1.375725206360221
+      },
+      "last_50_mean": {
+        "total_loss": 5.0448122948229415,
+        "reconstruction": 1.8577136155962943,
+        "codebook": 0.0001461145103075978,
+        "adversarial": 3.1869525647163393
+      },
+      "last_batch_usage": {
+        "active_codes": 3640,
+        "codebook_size": 8192,
+        "active_fraction": 0.4443359375,
+        "valid_eeg_tokens": 97111,
+        "perplexity": 1331.401739103088,
+        "largest_code_fraction": 0.0034496606975522857
+      },
+      "last_50_usage": {
+        "active_codes": 5994,
+        "codebook_size": 8192,
+        "active_fraction": 0.731689453125,
+        "valid_eeg_tokens": 4879914,
+        "perplexity": 1200.7621239134057,
+        "largest_code_fraction": 0.003629982003781214
+      },
+      "dead_code_resets": 14511,
+      "lr_first": 0.0,
+      "lr_last": 5.5642283675289925e-06,
+      "alpha_last": 0.055572562699584216
+    }
+  },
+  "initial_model_sha256": "512d0ee6802951089cbde2ce80ee866da822aa44515d8137580ae636642009d5",
+  "matching_input_streams_all_16_ranks": true,
+  "input_stream_sha256": [
+    "4d56efcd2ad8b40649f3e97214901bf4209024a760a57471d9c144a88caad1d8",
+    "f19486abffb0707ed18808f43efa3824778ec54066b4eaaa51666c6aded26cb0",
+    "2b04f08b91d786287073647e76cbc6479e97d6a2ea3ff9392b6975ec32f47b89",
+    "7ac196ee0926bce0e3a7d50b5c26a68e010d5e6e662b702c748e03ada7104ec0",
+    "1ce28e72e579bf22d5526c954ffc0f4ff4b350b3e0d2e261c44ba8ac99ee619d",
+    "827f2f32973afc33377b3ab367e4ba8bc6724d810e8e9f8fc1f4188f3b573030",
+    "531cbf3f449cabdcd6f890ccd46023d60e246b3c7f914d8b6e0d0a217a10c72a",
+    "011afab575f09865bc467140fc3aeff305bb835fafaddbb7b9b897c5e276f43f",
+    "f2bf364b220bc760dab90040a7f90526d9554b620353feebac9d71e21038c1f6",
+    "9d3f816a025c2bfbd05d36395d1c9f163485c0fffdcd8fc2b8f60364366d7fe9",
+    "ca8aa8f2c18d8dc7582940050758db7a2e19937d03c809e65f7a8239d6427b90",
+    "55878c20e05a7199e6a96626884b1af40eb0d1fb3d9f45abff99500d3a9f354e",
+    "af7ff632510a3951dacbf69ddf942aae64a97b2ff67dd8816052a8a12bc93336",
+    "03973dfc5070956efdd690b9f07e4a785cf6db713b4b105a60fbfe461b069f0e",
+    "0db22b07754340ca861c4c9035ad6b2cd369b2c955ac50e2dc6f4fec3ee51dbc",
+    "5a665253fe96fda8501a24d320afac7aa9e482199f745ba2add5c91915b33276"
+  ],
+  "configuration_differences": {
+    "out_dir": [
+      "/mnt/cfs-omni/lhy/neurolm-reproduction/vq-reset-ab-500-20261108-r1/runs/reset_off",
+      "/mnt/cfs-omni/lhy/neurolm-reproduction/vq-reset-ab-500-20261108-r1/runs/reset_on"
+    ],
+    "vq_dead_code_patience": [
+      0,
+      100
+    ]
+  },
+  "schedule": "first 500 updates of the original 50-epoch / 5-epoch-warmup schedule"
+}

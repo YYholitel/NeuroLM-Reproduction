@@ -1,0 +1,10 @@
+{
+  "initial_models_identical": true,
+  "matching_input_prefix_all_ranks": true,
+  "minimum_matched_updates": 132,
+  "pre_reset_max_abs_difference": {
+    "reconstruction": 2.4437904357910156e-06,
+    "codebook": 1.3014869182370603e-08,
+    "adversarial": 3.020837903022766e-05
+  }
+}

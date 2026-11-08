@@ -1,0 +1,14 @@
+{
+  "reconstruction": {
+    "max_abs_difference_before_first_reset": 2.4437904357910156e-06,
+    "mean_abs_difference_before_first_reset": 7.014081935689907e-07
+  },
+  "codebook": {
+    "max_abs_difference_before_first_reset": 1.3014869182370603e-08,
+    "mean_abs_difference_before_first_reset": 2.416201290672156e-09
+  },
+  "adversarial": {
+    "max_abs_difference_before_first_reset": 3.020837903022766e-05,
+    "mean_abs_difference_before_first_reset": 3.016732557855471e-06
+  }
+}

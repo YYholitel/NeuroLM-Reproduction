@@ -1,0 +1,20 @@
+{
+  "ok": true,
+  "runtime_files": 26,
+  "train_samples": 459656,
+  "train_manifest_sha256": "b3a2af72fd7a835286fd664fe9f791d4e31a4d434d04d15550aed8c42df18158",
+  "plan_sha256": "d83aba055dfc45a6b89cf1860ca8fad272fd68527a7866c3d3e11ea278bdbaa5",
+  "torch_version": "2.7.1+cu128",
+  "worker": true,
+  "worker_rank": "0",
+  "gpu_names": [
+    "NVIDIA H20",
+    "NVIDIA H20",
+    "NVIDIA H20",
+    "NVIDIA H20",
+    "NVIDIA H20",
+    "NVIDIA H20",
+    "NVIDIA H20",
+    "NVIDIA H20"
+  ]
+}

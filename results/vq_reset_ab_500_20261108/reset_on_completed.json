@@ -1,0 +1,1 @@
+{"epochs_completed": 0, "partial_epoch_updates": 500, "steps": 500, "requested_max_updates": 500, "decoder_layers": 3, "wandb": false, "world_size": 16}

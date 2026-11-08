@@ -1,0 +1,15 @@
+{
+  "actual_vq_optimizer_step": true,
+  "finite_gradients": true,
+  "codebook_not_in_optimizer": true,
+  "model_mask_reaches_quantizer": true,
+  "reconstruction_padding_invariant": true,
+  "code_indices_masked": true,
+  "model_eval_pure": true,
+  "fixed_probe_preserves_state": true,
+  "epoch_metrics_label_loss_scale": true,
+  "cli_can_disable_reset": true,
+  "cpu_loss": 2.094064235687256,
+  "ok": true,
+  "mode": "integration"
+}

@@ -1,0 +1,10 @@
+{
+  "reconstruction": 2.9947006702423096,
+  "frequency": 1.9288185834884644,
+  "raw": 1.0658820867538452,
+  "codebook": 0.004357977770268917,
+  "unique_samples": 2,
+  "evaluation": true,
+  "stage": "after_first_training_update",
+  "update": 1
+}
