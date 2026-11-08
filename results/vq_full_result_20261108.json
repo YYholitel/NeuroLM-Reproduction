@@ -1,0 +1,145 @@
+{
+  "observed_at_utc": "2026-11-08T01:33:23.315284+00:00",
+  "task_id": "train-1712596817713834752",
+  "platform_status": "SUCCEED",
+  "platform_query_ok": true,
+  "temporary_probe_kernel_removed": true,
+  "completed_at_china": "2026-11-08T05:16:13.624072+08:00",
+  "epochs_completed": 50,
+  "optimizer_updates": 44850,
+  "world_size": 16,
+  "node_exit_codes": {
+    "node-0": 0,
+    "node-1": 0
+  },
+  "final_epoch": {
+    "epoch": 50,
+    "updates": 897,
+    "mean": {
+      "reconstruction": 0.08171617656667408,
+      "frequency": 0.024605909806942005,
+      "raw": 0.05711026675973208,
+      "codebook": 0.0003662854032861745,
+      "adversarial": 1.384105554753821,
+      "adversarial_eeg": 0.6931528710161098,
+      "adversarial_text": 0.6909526837377112
+    },
+    "first_window": {
+      "reconstruction": 0.08190151052549481,
+      "frequency": 0.024607285298407076,
+      "raw": 0.057294225227087735,
+      "codebook": 0.0003664025828038575,
+      "adversarial": 1.3843131352588534,
+      "adversarial_eeg": 0.692755283229053,
+      "adversarial_text": 0.6915578520298005
+    },
+    "last_window": {
+      "reconstruction": 0.08182991193723865,
+      "frequency": 0.02461078337742947,
+      "raw": 0.05721912855980918,
+      "codebook": 0.000366206224225607,
+      "adversarial": 1.3836879129707813,
+      "adversarial_eeg": 0.6917338059842586,
+      "adversarial_text": 0.6919541069865227
+    },
+    "window_updates": 100,
+    "codebook_min": 0.00034534575934230816,
+    "codebook_max": 0.0003873669556924142,
+    "lr_first": 1.0048718994803517e-05,
+    "lr_last": 1.00000000605745e-05,
+    "alpha_first": 0.9998891029505543,
+    "alpha_last": 0.9999091840169461,
+    "code_usage": {
+      "active_codes": 179,
+      "codebook_size": 8192,
+      "active_fraction": 0.0218505859375,
+      "valid_eeg_tokens": 87525437,
+      "perplexity": 173.2981142842368,
+      "largest_code_fraction": 0.012300264207763967
+    },
+    "tail_code_usage": {
+      "active_codes": 179,
+      "codebook_size": 8192,
+      "active_fraction": 0.0218505859375,
+      "valid_eeg_tokens": 9764199,
+      "perplexity": 173.32474643739644,
+      "largest_code_fraction": 0.012326254309237245
+    },
+    "fixed_diagnostic": {
+      "reconstruction": 2.1529340147972107,
+      "frequency": 1.2720218896865845,
+      "raw": 0.8809121251106262,
+      "codebook": 0.002855755854398012,
+      "unique_samples": 2,
+      "evaluation": true
+    },
+    "fixed_diagnostic_baseline": {
+      "reconstruction": 2.9596433639526367,
+      "frequency": 1.9062535762786865,
+      "raw": 1.0533897876739502,
+      "codebook": 0.00441078282892704,
+      "unique_samples": 2,
+      "evaluation": true,
+      "stage": "after_first_training_update",
+      "update": 1
+    },
+    "milestones": [
+      50
+    ],
+    "fixed_diagnostic_relative_improvement": 0.2725697828937257,
+    "review_flags": [
+      "review_low_recent_code_usage_fewer_than_512"
+    ],
+    "automatic_stop": false,
+    "interpretation": "Review flags are diagnostic heuristics, not paper thresholds or automatic stop rules."
+  },
+  "epoch_1_mean": {
+    "reconstruction": 0.3727078154504532,
+    "frequency": 0.18377597965486972,
+    "raw": 0.18893183579558348,
+    "codebook": 0.00015351510454019015,
+    "adversarial": 3.250296501532081,
+    "adversarial_eeg": 2.55382366505438,
+    "adversarial_text": 0.6964728364777006
+  },
+  "training_reconstruction_mean_decrease_percent": 78.07500321185586,
+  "best_fixed_diagnostic": {
+    "epoch": 12,
+    "reconstruction": 1.3615981936454773
+  },
+  "final_fixed_diagnostic_increase_from_best_percent": 58.118160324012266,
+  "fixed_diagnostic_unique_samples": 2,
+  "fixed_diagnostic_is_representative_validation": false,
+  "checkpoint_validation": {
+    "path": "/mnt/cfs-omni/lhy/neurolm-reproduction/vq-five-full-20261107-r1/run/checkpoints/VQ/ckpt.pt",
+    "bytes": 1734777699,
+    "sha256": "2de173f3bc3e78388e109fc32277b80dd5010bf562671d7469a47e99603ef183",
+    "loaded_on_cpu": true,
+    "checkpoint_epoch_zero_based": 49,
+    "iter_num": 44850,
+    "encoder_layers": 12,
+    "decoder_layers": 3,
+    "hidden": 768,
+    "model_state_entries": 160,
+    "model_nonfinite_entries": [],
+    "optimizer_present": true,
+    "saved_epoch_checkpoints": [
+      10,
+      20,
+      30,
+      40,
+      50
+    ],
+    "epoch_12_checkpoint_retained": false
+  },
+  "source_sha256": {
+    "metrics": "5d6f6094366342b2c3fc4b4ead25d17f4f27d5ab5c455850ce9d8991d3c197bc",
+    "epochs": "8bff39f6e709fae8d4665a0fabc6bfeb83511be96597b5503d1f22a3834f3621"
+  },
+  "limitations": [
+    "Five-dataset train-split pretraining, not the paper 25000-hour corpus",
+    "Only 179 of 8192 codes used in the final 100 updates",
+    "Fixed two-sample reconstruction worsened after epoch 12; this is not a full validation set",
+    "No downstream task evaluation has been performed for this newly trained VQ checkpoint"
+  ]
+}

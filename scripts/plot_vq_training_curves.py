@@ -80,14 +80,18 @@ def main():
     axes[-1].set_xlabel('Optimizer update (1-based)')
     axes[-1].xaxis.set_major_locator(MaxNLocator(integer=True, nbins=9))
     last = rows[-1]
+    trace_complete = (len(rows) == 44850 and int(steps[0]) == 1 and int(steps[-1]) == 44850
+                      and last['epoch'] == 49 and last['step'] == 896)
     fig.suptitle('NeuroLM | Five-dataset VQ pretraining', x=0.11, ha='left',
                  y=0.985, fontsize=15, fontweight='bold')
     fig.text(0.11, 0.944,
              f'{len(rows):,} observed updates | epoch {last["epoch"] + 1}, '
              f'update {last["step"] + 1}/897 | 459,656 EEG windows | 16 H20', fontsize=9.5)
+    conclusion = ('All 50 planned epochs are recorded. Loss curves alone do not establish codebook quality.'
+                  if trace_complete else
+                  'This is an in-progress training trace; early updates alone do not establish convergence.')
     fig.text(0.11, 0.022,
-             'Each observed point is a mean over 16 DDP ranks. Only recorded updates are shown.\n'
-             'This is an in-progress training trace; early updates alone do not establish convergence.',
+             'Each observed point is a mean over 16 DDP ranks. Only recorded updates are shown.\n' + conclusion,
              fontsize=8, color='#46515C')
     fig.tight_layout(rect=(0, 0.065, 1, 0.925), h_pad=1.5)
     args.output_dir.mkdir(parents=True, exist_ok=True)
@@ -101,7 +105,8 @@ def main():
     plt.close(fig)
     metadata = dict(plotted=True, source=str(args.input.resolve()),
                     source_sha256=hashlib.sha256(content).hexdigest(),
-                    observed_updates=len(rows), first_update=int(steps[0]), last_update=int(steps[-1]),
+                    observed_updates=len(rows), trace_complete=trace_complete,
+                    first_update=int(steps[0]), last_update=int(steps[-1]),
                     epoch=last['epoch'] + 1, update_in_epoch=last['step'] + 1,
                     rolling_window=window, first={k: rows[0][k] for k in METRICS},
                     last={k: last[k] for k in METRICS},

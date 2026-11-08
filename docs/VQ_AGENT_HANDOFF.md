@@ -32,6 +32,8 @@ python scripts/check_vq_full.py files
 
 ## 正在执行的工作
 
+**最新状态（2026-11-08）：本次全量任务已完成 50 epochs，平台 SUCCEED，两个节点退出码均为 0。** 详见 [最终结果](VQ_FIVE_FULL_RESULT_20261108.md)。最终有效码为 179/8192（最后 100 步），固定诊断在第 12 轮后退化；后续接手应先评估这两点。tmux 的曲线进程已随完成标记退出，保留窗口，不能把历史监控快照中的 RUNNING 当作当前状态。
+
 - 任务名：`neurolm-vq-five-full16-e50-20261107-r1`。
 - 2026-11-07 22:24 实际任务 `train-1712596817713834752` 已进入 `RUNNING`；22:28 曲线快照含第 1 epoch 前 89 次真实更新。数据已完整通过预检，后续需查询最新状态。
 - 腾讯运行根目录：`/mnt/cfs-omni/lhy/neurolm-reproduction/vq-five-full-20261107-r1`。

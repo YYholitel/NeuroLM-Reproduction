@@ -92,8 +92,12 @@ COS 暂存位置仅限 `omni-eeg-1442740494/lhy/neurolm-reproduction/transfer/vq
 
 用户要求上传图片并挂 tmux 后，图片和对应逐步日志更新为 **8,127 步，第 10 epoch 第 54 步** 的快照，移动平均窗口为 100 步；前述 89 步版本可在提交 `5fe4200` 查看。已有 9 个完整 epoch，重建 loss 的 epoch 均值从第 1 轮 0.372708 降到第 9 轮 0.116117。第 1 轮固定诊断从基线 2.959643 降到 2.859282；第 9 轮为 1.532391。
 
-![五数据集 VQ 前 8127 次更新](../results/figures/vq-five-full-20261107-r1/vq_training_curves.png)
+![五数据集 VQ 前 8127 次更新](https://raw.githubusercontent.com/YYholitel/NeuroLM-Reproduction/9fbd7e7d58139c36cccc1ac7cecde8033d20f54b/results/figures/vq-five-full-20261107-r1/vq_training_curves.png)
 
 **存在持续的低码本利用率提示。** 第 5 轮末 LR 正确达到 5e-5，但最近 100 步仅激活 100/8192 个码（1.22%，perplexity 76.68）；第 9 轮为 119/8192（1.45%，perplexity 103.50）。第 9 轮的平均码本 loss 为 2.80659e-4，对抗 loss 为 1.390801。当前 loss 有限且重建改善，但不能据此宣布码本学习正常。这些标记按既定规则仅提示检查，不会自行修改训练目标或停止任务。
 
 完整逐轮证据见 [epoch 日志](../results/vq_five_full_epochs_20261107.jsonl)。tmux 会话 `vq-monitor` 在腾讯 Notebook 上每分钟更新曲线，第二个窗口跟随实际训练日志；连接方式和图片位置见 [交接说明](VQ_AGENT_HANDOFF.md#tmux-持续监控和图片位置)。TI-ONE 保持原任务运行，tmux 负责观察与绘图。
+
+## 最终结果：2026-11-08
+
+已完成 50 epochs，平台状态 SUCCEED，完整结果、最终曲线、码本低使用率与固定诊断后期退化记录见 [最终结果报告](VQ_FIVE_FULL_RESULT_20261108.md)。此前各阶段记录是历史快照；当前 PNG/SVG/PDF 和逐步、逐轮日志已更新为完整 44,850 步。
