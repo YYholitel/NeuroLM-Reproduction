@@ -22,4 +22,6 @@
 
 隔离根目录：`/mnt/cfs-omni/lhy/neurolm-reproduction/vq-compact-e5-20261108-r1`。提交和状态入口 `scripts/check_vq_compact_e5.py`；TI-ONE 配置见 `experiments/vq_compact_e5_tione_20261108.json`。
 
+任务已提交：`train-1713086037633018624`，名称 `neurolm-vq-compact16-e5-20261108-r1`。提交时阶段二 100 步任务已 SUCCEED，冻结状态、权重更新、数据和产物检查全部通过。tmux 会话为 `vq-compact`，socket `/tmp/clawdbot-tmux-sockets/neurolm-vq-compact.sock`。
+
 `scripts/observe_vq_compact_e5.py` 在 tmux 中监控、绘制真实日志对比，完成后核验 4485 步、运行冻结审计、导出哈希清单。训练由 TI-ONE 工作节点执行。失败即报告，不自动提交完整阶段二或额外实验。
