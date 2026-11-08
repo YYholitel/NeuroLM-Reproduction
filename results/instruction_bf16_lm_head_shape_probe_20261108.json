@@ -1,0 +1,113 @@
+{
+  "diagnostic_only": true,
+  "cases": [
+    {
+      "batch": 1,
+      "gpu": 0,
+      "exit_code": 0,
+      "gmp_overflow": false,
+      "result": {
+        "batch": 1,
+        "shape": [
+          1,
+          1,
+          58496
+        ],
+        "finite": true,
+        "torch": "2.2.2",
+        "cuda": "12.1",
+        "gpu": "NVIDIA H20"
+      },
+      "log_sha256": "c26646b063b11fd03836400392785c5306ed19dce4ce17c906b3b77eb35597fc"
+    },
+    {
+      "batch": 7,
+      "gpu": 0,
+      "exit_code": -6,
+      "gmp_overflow": true,
+      "log_sha256": "5f4da09d3bdc2207d90c6d5f1cbe47287e528d1c2046c3c88d37cc6acd04115f"
+    },
+    {
+      "batch": 8,
+      "gpu": 1,
+      "exit_code": -6,
+      "gmp_overflow": true,
+      "log_sha256": "35f445a2aae0bcfe37cae905289ef269307059c4bf2000846f253dc756e2d6f4"
+    },
+    {
+      "batch": 16,
+      "gpu": 0,
+      "exit_code": -6,
+      "gmp_overflow": true,
+      "log_sha256": "736dd8547a66f7ee5c3bf861878a4f5120bc4fead94cb9de69ec9efe4f052abb"
+    },
+    {
+      "batch": 33,
+      "gpu": 1,
+      "exit_code": 0,
+      "gmp_overflow": false,
+      "result": {
+        "batch": 33,
+        "shape": [
+          33,
+          1,
+          58496
+        ],
+        "finite": true,
+        "torch": "2.2.2",
+        "cuda": "12.1",
+        "gpu": "NVIDIA H20"
+      },
+      "log_sha256": "2951c2b0dd866943767c669ffb75883eef29b815ed2cb7941103704c095773ca"
+    },
+    {
+      "batch": 48,
+      "gpu": 1,
+      "exit_code": 0,
+      "gmp_overflow": false,
+      "result": {
+        "batch": 48,
+        "shape": [
+          48,
+          1,
+          58496
+        ],
+        "finite": true,
+        "torch": "2.2.2",
+        "cuda": "12.1",
+        "gpu": "NVIDIA H20"
+      },
+      "log_sha256": "2abfc4a66071070731690512753513dba522c8a34a1fb588ba754ce4ae461643"
+    }
+  ],
+  "status": "reproduced_shape_dependent_native_failure",
+  "original_summary_sha256": "6177086b2e3b225698a67e4e8d17fd55d11a3b88e4f47201cb29b41523430909",
+  "source_script_sha256": "599c224091f706adb03a11a5b4597d2b12a690e1e585c42223b611ad32b24020",
+  "collection_note": "Native messages were written to stdout. Failure labels were recomputed from saved combined logs; original exit codes retained.",
+  "platform": {
+    "ok": true,
+    "kind": "linear",
+    "tasks": [
+      {
+        "name": "neurolm-linear-shape-probe-20261108-r1",
+        "id": "train-1712994769507311488",
+        "status": "SUCCEED"
+      }
+    ],
+    "detail": {
+      "Status": "SUCCEED",
+      "Message": "",
+      "StartTime": "2026-11-08T03:35:18Z",
+      "EndTime": "2026-11-08T03:36:56Z",
+      "RuntimeInSeconds": 98,
+      "LatestInstanceId": "train-1712994769507311488-d0ityts8nb0g"
+    },
+    "temporary_probe_kernel_removed": true
+  },
+  "environment": {
+    "SYMPY_GROUND_TYPES": "python",
+    "OMP_NUM_THREADS": "4",
+    "PYTHONNOUSERSITE": "1",
+    "core_dump_limit": 0
+  }
+}

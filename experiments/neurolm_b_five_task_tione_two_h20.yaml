@@ -1,0 +1,63 @@
+experiment_id: neurolm_b_five_task_tione_two_h20_s42_e1
+status: completed_with_evaluation_recovery
+category: five_task_exploratory_modified_protocol
+paper_comparable: false
+datasets: [TUAB, TUEV, HMC, Workload, TUSL]
+excluded: [SEED]
+seed: 42
+epochs: 1
+hardware_plan:
+  nodes: 1
+  gpus_per_node: 2
+  total_gpus: 2
+  platform_identity: authorized_notebook_STS
+  gpu: H20
+  launch: Tencent_TI_ONE_DDP
+runtime:
+  python: 3.11.8
+  torch: 2.2.2
+  cuda: '12.1'
+  numpy: 1.26.4
+training:
+  per_rank_eeg_batch: 32
+  per_rank_text_batch: 8
+  gradient_accumulation: 8
+  nominal_global_eeg_batch: 512
+  nominal_global_text_batch: 128
+  peak_lr: 0.0005
+  min_lr: 0.00005
+  warmup_ratio: 0.1
+  warmup_epochs: 1
+  weight_decay: 0.1
+  grad_clip: 1.0
+  compile: false
+  drop_last: true
+  train_samples_available: 459656
+  microsteps_per_epoch: 7182
+  optimizer_updates_per_epoch: 898
+  warmup_microsteps: 718
+  final_accumulation_microsteps: 6
+  final_global_eeg_batch: 384
+  final_global_text_batch: 96
+source:
+  commit: 0cda9876d8ce6ee07ed0c43eee5e9a6f5c24b177
+  runtime_patches:
+    - patches/0002-runtime-compat.patch
+    - patches/0004-parse-failure-count.patch
+    - patches/0010-instruction-task-selection-and-run-records.patch
+entrypoint: scripts/run_five_task_tione_two_h20.sh
+completion_requires: [full_validation_and_test_coverage, checkpoint_sha256, summary_json, zero_exit_code]
+
+results:
+  report: results/INSTRUCTION_FIVE_TASK_20261108.md
+  metrics: results/instruction_five_task_e1_s42_20261108.json
+  audit: results/instruction_five_task_e1_s42_audit_20261108.json
+  evaluated_validation_test_samples: 201240
+evaluation:
+  decoding: author_top_k_1_max_5_tokens
+  per_rank_batch: 48
+  recovery_entrypoint: scripts/run_five_task_tione_eval_two_h20.sh
+  symbolic_backend: original_environment_default
+  recovery_patch: patches/0011-inference-lm-head-small-batch.patch
+  inference_lm_head_min_batch: 48
+  additional_optimizer_steps: 0

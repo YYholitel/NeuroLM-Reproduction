@@ -1,0 +1,173 @@
+{
+  "status": "passed",
+  "diagnostic_only": true,
+  "torch": "2.2.2",
+  "cuda": "12.1",
+  "gpu": "NVIDIA H20",
+  "padding_batch": 48,
+  "reference": "FP32 CPU linear",
+  "rtol": 0.03,
+  "atol": 0.02,
+  "cases": [
+    {
+      "gpu": 0,
+      "batch": 1,
+      "shape": [
+        1,
+        1,
+        58496
+      ],
+      "max_absolute_error_vs_fp32": 0.00789642333984375
+    },
+    {
+      "gpu": 0,
+      "batch": 7,
+      "shape": [
+        7,
+        1,
+        58496
+      ],
+      "max_absolute_error_vs_fp32": 0.011316061019897461
+    },
+    {
+      "gpu": 0,
+      "batch": 8,
+      "shape": [
+        8,
+        1,
+        58496
+      ],
+      "max_absolute_error_vs_fp32": 0.009834766387939453
+    },
+    {
+      "gpu": 0,
+      "batch": 16,
+      "shape": [
+        16,
+        1,
+        58496
+      ],
+      "max_absolute_error_vs_fp32": 0.011162042617797852
+    },
+    {
+      "gpu": 0,
+      "batch": 22,
+      "shape": [
+        22,
+        1,
+        58496
+      ],
+      "max_absolute_error_vs_fp32": 0.010285139083862305
+    },
+    {
+      "gpu": 0,
+      "batch": 30,
+      "shape": [
+        30,
+        1,
+        58496
+      ],
+      "max_absolute_error_vs_fp32": 0.010104179382324219
+    },
+    {
+      "gpu": 0,
+      "batch": 33,
+      "shape": [
+        33,
+        1,
+        58496
+      ],
+      "max_absolute_error_vs_fp32": 0.010845184326171875
+    },
+    {
+      "gpu": 0,
+      "batch": 48,
+      "shape": [
+        48,
+        1,
+        58496
+      ],
+      "max_absolute_error_vs_fp32": 0.011697053909301758
+    },
+    {
+      "gpu": 1,
+      "batch": 1,
+      "shape": [
+        1,
+        1,
+        58496
+      ],
+      "max_absolute_error_vs_fp32": 0.008672714233398438
+    },
+    {
+      "gpu": 1,
+      "batch": 7,
+      "shape": [
+        7,
+        1,
+        58496
+      ],
+      "max_absolute_error_vs_fp32": 0.009955406188964844
+    },
+    {
+      "gpu": 1,
+      "batch": 8,
+      "shape": [
+        8,
+        1,
+        58496
+      ],
+      "max_absolute_error_vs_fp32": 0.01054847240447998
+    },
+    {
+      "gpu": 1,
+      "batch": 16,
+      "shape": [
+        16,
+        1,
+        58496
+      ],
+      "max_absolute_error_vs_fp32": 0.010109663009643555
+    },
+    {
+      "gpu": 1,
+      "batch": 22,
+      "shape": [
+        22,
+        1,
+        58496
+      ],
+      "max_absolute_error_vs_fp32": 0.01140904426574707
+    },
+    {
+      "gpu": 1,
+      "batch": 30,
+      "shape": [
+        30,
+        1,
+        58496
+      ],
+      "max_absolute_error_vs_fp32": 0.010314464569091797
+    },
+    {
+      "gpu": 1,
+      "batch": 33,
+      "shape": [
+        33,
+        1,
+        58496
+      ],
+      "max_absolute_error_vs_fp32": 0.010002613067626953
+    },
+    {
+      "gpu": 1,
+      "batch": 48,
+      "shape": [
+        48,
+        1,
+        58496
+      ],
+      "max_absolute_error_vs_fp32": 0.010933160781860352
+    }
+  ]
+}

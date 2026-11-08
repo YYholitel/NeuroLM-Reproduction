@@ -1,0 +1,630 @@
+{
+  "status": "passed",
+  "paper_comparable": false,
+  "epochs": 1,
+  "seed": 42,
+  "total_validation_test_samples": 201240,
+  "checkpoint_sha256_independently_recomputed": "a10a23f6f4a69058c996c01096d47b0806dafd83a0d0ca6506e274a5c6372174",
+  "training_checkpoint_verified": {
+    "checkpoint_epoch": 0,
+    "completed_microsteps": 7182,
+    "optimizer_steps": [
+      898
+    ],
+    "optimizer_states": 150,
+    "separate_evaluation_recovery": true,
+    "source_training_run": "neurolm-instruction-five-e1-2gpu-20261108-r2",
+    "source_worker_exit_code": 1,
+    "inference_lm_head_min_batch": 48,
+    "padding_probe_sha256": "a0c5801f3ea6e8d3490d97484590c358945b4c39051de9563bcbf4f2de63f801"
+  },
+  "splits": [
+    {
+      "dataset": "TUAB",
+      "split": "val",
+      "samples": 73627,
+      "author_metrics_recomputed": {
+        "pr_auc": 0.7785047940317685,
+        "roc_auc": 0.7961444057817458,
+        "accuracy": 0.7895744767544515,
+        "balanced_accuracy": 0.796144405781746
+      },
+      "strict_parse_failure_as_error": {
+        "accuracy": 0.7895744767544515,
+        "balanced_accuracy": 0.796144405781746,
+        "class_support": [
+          34679,
+          38948
+        ],
+        "parse_failures": 0,
+        "confusion_matrix": [
+          [
+            31539,
+            3140,
+            0
+          ],
+          [
+            12353,
+            26595,
+            0
+          ]
+        ],
+        "confusion_columns": [
+          0,
+          1,
+          "unparseable"
+        ]
+      },
+      "prediction_file_sha256": {
+        "TUAB-val-epoch0-rank0.jsonl": "5b187bb9da13e33208e21847befbf8be4a5b85b34524bdfc94c3485895b2997d",
+        "TUAB-val-epoch0-rank1.jsonl": "e3313614a528707db3aabcd009c61f7a90255336a12a9f835f5b4b6890b5a6e3"
+      }
+    },
+    {
+      "dataset": "TUAB",
+      "split": "test",
+      "samples": 36945,
+      "author_metrics_recomputed": {
+        "pr_auc": 0.7192699644470423,
+        "roc_auc": 0.7820535860928101,
+        "accuracy": 0.7911219380159696,
+        "balanced_accuracy": 0.7820535860928102
+      },
+      "strict_parse_failure_as_error": {
+        "accuracy": 0.7911219380159696,
+        "balanced_accuracy": 0.7820535860928102,
+        "class_support": [
+          19907,
+          17038
+        ],
+        "parse_failures": 0,
+        "confusion_matrix": [
+          [
+            17893,
+            2014,
+            0
+          ],
+          [
+            5703,
+            11335,
+            0
+          ]
+        ],
+        "confusion_columns": [
+          0,
+          1,
+          "unparseable"
+        ]
+      },
+      "prediction_file_sha256": {
+        "TUAB-test-epoch0-rank0.jsonl": "c3112a814e828b81a310783f367a777336643bca54ba66745b60655237e634c9",
+        "TUAB-test-epoch0-rank1.jsonl": "6990f1abcccd12a9d7486478819c70dd3880d8621d9e1cac655367eb39a661a4"
+      }
+    },
+    {
+      "dataset": "TUEV",
+      "split": "val",
+      "samples": 15662,
+      "author_metrics_recomputed": {
+        "accuracy": 0.7583322691865663,
+        "balanced_accuracy": 0.5591225772706342,
+        "cohen_kappa": 0.5295165727898288,
+        "f1_weighted": 0.7701180850306788
+      },
+      "strict_parse_failure_as_error": {
+        "accuracy": 0.7583322691865663,
+        "balanced_accuracy": 0.5591225772706342,
+        "class_support": [
+          229,
+          515,
+          1528,
+          59,
+          2309,
+          11022
+        ],
+        "parse_failures": 0,
+        "confusion_matrix": [
+          [
+            0,
+            39,
+            72,
+            19,
+            0,
+            99,
+            0
+          ],
+          [
+            0,
+            465,
+            8,
+            0,
+            35,
+            7,
+            0
+          ],
+          [
+            10,
+            970,
+            439,
+            45,
+            50,
+            14,
+            0
+          ],
+          [
+            0,
+            0,
+            2,
+            39,
+            8,
+            10,
+            0
+          ],
+          [
+            0,
+            171,
+            123,
+            17,
+            1494,
+            504,
+            0
+          ],
+          [
+            44,
+            355,
+            138,
+            26,
+            1019,
+            9440,
+            0
+          ]
+        ],
+        "confusion_columns": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          "unparseable"
+        ]
+      },
+      "prediction_file_sha256": {
+        "TUEV-val-epoch0-rank0.jsonl": "7d5ff6e188eeff0157bdcda05cb15cc28dd14d4b5da0b40aca3f40e6c15dc419",
+        "TUEV-val-epoch0-rank1.jsonl": "5bd4422096da8bd3cedef2197c9a935e9e8f4ec151617e19c45b756c9e24e168"
+      }
+    },
+    {
+      "dataset": "TUEV",
+      "split": "test",
+      "samples": 28305,
+      "author_metrics_recomputed": {
+        "accuracy": 0.7530118353647766,
+        "balanced_accuracy": 0.5313393040294392,
+        "cohen_kappa": 0.5389730455631085,
+        "f1_weighted": 0.7620961039896748
+      },
+      "strict_parse_failure_as_error": {
+        "accuracy": 0.7530118353647766,
+        "balanced_accuracy": 0.5313393040294393,
+        "class_support": [
+          567,
+          3561,
+          1998,
+          329,
+          2204,
+          19646
+        ],
+        "parse_failures": 0,
+        "confusion_matrix": [
+          [
+            3,
+            304,
+            102,
+            0,
+            56,
+            102,
+            0
+          ],
+          [
+            16,
+            2633,
+            217,
+            16,
+            500,
+            179,
+            0
+          ],
+          [
+            16,
+            617,
+            878,
+            60,
+            186,
+            241,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            180,
+            76,
+            73,
+            0
+          ],
+          [
+            0,
+            15,
+            115,
+            18,
+            1390,
+            666,
+            0
+          ],
+          [
+            57,
+            780,
+            837,
+            160,
+            1582,
+            16230,
+            0
+          ]
+        ],
+        "confusion_columns": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          "unparseable"
+        ]
+      },
+      "prediction_file_sha256": {
+        "TUEV-test-epoch0-rank0.jsonl": "4905119106ff0b03f2442adc870ed34c18a9ee17866a8f1b8b64333e8b2d2e67",
+        "TUEV-test-epoch0-rank1.jsonl": "5eae408fcc303e12e5cff4af3e5b00c28ae102ed55aa23c325e3f93cd8705ed2"
+      }
+    },
+    {
+      "dataset": "HMC",
+      "split": "val",
+      "samples": 22124,
+      "author_metrics_recomputed": {
+        "accuracy": 0.7068342071958055,
+        "balanced_accuracy": 0.6571053758745531,
+        "cohen_kappa": 0.6131428099146256,
+        "f1_weighted": 0.7055853681059356
+      },
+      "strict_parse_failure_as_error": {
+        "accuracy": 0.7068342071958055,
+        "balanced_accuracy": 0.6571053758745531,
+        "class_support": [
+          4186,
+          2136,
+          7772,
+          4961,
+          3069
+        ],
+        "parse_failures": 0,
+        "confusion_matrix": [
+          [
+            3387,
+            511,
+            191,
+            6,
+            91,
+            0
+          ],
+          [
+            544,
+            749,
+            456,
+            23,
+            364,
+            0
+          ],
+          [
+            115,
+            382,
+            5872,
+            710,
+            693,
+            0
+          ],
+          [
+            17,
+            16,
+            1153,
+            3736,
+            39,
+            0
+          ],
+          [
+            54,
+            278,
+            608,
+            235,
+            1894,
+            0
+          ]
+        ],
+        "confusion_columns": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          "unparseable"
+        ]
+      },
+      "prediction_file_sha256": {
+        "HMC-val-epoch0-rank0.jsonl": "228fbd44a32ed903b2f9f24ce625d75f513a608b4a9ad8dd1ae000800643711c",
+        "HMC-val-epoch0-rank1.jsonl": "fbd71371eaf536163bdb8b25a09db666084a6c501a2a639d3e9ab59449061253"
+      }
+    },
+    {
+      "dataset": "HMC",
+      "split": "test",
+      "samples": 23871,
+      "author_metrics_recomputed": {
+        "accuracy": 0.6972477064220184,
+        "balanced_accuracy": 0.6585986008674483,
+        "cohen_kappa": 0.599034189952093,
+        "f1_weighted": 0.6899702584158631
+      },
+      "strict_parse_failure_as_error": {
+        "accuracy": 0.6972477064220184,
+        "balanced_accuracy": 0.6585986008674484,
+        "class_support": [
+          3805,
+          2868,
+          8843,
+          4710,
+          3645
+        ],
+        "parse_failures": 0,
+        "confusion_matrix": [
+          [
+            2899,
+            553,
+            249,
+            9,
+            95,
+            0
+          ],
+          [
+            440,
+            774,
+            882,
+            54,
+            718,
+            0
+          ],
+          [
+            103,
+            214,
+            6595,
+            932,
+            999,
+            0
+          ],
+          [
+            6,
+            4,
+            906,
+            3769,
+            25,
+            0
+          ],
+          [
+            72,
+            250,
+            651,
+            65,
+            2607,
+            0
+          ]
+        ],
+        "confusion_columns": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          "unparseable"
+        ]
+      },
+      "prediction_file_sha256": {
+        "HMC-test-epoch0-rank0.jsonl": "12f2e351c76fcbdf681a817c041b41d033adf2e69370fb148b32591401f150f9",
+        "HMC-test-epoch0-rank1.jsonl": "6d2f8a39a3f5080825a220a9e6375e4ec1cbebdd6518868a86ed6fc31ff288d4"
+      }
+    },
+    {
+      "dataset": "Workload",
+      "split": "val",
+      "samples": 290,
+      "author_metrics_recomputed": {
+        "pr_auc": 0.5630415561450044,
+        "roc_auc": 0.5793103448275861,
+        "accuracy": 0.5793103448275863,
+        "balanced_accuracy": 0.5793103448275863
+      },
+      "strict_parse_failure_as_error": {
+        "accuracy": 0.5793103448275863,
+        "balanced_accuracy": 0.5793103448275863,
+        "class_support": [
+          145,
+          145
+        ],
+        "parse_failures": 0,
+        "confusion_matrix": [
+          [
+            137,
+            8,
+            0
+          ],
+          [
+            114,
+            31,
+            0
+          ]
+        ],
+        "confusion_columns": [
+          0,
+          1,
+          "unparseable"
+        ]
+      },
+      "prediction_file_sha256": {
+        "Workload-val-epoch0-rank0.jsonl": "9629444888ef45ca837cafac11f34aea0a200dad9ba0e741f00db1f47ec6aa42",
+        "Workload-val-epoch0-rank1.jsonl": "a29651c41e22dd620e4267befd26848d9836cdd97c69d76b0f4b78806c6bb4e9"
+      }
+    },
+    {
+      "dataset": "Workload",
+      "split": "test",
+      "samples": 290,
+      "author_metrics_recomputed": {
+        "pr_auc": 0.5112852664576802,
+        "roc_auc": 0.5206896551724138,
+        "accuracy": 0.5206896551724138,
+        "balanced_accuracy": 0.5206896551724138
+      },
+      "strict_parse_failure_as_error": {
+        "accuracy": 0.5206896551724138,
+        "balanced_accuracy": 0.5206896551724138,
+        "class_support": [
+          145,
+          145
+        ],
+        "parse_failures": 0,
+        "confusion_matrix": [
+          [
+            115,
+            30,
+            0
+          ],
+          [
+            109,
+            36,
+            0
+          ]
+        ],
+        "confusion_columns": [
+          0,
+          1,
+          "unparseable"
+        ]
+      },
+      "prediction_file_sha256": {
+        "Workload-test-epoch0-rank0.jsonl": "8420ca71d14df6f234308d6568e88106d1acb9f9688e41e08c3625ca483b95a1",
+        "Workload-test-epoch0-rank1.jsonl": "58f9c1d76e4f7835e926222d1a5f4f826dccba8b2132b1eb129ac636925e9e1a"
+      }
+    },
+    {
+      "dataset": "TUSL",
+      "split": "val",
+      "samples": 66,
+      "author_metrics_recomputed": {
+        "accuracy": 0.4090909090909091,
+        "balanced_accuracy": 0.39148073022312374,
+        "cohen_kappa": 0.05714285714285705,
+        "f1_weighted": 0.33606071015895816
+      },
+      "strict_parse_failure_as_error": {
+        "accuracy": 0.22727272727272727,
+        "balanced_accuracy": 0.2535496957403651,
+        "class_support": [
+          17,
+          20,
+          29
+        ],
+        "parse_failures": 36,
+        "confusion_matrix": [
+          [
+            10,
+            0,
+            0,
+            7
+          ],
+          [
+            2,
+            0,
+            1,
+            17
+          ],
+          [
+            12,
+            0,
+            5,
+            12
+          ]
+        ],
+        "confusion_columns": [
+          0,
+          1,
+          2,
+          "unparseable"
+        ]
+      },
+      "prediction_file_sha256": {
+        "TUSL-val-epoch0-rank0.jsonl": "3af860b1148da2ab45f9a32544d60869db38f1aa2a06fbfc688e1f1d6283a1a4",
+        "TUSL-val-epoch0-rank1.jsonl": "ab815d74de9558ad80422dc85725b1bdc3e1eebfad6e196cc25ac22d5ccd8dc8"
+      }
+    },
+    {
+      "dataset": "TUSL",
+      "split": "test",
+      "samples": 60,
+      "author_metrics_recomputed": {
+        "accuracy": 0.3333333333333333,
+        "balanced_accuracy": 0.2588383838383838,
+        "cohen_kappa": -0.1799410029498525,
+        "f1_weighted": 0.2884498480243161
+      },
+      "strict_parse_failure_as_error": {
+        "accuracy": 0.1,
+        "balanced_accuracy": 0.06439393939393939,
+        "class_support": [
+          33,
+          3,
+          24
+        ],
+        "parse_failures": 42,
+        "confusion_matrix": [
+          [
+            5,
+            0,
+            3,
+            25
+          ],
+          [
+            0,
+            0,
+            0,
+            3
+          ],
+          [
+            9,
+            0,
+            1,
+            14
+          ]
+        ],
+        "confusion_columns": [
+          0,
+          1,
+          2,
+          "unparseable"
+        ]
+      },
+      "prediction_file_sha256": {
+        "TUSL-test-epoch0-rank0.jsonl": "24c3b8a454559dce731accee7cc6f1841a330673383b112fa10e632a0e9c126c",
+        "TUSL-test-epoch0-rank1.jsonl": "c48be84e321f2946c4bafb8f8ca46b57a63d9cf57a29150e66752925999ee198"
+      }
+    }
+  ],
+  "metric_caveat": "Author metrics retained: binary AUC uses generated labels as scores; binary classification maps parse failures to 0, multiclass to the last class. Strict accuracy and balanced accuracy always count parse failures as errors."
+}

@@ -1,0 +1,77 @@
+{
+  "counts": {
+    "TUAB/processed/train": {
+      "actual": 298511,
+      "expected": 298511
+    },
+    "TUAB/processed/val": {
+      "actual": 73627,
+      "expected": 73627
+    },
+    "TUAB/processed/test": {
+      "actual": 36945,
+      "expected": 36945
+    },
+    "TUEV/processed_train": {
+      "actual": 68270,
+      "expected": 68270
+    },
+    "TUEV/processed_eval": {
+      "actual": 15662,
+      "expected": 15662
+    },
+    "TUEV/processed_test": {
+      "actual": 28305,
+      "expected": 28305
+    },
+    "HMC/train": {
+      "actual": 91248,
+      "expected": 91248
+    },
+    "HMC/eval": {
+      "actual": 22124,
+      "expected": 22124
+    },
+    "HMC/test": {
+      "actual": 23871,
+      "expected": 23871
+    },
+    "EEGWorkload/train": {
+      "actual": 1508,
+      "expected": 1508
+    },
+    "EEGWorkload/eval": {
+      "actual": 290,
+      "expected": 290
+    },
+    "EEGWorkload/test": {
+      "actual": 290,
+      "expected": 290
+    },
+    "TUSL/train": {
+      "actual": 119,
+      "expected": 119
+    },
+    "TUSL/eval": {
+      "actual": 66,
+      "expected": 66
+    },
+    "TUSL/test": {
+      "actual": 60,
+      "expected": 60
+    }
+  },
+  "sha256": {
+    "NeuroLM-B.pt": "ffe098bc138b89f8817d3710a3604498d8ecd15135080e2ca27735d05c6d29ab",
+    "VQ.pt": "e792c39a6a9e6d1bf4604cf63090730424f1d37f942597883d0c0a1375a2663a",
+    "train.bin": "68a352b5dbd52e85b7a8a1556c1ccae65ce14b02e4913788b0883b89ceddc1d1",
+    "val.bin": "009ecdd6da34f1ae915ff1f0f3aeb0416b02f2252356505b32ce44166dd5cfcc"
+  },
+  "errors": [],
+  "paper_comparable": false,
+  "passed": true,
+  "reused_verified_input_manifest": {
+    "run": "neurolm-instruction-five-eval-2gpu-20261108-r3",
+    "sha256": "624eabf44cf23b40320b2d4d411737648759463f2f800a2f0eb2ee2e2848877a"
+  }
+}

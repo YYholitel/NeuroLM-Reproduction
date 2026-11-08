@@ -1,0 +1,198 @@
+{
+  "status": "completed",
+  "category": "five_task_exploratory_modified_protocol",
+  "paper_comparable": false,
+  "seed": 42,
+  "epochs": 1,
+  "checkpoint_sha256": "a10a23f6f4a69058c996c01096d47b0806dafd83a0d0ca6506e274a5c6372174",
+  "checkpoint_bytes": 2377398188,
+  "metrics": [
+    {
+      "epoch": 0,
+      "dataset": "TUAB",
+      "val": {
+        "pr_auc": 0.7785047940317685,
+        "roc_auc": 0.7961444057817458,
+        "accuracy": 0.7895744767544515,
+        "balanced_accuracy": 0.796144405781746,
+        "parse_failures": 0,
+        "samples": 73627
+      },
+      "test": {
+        "pr_auc": 0.7192699644470423,
+        "roc_auc": 0.7820535860928101,
+        "accuracy": 0.7911219380159696,
+        "balanced_accuracy": 0.7820535860928102,
+        "parse_failures": 0,
+        "samples": 36945
+      }
+    },
+    {
+      "epoch": 0,
+      "dataset": "TUEV",
+      "val": {
+        "accuracy": 0.7583322691865663,
+        "balanced_accuracy": 0.5591225772706342,
+        "cohen_kappa": 0.5295165727898288,
+        "f1_weighted": 0.7701180850306788,
+        "parse_failures": 0,
+        "samples": 15662
+      },
+      "test": {
+        "accuracy": 0.7530118353647766,
+        "balanced_accuracy": 0.5313393040294392,
+        "cohen_kappa": 0.5389730455631085,
+        "f1_weighted": 0.7620961039896748,
+        "parse_failures": 0,
+        "samples": 28305
+      }
+    },
+    {
+      "epoch": 0,
+      "dataset": "HMC",
+      "val": {
+        "accuracy": 0.7068342071958055,
+        "balanced_accuracy": 0.6571053758745531,
+        "cohen_kappa": 0.6131428099146256,
+        "f1_weighted": 0.7055853681059356,
+        "parse_failures": 0,
+        "samples": 22124
+      },
+      "test": {
+        "accuracy": 0.6972477064220184,
+        "balanced_accuracy": 0.6585986008674483,
+        "cohen_kappa": 0.599034189952093,
+        "f1_weighted": 0.6899702584158631,
+        "parse_failures": 0,
+        "samples": 23871
+      }
+    },
+    {
+      "epoch": 0,
+      "dataset": "Workload",
+      "val": {
+        "pr_auc": 0.5630415561450044,
+        "roc_auc": 0.5793103448275861,
+        "accuracy": 0.5793103448275863,
+        "balanced_accuracy": 0.5793103448275863,
+        "parse_failures": 0,
+        "samples": 290
+      },
+      "test": {
+        "pr_auc": 0.5112852664576802,
+        "roc_auc": 0.5206896551724138,
+        "accuracy": 0.5206896551724138,
+        "balanced_accuracy": 0.5206896551724138,
+        "parse_failures": 0,
+        "samples": 290
+      }
+    },
+    {
+      "epoch": 0,
+      "dataset": "TUSL",
+      "val": {
+        "accuracy": 0.4090909090909091,
+        "balanced_accuracy": 0.39148073022312374,
+        "cohen_kappa": 0.05714285714285705,
+        "f1_weighted": 0.33606071015895816,
+        "parse_failures": 36,
+        "samples": 66
+      },
+      "test": {
+        "accuracy": 0.3333333333333333,
+        "balanced_accuracy": 0.2588383838383838,
+        "cohen_kappa": -0.1799410029498525,
+        "f1_weighted": 0.2884498480243161,
+        "parse_failures": 42,
+        "samples": 60
+      }
+    }
+  ],
+  "runtime": {
+    "world_size": 2,
+    "torch": "2.2.2",
+    "cuda": "12.1",
+    "dtype": "bfloat16",
+    "gpu": "NVIDIA H20",
+    "global_eeg_batch": 512,
+    "global_text_batch": 128,
+    "microsteps_per_epoch": 7182,
+    "dataset_counts": {
+      "TUAB": {
+        "train": 298511,
+        "val": 73627,
+        "test": 36945
+      },
+      "TUEV": {
+        "train": 68270,
+        "val": 15662,
+        "test": 28305
+      },
+      "HMC": {
+        "train": 91248,
+        "val": 22124,
+        "test": 23871
+      },
+      "Workload": {
+        "train": 1508,
+        "val": 290,
+        "test": 290
+      },
+      "TUSL": {
+        "train": 119,
+        "val": 66,
+        "test": 60
+      }
+    }
+  },
+  "metric_caveat": "Author generation parser and hard-label AUC retained; parse failures reported explicitly.",
+  "training_provenance": {
+    "source_training_run": "neurolm-instruction-five-e1-2gpu-20261108-r2",
+    "checkpoint_sha256": "a10a23f6f4a69058c996c01096d47b0806dafd83a0d0ca6506e274a5c6372174",
+    "checkpoint_bytes": 2377398188,
+    "epoch": 0,
+    "iter_num": 7182,
+    "optimizer_steps": [
+      898
+    ],
+    "optimizer_states": 150,
+    "training_worker_exit_code": 1,
+    "training_complete": true,
+    "evaluation_only": true,
+    "sympy": "1.14.0",
+    "sympy_ground_types": "gmpy",
+    "inference_lm_head_min_batch": 48
+  },
+  "recovery_consistency": {
+    "TUAB_validation_test_predictions_byte_identical": true,
+    "prediction_files": 4,
+    "predictions": 110572
+  },
+  "platform": {
+    "name": "Tencent TI-ONE",
+    "phase": "evaluation_only_recovery",
+    "task_id": "train-1712999845714059136",
+    "task_name": "neurolm-instruction-five-eval-2gpu-20261108-r4",
+    "Status": "SUCCEED",
+    "StartTime": "2026-11-08T03:45:25Z",
+    "EndTime": "2026-11-08T04:12:24Z",
+    "RuntimeInSeconds": 1619
+  },
+  "training_platform": {
+    "name": "Tencent TI-ONE",
+    "task_id": "train-1712958136694614784",
+    "task_name": "neurolm-instruction-five-e1-2gpu-20261108-r2",
+    "Status": "FAILED",
+    "StartTime": "2026-11-08T02:22:32Z",
+    "EndTime": "2026-11-08T02:56:41Z",
+    "RuntimeInSeconds": 2049
+  },
+  "failed_evaluation_attempt": {
+    "task_id": "train-1712977606258853632",
+    "task_name": "neurolm-instruction-five-eval-2gpu-20261108-r3",
+    "Status": "FAILED",
+    "StartTime": "2026-11-08T03:01:12Z",
+    "EndTime": "2026-11-08T03:29:27Z",
+    "RuntimeInSeconds": 1695
+  }
+}

@@ -1,0 +1,271 @@
+{
+  "status": "passed",
+  "diagnostic_only": true,
+  "paper_comparable": false,
+  "evaluation_run": false,
+  "complete_epoch": false,
+  "seed": 42,
+  "world_size": 2,
+  "eeg_batch_per_rank": 32,
+  "text_batch_per_rank": 8,
+  "gradient_accumulation": 8,
+  "optimizer_steps": 1,
+  "global_eeg_samples": 512,
+  "global_text_samples": 128,
+  "sampling": "fixed 64 original train samples per task; loaders cycled across eight microsteps",
+  "learning_rate": 0.0005,
+  "scheduler": "disabled for this one-update diagnostic only",
+  "seconds": 34.30244452506304,
+  "ranks": [
+    {
+      "rank": 0,
+      "rows": [
+        {
+          "rank": 0,
+          "microstep": 0,
+          "dataset": "TUAB",
+          "instruction_loss": 25.5390625,
+          "text_loss": 2.9513845443725586,
+          "answer_targets": 96,
+          "logits_shape": [
+            32,
+            356,
+            58496
+          ]
+        },
+        {
+          "rank": 0,
+          "microstep": 1,
+          "dataset": "TUEV",
+          "instruction_loss": 26.1181640625,
+          "text_loss": 3.2894558906555176,
+          "answer_targets": 160,
+          "logits_shape": [
+            32,
+            356,
+            58496
+          ]
+        },
+        {
+          "rank": 0,
+          "microstep": 2,
+          "dataset": "HMC",
+          "instruction_loss": 8.671093940734863,
+          "text_loss": 3.104862689971924,
+          "answer_targets": 160,
+          "logits_shape": [
+            32,
+            356,
+            58496
+          ]
+        },
+        {
+          "rank": 0,
+          "microstep": 3,
+          "dataset": "Workload",
+          "instruction_loss": 15.05078125,
+          "text_loss": 3.341973066329956,
+          "answer_targets": 96,
+          "logits_shape": [
+            32,
+            356,
+            58496
+          ]
+        },
+        {
+          "rank": 0,
+          "microstep": 4,
+          "dataset": "TUSL",
+          "instruction_loss": 29.364990234375,
+          "text_loss": 3.3549013137817383,
+          "answer_targets": 128,
+          "logits_shape": [
+            32,
+            356,
+            58496
+          ]
+        },
+        {
+          "rank": 0,
+          "microstep": 5,
+          "dataset": "TUAB",
+          "instruction_loss": 25.5390625,
+          "text_loss": 3.041973114013672,
+          "answer_targets": 96,
+          "logits_shape": [
+            32,
+            356,
+            58496
+          ]
+        },
+        {
+          "rank": 0,
+          "microstep": 6,
+          "dataset": "TUEV",
+          "instruction_loss": 26.1181640625,
+          "text_loss": 3.158628463745117,
+          "answer_targets": 160,
+          "logits_shape": [
+            32,
+            356,
+            58496
+          ]
+        },
+        {
+          "rank": 0,
+          "microstep": 7,
+          "dataset": "HMC",
+          "instruction_loss": 8.671093940734863,
+          "text_loss": 3.153062343597412,
+          "answer_targets": 160,
+          "logits_shape": [
+            32,
+            356,
+            58496
+          ]
+        }
+      ],
+      "gradient_norm": 1627.3385009765625,
+      "position_embedding_max_update": 0.0005152523517608643,
+      "peak_allocated_gib": 19.129497528076172
+    },
+    {
+      "rank": 1,
+      "rows": [
+        {
+          "rank": 1,
+          "microstep": 0,
+          "dataset": "TUAB",
+          "instruction_loss": 24.55045509338379,
+          "text_loss": 3.0496535301208496,
+          "answer_targets": 96,
+          "logits_shape": [
+            32,
+            356,
+            58496
+          ]
+        },
+        {
+          "rank": 1,
+          "microstep": 1,
+          "dataset": "TUEV",
+          "instruction_loss": 25.8037109375,
+          "text_loss": 3.155888557434082,
+          "answer_targets": 160,
+          "logits_shape": [
+            32,
+            356,
+            58496
+          ]
+        },
+        {
+          "rank": 1,
+          "microstep": 2,
+          "dataset": "HMC",
+          "instruction_loss": 8.788866996765137,
+          "text_loss": 3.121856212615967,
+          "answer_targets": 160,
+          "logits_shape": [
+            32,
+            356,
+            58496
+          ]
+        },
+        {
+          "rank": 1,
+          "microstep": 3,
+          "dataset": "Workload",
+          "instruction_loss": 14.681965827941895,
+          "text_loss": 3.2000234127044678,
+          "answer_targets": 96,
+          "logits_shape": [
+            32,
+            356,
+            58496
+          ]
+        },
+        {
+          "rank": 1,
+          "microstep": 4,
+          "dataset": "TUSL",
+          "instruction_loss": 29.87353515625,
+          "text_loss": 3.007493495941162,
+          "answer_targets": 128,
+          "logits_shape": [
+            32,
+            356,
+            58496
+          ]
+        },
+        {
+          "rank": 1,
+          "microstep": 5,
+          "dataset": "TUAB",
+          "instruction_loss": 24.55045509338379,
+          "text_loss": 3.1408538818359375,
+          "answer_targets": 96,
+          "logits_shape": [
+            32,
+            356,
+            58496
+          ]
+        },
+        {
+          "rank": 1,
+          "microstep": 6,
+          "dataset": "TUEV",
+          "instruction_loss": 25.8037109375,
+          "text_loss": 3.263655185699463,
+          "answer_targets": 160,
+          "logits_shape": [
+            32,
+            356,
+            58496
+          ]
+        },
+        {
+          "rank": 1,
+          "microstep": 7,
+          "dataset": "HMC",
+          "instruction_loss": 8.788866996765137,
+          "text_loss": 3.0315470695495605,
+          "answer_targets": 160,
+          "logits_shape": [
+            32,
+            356,
+            58496
+          ]
+        }
+      ],
+      "gradient_norm": 1627.3385009765625,
+      "position_embedding_max_update": 0.0005152523517608643,
+      "peak_allocated_gib": 19.129497528076172
+    }
+  ],
+  "checkpoint_sha256": "d27d6de366ea067452c4bce45c3b29b720c370d7fe0b3169f5ff87088fb5ac54",
+  "checkpoint_bytes": 2377444354,
+  "platform": {
+    "name": "Tencent TI-ONE",
+    "status": "SUCCEED",
+    "exit_code": 0,
+    "gpu": "H20",
+    "gpu_count": 2,
+    "runtime_seconds": 54,
+    "start_utc": "2026-11-07T15:06:17Z",
+    "end_utc": "2026-11-07T15:07:11Z"
+  },
+  "verification": {
+    "checkpoint_sha256_independently_recomputed": true,
+    "worker_log_sha256": "0ac0a60b4b6ce8eb1bd5282ff13044241ca4ada3da10d8288eda1bb33591809e",
+    "official_start_checkpoint_sha256": "ffe098bc138b89f8817d3710a3604498d8ecd15135080e2ca27735d05c6d29ab",
+    "code_bundle_sha256": "a40765ebf119242d57d5abd32ff91824f06e6e16b4aafbaa241694e1b420ba39",
+    "environment_archive_sha256": "921e3a953356c939c20e60413ef4629ad8f01e0a56ed004530c2435362def277"
+  },
+  "per_task_diagnostic_loss": {
+    "TUAB": 25.044758796691895,
+    "TUEV": 25.9609375,
+    "HMC": 8.72998046875,
+    "Workload": 14.866373538970947,
+    "TUSL": 29.6192626953125
+  }
+}

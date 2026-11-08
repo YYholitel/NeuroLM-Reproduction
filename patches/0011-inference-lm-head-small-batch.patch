@@ -1,0 +1,17 @@
+--- a/model/model.py
++++ b/model/model.py
+@@ -250,7 +250,13 @@
+             return logits, loss, accuracy
+         else:
+             # inference-time mini-optimization: only forward the lm_head on the very last position
+-            logits = self.lm_head(x[:, [-1], :]) # note: using list [-1] to preserve the time dim
++            # The H20 / CUDA 12.1 BF16 LM-head aborts for some small batches.
++            # Pad only this independent linear operation; keep real rows only.
++            last_hidden = x[:, [-1], :]
++            actual_batch = last_hidden.size(0)
++            if actual_batch < 48:
++                last_hidden = torch.cat((last_hidden, last_hidden[:1].expand(48 - actual_batch, -1, -1)), dim=0)
++            logits = self.lm_head(last_hidden)[:actual_batch]
+             loss = None
+             accuracy = None
+ 
