@@ -1,0 +1,259 @@
+{
+  "observed_utc": "2026-11-08T10:46:51.742326+00:00",
+  "steps": 12596,
+  "planned_steps": 19140,
+  "epochs_planned": 20,
+  "elapsed_seconds_since_first_update": 9120.882802,
+  "last_update_age_seconds": 0.309001,
+  "latest": {
+    "utc": "2026-11-08T10:46:51.433325+00:00",
+    "step": 12596,
+    "epoch": 13,
+    "lr": 0.00023056608269014586,
+    "eeg_loss": 4.950264930725098,
+    "text_loss": 3.116588592529297,
+    "eeg_accuracy": 0.1296447515487671,
+    "text_accuracy": 0.422515869140625,
+    "eeg_targets": 83917,
+    "text_targets": 32768,
+    "grad_norm": 5.323197841644287,
+    "step_seconds": 0.5487186964601278
+  },
+  "completed_epochs": 13,
+  "all_metrics_finite": true,
+  "continuous_steps": true,
+  "eeg_loss": {
+    "first_20_mean": 12.549396228790282,
+    "last_20_mean": 4.921996212005615
+  },
+  "text_loss": {
+    "first_20_mean": 111.09663963317871,
+    "last_20_mean": 3.175412821769714
+  },
+  "losses_decreased": true,
+  "frozen_check": {
+    "step": 12500,
+    "utc": "2026-11-08T10:45:59.432864+00:00",
+    "frozen_state_unchanged": true,
+    "gpt_weights_updated": true,
+    "initial": {
+      "frozen_encoder_sha256": "c7cdbc311544d5cc72003611788cea28c98a52778922b7a8e7d76710b314876a",
+      "target_encoder_sha256": "c7cdbc311544d5cc72003611788cea28c98a52778922b7a8e7d76710b314876a",
+      "quantizer_sha256": "e66a96b62901cc38725b96560de6d9d5f7bcb39eb9e5411ca255c84caab85141",
+      "gpt_block_sha256": "07e158e03b85d507f44f28f9407a0905a299db0f27f5f22d3b59a8d4b5cf8a4d"
+    },
+    "final": {
+      "frozen_encoder_sha256": "c7cdbc311544d5cc72003611788cea28c98a52778922b7a8e7d76710b314876a",
+      "target_encoder_sha256": "c7cdbc311544d5cc72003611788cea28c98a52778922b7a8e7d76710b314876a",
+      "quantizer_sha256": "e66a96b62901cc38725b96560de6d9d5f7bcb39eb9e5411ca255c84caab85141",
+      "gpt_block_sha256": "7cb7b87b1847f661157887dd51f93a5211457011774a0edb73f2bbaf4c635ccc"
+    }
+  },
+  "nodes": {
+    "0": {
+      "gpus": [
+        {
+          "timestamp": "2026/11/08 18:46:42.058",
+          "gpu_index": " 0",
+          "gpu_uuid": " GPU-b60abdb6-c533-7421-a20f-20a34edd0980",
+          "gpu_util_pct": " 94",
+          "memory_util_pct": " 16",
+          "memory_used_MiB": " 44147",
+          "memory_total_MiB": " 97871",
+          "power_W": " 329.39",
+          "temperature_C": " 61"
+        },
+        {
+          "timestamp": "2026/11/08 18:46:42.063",
+          "gpu_index": " 1",
+          "gpu_uuid": " GPU-2eaf544f-179d-83b8-2cb6-4f26882e6b23",
+          "gpu_util_pct": " 84",
+          "memory_util_pct": " 14",
+          "memory_used_MiB": " 44147",
+          "memory_total_MiB": " 97871",
+          "power_W": " 315.34",
+          "temperature_C": " 57"
+        },
+        {
+          "timestamp": "2026/11/08 18:46:42.074",
+          "gpu_index": " 2",
+          "gpu_uuid": " GPU-d038f1f2-5ade-435c-c02a-df2d68be4ead",
+          "gpu_util_pct": " 90",
+          "memory_util_pct": " 13",
+          "memory_used_MiB": " 44147",
+          "memory_total_MiB": " 97871",
+          "power_W": " 312.41",
+          "temperature_C": " 46"
+        },
+        {
+          "timestamp": "2026/11/08 18:46:42.080",
+          "gpu_index": " 3",
+          "gpu_uuid": " GPU-07d7d6f4-5609-8553-0585-822b23fef60f",
+          "gpu_util_pct": " 95",
+          "memory_util_pct": " 14",
+          "memory_used_MiB": " 44163",
+          "memory_total_MiB": " 97871",
+          "power_W": " 315.64",
+          "temperature_C": " 47"
+        },
+        {
+          "timestamp": "2026/11/08 18:46:42.087",
+          "gpu_index": " 4",
+          "gpu_uuid": " GPU-1009fbbd-879b-fcff-a849-ce434fa65d04",
+          "gpu_util_pct": " 99",
+          "memory_util_pct": " 15",
+          "memory_used_MiB": " 44147",
+          "memory_total_MiB": " 97871",
+          "power_W": " 320.39",
+          "temperature_C": " 58"
+        },
+        {
+          "timestamp": "2026/11/08 18:46:42.093",
+          "gpu_index": " 5",
+          "gpu_uuid": " GPU-ca4b31cf-366d-4d4b-4c5c-8bcd7ef35443",
+          "gpu_util_pct": " 95",
+          "memory_util_pct": " 15",
+          "memory_used_MiB": " 44163",
+          "memory_total_MiB": " 97871",
+          "power_W": " 329.10",
+          "temperature_C": " 59"
+        },
+        {
+          "timestamp": "2026/11/08 18:46:42.098",
+          "gpu_index": " 6",
+          "gpu_uuid": " GPU-c29dc4e1-e9e0-c60d-2218-a63bd818219c",
+          "gpu_util_pct": " 99",
+          "memory_util_pct": " 14",
+          "memory_used_MiB": " 44147",
+          "memory_total_MiB": " 97871",
+          "power_W": " 313.87",
+          "temperature_C": " 47"
+        },
+        {
+          "timestamp": "2026/11/08 18:46:42.104",
+          "gpu_index": " 7",
+          "gpu_uuid": " GPU-ebaee217-0fa9-24e9-725a-48dd95552ad7",
+          "gpu_util_pct": " 98",
+          "memory_util_pct": " 17",
+          "memory_used_MiB": " 44163",
+          "memory_total_MiB": " 97871",
+          "power_W": " 305.54",
+          "temperature_C": " 46"
+        }
+      ],
+      "exit_code": null
+    },
+    "1": {
+      "gpus": [
+        {
+          "timestamp": "2026/11/08 18:46:47.102",
+          "gpu_index": " 0",
+          "gpu_uuid": " GPU-6bb868e6-26b9-235d-2608-6971d70dc372",
+          "gpu_util_pct": " 99",
+          "memory_util_pct": " 19",
+          "memory_used_MiB": " 44131",
+          "memory_total_MiB": " 97871",
+          "power_W": " 324.49",
+          "temperature_C": " 56"
+        },
+        {
+          "timestamp": "2026/11/08 18:46:47.125",
+          "gpu_index": " 1",
+          "gpu_uuid": " GPU-fe8e7ab7-d10a-d0d5-8c24-d48ee72a5df8",
+          "gpu_util_pct": " 99",
+          "memory_util_pct": " 20",
+          "memory_used_MiB": " 44163",
+          "memory_total_MiB": " 97871",
+          "power_W": " 326.28",
+          "temperature_C": " 60"
+        },
+        {
+          "timestamp": "2026/11/08 18:46:47.160",
+          "gpu_index": " 2",
+          "gpu_uuid": " GPU-4b6a8e8c-835d-5b20-a754-8fc951652835",
+          "gpu_util_pct": " 99",
+          "memory_util_pct": " 16",
+          "memory_used_MiB": " 44147",
+          "memory_total_MiB": " 97871",
+          "power_W": " 306.34",
+          "temperature_C": " 45"
+        },
+        {
+          "timestamp": "2026/11/08 18:46:47.177",
+          "gpu_index": " 3",
+          "gpu_uuid": " GPU-bef83eac-e562-9e91-a861-8c32105e4504",
+          "gpu_util_pct": " 99",
+          "memory_util_pct": " 16",
+          "memory_used_MiB": " 44163",
+          "memory_total_MiB": " 97871",
+          "power_W": " 310.58",
+          "temperature_C": " 47"
+        },
+        {
+          "timestamp": "2026/11/08 18:46:47.193",
+          "gpu_index": " 4",
+          "gpu_uuid": " GPU-958f0905-3b12-a678-8c14-d098fad81f04",
+          "gpu_util_pct": " 99",
+          "memory_util_pct": " 19",
+          "memory_used_MiB": " 44147",
+          "memory_total_MiB": " 97871",
+          "power_W": " 327.97",
+          "temperature_C": " 59"
+        },
+        {
+          "timestamp": "2026/11/08 18:46:47.210",
+          "gpu_index": " 5",
+          "gpu_uuid": " GPU-f3a0c028-f4ad-ea05-c345-61b9bbb0fdd5",
+          "gpu_util_pct": " 94",
+          "memory_util_pct": " 14",
+          "memory_used_MiB": " 44163",
+          "memory_total_MiB": " 97871",
+          "power_W": " 333.88",
+          "temperature_C": " 58"
+        },
+        {
+          "timestamp": "2026/11/08 18:46:47.216",
+          "gpu_index": " 6",
+          "gpu_uuid": " GPU-eb454270-892c-5403-2cc6-d27ac94cf79e",
+          "gpu_util_pct": " 99",
+          "memory_util_pct": " 20",
+          "memory_used_MiB": " 44147",
+          "memory_total_MiB": " 97871",
+          "power_W": " 308.33",
+          "temperature_C": " 45"
+        },
+        {
+          "timestamp": "2026/11/08 18:46:47.222",
+          "gpu_index": " 7",
+          "gpu_uuid": " GPU-b4a41821-1f7a-f8a2-56da-f69c4ae29fa6",
+          "gpu_util_pct": " 99",
+          "memory_util_pct": " 20",
+          "memory_used_MiB": " 44163",
+          "memory_total_MiB": " 97871",
+          "power_W": " 316.50",
+          "temperature_C": " 47"
+        }
+      ],
+      "exit_code": null
+    }
+  },
+  "input_stream_steps": {
+    "0": 12596,
+    "1": 12596,
+    "2": 12597,
+    "3": 12597,
+    "4": 12597,
+    "5": 12597,
+    "6": 12597,
+    "7": 12597,
+    "8": 12597,
+    "9": 12597,
+    "10": 12597,
+    "11": 12598,
+    "12": 12598,
+    "13": 12598,
+    "14": 12598,
+    "15": 12598
+  },
+  "healthy_15min": true
+}

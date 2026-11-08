@@ -1,0 +1,23 @@
+{
+  "task.json": "b1234b16dc92ec1cb8ab9f8890b4f72e41a563b120144f76f33c4e6ec0689720",
+  "submitted.json": "4824e338555ece6226248517a2c936060cc591d4167bb81831267724c7a91363",
+  "resource_capacity.json": "8a40bdd21865fa5577f32830806445533ea7d9ac3d1979c45646266c9ec1d177",
+  "preflight.json": "e7007ab1d4ad825bc12e6ee1e3f40d7d392d84e969f9fa2fed29d0c8f24cafc5",
+  "preflight_node_0.json": "bae46900f7b07511e8ebb0166862337231bff76648a470248dc129dfc6b98442",
+  "preflight_node_1.json": "bae46900f7b07511e8ebb0166862337231bff76648a470248dc129dfc6b98442",
+  "cpu_test.json": "95513d532874388d8c14a8c60dd7460272890e6ccac2d62dc4ca1d1854337cb3",
+  "cpu_sample_source.json": "7c773fcc766370d8a2c6ecd62aad46e5abae90ac750008ddec6e75387422cb87",
+  "source_manifest.json": "39e40547207026c0573dd00322c6362da93dbfe1ad20370aae92b90c95bd6b34",
+  "platform_status.json": "767864f8853181fe8462f787b8409d286b63d48cc2026609d5e278e79191a9f7",
+  "training_log_snapshot.txt": "a677cf99ccc26cf82a9815977a41dc77ea416d18622bbc56b208272429996e58",
+  "code/bundle_manifest.json": "96e5cc3abb43629ee8aed786b5ffd3361e77a4061313969e336ffa5b458f33dd",
+  "run/run_config.json": "780844738d112faaebd03987a7095b7a676e4827498c2f4201f7e5270a1a8fab",
+  "run/initial_state.json": "9c5063398389acf96416342b46cabfde1ac8558cfbbe7a9ae82c7d33984988db",
+  "run/frozen_health.json": "4932b0e57db274b242c17ec085cb771d7c0d72ebe9dfbc0fc618f6258e1fb0c4",
+  "run/epochs.jsonl": "69943c7224fa26a04df25f4c6619a589db9d7cf47d0d8fa8cdf1bfa24172addd",
+  "monitor/first_15min_audit.json": "0dc443ede72ad3e73595c9a76780ada7e3648e09335bec7bd2c12c23bbd3c198",
+  "monitor/first_15min_metrics.jsonl": "9e53025e33fa140cfd7d94d50a3b101e5b67f87ca4903ef658fdbee3b658b546",
+  "monitor/first_15min_frozen_checks.jsonl": "252cf5567371cb73f91da7a3fbeb03356b4813299414d7f7fdd001e00b9b876d",
+  "monitor/live_health.json": "98cee604f2ded17647a35d9b043c29120c8c7b078c320ccb49ab4d9b312b8e04",
+  "monitor/pretrain_curves.png": "182a60e53781641a7aebea8c4396d6e3e23cb2454fdc2d170cd28bd135bd2dfe"
+}

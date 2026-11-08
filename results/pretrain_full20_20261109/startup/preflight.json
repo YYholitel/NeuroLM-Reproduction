@@ -1,0 +1,15 @@
+{
+  "ok": true,
+  "worker": false,
+  "runtime_files": 28,
+  "model_files_and_train_pretrain_unchanged": true,
+  "vq_sha256": "546e07e0b455b15ef9374a96bc77dead226bba8d00afa6e738a625fbb266de07",
+  "frozen_vq_epoch": 5,
+  "train_samples": 459656,
+  "total_epochs": 20,
+  "total_updates": 19140,
+  "global_eeg_batch": 480,
+  "global_text_batch": 32,
+  "downstream_data_accessed": false,
+  "gpu_names": []
+}
