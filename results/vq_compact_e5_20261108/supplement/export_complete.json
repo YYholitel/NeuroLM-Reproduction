@@ -1,0 +1,30 @@
+{
+  "complete": true,
+  "archive_sha256": "25cdfbe0b35ea0365e762509a2cc9cd7cc683d06fe8fe2d616ab9ae7c36a8454",
+  "fixed_comparison": {
+    "baseline_8192x128": {
+      "codebook_size": 8192,
+      "reconstruction": 0.683196377107108,
+      "commitment": 0.0007201830455288329,
+      "tokens": 4944,
+      "active_codes": 2432,
+      "perplexity": 1881.4358217666504,
+      "top1_fraction": 0.0034385113268608413,
+      "top5_fraction": 0.016383495145631068,
+      "normalized_perplexity": 0.22966745871174932,
+      "active_fraction": 0.296875
+    },
+    "compact_1024x64": {
+      "codebook_size": 1024,
+      "reconstruction": 0.8229139103707903,
+      "commitment": 0.0006087167134673695,
+      "tokens": 4944,
+      "active_codes": 772,
+      "perplexity": 555.1653186195043,
+      "top1_fraction": 0.007281553398058253,
+      "top5_fraction": 0.03317152103559871,
+      "normalized_perplexity": 0.5421536314643597,
+      "active_fraction": 0.75390625
+    }
+  }
+}

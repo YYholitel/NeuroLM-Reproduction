@@ -1,0 +1,186 @@
+{
+  "baseline": {
+    "codebook_shape": [
+      8192,
+      128
+    ],
+    "overall": {
+      "samples": 160,
+      "reconstruction": 0.7501988589513597,
+      "frequency": 0.2186063585015335,
+      "raw": 0.5315924970464523,
+      "commitment": 0.0007520398601665424,
+      "active_codes": 4423,
+      "codebook_size": 8192,
+      "active_fraction": 0.5399169921875,
+      "valid_eeg_tokens": 24672,
+      "perplexity": 3196.7558680025577,
+      "largest_code_fraction": 0.003972114137483787,
+      "normalized_perplexity": 0.39022898779328097
+    },
+    "per_dataset": {
+      "TUAB": {
+        "samples": 32,
+        "reconstruction": 0.701290845638141,
+        "frequency": 0.2206136337481439,
+        "raw": 0.4806772049050778,
+        "commitment": 0.0007650247280253097,
+        "active_codes": 2885,
+        "codebook_size": 8192,
+        "active_fraction": 0.3521728515625,
+        "valid_eeg_tokens": 7360,
+        "perplexity": 2161.0088643282184,
+        "largest_code_fraction": 0.00828804347826087,
+        "normalized_perplexity": 0.2637950273838157
+      },
+      "TUEV": {
+        "samples": 32,
+        "reconstruction": 0.7724973680451512,
+        "frequency": 0.24995794892311096,
+        "raw": 0.5225394202861935,
+        "commitment": 0.0006423439572245115,
+        "active_codes": 1972,
+        "codebook_size": 8192,
+        "active_fraction": 0.24072265625,
+        "valid_eeg_tokens": 3680,
+        "perplexity": 1587.615249445695,
+        "largest_code_fraction": 0.003532608695652174,
+        "normalized_perplexity": 0.19380068962960145
+      },
+      "HMC": {
+        "samples": 32,
+        "reconstruction": 0.6617509946227074,
+        "frequency": 0.1674379693577066,
+        "raw": 0.49431302142329514,
+        "commitment": 0.0006429425457099569,
+        "active_codes": 1986,
+        "codebook_size": 8192,
+        "active_fraction": 0.242431640625,
+        "valid_eeg_tokens": 3840,
+        "perplexity": 1616.7655314777471,
+        "largest_code_fraction": 0.00546875,
+        "normalized_perplexity": 0.19735907366671718
+      },
+      "Workload": {
+        "samples": 32,
+        "reconstruction": 1.1779171526432037,
+        "frequency": 0.333720481954515,
+        "raw": 0.8441966753453016,
+        "commitment": 0.0008040175089263357,
+        "active_codes": 1260,
+        "codebook_size": 8192,
+        "active_fraction": 0.15380859375,
+        "valid_eeg_tokens": 2432,
+        "perplexity": 1009.7048686410977,
+        "largest_code_fraction": 0.004934210526315789,
+        "normalized_perplexity": 0.12325498884779025
+      },
+      "TUSL": {
+        "samples": 32,
+        "reconstruction": 0.6927713281475008,
+        "frequency": 0.18958212854340672,
+        "raw": 0.5031891950638965,
+        "commitment": 0.000833648058687686,
+        "active_codes": 2809,
+        "codebook_size": 8192,
+        "active_fraction": 0.3428955078125,
+        "valid_eeg_tokens": 7360,
+        "perplexity": 2143.96411565455,
+        "largest_code_fraction": 0.005027173913043478,
+        "normalized_perplexity": 0.26171436958673705
+      }
+    }
+  },
+  "compact": {
+    "codebook_shape": [
+      1024,
+      64
+    ],
+    "overall": {
+      "samples": 160,
+      "reconstruction": 0.876763997651424,
+      "frequency": 0.2140261850888441,
+      "raw": 0.662737809075707,
+      "commitment": 0.0005934535840716908,
+      "active_codes": 936,
+      "codebook_size": 1024,
+      "active_fraction": 0.9140625,
+      "valid_eeg_tokens": 24672,
+      "perplexity": 630.0123279161261,
+      "largest_code_fraction": 0.005188067444876783,
+      "normalized_perplexity": 0.6152464139805919
+    },
+    "per_dataset": {
+      "TUAB": {
+        "samples": 32,
+        "reconstruction": 0.8128903433680534,
+        "frequency": 0.21501500078011304,
+        "raw": 0.5978753382805735,
+        "commitment": 0.0005373374433474964,
+        "active_codes": 803,
+        "codebook_size": 1024,
+        "active_fraction": 0.7841796875,
+        "valid_eeg_tokens": 7360,
+        "perplexity": 564.6141255430754,
+        "largest_code_fraction": 0.00625,
+        "normalized_perplexity": 0.5513809819756595
+      },
+      "TUEV": {
+        "samples": 32,
+        "reconstruction": 0.8684796411544085,
+        "frequency": 0.2449551020981744,
+        "raw": 0.6235245380084962,
+        "commitment": 0.0006699717132505612,
+        "active_codes": 733,
+        "codebook_size": 1024,
+        "active_fraction": 0.7158203125,
+        "valid_eeg_tokens": 3680,
+        "perplexity": 517.4981650469971,
+        "largest_code_fraction": 0.012228260869565218,
+        "normalized_perplexity": 0.5053693018037081
+      },
+      "HMC": {
+        "samples": 32,
+        "reconstruction": 0.847189312800765,
+        "frequency": 0.16398199170362204,
+        "raw": 0.6832073191180825,
+        "commitment": 0.0006094466043577995,
+        "active_codes": 581,
+        "codebook_size": 1024,
+        "active_fraction": 0.5673828125,
+        "valid_eeg_tokens": 3840,
+        "perplexity": 380.7726038461129,
+        "largest_code_fraction": 0.01015625,
+        "normalized_perplexity": 0.3718482459434696
+      },
+      "Workload": {
+        "samples": 32,
+        "reconstruction": 1.283107541501522,
+        "frequency": 0.32474352745339274,
+        "raw": 0.9583640154451132,
+        "commitment": 0.0007389571328531019,
+        "active_codes": 404,
+        "codebook_size": 1024,
+        "active_fraction": 0.39453125,
+        "valid_eeg_tokens": 2432,
+        "perplexity": 260.1450833293955,
+        "largest_code_fraction": 0.01644736842105263,
+        "normalized_perplexity": 0.2540479329388628
+      },
+      "TUSL": {
+        "samples": 32,
+        "reconstruction": 0.8259400599636137,
+        "frequency": 0.18709806387778372,
+        "raw": 0.6388419897994027,
+        "commitment": 0.0005548870421989704,
+        "active_codes": 849,
+        "codebook_size": 1024,
+        "active_fraction": 0.8291015625,
+        "valid_eeg_tokens": 7360,
+        "perplexity": 587.6988579757164,
+        "largest_code_fraction": 0.007472826086956522,
+        "normalized_perplexity": 0.5739246659919105
+      }
+    }
+  }
+}

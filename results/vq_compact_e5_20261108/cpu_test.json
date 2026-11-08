@@ -1,0 +1,24 @@
+{
+  "ok": true,
+  "codebook_shape": [
+    1024,
+    64
+  ],
+  "cli_geometry_applied": true,
+  "actual_optimizer_step": true,
+  "finite_gradients": true,
+  "checkpoint_strict_roundtrip": true,
+  "evaluation_unchanged": true,
+  "valid_tokens_counted": 8,
+  "active_fraction_denominator": 1024,
+  "dead_code_patience": 50,
+  "dead_code_interval": 50,
+  "test_encoder_decoder_layers": [
+    1,
+    1
+  ],
+  "training_encoder_decoder_layers": [
+    12,
+    3
+  ]
+}
