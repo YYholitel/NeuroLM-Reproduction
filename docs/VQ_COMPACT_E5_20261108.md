@@ -18,6 +18,8 @@
 
 最终对同一组 32 个训练诊断样本、4944 个有效 token 做冻结 checkpoint 评估，与基线最终权重比较。该组不是独立验证集，不据此宣称下游准确率提升。两轮数据顺序的 SHA-256 完全一致才标记对照核验完成。
 
+另外复用阶段二已建立的 **160 个独立验证窗口**（五数据集各 32 个），通过 `audit_vq_heldout_probe.py` 分别评估两轮最终 checkpoint，记录有效 token 加权的频域/时域重建误差、commitment 和码本分配，并保存逐样本结果。`compare_vq_heldout_probe.py` 先评估已完成的基线，再等待紧凑模型五 epoch 完成后评估；整个过程冻结模型、确认量化器状态不变。这个均衡小探针不等同于完整验证总体或下游任务指标。
+
 ## 运行与产物
 
 隔离根目录：`/mnt/cfs-omni/lhy/neurolm-reproduction/vq-compact-e5-20261108-r1`。提交和状态入口 `scripts/check_vq_compact_e5.py`；TI-ONE 配置见 `experiments/vq_compact_e5_tione_20261108.json`。
