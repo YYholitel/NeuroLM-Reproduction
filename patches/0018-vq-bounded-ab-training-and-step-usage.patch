@@ -1,0 +1,213 @@
+diff --git a/train_vq.py b/train_vq.py
+--- a/train_vq.py
++++ b/train_vq.py
+@@ -7,6 +7,8 @@
+ import time
+ import argparse
+ import json
++import hashlib
++from collections import deque
+ from contextlib import nullcontext
+ 
+ import numpy as np
+@@ -21,7 +23,7 @@
+ from pathlib import Path
+ from vq_scheduler import cosine_scheduler
+ import math
+-from vq_monitor import fixed_probe, epoch_summary, append_json
++from vq_monitor import fixed_probe, epoch_summary, append_json, usage_summary
+ 
+ 
+ master_process = None; device = None; dtype = None
+@@ -65,6 +67,10 @@
+     global ctx, master_process, ddp, ddp_world_size, ddp_rank, device, dtype, device_type, ddp_local_rank
+ 
+     init(args)
++    if args.max_updates < 0 or args.usage_window < 1:
++        raise ValueError('Invalid update limit or usage window')
++    if args.max_updates and args.gradient_accumulation_steps != 1:
++        raise ValueError('Bounded A/B runs require one optimizer update per batch')
+ 
+     checkpoint_out_dir = os.path.join(args.out_dir, 'checkpoints/VQ')
+     if master_process:
+@@ -72,6 +78,8 @@
+ 
+     # text data loader
+     data_dir = os.path.join(args.out_dir, 'text')
++    # Dead-code sampling must not change the text stream in the A/B experiment.
++    text_generator = torch.Generator().manual_seed(args.seed + 910000 + (ddp_rank if ddp else 0))
+     def get_batch(split):
+         # We recreate np.memmap every batch to avoid a memory leak, as per
+         # https://stackoverflow.com/questions/45132940/numpy-memmap-memory-usage-want-to-iterate-once/61472122#61472122
+@@ -79,7 +87,7 @@
+             data = np.memmap(os.path.join(data_dir, 'train.bin'), dtype=np.uint16, mode='r')
+         else:
+             data = np.memmap(os.path.join(data_dir, 'val.bin'), dtype=np.uint16, mode='r')
+-        ix = torch.randint(len(data) - args.block_size, (args.text_batch_size,))
++        ix = torch.randint(len(data) - args.block_size, (args.text_batch_size,), generator=text_generator)
+         x = torch.stack([torch.from_numpy((data[i:i+args.block_size]).astype(np.int64)) for i in ix])
+         y = torch.stack([torch.from_numpy((data[i+1:i+1+args.block_size]).astype(np.int64)) for i in ix])
+         if device_type == 'cuda':
+@@ -87,7 +95,7 @@
+             x, y = x.pin_memory().to(device, non_blocking=True), y.pin_memory().to(device, non_blocking=True)
+         else:
+             x, y = x.to(device), y.to(device)
+-        return x, y
++        return x, y, ix.tolist()
+ 
+ 
+     print('prepare dataloader...')
+@@ -105,7 +113,7 @@
+ 
+     if ddp:
+         sampler_train = torch.utils.data.DistributedSampler(
+-            dataset_train, num_replicas=ddp_world_size, rank=ddp_rank, shuffle=True
++            dataset_train, num_replicas=ddp_world_size, rank=ddp_rank, shuffle=True, seed=args.seed
+         )
+         data_loader_train = torch.utils.data.DataLoader(
+             dataset_train, sampler=sampler_train,
+@@ -217,7 +225,9 @@
+ 
+     if master_process:
+         config = dict(vars(args), world_size=ddp_world_size, steps_per_epoch=num_training_steps_per_epoch,
+-                      total_updates=args.epochs*num_training_steps_per_epoch,
++                      total_updates=min(args.max_updates or args.epochs*num_training_steps_per_epoch,
++                                        args.epochs*num_training_steps_per_epoch),
++                      schedule_total_updates=args.epochs*num_training_steps_per_epoch,
+                       global_eeg_batch=args.batch_size*ddp_world_size,
+                       global_text_batch=args.text_batch_size*ddp_world_size,
+                       train_samples=len(files), plan_sha256=ready['plan_sha256'],
+@@ -238,16 +248,29 @@
+     epoch_history = [json.loads(line) for line in epoch_path.read_text().splitlines()] if master_process and epoch_path.exists() else []
+ 
+     # training loop
+-    X_text, Y_text = get_batch('train') # fetch the very first batch
++    X_text, Y_text, text_offsets = get_batch('train')
+     t0 = time.time()
+     local_iter_num = 0 # number of iterations in the lifetime of this process
+     raw_model = model.module if ddp else model # unwrap DDP container if needed
++    if args.max_updates and init_from != 'scratch':
++        raise ValueError('Bounded A/B runs must start from scratch in a fresh output directory')
++    if master_process and args.max_updates:
++        initial_hash = hashlib.sha256()
++        for name, tensor in raw_model.state_dict().items():
++            initial_hash.update(name.encode())
++            initial_hash.update(tensor.detach().cpu().contiguous().numpy().tobytes())
++        append_json(Path(args.out_dir)/'initial_state.jsonl', {'model_sha256':initial_hash.hexdigest()})
++    recent_counts = deque(maxlen=args.usage_window)
++    recent_sum = torch.zeros(raw_model.VQ.quantize.num_tokens, dtype=torch.long, device=device)
++    last_epoch_complete = False
+     for epoch in range(start_epoch, args.epochs):
+         epoch_code_counts = torch.zeros(raw_model.VQ.quantize.num_tokens, dtype=torch.long, device=device)
+         tail_code_counts = torch.zeros_like(epoch_code_counts)
+         epoch_rows = []
+         if ddp:
+             sampler_train.set_epoch(epoch)
++            sampler_indices = list(iter(sampler_train))
++        epoch_limit = min(num_training_steps_per_epoch, args.max_updates-iter_num) if args.max_updates else num_training_steps_per_epoch
+         for step, (batch) in enumerate(data_loader_train):
+             # determine and set the learning rate for this iteration
+             lr = lr_schedule_values[iter_num] if args.decay_lr else args.learning_rate
+@@ -275,7 +298,7 @@
+                 alpha = 2 / (1 + math.exp(-10 * iter_num / args.epochs / num_training_steps_per_epoch)) - 1
+                 loss, domain_loss, log = model(X, Y_freq, Y_raw, input_chans, input_time, input_mask, alpha)
+                 epoch_code_counts.add_(log['train/valid_code_counts'])
+-                if step >= num_training_steps_per_epoch - 100:
++                if step >= epoch_limit - 100:
+                     tail_code_counts.add_(log['train/valid_code_counts'])
+                 domain_loss2 = model(X_text)
+                 loss = (loss + domain_loss + domain_loss2) / args.gradient_accumulation_steps # scale the loss to account for gradient accumulation
+@@ -307,6 +330,13 @@
+                 torch.distributed.all_reduce(metrics)
+                 metrics /= ddp_world_size
+             values = metrics.tolist()
++            step_counts = log['train/valid_code_counts'].detach().clone()
++            if ddp:
++                torch.distributed.all_reduce(step_counts)
++            if len(recent_counts) == args.usage_window:
++                recent_sum.sub_(recent_counts[0])
++            recent_counts.append(step_counts)
++            recent_sum.add_(step_counts)
+             reconstruction = values[0] + values[1]
+             if not all(math.isfinite(v) for v in values):
+                 raise RuntimeError("Non-finite globally averaged loss")
+@@ -316,12 +346,20 @@
+                            codebook=values[2], adversarial_eeg=values[3],
+                            adversarial_text=values[4], adversarial=values[3]+values[4],
+                            reconstruction_padded_mean=values[5], dead_code_resets=int(values[6]),
+-                           loss_normalization='global_valid_elements')
++                           loss_normalization='global_valid_elements',
++                           total_loss=reconstruction+values[2]+values[3]+values[4],
++                           code_usage=usage_summary(step_counts),
++                           rolling_code_usage=usage_summary(recent_sum),
++                           usage_window_updates=len(recent_counts))
+                 epoch_rows.append(row)
+                 if iter_num < 20 or (iter_num + 1) % args.log_interval == 0:
+                     print("VQ_METRICS=" + json.dumps(row), flush=True)
+                 with open(os.path.join(args.out_dir, 'metrics.jsonl'), 'a') as stream:
+                     stream.write(json.dumps(row) + '\n')
++            if args.max_updates and ddp:
++                eeg_indices = sampler_indices[step*args.batch_size:(step+1)*args.batch_size]
++                append_json(Path(args.out_dir)/f'input_stream_rank-{ddp_rank}.jsonl',
++                            dict(update=iter_num+1, eeg_indices=eeg_indices, text_offsets=text_offsets))
+ 
+             if baseline is None:
+                 baseline = fixed_probe(raw_model.VQ, probe_batch, device, ctx)
+@@ -346,7 +384,7 @@
+                         "lr": lr
+                     })
+             
+-            X_text, Y_text = get_batch('train') # fetch the very first batch
++            X_text, Y_text, text_offsets = get_batch('train')
+ 
+             # timing and logging
+             t1 = time.time()
+@@ -355,6 +393,9 @@
+ 
+             iter_num += 1
+             local_iter_num += 1
++            if args.max_updates and iter_num >= args.max_updates:
++                break
++        last_epoch_complete = (step + 1 == num_training_steps_per_epoch)
+         
+         if ddp:
+             torch.distributed.all_reduce(epoch_code_counts)
+@@ -362,6 +403,7 @@
+         probe = fixed_probe(raw_model.VQ, probe_batch, device, ctx)
+         if master_process:
+             summary = epoch_summary(epoch+1,epoch_rows,epoch_code_counts,tail_code_counts,probe,baseline,epoch_history)
++            summary['epoch_complete'] = last_epoch_complete
+             append_json(epoch_path,summary)
+             if summary['milestones'] or summary['review_flags']:
+                 append_json(Path(args.out_dir)/'review_checkpoints.jsonl',summary)
+@@ -386,14 +428,20 @@
+             if (epoch + 1) % args.save_ckpt_freq == 0:
+                 print(f"saving checkpoint {epoch} to {checkpoint_out_dir}")
+                 torch.save(checkpoint, os.path.join(checkpoint_out_dir, f'ckpt-{epoch}.pt'))
++        if args.max_updates and iter_num >= args.max_updates:
++            break
+ 
+     if ddp:
+         torch.distributed.barrier()
+     if master_process:
+         with open(os.path.join(args.out_dir, 'completed.json'), 'w') as stream:
+-            json.dump(dict(epochs=args.epochs, steps=iter_num, decoder_layers=decoder_args['n_layer'],
++            json.dump(dict(epochs_completed=epoch+int(last_epoch_complete),
++                           partial_epoch_updates=0 if last_epoch_complete else step+1,
++                           steps=iter_num, requested_max_updates=args.max_updates,
++                           decoder_layers=decoder_args['n_layer'],
+                            wandb=False, world_size=ddp_world_size), stream)
+     if ddp:
++        torch.distributed.barrier()
+         destroy_process_group()
+ 
+ 
+@@ -424,6 +472,8 @@
+     parser.add_argument('--warmup_epochs', default=5, type=int)
+     parser.add_argument('--save_ckpt_freq', default=10, type=int)
+     parser.add_argument('--block_size', default=1024, type=int)
++    parser.add_argument('--max_updates', default=0, type=int, help='Stop exactly after this many optimizer updates; 0 disables')
++    parser.add_argument('--usage_window', default=50, type=int)
+     parser.add_argument('--vq_beta', default=1.0, type=float)
+     parser.add_argument('--vq_ema_decay', default=0.99, type=float)
+     parser.add_argument('--vq_dead_code_patience', default=100, type=int,
