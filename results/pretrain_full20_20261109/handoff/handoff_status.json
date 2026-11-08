@@ -1,0 +1,40 @@
+{
+  "checked_utc": "2026-11-08T10:52:43.389274+00:00",
+  "task": [
+    {
+      "name": "neurolm-pretrain-b16-e20-20261109-r1",
+      "id": "train-1713134905275320064",
+      "status": "RUNNING"
+    }
+  ],
+  "tmux": "pretrain_neurolm 0 python",
+  "tokenizer_path": "/mnt/cfs-omni/lhy/neurolm-reproduction/vq-fixed-e5-20261108-r1/run/checkpoints/VQ/ckpt-4.pt",
+  "per_gpu_eeg": 30,
+  "per_gpu_text": 2,
+  "world_size": 16,
+  "global_eeg": 480,
+  "global_text": 32,
+  "planned_epochs": 20,
+  "lr_peak": 0.0006,
+  "lr_min": 6e-05,
+  "warmup": 2,
+  "steps": 13032,
+  "completed_epochs": 13,
+  "latest": {
+    "utc": "2026-11-08T10:52:19.105049+00:00",
+    "step": 13032,
+    "epoch": 13,
+    "lr": 0.00021094101018805062,
+    "eeg_loss": 4.8621625900268555,
+    "text_loss": 3.0868120193481445,
+    "eeg_accuracy": 0.14326420426368713,
+    "text_accuracy": 0.428863525390625,
+    "eeg_targets": 79692,
+    "text_targets": 32768,
+    "grad_norm": 4.874047756195068,
+    "step_seconds": 0.5426785461604595
+  },
+  "all_finite": true,
+  "frozen": true,
+  "gpt_updated": true
+}

@@ -1,0 +1,20 @@
+PRETRAIN_WORKER node=1 host=train-1713134905275320064-d0k7n2zs4dts-worker-0 UTC=2026-11-08T08:13:49Z
+0, NVIDIA H20, 97871 MiB
+1, NVIDIA H20, 97871 MiB
+2, NVIDIA H20, 97871 MiB
+3, NVIDIA H20, 97871 MiB
+4, NVIDIA H20, 97871 MiB
+5, NVIDIA H20, 97871 MiB
+6, NVIDIA H20, 97871 MiB
+7, NVIDIA H20, 97871 MiB
+PRETRAIN_PREFLIGHT={"ok": true, "worker": true, "runtime_files": 28, "model_files_and_train_pretrain_unchanged": true, "vq_sha256": "546e07e0b455b15ef9374a96bc77dead226bba8d00afa6e738a625fbb266de07", "frozen_vq_epoch": 5, "train_samples": 459656, "total_epochs": 20, "total_updates": 19140, "global_eeg_batch": 480, "global_text_batch": 32, "downstream_data_accessed": false, "gpu_names": ["NVIDIA H20", "NVIDIA H20", "NVIDIA H20", "NVIDIA H20", "NVIDIA H20", "NVIDIA H20", "NVIDIA H20", "NVIDIA H20"]}
+/usr/local/lib/python3.12/dist-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. 
+  warnings.warn(  # warn only once
+/usr/local/lib/python3.12/dist-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. 
+  warnings.warn(  # warn only once
+[rank12]:[W1108 16:14:28.336758152 ProcessGroupNCCL.cpp:4718] [PG ID 0 PG GUID 0 Rank 12]  using GPU 4 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can pecify device_id in init_process_group() to force use of a particular device.
+/usr/local/lib/python3.12/dist-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. 
+  warnings.warn(  # warn only once
+[rank13]:[W1108 16:14:29.759288744 ProcessGroupNCCL.cpp:4718] [PG ID 0 PG GUID 0 Rank 13]  using GPU 5 as device used by this process is currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. You can pecify device_id in init_process_group() to force use of a particular device.
+/usr/local/lib/python3.12/dist-packages/torch/distributed/distributed_c10d.py:4631: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user. 
+  warnings.warn(  # warn only once
