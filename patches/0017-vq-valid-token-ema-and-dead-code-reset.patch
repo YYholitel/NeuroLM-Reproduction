@@ -1,0 +1,497 @@
+diff --git a/model/norm_ema_quantizer.py b/model/norm_ema_quantizer.py
+--- a/model/norm_ema_quantizer.py
++++ b/model/norm_ema_quantizer.py
+@@ -8,6 +8,42 @@
+ import torch.nn.functional as F
+ import torch.distributed as distributed
+ from einops import rearrange, repeat
++
++
++def distributed_training():
++    return distributed.is_available() and distributed.is_initialized()
++
++
++def masked_token_mean(values, valid_mask, sync=False):
++    """Mean over valid elements; DDP averaging then yields the global-token mean.
++
++    In eval, sync=False is mandatory so a rank-zero probe can run independently.
++    """
++    selected = values[valid_mask]
++    count = torch.tensor(selected.numel(), device=values.device, dtype=torch.long)
++    world_size = 1
++    if sync and distributed_training():
++        distributed.all_reduce(count)
++        world_size = distributed.get_world_size()
++    return selected.sum() * world_size / count.clamp_min(1)
++
++
++@torch.no_grad()
++def pooled_vectors(local_vectors, samples_per_rank):
++    """Bounded valid-only candidate pool, including ranks with no valid tokens."""
++    if len(local_vectors) > samples_per_rank:
++        local_vectors = sample_vectors(local_vectors, samples_per_rank)
++    if not distributed_training():
++        return local_vectors
++    size = torch.tensor([len(local_vectors)], device=local_vectors.device, dtype=torch.long)
++    sizes = [torch.empty_like(size) for _ in range(distributed.get_world_size())]
++    distributed.all_gather(sizes, size)
++    max_size = max(int(n) for n in sizes)
++    padded = local_vectors.new_zeros(max_size, local_vectors.shape[-1])
++    padded[:len(local_vectors)] = local_vectors
++    gathered = [torch.empty_like(padded) for _ in sizes]
++    distributed.all_gather(gathered, padded)
++    return torch.cat([vectors[:int(n)] for vectors, n in zip(gathered, sizes)])
+ 
+ 
+ def l2norm(t):
+@@ -99,7 +135,7 @@
+             embed, cluster_size = kmeans(data, self.num_tokens, 10, use_cosine_sim=True)
+         self.weight.data.copy_(embed)
+         self.cluster_size.data.copy_(cluster_size)
+-        self.initted.data.copy_(torch.Tensor([True]))
++        self.initted.fill_(True)
+         
+     def forward(self, embed_id):
+         return F.embedding(embed_id, self.weight)
+@@ -126,85 +162,110 @@
+ 
+ class NormEMAVectorQuantizer(nn.Module):
+     def __init__(self, n_embed, embedding_dim, beta, decay=0.99, eps=1e-5, 
+-                statistic_code_usage=True, kmeans_init=False, codebook_init_path=''):
++                statistic_code_usage=True, kmeans_init=False, codebook_init_path='',
++                dead_code_patience=100, dead_code_interval=50, init_samples_per_rank=2048):
+         super().__init__()
++        if not 0 <= decay < 1 or beta < 0:
++            raise ValueError('EMA decay must be in [0, 1); beta must be nonnegative')
++        if dead_code_patience < 0 or dead_code_interval < 1 or init_samples_per_rank < 1:
++            raise ValueError('Invalid dead-code policy or initialization pool size')
+         self.codebook_dim = embedding_dim
+         self.num_tokens = n_embed
+         self.beta = beta
+         self.decay = decay
+-        
+-        # learnable = True if orthogonal_reg_weight > 0 else False
++        self.dead_code_patience = dead_code_patience
++        self.dead_code_interval = dead_code_interval
++        self.init_samples_per_rank = init_samples_per_rank
+         self.embedding = EmbeddingEMA(self.num_tokens, self.codebook_dim, decay, eps, kmeans_init, codebook_init_path)
+-        
+         self.statistic_code_usage = statistic_code_usage
+         if statistic_code_usage:
+             self.register_buffer('cluster_size', torch.zeros(n_embed))
+-        if distributed.is_available() and distributed.is_initialized():
+-            print("ddp is enable, so use ddp_reduce to sync the statistic_code_usage for each gpu!")
+-            self.all_reduce_fn = distributed.all_reduce
+-        else:
+-            self.all_reduce_fn = nn.Identity()
+-    
+-    def reset_cluster_size(self, device):
++        self.register_buffer('code_age', torch.zeros(n_embed, dtype=torch.long))
++        self.register_buffer('num_updates', torch.zeros((), dtype=torch.long))
++        self.register_buffer('total_replacements', torch.zeros((), dtype=torch.long))
++        self.register_buffer('last_reset_count', torch.zeros((), dtype=torch.long), persistent=False)
++
++    @torch.no_grad()
++    def reset_cluster_size(self, device=None):
++        # Usage-statistic reset only; dead-code replacement is handled separately.
+         if self.statistic_code_usage:
+-            self.register_buffer('cluster_size', torch.zeros(self.num_tokens))
+-            self.cluster_size = self.cluster_size.to(device)
+-
+-    def forward(self, z):
+-        # reshape z -> (batch, height, width, channel) and flatten
+-        #z, 'b c h w -> b h w c'
+-        #z = rearrange(z, 'b c h w -> b h w c')
+-        z = l2norm(z) # by JWB, z: (b, n, c)
+-        z_flattened = z.reshape(-1, self.codebook_dim)
+-        self.embedding.init_embed_(z_flattened)
+-        
+-        d = z_flattened.pow(2).sum(dim=1, keepdim=True) + \
+-            self.embedding.weight.pow(2).sum(dim=1) - 2 * \
+-            torch.einsum('bd,nd->bn', z_flattened, self.embedding.weight) # 'n d -> d n'
+-        
+-        encoding_indices = torch.argmin(d, dim=1)
+-
+-        z_q = self.embedding(encoding_indices).view(z.shape)
+-        
+-        encodings = F.one_hot(encoding_indices, self.num_tokens).type(z.dtype)     
+-        
+-        if not self.training:
++            self.cluster_size.zero_()
++
++    def candidate_pool(self, vectors):
++        world = distributed.get_world_size() if distributed_training() else 1
++        cap = max(self.init_samples_per_rank, (self.num_tokens + world - 1) // world)
++        return pooled_vectors(vectors.detach(), cap)
++
++    @torch.no_grad()
++    def update_ema(self, vectors, indices):
++        bins = torch.bincount(indices, minlength=self.num_tokens).float()
++        sums = vectors.new_zeros(self.num_tokens, self.codebook_dim)
++        sums.index_add_(0, indices, vectors)
++        if distributed_training():
++            distributed.all_reduce(bins)
++            distributed.all_reduce(sums)
++        if self.statistic_code_usage:
++            ema_inplace(self.cluster_size, bins, self.decay)
++        centroids = l2norm(sums / bins.clamp_min(1).unsqueeze(-1))
++        centroids = torch.where((bins == 0).unsqueeze(-1), self.embedding.weight, centroids)
++        norm_ema_inplace(self.embedding.weight, centroids, self.decay)
++        self.code_age.add_(1).masked_fill_(bins > 0, 0)
++        self.num_updates.add_(1)
++        self.last_reset_count.zero_()
++        if (not self.dead_code_patience or int(self.num_updates) % self.dead_code_interval):
++            return
++        expired = self.code_age >= self.dead_code_patience
++        num_expired = int(expired.sum())
++        if not num_expired:
++            return
++        pool = self.candidate_pool(vectors)
++        if not distributed_training() or distributed.get_rank() == 0:
++            replacements = sample_vectors(pool, num_expired)
++        else:
++            replacements = vectors.new_empty(num_expired, self.codebook_dim)
++        if distributed_training():
++            distributed.broadcast(replacements, src=0)
++        self.embedding.weight[expired] = replacements
++        self.code_age[expired] = 0
++        if self.statistic_code_usage:
++            # A replacement has not yet been assigned a real token.
++            self.cluster_size[expired] = 0
++        self.last_reset_count.fill_(num_expired)
++        self.total_replacements.add_(num_expired)
++
++    def forward(self, z, valid_mask=None):
++        if valid_mask is None:
++            valid_mask = torch.ones(z.shape[:-1], dtype=torch.bool, device=z.device)
++        if valid_mask.shape != z.shape[:-1] or valid_mask.dtype != torch.bool:
++            raise ValueError('valid_mask must be bool with the token dimensions of z')
++        # Select before normalizing: even invalid NaNs must not enter EMA or loss.
++        with torch.autocast(device_type=z.device.type, enabled=False):
++            vectors = l2norm(z[valid_mask].float())
++            global_tokens = torch.tensor(len(vectors), device=z.device, dtype=torch.long)
++            world = 1
++            if self.training and distributed_training():
++                distributed.all_reduce(global_tokens)
++                world = distributed.get_world_size()
++            if self.training and not int(global_tokens):
++                raise ValueError('Training batch has no globally valid tokens')
++            if not bool(self.embedding.initted):
++                if not self.training:
++                    raise RuntimeError('Cannot evaluate an uninitialized codebook')
++                self.embedding.init_embed_(self.candidate_pool(vectors))
+             with torch.no_grad():
+-                cluster_size = encodings.sum(0)
+-                self.all_reduce_fn(cluster_size)
+-                ema_inplace(self.cluster_size, cluster_size, self.decay)
+-        
+-        if self.training and self.embedding.update:
+-            #EMA cluster size
+-
+-            bins = encodings.sum(0)
+-            self.all_reduce_fn(bins)
+-
+-            # self.embedding.cluster_size_ema_update(bins)
+-            ema_inplace(self.cluster_size, bins, self.decay)
+-
+-            zero_mask = (bins == 0)
+-            bins = bins.masked_fill(zero_mask, 1.)
+-
+-            embed_sum = z_flattened.t() @ encodings
+-            self.all_reduce_fn(embed_sum)
+-                        
+-            embed_normalized = (embed_sum / bins.unsqueeze(0)).t()
+-            embed_normalized = l2norm(embed_normalized)
+-            
+-            embed_normalized = torch.where(zero_mask[..., None], self.embedding.weight,
+-                                           embed_normalized)
+-
+-            norm_ema_inplace(self.embedding.weight, embed_normalized, self.decay)
+-
+-        # compute loss for embedding
+-        loss = self.beta * F.mse_loss(z_q.detach(), z) 
+-        
+-        # preserve gradients
+-        z_q = z + (z_q - z).detach()
+-
+-        # reshape back to match original input shape
+-        #z_q, 'b h w c -> b c h w'
+-        #z_q = rearrange(z_q, 'b h w c -> b c h w')
+-        return z_q, loss, encoding_indices
+-    
++                distances = (vectors.square().sum(-1, keepdim=True)
++                             + self.embedding.weight.square().sum(-1)
++                             - 2 * vectors @ self.embedding.weight.t())
++                indices = distances.argmin(-1)
++                quantized = self.embedding(indices)
++            loss = self.beta * (quantized.detach() - vectors).square().sum()
++            loss = loss * world / (global_tokens.clamp_min(1) * self.codebook_dim)
++            if self.training and self.embedding.update:
++                self.update_ema(vectors.detach(), indices)
++            straight_through = vectors + (quantized - vectors).detach()
++            output = torch.zeros(z.shape, dtype=straight_through.dtype, device=z.device)
++            output[valid_mask] = straight_through
++            # Zero is a placeholder, not an observed assignment, at masked positions.
++            all_indices = torch.zeros(valid_mask.shape, dtype=torch.long, device=z.device)
++            all_indices[valid_mask] = indices
++        return output.to(z.dtype), loss, all_indices.reshape(-1)
+diff --git a/model/model_vq.py b/model/model_vq.py
+--- a/model/model_vq.py
++++ b/model/model_vq.py
+@@ -9,7 +9,7 @@
+ import inspect
+ 
+ from model.model_neural_transformer import NeuralTransformer
+-from model.norm_ema_quantizer import NormEMAVectorQuantizer
++from model.norm_ema_quantizer import NormEMAVectorQuantizer, masked_token_mean
+ 
+ from torch.autograd import Function
+ from transformers import GPT2LMHeadModel
+@@ -34,6 +34,10 @@
+                  n_embed=8192, 
+                  embed_dim=128,
+                  decay=0.99,
++                 beta=1.0,
++                 dead_code_patience=100,
++                 dead_code_interval=50,
++                 init_samples_per_rank=2048,
+                  quantize_kmeans_init=True,
+                  decoder_out_dim=200,
+                  smooth_l1_loss = False,
+@@ -54,7 +58,9 @@
+         self.decoder_raw = NeuralTransformer(decoder_config)
+                 
+         self.quantize = NormEMAVectorQuantizer(
+-            n_embed=n_embed, embedding_dim=embed_dim, beta=1.0, kmeans_init=quantize_kmeans_init, decay=decay,
++            n_embed=n_embed, embedding_dim=embed_dim, beta=beta, kmeans_init=quantize_kmeans_init, decay=decay,
++            dead_code_patience=dead_code_patience, dead_code_interval=dead_code_interval,
++            init_samples_per_rank=init_samples_per_rank,
+         )
+ 
+         self.decoder_out_dim = decoder_out_dim
+@@ -105,18 +111,18 @@
+     def get_number_of_tokens(self):
+         return self.quantize.n_e
+ 
+-    def get_tokens(self, data, input_chans=None, input_times=None, mask=None, **kwargs):
+-        quantize, embed_ind, loss, _ = self.encode(data, input_chans, input_times, mask)
++    def get_tokens(self, data, input_chans=None, input_times=None, mask=None, valid_mask=None, **kwargs):
++        quantize, embed_ind, loss, _ = self.encode(data, input_chans, input_times, mask, valid_mask)
+         return embed_ind.view(data.size(0), data.size(1))
+ 
+-    def encode(self, x, input_chans=None, input_time=None, mask=None):
++    def encode(self, x, input_chans=None, input_time=None, mask=None, valid_mask=None):
+         batch_size, n, t = x.shape
+         encoder_features = self.encoder(x, input_chans, input_time, mask, return_all_tokens=True)
+ 
+         with torch.cuda.amp.autocast(enabled=False):
+             to_quantizer_features = self.encode_task_layer(encoder_features.type_as(self.encode_task_layer[-1].weight))
+ 
+-        quantize, loss, embed_ind = self.quantize(to_quantizer_features)
++        quantize, loss, embed_ind = self.quantize(to_quantizer_features, valid_mask)
+ 
+         return quantize, embed_ind, loss, encoder_features
+         
+@@ -133,25 +139,26 @@
+             mask = None
+         else:
+             mask = input_mask.unsqueeze(1).repeat(1, x.size(1), 1).unsqueeze(1)
+-        return self.get_tokens(x, input_chans, input_time, mask, **kwargs)
+-    
+-    def calculate_rec_loss(self, rec, target):
+-        rec_loss = self.loss_fn(rec, target)
+-        return rec_loss
++        return self.get_tokens(x, input_chans, input_time, mask, valid_mask=input_mask, **kwargs)
++
++    def calculate_rec_loss(self, rec, target, input_mask=None):
++        if input_mask is None:
++            return self.loss_fn(rec, target)
++        errors = self.loss_fn(rec[input_mask].float(), target[input_mask].float(), reduction='none')
++        return masked_token_mean(errors, torch.ones(errors.shape[0], dtype=torch.bool, device=rec.device),
++                                 sync=self.training)
+ 
+     def forward(self, x, y_freq, y_raw, input_chans=None, input_time=None, input_mask=None, **kwargs):
+         """
+         x: shape [B, N, T]
+         """
+         mask = input_mask.unsqueeze(1).repeat(1, x.size(1), 1).unsqueeze(1)
+-        quantize, embed_ind, emb_loss, encoder_features = self.encode(x, input_chans, input_time, mask)
++        quantize, embed_ind, emb_loss, encoder_features = self.encode(x, input_chans, input_time, mask, input_mask)
+         
+         xrec_freq, xrec_raw = self.decode(quantize, input_chans, input_time, mask)
+ 
+-        loss_freq_mask = input_mask.unsqueeze(-1).repeat(1, 1, xrec_freq.size(-1))
+-        loss_raw_mask = input_mask.unsqueeze(-1).repeat(1, 1, xrec_raw.size(-1))
+-        rec_freq_loss = self.calculate_rec_loss(xrec_freq * loss_freq_mask, y_freq)
+-        rec_raw_loss = self.calculate_rec_loss(xrec_raw * loss_raw_mask, y_raw)
++        rec_freq_loss = self.calculate_rec_loss(xrec_freq, y_freq, input_mask)
++        rec_raw_loss = self.calculate_rec_loss(xrec_raw, y_raw, input_mask)
+         loss = emb_loss + rec_freq_loss + rec_raw_loss
+ 
+         log = {}
+@@ -162,6 +169,12 @@
+         log[f'{split}/total_loss'] = loss.detach().mean()
+         valid_indices = embed_ind.detach().reshape_as(input_mask)[input_mask]
+         log[f'{split}/valid_code_counts'] = torch.bincount(valid_indices, minlength=self.quantize.num_tokens)
++        log[f'{split}/dead_code_resets'] = self.quantize.last_reset_count.detach().clone()
++        # Retain the old denominator as a comparison metric, never as the objective.
++        with torch.no_grad():
++            legacy_freq = self.loss_fn(xrec_freq[input_mask].float(), y_freq[input_mask].float(), reduction='sum') / xrec_freq.numel()
++            legacy_raw = self.loss_fn(xrec_raw[input_mask].float(), y_raw[input_mask].float(), reduction='sum') / xrec_raw.numel()
++            log[f'{split}/reconstruction_padded_mean'] = legacy_freq + legacy_raw
+ 
+         return loss, encoder_features, log
+     
+@@ -197,9 +210,10 @@
+                  encoder_config,
+                  decoder_config,
+                  gpt2_embedding_path=None,
++                 vq_kwargs=None,
+                  ):
+         super(VQ_Align, self).__init__()
+-        self.VQ = VQ(encoder_config, decoder_config)
++        self.VQ = VQ(encoder_config, decoder_config, **(vq_kwargs or {}))
+         self.domain_classifier = nn.Sequential(
+                 nn.Linear(decoder_config.n_embd, 256),
+                 nn.GELU(),
+@@ -233,7 +247,8 @@
+             domain_out = self.domain_classifier(reverse_x)
+             target = torch.full((domain_out.size(0), domain_out.size(1)), fill_value=-1, device=x.device)
+             target[input_mask == True] = 0
+-            domain_loss = F.cross_entropy(domain_out.view(-1, domain_out.size(-1)), target.view(-1), ignore_index=-1)
++            errors = F.cross_entropy(domain_out[input_mask], target[input_mask], reduction='none')
++            domain_loss = masked_token_mean(errors, torch.ones_like(errors, dtype=torch.bool), sync=self.training)
+             split="train" if self.training else "val"
+             log[f'{split}/domain_loss'] = domain_loss.detach().item()
+             return loss, domain_loss, log
+@@ -268,4 +283,3 @@
+         print(f"using fused AdamW: {use_fused}")
+ 
+         return optimizer
+-    
+\ No newline at end of file
+diff --git a/train_vq.py b/train_vq.py
+--- a/train_vq.py
++++ b/train_vq.py
+@@ -144,13 +144,18 @@
+         # determine the vocab size we'll use for from-scratch training
+         encoder_conf = NTConfig(**encoder_args)
+         decoder_conf = NTConfig(**decoder_args)
+-        model = VQ_Align(encoder_conf, decoder_conf, gpt2_embedding_path=args.gpt2_embedding_path)
++        model = VQ_Align(encoder_conf, decoder_conf, gpt2_embedding_path=args.gpt2_embedding_path,
++                         vq_kwargs=vq_options(args))
+         start_epoch = 0
+     elif init_from == 'resume':
+         print(f"Resuming training from {checkpoint_out_dir}")
+         # resume training from a checkpoint.
+         ckpt_path = os.path.join(checkpoint_out_dir, 'ckpt.pt')
+         checkpoint = torch.load(ckpt_path, map_location='cpu', weights_only=False)
++        if (checkpoint.get('loss_normalization') != 'global_valid_elements'
++                or checkpoint.get('vq_options') != vq_options(args)):
++            raise ValueError('Checkpoint uses a different VQ objective/policy. '
++                             'Use a new output directory for patch 0017; do not silently resume the old run.')
+         checkpoint_model_args = checkpoint['encoder_args']
+         # force these config attributes to be equal otherwise we can't even resume training
+         # the rest of the attributes (e.g. dropout) can stay as desired from command line
+@@ -162,7 +167,8 @@
+         # create the model
+         encoder_conf = NTConfig(**encoder_args)
+         decoder_conf = NTConfig(**decoder_args)
+-        model = VQ_Align(encoder_conf, decoder_conf, gpt2_embedding_path=args.gpt2_embedding_path)
++        model = VQ_Align(encoder_conf, decoder_conf, gpt2_embedding_path=args.gpt2_embedding_path,
++                         vq_kwargs=vq_options(args))
+         state_dict = checkpoint['model']
+         # fix the keys of the state dictionary :(
+         # honestly no idea how checkpoints sometimes get this prefix, have to debug more
+@@ -214,7 +220,8 @@
+                       total_updates=args.epochs*num_training_steps_per_epoch,
+                       global_eeg_batch=args.batch_size*ddp_world_size,
+                       global_text_batch=args.text_batch_size*ddp_world_size,
+-                      train_samples=len(files), plan_sha256=ready['plan_sha256'])
++                      train_samples=len(files), plan_sha256=ready['plan_sha256'],
++                      loss_normalization='global_valid_elements', codebook_update='valid_token_normalized_ema')
+         with open(os.path.join(args.out_dir, 'run_config.json'), 'w') as stream:
+             json.dump(config, stream, indent=2)
+         print('VQ_RUN_CONFIG='+json.dumps(config), flush=True)
+@@ -293,7 +300,8 @@
+ 
+             metrics = torch.tensor([
+                 log['train/rec_freq_loss'], log['train/rec_raw_loss'],
+-                log['train/quant_loss'], log['train/domain_loss'], domain_loss2.detach().item()
++                log['train/quant_loss'], log['train/domain_loss'], domain_loss2.detach().item(),
++                log['train/reconstruction_padded_mean'], log['train/dead_code_resets']
+             ], device=device, dtype=torch.float64)
+             if ddp:
+                 torch.distributed.all_reduce(metrics)
+@@ -306,7 +314,9 @@
+                 row = dict(epoch=epoch, step=step, iter=iter_num, lr=lr, alpha=alpha, step_seconds=time.time()-t0,
+                            reconstruction=reconstruction, frequency=values[0], raw=values[1],
+                            codebook=values[2], adversarial_eeg=values[3],
+-                           adversarial_text=values[4], adversarial=values[3]+values[4])
++                           adversarial_text=values[4], adversarial=values[3]+values[4],
++                           reconstruction_padded_mean=values[5], dead_code_resets=int(values[6]),
++                           loss_normalization='global_valid_elements')
+                 epoch_rows.append(row)
+                 if iter_num < 20 or (iter_num + 1) % args.log_interval == 0:
+                     print("VQ_METRICS=" + json.dumps(row), flush=True)
+@@ -364,7 +374,9 @@
+                 'encoder_args': encoder_args,
+                 'decoder_args': decoder_args,
+                 'iter_num': iter_num,
+-                'epoch': epoch
++                'epoch': epoch,
++                'vq_options': vq_options(args),
++                'loss_normalization': 'global_valid_elements'
+             }
+             print(f"saving checkpoint to {checkpoint_out_dir}")
+             checkpoint_temp = os.path.join(checkpoint_out_dir, 'ckpt.pt.partial')
+@@ -383,6 +395,13 @@
+                            wandb=False, world_size=ddp_world_size), stream)
+     if ddp:
+         destroy_process_group()
++
++
++def vq_options(args):
++    return dict(beta=args.vq_beta, decay=args.vq_ema_decay,
++                dead_code_patience=args.vq_dead_code_patience,
++                dead_code_interval=args.vq_dead_code_interval,
++                init_samples_per_rank=args.vq_init_samples_per_rank)
+ 
+ 
+ def get_args():
+@@ -405,6 +424,12 @@
+     parser.add_argument('--warmup_epochs', default=5, type=int)
+     parser.add_argument('--save_ckpt_freq', default=10, type=int)
+     parser.add_argument('--block_size', default=1024, type=int)
++    parser.add_argument('--vq_beta', default=1.0, type=float)
++    parser.add_argument('--vq_ema_decay', default=0.99, type=float)
++    parser.add_argument('--vq_dead_code_patience', default=100, type=int,
++                        help='consecutive globally unused training forwards before replacement; 0 disables')
++    parser.add_argument('--vq_dead_code_interval', default=50, type=int)
++    parser.add_argument('--vq_init_samples_per_rank', default=2048, type=int)
+ 
+     parser.add_argument('--learning_rate', type=float, default=5e-5, metavar='LR',
+                         help='learning rate (default: 5e-5)')
+diff --git a/vq_monitor.py b/vq_monitor.py
+--- a/vq_monitor.py
++++ b/vq_monitor.py
+@@ -18,7 +18,7 @@
+ 
+ 
+ def fixed_probe(vq, batch, device, autocast_context):
+-    """All DDP ranks must call this together: the upstream quantizer reduces stats."""
++    """All ranks call this wrapper's metric reduction; quantizer eval itself is pure."""
+     assert bool(vq.quantize.embedding.initted.item()), 'Probe must not initialize the training codebook'
+     previous_training=vq.training
+     saved_buffers={name:value.clone() for name,value in vq.quantize.named_buffers()}
+@@ -78,6 +78,10 @@
+     report['review_flags']=flags
+     report['automatic_stop']=False
+     report['interpretation']='Review flags are diagnostic heuristics, not paper thresholds or automatic stop rules.'
++    report['loss_normalization']=rows[0].get('loss_normalization','legacy_padded_elements')
++    report['dead_code_resets']=sum(row.get('dead_code_resets',0) for row in rows)
++    if all('reconstruction_padded_mean' in row for row in rows):
++        report['mean']['reconstruction_padded_mean']=sum(row['reconstruction_padded_mean'] for row in rows)/len(rows)
+     return report
+ 
+ 

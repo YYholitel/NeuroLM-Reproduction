@@ -1,0 +1,93 @@
+{
+  "date": "2026-11-08",
+  "baseline_run": "vq-five-full-20261107-r1",
+  "isolated_runtime": "vq-codebook-fix-20261108-r1/code",
+  "changed_files": {
+    "model/norm_ema_quantizer.py": {
+      "before": "34f76c5064e3c268f5b5adf6806cc4e4b6e350f27b46eadaec13ff0bf175181b",
+      "after": "7986ba081f4b236fa777abde98c08ad4c719e0b9be68c9e5176b8b51539b358f",
+      "normalized_before": "24fff3dbc914df6edcb2a26bb84d8ee3144a80732bcf5a5bb9146e01c921f66b"
+    },
+    "model/model_vq.py": {
+      "before": "2184d7d1c01556eb120710c3d61df481dfe50cb3c32bc1ac8cc83a2b1bf80b14",
+      "after": "91c13b1dfc2652d9122354676016ca047391cdce9ec07809d4cb3b88647559c7",
+      "normalized_before": "79d12b7f72c5937cc31c1ad51cabcedb31d9669b07e8cab3e072428c7cfbcfa2"
+    },
+    "train_vq.py": {
+      "before": "d5f364c2a48d57356a7c508d5388242bfd86b33e9b92f2986c68b4a1784fb507",
+      "after": "a7e9820bc9615fd439b28e5325d2b83e84323c0a5c02cc8834a9194fc981202f",
+      "normalized_before": "be6347f20dbfc15e183aa38ebfaf7c5638843dc731d4f833790c431e48b756f7"
+    },
+    "vq_monitor.py": {
+      "before": "fd59f5a5e79f6eae2ed0ca9637e1ae78a6de116bfc94d5238f0bf21d3319227e",
+      "after": "839fabb0c17f5e9f201c0f0f9bf01e607142596b48d7dcc85c55a5ca3ab1369f",
+      "normalized_before": "d4456cb955aa3591c0f5e238e313e1671dee9a9dc816d7cbbdeff455db09c82d"
+    }
+  },
+  "patch_sha256": "f1a3a92c47ce99cd23cd891d5a42fa28791b442976a5cd2162018952285aa7ee",
+  "patch_apply_verified": true,
+  "new_full_gpu_training_started": false,
+  "tests": {
+    "baseline": {
+      "reproduced_padding_changes_loss_and_ema": true,
+      "valid_only_commitment": 0.12521661818027496,
+      "padded_commitment": 0.09806185960769653,
+      "ok": true,
+      "mode": "baseline"
+    },
+    "unit": {
+      "masked_assignments_ema_loss_gradients_invariant": true,
+      "initialization_excludes_padding": true,
+      "padding_gradient_zero": true,
+      "eval_pure": true,
+      "dead_reset_valid_only": true,
+      "state_roundtrip": true,
+      "fp32_under_autocast": true,
+      "ok": true,
+      "mode": "unit"
+    },
+    "ddp": {
+      "world_size": 2,
+      "global_initialization_synchronized": true,
+      "empty_local_rank_supported": true,
+      "globally_weighted_gradient": true,
+      "eval_without_collectives": true,
+      "synchronized_reset": true,
+      "global_empty_rejected": true,
+      "ok": true,
+      "mode": "ddp"
+    },
+    "integration": {
+      "actual_vq_optimizer_step": true,
+      "finite_gradients": true,
+      "codebook_not_in_optimizer": true,
+      "model_mask_reaches_quantizer": true,
+      "reconstruction_padding_invariant": true,
+      "code_indices_masked": true,
+      "model_eval_pure": true,
+      "fixed_probe_preserves_state": true,
+      "epoch_metrics_label_loss_scale": true,
+      "cli_can_disable_reset": true,
+      "cpu_loss": 2.0554890632629395,
+      "ok": true,
+      "mode": "integration"
+    }
+  },
+  "test_script_sha256": "3b2e9dd6193fdc9b4cde25e6e399e620242c3f29ea72ff29bd96a1f7bd78fb9c",
+  "audit_sha256": "550c88a3203c887e1f53b635b700a59decd9150e34b811336056fab1bae9be95",
+  "runtime_verification": {
+    "runtime_hashes": {
+      "vq-five-full-20261107-r1": {
+        "files": 26,
+        "all_match": true
+      },
+      "vq-codebook-fix-20261108-r1": {
+        "files": 26,
+        "all_match": true
+      }
+    },
+    "torch_version": "2.7.1+cu128",
+    "new_gpu_training_submitted_by_this_fix": false
+  },
+  "safe_apply_helper_verified": true
+}
