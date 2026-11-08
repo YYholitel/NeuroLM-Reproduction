@@ -1,0 +1,310 @@
+{
+  "verified_complete": true,
+  "task_id": "train-1713023249548061440",
+  "completion": {
+    "epochs_completed": 5,
+    "partial_epoch_updates": 0,
+    "steps": 4485,
+    "requested_max_updates": 4485,
+    "decoder_layers": 3,
+    "wandb": false,
+    "world_size": 16
+  },
+  "epochs": [
+    {
+      "epoch": 1,
+      "mean": {
+        "reconstruction": 1.9311849572109172,
+        "codebook": 0.0004594678450281236,
+        "adversarial": 3.157158067211127,
+        "total_loss": 5.088802492267072
+      },
+      "last_100_mean": {
+        "reconstruction": 1.3884402067027986,
+        "codebook": 0.000764071442513341,
+        "adversarial": 2.648355621621013,
+        "total_loss": 4.0375598997663245
+      },
+      "last_100_usage": {
+        "active_codes": 6574,
+        "codebook_size": 8192,
+        "active_fraction": 0.802490234375,
+        "valid_eeg_tokens": 9767298,
+        "perplexity": 1248.048071987947,
+        "largest_code_fraction": 0.02366109849417925
+      },
+      "last_100_per_batch": {
+        "active_codes": {
+          "min": 207,
+          "p10": 532,
+          "median": 1199.5,
+          "max": 4196
+        },
+        "perplexity": {
+          "min": 14.487155512222296,
+          "p10": 113.7682373234065,
+          "median": 282.4423351469564,
+          "max": 3254.3065164222244
+        },
+        "largest_code_fraction": {
+          "min": 0.001192372821915612,
+          "p10": 0.006427608301144601,
+          "median": 0.0314093370512729,
+          "max": 0.23658895656031945
+        }
+      },
+      "resets": 27806,
+      "lr_last": 9.991079393398751e-06,
+      "alpha_last": 0.0995576181157305,
+      "fixed_diagnostic": {
+        "reconstruction": 2.6653565168380737,
+        "frequency": 1.7303485870361328,
+        "raw": 0.9350079298019409,
+        "codebook": 0.0011909303721040487,
+        "unique_samples": 2,
+        "evaluation": true
+      },
+      "review_flags": []
+    },
+    {
+      "epoch": 2,
+      "mean": {
+        "reconstruction": 1.2356638593667726,
+        "codebook": 0.002435957543457233,
+        "adversarial": 2.351456327718935,
+        "total_loss": 3.5895561446291646
+      },
+      "last_100_mean": {
+        "reconstruction": 1.123574060369283,
+        "codebook": 0.0015738200390478596,
+        "adversarial": 2.14280061326921,
+        "total_loss": 3.2679484936775407
+      },
+      "last_100_usage": {
+        "active_codes": 6403,
+        "codebook_size": 8192,
+        "active_fraction": 0.7816162109375,
+        "valid_eeg_tokens": 9748581,
+        "perplexity": 758.441034362535,
+        "largest_code_fraction": 0.014655261109283495
+      },
+      "last_100_per_batch": {
+        "active_codes": {
+          "min": 84,
+          "p10": 471,
+          "median": 820.0,
+          "max": 4036
+        },
+        "perplexity": {
+          "min": 26.229604377779523,
+          "p10": 80.24262135371991,
+          "median": 182.64835551234563,
+          "max": 2965.064576038543
+        },
+        "largest_code_fraction": {
+          "min": 0.0023832320372991424,
+          "p10": 0.027258010999728525,
+          "median": 0.049446894293204105,
+          "max": 0.1502160321252478
+        }
+      },
+      "resets": 48806,
+      "lr_last": 1.9993309545049064e-05,
+      "alpha_last": 0.1972681781818515,
+      "fixed_diagnostic": {
+        "reconstruction": 2.9741779565811157,
+        "frequency": 1.4930542707443237,
+        "raw": 1.481123685836792,
+        "codebook": 0.002670642454177141,
+        "unique_samples": 2,
+        "evaluation": true
+      },
+      "review_flags": []
+    },
+    {
+      "epoch": 3,
+      "mean": {
+        "reconstruction": 1.065710785359543,
+        "codebook": 0.00316695421741319,
+        "adversarial": 1.8555354299137956,
+        "total_loss": 2.9244131694907516
+      },
+      "last_100_mean": {
+        "reconstruction": 1.016063140053302,
+        "codebook": 0.0025234266611550995,
+        "adversarial": 1.658875857628882,
+        "total_loss": 2.677462424343339
+      },
+      "last_100_usage": {
+        "active_codes": 6449,
+        "codebook_size": 8192,
+        "active_fraction": 0.7872314453125,
+        "valid_eeg_tokens": 9752307,
+        "perplexity": 1295.4769856200023,
+        "largest_code_fraction": 0.015255877404187542
+      },
+      "last_100_per_batch": {
+        "active_codes": {
+          "min": 130,
+          "p10": 643,
+          "median": 1078.5,
+          "max": 3481
+        },
+        "perplexity": {
+          "min": 36.717794338506174,
+          "p10": 50.10550173448068,
+          "median": 336.75970883127655,
+          "max": 2707.918515622441
+        },
+        "largest_code_fraction": {
+          "min": 0.0018809482432556761,
+          "p10": 0.01159959048575149,
+          "median": 0.03406600586473701,
+          "max": 0.30122228077998947
+        }
+      },
+      "resets": 48143,
+      "lr_last": 2.9995539696699376e-05,
+      "alpha_last": 0.29121058718076775,
+      "fixed_diagnostic": {
+        "reconstruction": 2.339401364326477,
+        "frequency": 1.298932671546936,
+        "raw": 1.040468692779541,
+        "codebook": 0.002779396716505289,
+        "unique_samples": 2,
+        "evaluation": true
+      },
+      "review_flags": []
+    },
+    {
+      "epoch": 4,
+      "mean": {
+        "reconstruction": 0.9516617648901549,
+        "codebook": 0.00245239497724078,
+        "adversarial": 1.4806213981763707,
+        "total_loss": 2.4347355580437666
+      },
+      "last_100_mean": {
+        "reconstruction": 0.8189136632531882,
+        "codebook": 0.0015044571989346878,
+        "adversarial": 1.4121925026923419,
+        "total_loss": 2.2326106231444647
+      },
+      "last_100_usage": {
+        "active_codes": 7278,
+        "codebook_size": 8192,
+        "active_fraction": 0.888427734375,
+        "valid_eeg_tokens": 9764352,
+        "perplexity": 3030.368838490801,
+        "largest_code_fraction": 0.006871423725814063
+      },
+      "last_100_per_batch": {
+        "active_codes": {
+          "min": 1354,
+          "p10": 1437,
+          "median": 2098.0,
+          "max": 3510
+        },
+        "perplexity": {
+          "min": 354.0912835658736,
+          "p10": 404.6642313761941,
+          "median": 714.2795099836143,
+          "max": 2482.1103897290086
+        },
+        "largest_code_fraction": {
+          "min": 0.001982513216754778,
+          "p10": 0.005557378393897137,
+          "median": 0.01686456411522462,
+          "max": 0.06156858368924553
+        }
+      },
+      "resets": 39038,
+      "lr_last": 3.999776984834969e-05,
+      "alpha_last": 0.3798535692756262,
+      "fixed_diagnostic": {
+        "reconstruction": 2.357401967048645,
+        "frequency": 1.3462773561477661,
+        "raw": 1.011124610900879,
+        "codebook": 0.0024356653448194265,
+        "unique_samples": 2,
+        "evaluation": true
+      },
+      "review_flags": []
+    },
+    {
+      "epoch": 5,
+      "mean": {
+        "reconstruction": 0.7113380299075408,
+        "codebook": 0.0009216443878898829,
+        "adversarial": 1.406366923057714,
+        "total_loss": 2.1186265973531446
+      },
+      "last_100_mean": {
+        "reconstruction": 0.6826745531335473,
+        "codebook": 0.0007035518584052624,
+        "adversarial": 1.4006330689787865,
+        "total_loss": 2.084011173970739
+      },
+      "last_100_usage": {
+        "active_codes": 7630,
+        "codebook_size": 8192,
+        "active_fraction": 0.931396484375,
+        "valid_eeg_tokens": 9762843,
+        "perplexity": 4489.9913689669065,
+        "largest_code_fraction": 0.0012871250720717315
+      },
+      "last_100_per_batch": {
+        "active_codes": {
+          "min": 4568,
+          "p10": 4750,
+          "median": 5057.0,
+          "max": 5438
+        },
+        "perplexity": {
+          "min": 1804.4621789187288,
+          "p10": 2492.729222997763,
+          "median": 3054.28861631162,
+          "max": 3868.1419508959834
+        },
+        "largest_code_fraction": {
+          "min": 0.0015299446401610469,
+          "p10": 0.0020764285429062013,
+          "median": 0.003286608219159998,
+          "max": 0.006263155722481324
+        }
+      },
+      "resets": 23149,
+      "lr_last": 5e-05,
+      "alpha_last": 0.46202947741072653,
+      "fixed_diagnostic": {
+        "reconstruction": 2.852294683456421,
+        "frequency": 1.8144772052764893,
+        "raw": 1.0378174781799316,
+        "codebook": 0.0022027953527867794,
+        "unique_samples": 2,
+        "evaluation": true
+      },
+      "review_flags": []
+    }
+  ],
+  "input_stream_sha256": {
+    "0": "c283b94c6e2f6c320d25441730be16e87a74bd10ae22eab7d84cc25965bfe69c",
+    "1": "411d1717212b04cd232c8a7039609e3e708f82a6685c660e41a0f10f671d6b8e",
+    "2": "4299d1bc98b54dbfe40d2c8953172cc91a115d5e66a8b64180f723d0f35b8778",
+    "3": "0dc202d61b5f2928abad88f682b825c08fe901f351ded170e893d7f33beba614",
+    "4": "7e9760e2acec1038b6808e285c699d342c2ceb661b616c337573c90d47cebbc6",
+    "5": "a02814568aba72d30aa1f571fc2c3f84feb62906a381deac7771dfeb0f9b029c",
+    "6": "892882b669ee92a6ea8e9aeff52a3fade134113dc27f8a5d0431788309a2d18e",
+    "7": "1b276dfeda8d0d0f7a84765a36f7f28baa8c2d683b3a8d0a4cbacc3c6c758f9b",
+    "8": "95eae541a06ab1d8dc247064aebd9f6298b87df403ba88201f31435625b5d8ba",
+    "9": "d8e273e5d225e70d73ceacb3e497285f5814e116f01bdc71d11c84b444968536",
+    "10": "05016de5a127a6cadc55b9dc67c9a2c4e7dfa9a730788cf78fc2877dd26250a5",
+    "11": "d02b13c814f1654c5af0d77f66f752b2abbb0d3f232bc6c751b76c9fe1eba1ed",
+    "12": "61946f2c7bd6914ab4b4fa01cc87d8b552110ab99f161f1b924d556372a807cc",
+    "13": "3ed4ec8d018ee2b7756af8ac970f679b84e19853f82ab56b18a1067871c3a99e",
+    "14": "2b86a6510d0933512025dc9b3bfe6a24d2c7d98e0a731d925f77a12687e7ac7b",
+    "15": "3445c65b35ac55e572ac3cffa83af36ab4b8a04c7e757796d2b527308c50a47a"
+  },
+  "diagnostic_notice": "Training diagnostics only; no claim of held-out quality.",
+  "next_stage_submitted": false
+}

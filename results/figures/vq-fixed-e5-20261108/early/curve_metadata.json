@@ -1,0 +1,42 @@
+{
+  "observed_updates": 485,
+  "target_updates": 4485,
+  "trace_complete": false,
+  "last": {
+    "epoch": 0,
+    "step": 484,
+    "iter": 484,
+    "lr": 5.396966993755576e-06,
+    "alpha": 0.053905332911673653,
+    "step_seconds": 0.42228007316589355,
+    "reconstruction": 1.860469114035368,
+    "frequency": 0.8584781996905804,
+    "raw": 1.0019909143447876,
+    "codebook": 0.00016398368916270556,
+    "adversarial_eeg": 2.5765604227781296,
+    "adversarial_text": 0.6971342861652374,
+    "adversarial": 3.273694708943367,
+    "reconstruction_padded_mean": 0.3460558708757162,
+    "dead_code_resets": 0,
+    "loss_normalization": "global_valid_elements",
+    "total_loss": 5.134327806667898,
+    "code_usage": {
+      "active_codes": 3732,
+      "codebook_size": 8192,
+      "active_fraction": 0.45556640625,
+      "valid_eeg_tokens": 97520,
+      "perplexity": 1205.646872194087,
+      "largest_code_fraction": 0.0036607875307629206
+    },
+    "rolling_code_usage": {
+      "active_codes": 6673,
+      "codebook_size": 8192,
+      "active_fraction": 0.8145751953125,
+      "valid_eeg_tokens": 4897476,
+      "perplexity": 2001.93529331194,
+      "largest_code_fraction": 0.002902107126201333
+    },
+    "usage_window_updates": 50
+  },
+  "total_dead_code_resets": 13861
+}

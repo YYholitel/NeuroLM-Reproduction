@@ -16,6 +16,8 @@ for rank in [0, 1]:
     for name in ['gpu_metrics.csv', 'exit_code.txt']:
         mapping[f'node-{rank}/{name}'] = f'node_{rank}_{name}'
 mapping['fixed_audit/audit.json'] = 'fixed_audit.json'
+for epoch in [1, 3]:
+    mapping[f'fixed_audit_e{epoch}/audit.json'] = f'fixed_audit_e{epoch}.json'
 for name in ['vq_fixed_e5_curves.png', 'vq_fixed_e5_curves.svg', 'vq_fixed_e5_curves.pdf', 'curve_metadata.json']:
     mapping['monitor/figures/' + name] = 'figures/' + name
 hashes = {target:hashlib.sha256((root / source).read_bytes()).hexdigest() for source, target in mapping.items()}

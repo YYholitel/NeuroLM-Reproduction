@@ -12,14 +12,15 @@ def main():
     parser=argparse.ArgumentParser(__doc__)
     parser.add_argument('--old',type=Path,required=True)
     parser.add_argument('--epoch1',type=Path,required=True)
+    parser.add_argument('--epoch3',type=Path,required=True)
     parser.add_argument('--epoch5',type=Path,required=True)
     parser.add_argument('--output-dir',type=Path,required=True)
     args=parser.parse_args()
-    reports=[json.loads(path.read_text()) for path in [args.old,args.epoch1,args.epoch5]]
+    reports=[json.loads(path.read_text()) for path in [args.old,args.epoch1,args.epoch3,args.epoch5]]
     assert all(r['sample_names']==reports[0]['sample_names'] for r in reports)
     assert all(r['valid']['tokens']==4944 for r in reports)
-    labels=['Previous VQ\n50 epochs','Repaired VQ\n1 epoch','Repaired VQ\n5 epochs']
-    colors=['#697581','#3595b4','#dc7626']
+    labels=['Previous VQ\n50 epochs','Repaired VQ\n1 epoch','Repaired VQ\n3 epochs','Repaired VQ\n5 epochs']
+    colors=['#697581','#3595b4','#35856a','#dc7626']
     plt.rcParams.update({'font.family':'DejaVu Sans','font.size':11,'axes.spines.top':False,
                          'axes.spines.right':False,'svg.hashsalt':'vq-fixed-audit-20261108'})
     fig,axes=plt.subplots(2,2,figsize=(12,8.2),constrained_layout=True)
