@@ -2,3 +2,5 @@
 *.patch text eol=lf
 # Literal patch context retains the upstream source's CRLF and blank lines.
 patches/0011-inference-lm-head-small-batch.patch -text -whitespace
+# Preserve exported experiment evidence byte-for-byte for SHA256 verification.
+results/pretrain_full20_20261109/** -text
