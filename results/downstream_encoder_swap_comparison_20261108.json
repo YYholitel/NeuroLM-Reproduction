@@ -1,0 +1,51 @@
+{
+  "status": "verified",
+  "interpretation": "Unaligned encoder-swap diagnostic, not a matched newly pretrained/instruction-tuned NeuroLM.",
+  "matched_run_fields": [
+    "mode",
+    "precision",
+    "world_size",
+    "batch_size_per_rank",
+    "torch",
+    "code_sha256",
+    "script_sha256",
+    "constrained_attention"
+  ],
+  "matched_inputs_templates_and_full_coverage": true,
+  "baseline_checkpoint_sha256": "a10a23f6f4a69058c996c01096d47b0806dafd83a0d0ca6506e274a5c6372174",
+  "override_vq_sha256": "546e07e0b455b15ef9374a96bc77dead226bba8d00afa6e738a625fbb266de07",
+  "splits": [
+    {
+      "task": "TUSL",
+      "split": "val",
+      "samples": 66,
+      "baseline_balanced_accuracy": 0.5180527383367141,
+      "new_encoder_balanced_accuracy": 0.3333333333333333,
+      "balanced_accuracy_delta_percentage_points": -18.471940500338075
+    },
+    {
+      "task": "TUSL",
+      "split": "test",
+      "samples": 60,
+      "baseline_balanced_accuracy": 0.4696969696969697,
+      "new_encoder_balanced_accuracy": 0.3333333333333333,
+      "balanced_accuracy_delta_percentage_points": -13.63636363636364
+    },
+    {
+      "task": "TUAB",
+      "split": "val",
+      "samples": 73627,
+      "baseline_balanced_accuracy": 0.795217755399191,
+      "new_encoder_balanced_accuracy": 0.5,
+      "balanced_accuracy_delta_percentage_points": -29.521775539919105
+    },
+    {
+      "task": "TUAB",
+      "split": "test",
+      "samples": 36945,
+      "baseline_balanced_accuracy": 0.7811124331144872,
+      "new_encoder_balanced_accuracy": 0.5,
+      "balanced_accuracy_delta_percentage_points": -28.111243311448717
+    }
+  ]
+}

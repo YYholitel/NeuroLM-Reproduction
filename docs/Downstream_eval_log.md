@@ -74,10 +74,10 @@ TUAB AUC, when available, uses the conditional probability of Yes among the
 legal first answer tokens. This is a modified score definition, not the original
 author's AUC from generated class IDs. The evaluator records the definition.
 
-Local CPU verification: **11 tests passed**. Coverage includes adversarial illegal
+Local CPU verification: **12 tests passed**. Coverage includes adversarial illegal
 top logits, premature EOS, shared multi-token prefixes, variable answer lengths,
 mask preservation, invalid raw-output logging, independent sklearn metric
-agreement and valid-token-only perplexity. Real-checkpoint runs are recorded below
+agreement, rejection of NaN/Inf codebooks/features, and valid-token-only perplexity. Real-checkpoint runs are recorded below
 only after completion and coverage verification.
 
 ## VQ quality tool for Agent A
@@ -107,6 +107,8 @@ tensor hashes, checkpoint/code hashes, histogram, active codes and
 `perplexity = exp(-sum(p * ln(p)))`. It fails if parameters or codebook weights
 change. Legacy usage-buffer changes are explicitly reported. It refuses an
 uninitialized codebook rather than fitting k-means during evaluation.
+Nonfinite codebook weights or encoder features are rejected before quantization;
+they cannot silently become argmin index zero and a misleading perplexity of one.
 
 Fixed-batch perplexity is a diagnostic, not a downstream accuracy metric or a
 standalone guarantee that VQ training has succeeded. Its upper bound is the
@@ -115,10 +117,10 @@ batch cannot demonstrate use of all 8192 codes.
 
 ## New-checkpoint handoff
 
-Agent A's chat is **定位预训练 ck**. Last checked during this implementation:
-the repaired five-epoch VQ job was still running; no completed final checkpoint
-or matched new NeuroLM had been handed off. Do not treat an in-progress file as
-an immutable final checkpoint.
+Agent A's chat is **定位预训练 ck**. The final five-epoch VQ was received and
+evaluated during this task; the completed measurements are recorded below. No
+matched newly pretrained/instruction-tuned NeuroLM has been provided. Only
+completed immutable checkpoints are eligible for these recorded evaluations.
 
 For a full NeuroLM checkpoint, run strict loading and full TUSL/TUAB validation
 and test splits. For a VQ-only checkpoint, first run the fixed-batch quality test.
@@ -168,8 +170,8 @@ checkpoint, using the identical two-sample batch: **385 active codes**, perplexi
 **366.940693**, 460 valid tokens. This validates the training-checkpoint format
 (three decoder layers, saved VQ options) in addition to the official format
 (four decoder layers). Higher fixed-batch perplexity alone does not mean this
-checkpoint is better than the official VQ. This is not the pending five-epoch
-checkpoint's result.
+checkpoint is better than the official VQ. This is distinct from the final five-epoch
+checkpoint's result below.
 
 The complete 126-sample TUSL CPU run passed `scripts/audit_downstream_eval.py`:
 independent strict parsing, sklearn metrics, unique full-split index coverage,
@@ -203,3 +205,69 @@ Machine-readable evidence:
 [saved-output parser audit](../results/downstream_parser_audit_20261108.json),
 [encoder provenance](../results/downstream_encoder_provenance_20261108.json),
 [official fixed-batch VQ check](../results/vq_official_fixed_batch_quality_20261108.json).
+
+## Agent A final five-epoch VQ received — 2026-11-08
+
+The source completion record reports **5 complete epochs, 4485 updates**, with
+both worker nodes exiting 0. The immutable epoch-5 snapshot SHA-256 is
+`546e07e0b455b15ef9374a96bc77dead226bba8d00afa6e738a625fbb266de07`.
+
+The updated quality tool ran on the exact frozen two-sample batch used above:
+**241 active codes / 460 valid tokens**, perplexity **123.651409**, top-code
+fraction **9.3478%**; 1588 padding tokens excluded. Encoder features and codebook
+weights are finite, parameters are unchanged, and no runtime buffers changed.
+This is not sufficient evidence to call the new VQ high quality.
+
+[Final VQ fixed-batch evidence](../results/vq_fixed_e5_fixed_batch_quality_20261108.json).
+
+At the user's request, an isolated tmux workflow now handles waiting, completion
+checks, CPU quality checks, scoped TI-ONE inference submission and independent
+result auditing. It uses task-name deduplication and a process lock, never starts
+training, and leaves errors visible with logs. Its session is `downstream-eval`;
+Agent A's training/monitoring sessions were not modified.
+
+The resulting inference task is `train-1713078005898010496`,
+`neurolm-downstream-constrained-newvq-e5-20261108-r1`. It retains the same original
+instruction checkpoint, adapter, GPT weights, dataset splits, prompts and decoding
+protocol, and explicitly overrides only the embedded encoder with the new VQ
+encoder. **This is an unaligned encoder-swap diagnostic, not a newly pretrained
+and instruction-tuned NeuroLM.** Full downstream results are recorded only after
+the worker, platform and independent audit all finish successfully.
+
+## Completed new-encoder diagnostic and independent audit — 2026-11-08
+
+Task `train-1713078005898010496` completed **SUCCEED**, worker exit **0**,
+2026-11-08T06:20:40Z–2026-11-08T06:35:47Z
+(907 seconds). The tmux workflow completed its audit;
+no training was started. All **110,698** predictions passed independent strict
+parsing, exact split coverage, file hashing and sklearn metric recomputation.
+
+| Task | Split | Samples | Invalid | Accuracy | Balanced accuracy | Weighted F1 | Kappa | Conditional-option AUC |
+|---|---|---:|---:|---:|---:|---:|---:|---:|
+| TUSL | Validation | 66 | 0 | 25.7576% | 33.3333% | 10.5513% | 0.000000 | N/A |
+| TUSL | Test | 60 | 0 | 55.0000% | 33.3333% | 39.0323% | 0.000000 | N/A |
+| TUAB | Validation | 73,627 | 0 | 47.1009% | 50.0000% | 30.1629% | 0.000000 | 40.4289% |
+| TUAB | Test | 36,945 | 0 | 53.8828% | 50.0000% | 37.7346% | 0.000000 | 37.8194% |
+
+The baseline and encoder-swap runs have identical inference source hashes,
+precision, two allocated H20 GPUs, per-rank batch size, sorted split-file hashes,
+answer token sequences and prompts. Only the explicit VQ encoder override
+differs. Every TUSL output in the swap run is class A: test accuracy rises to
+55% because A is the majority class, while balanced accuracy is only 33.33%
+and kappa is zero. This is not an improvement over the baseline TUSL test
+balanced accuracy of 46.97%. TUAB likewise always predicts No, giving 50%
+balanced accuracy on both splits. Format validity and classification quality
+are separate checks.
+
+These results do not isolate intrinsic VQ quality: the replacement encoder is
+not aligned with the old adapter/LLM. A matched stage-two/three checkpoint is
+needed before drawing conclusions about the new training pipeline. This task
+has not started that training. Fixed-batch perplexity also cannot resolve this
+confound or establish that the full codebook is healthy.
+
+Evidence: [new-encoder summary](../results/downstream_constrained_newvq_gpu_20261108.json),
+[independent audit](../results/downstream_constrained_newvq_gpu_audit_20261108.json),
+[platform completion](../results/downstream_newvq_platform_20261108.json),
+[matched-protocol comparison](../results/downstream_encoder_swap_comparison_20261108.json).
+Raw predictions and EEG inputs remain on the authorized server; only code,
+configuration, hashes and aggregate measurements are published.

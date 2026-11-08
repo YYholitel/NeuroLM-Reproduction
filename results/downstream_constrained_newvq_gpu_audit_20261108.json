@@ -1,0 +1,83 @@
+{
+  "status": "passed",
+  "summary_sha256": "6eab85cf8aa9554892238a8e908d344cf218751f11b9cf2a9083c2f0fef230e7",
+  "total_samples": 110698,
+  "splits": [
+    {
+      "task": "TUSL",
+      "split": "val",
+      "samples": 66,
+      "parse_failures": 0,
+      "independent_metrics": {
+        "accuracy": 0.25757575757575757,
+        "balanced_accuracy": 0.3333333333333333,
+        "weighted_f1": 0.10551296093464768,
+        "cohen_kappa": 0.0
+      },
+      "artifact_sha256": {
+        "TUSL-val-rank0.jsonl": "45dc404c042ba5c183fee5a0c294207545e3c4aa321fd8ca5f134f7b384164d6",
+        "TUSL-val-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "TUSL-val-rank1.jsonl": "700955fb73297f10bf9cc81be3e31162c77e6b8ab373d6ee5ceb4ae278fc72c0",
+        "TUSL-val-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "task": "TUSL",
+      "split": "test",
+      "samples": 60,
+      "parse_failures": 0,
+      "independent_metrics": {
+        "accuracy": 0.55,
+        "balanced_accuracy": 0.3333333333333333,
+        "weighted_f1": 0.39032258064516134,
+        "cohen_kappa": 0.0
+      },
+      "artifact_sha256": {
+        "TUSL-test-rank0.jsonl": "bf3e9113e2ffb016ef1077546d3e83ee296e44d252406a41c0c5e3d7f9cee300",
+        "TUSL-test-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "TUSL-test-rank1.jsonl": "a3d388e86f316a4ce7d8ed1e35bfaa68d11be55dc534c0acfc2c712f62cba3b3",
+        "TUSL-test-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "task": "TUAB",
+      "split": "val",
+      "samples": 73627,
+      "parse_failures": 0,
+      "independent_metrics": {
+        "accuracy": 0.4710092764882448,
+        "balanced_accuracy": 0.5,
+        "weighted_f1": 0.30162928553054935,
+        "cohen_kappa": 0.0,
+        "roc_auc": 0.4042889256514055
+      },
+      "artifact_sha256": {
+        "TUAB-val-rank0.jsonl": "b14b1c4191967ca4666e8f155756f12c6dee417c37b5004bb021a25394b6d3a7",
+        "TUAB-val-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "TUAB-val-rank1.jsonl": "2be836e069bdd1e252663bac2111de59d31bf9eff434c6d02b61080f879611b8",
+        "TUAB-val-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "task": "TUAB",
+      "split": "test",
+      "samples": 36945,
+      "parse_failures": 0,
+      "independent_metrics": {
+        "accuracy": 0.5388279875490594,
+        "balanced_accuracy": 0.5,
+        "weighted_f1": 0.37734639935759956,
+        "cohen_kappa": 0.0,
+        "roc_auc": 0.37819353950559625
+      },
+      "artifact_sha256": {
+        "TUAB-test-rank0.jsonl": "a4ef24a38ded31ac437738085de5feb0a67701823544c39648db8a05d2b74962",
+        "TUAB-test-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "TUAB-test-rank1.jsonl": "de1dfd6838d6e9ec49b117825ba0b9a3b9d754d4c6b62079b3ebd2a92fec3dc7",
+        "TUAB-test-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "independent_strict_parser": true,
+  "invalid_log_matches_all_failures": true
+}

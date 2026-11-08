@@ -12,6 +12,13 @@ from downstream_eval_core import (TokenTrie, build_candidates, classification_me
 
 
 class EvaluationTests(unittest.TestCase):
+    def test_vq_nonfinite_rejected_before_argmin(self):
+        from eval_vq_quality import require_finite
+        require_finite(torch.tensor([0., 1.]), 'test')
+        for value in [float('nan'), float('inf'), -float('inf')]:
+            with self.assertRaises(ValueError):
+                require_finite(torch.tensor([0., value]), 'test')
+
     def test_parser_does_not_read_prompt_options(self):
         answers = {'(A)': 0, '(B)': 1, '(C)': 2}
         self.assertEqual(parse_answer('Options: (A) yes (B) no Answer: (B) <|endoftext|>(C)', answers)[0], 1)

@@ -12,6 +12,12 @@ from checkpoint_eval_io import clean_state, sha256, tensor_digest, write_json
 from downstream_eval_core import entropy_statistics
 
 
+def require_finite(tensor, name):
+    import torch
+    if not torch.isfinite(tensor).all():
+        raise ValueError('Nonfinite ' + name + '; refusing misleading codebook statistics')
+
+
 def main():
     parser = argparse.ArgumentParser(__doc__)
     parser.add_argument('--author-dir', type=Path, required=True)
@@ -77,11 +83,17 @@ def main():
     if hasattr(model.quantize.embedding, 'initted') and not bool(model.quantize.embedding.initted):
         raise ValueError('Uninitialized codebook: refusing evaluation-time k-means')
     model = model.to(args.device).eval()
+    require_finite(model.quantize.embedding.weight, 'codebook')
     before = {name: tensor_digest(tensor) for name, tensor in model.named_parameters()}
     buffers_before = {name: tensor_digest(tensor) for name, tensor in model.named_buffers()}
     before_codebook = tensor_digest(model.quantize.embedding.weight)
-    with torch.inference_mode():
-        indices = model.get_codebook_indices(*(batch[name].to(args.device) for name in names)).cpu()
+    handle = model.encode_task_layer.register_forward_hook(
+        lambda module, inputs, output: require_finite(output, 'encoder features'))
+    try:
+        with torch.inference_mode():
+            indices = model.get_codebook_indices(*(batch[name].to(args.device) for name in names)).cpu()
+    finally:
+        handle.remove()
     after = {name: tensor_digest(tensor) for name, tensor in model.named_parameters()}
     if before != after or before_codebook != tensor_digest(model.quantize.embedding.weight):
         raise AssertionError('Evaluation changed parameters/codebook')
@@ -92,6 +104,7 @@ def main():
         'input_tensor_sha256': tensor_hashes, 'input_shape': list(x.shape),
         'precision': 'float32_no_autocast', 'device': args.device,
         'torch_version': torch.__version__, 'evaluation_parameters_unchanged': True,
+        'encoder_features_finite': True, 'codebook_finite': True,
         'changed_runtime_buffers': [name for name, tensor in model.named_buffers()
                                     if buffers_before.get(name) != tensor_digest(tensor)],
         'statistics': entropy_statistics(indices, mask, size),
@@ -100,6 +113,8 @@ def main():
         'code_sha256': {name: sha256(args.author_dir / name) for name in
                         ['dataset.py', 'model/model_vq.py', 'model/norm_ema_quantizer.py']},
         'script_sha256': sha256(__file__),
+        'helper_code_sha256': {name: sha256(Path(__file__).with_name(name)) for name in
+                              ['checkpoint_eval_io.py', 'downstream_eval_core.py']},
         'interpretation': 'Valid EEG tokens only; exp(-sum(p*ln(p))). Fixed-batch utilization is not accuracy or proof of codebook health.',
     }
     for sample in report['per_sample']:

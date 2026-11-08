@@ -1,0 +1,13 @@
+{
+  "task_id": "train-1713078005898010496",
+  "task_name": "neurolm-downstream-constrained-newvq-e5-20261108-r1",
+  "status": "SUCCEED",
+  "start_time_utc": "2026-11-08T06:20:40Z",
+  "end_time_utc": "2026-11-08T06:35:47Z",
+  "runtime_seconds": 907,
+  "worker_exit_code": 0,
+  "allocated_gpus": 2,
+  "gpu_model": "NVIDIA H20",
+  "training_performed": false,
+  "independently_audited_samples": 110698
+}
