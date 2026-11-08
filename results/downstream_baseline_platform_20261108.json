@@ -1,0 +1,13 @@
+{
+  "task_id": "train-1713043048264500992",
+  "task_name": "neurolm-downstream-constrained-baseline-20261108-r1",
+  "status": "SUCCEED",
+  "start_time_utc": "2026-11-08T05:11:14Z",
+  "end_time_utc": "2026-11-08T05:28:01Z",
+  "runtime_seconds": 1007,
+  "worker_exit_code": 0,
+  "allocated_gpus": 2,
+  "gpu_model": "NVIDIA H20",
+  "training_performed": false,
+  "independently_audited_samples": 110698
+}

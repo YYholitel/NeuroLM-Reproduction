@@ -58,10 +58,17 @@ answer fragments or whitelist isolated letter tokens. TUAB retains **Yes/No**;
 TUSL retains **(A)/(B)/(C)**. Greedy selection is restricted at every position
 until a full legal answer and EOS have been produced.
 
+Singleton trie branches have only one possible next token and are appended
+without an unnecessary model forward. TUAB/TUSL each have a different first
+answer token per class, so only the actual class decision requires logits.
+An adversarial multi-token/shared-prefix test verifies this optimization.
+
 Appended attention rows inherit the existing EEG padding mask. The author's
 generation recurrence instead fills the new query row with ones, exposing
 previously masked EEG padding. This additional evaluation correction is explicit;
 new results must not be described as a parser-only or paper-identical comparison.
+For the present TUAB/TUSL candidates, the decision occurs before any appended
+query, so the padding-row correction does not change that class decision.
 
 TUAB AUC, when available, uses the conditional probability of Yes among the
 legal first answer tokens. This is a modified score definition, not the original
@@ -155,3 +162,44 @@ The current instruction checkpoint, CPU float32, exact constrained answer trie:
 
 These are real inference results from the existing instruction checkpoint, not
 from Agent A's new VQ. A format guarantee does not imply good classification.
+
+Compatibility was also checked with Agent A's **completed 500-step reset-on** VQ
+checkpoint, using the identical two-sample batch: **385 active codes**, perplexity
+**366.940693**, 460 valid tokens. This validates the training-checkpoint format
+(three decoder layers, saved VQ options) in addition to the official format
+(four decoder layers). Higher fixed-batch perplexity alone does not mean this
+checkpoint is better than the official VQ. This is not the pending five-epoch
+checkpoint's result.
+
+The complete 126-sample TUSL CPU run passed `scripts/audit_downstream_eval.py`:
+independent strict parsing, sklearn metrics, unique full-split index coverage,
+prediction hashes and exact correspondence between invalid rows and error logs.
+
+## Full allocated-GPU baseline — 2026-11-08
+
+TI-ONE task `train-1713043048264500992` completed **SUCCEED**, worker exit code
+**0**, 05:11:14–05:28:01 UTC (1007 seconds). It used two allocated H20 GPUs,
+BF16, batch size 32 per rank, and the existing instruction checkpoint above.
+No training was performed. Every validation/test sample was evaluated once.
+
+| Task | Split | Samples | Invalid | Accuracy | Balanced accuracy | Weighted F1 | Kappa | Conditional-option AUC |
+|---|---|---:|---:|---:|---:|---:|---:|---:|
+| TUSL | Validation | 66 | 0 | 50.0000% | 51.8053% | 49.3851% | 0.246106 | N/A |
+| TUSL | Test | 60 | 0 | 25.0000% | 46.9697% | 26.1530% | -0.075269 | N/A |
+| TUAB | Validation | 73,627 | 0 | 78.8434% | 79.5218% | 78.6491% | 0.581712 | 88.5412% |
+| TUAB | Test | 36,945 | 0 | 79.0472% | 78.1112% | 78.6408% | 0.571470 | 88.0366% |
+
+The full run contains **110,698** predictions. CPU float32 and GPU BF16 TUSL
+outputs differ on a few wrong-class choices while retaining the same accuracy
+and balanced accuracy; preserve their separate precision/batch provenance.
+Neither run demonstrates a downstream improvement from Agent A's new VQ.
+The independent audit passed for all 110,698 predictions: exact index coverage,
+strict raw-text parsing, error-file correspondence, prediction hashes and
+sklearn recomputation of every reported classification metric and TUAB AUC.
+
+Machine-readable evidence:
+[GPU summary](../results/downstream_constrained_baseline_gpu_20261108.json),
+[independent GPU audit](../results/downstream_constrained_baseline_gpu_audit_20261108.json),
+[saved-output parser audit](../results/downstream_parser_audit_20261108.json),
+[encoder provenance](../results/downstream_encoder_provenance_20261108.json),
+[official fixed-batch VQ check](../results/vq_official_fixed_batch_quality_20261108.json).

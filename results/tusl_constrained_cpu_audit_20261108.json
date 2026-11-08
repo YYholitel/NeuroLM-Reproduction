@@ -1,0 +1,41 @@
+{
+  "status": "passed",
+  "summary_sha256": "b859242b487b56f3a81ccc893bc9f6e4e823bce372b637e81baf521747802ae3",
+  "total_samples": 126,
+  "splits": [
+    {
+      "task": "TUSL",
+      "split": "val",
+      "samples": 66,
+      "parse_failures": 0,
+      "independent_metrics": {
+        "accuracy": 0.5,
+        "balanced_accuracy": 0.5180527383367141,
+        "weighted_f1": 0.49342632675966,
+        "cohen_kappa": 0.24532224532224534
+      },
+      "artifact_sha256": {
+        "TUSL-val-rank0.jsonl": "5f6517dc9a7917623f04b9325e8d8c82a32473561fac084d381f6402c309960c",
+        "TUSL-val-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "task": "TUSL",
+      "split": "test",
+      "samples": 60,
+      "parse_failures": 0,
+      "independent_metrics": {
+        "accuracy": 0.25,
+        "balanced_accuracy": 0.4696969696969697,
+        "weighted_f1": 0.2572762923351159,
+        "cohen_kappa": -0.09756097560975618
+      },
+      "artifact_sha256": {
+        "TUSL-test-rank0.jsonl": "196d6a7d582e545ebc8e246c140582efbee2a7146e1ffdb1f483ff9f8ca9d377",
+        "TUSL-test-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "independent_strict_parser": true,
+  "invalid_log_matches_all_failures": true
+}
