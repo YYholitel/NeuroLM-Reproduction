@@ -1,0 +1,9 @@
+{
+  "phase": "startup",
+  "exported_utc": "2026-11-09T05:51:54.124114+00:00",
+  "source_root": "/mnt/cfs-omni/lhy/neurolm-reproduction/stage3-new-pretrain-20261109-r1",
+  "raw_predictions_exported": false,
+  "model_weights_exported": false,
+  "eeg_exported": false,
+  "live_snapshot": true
+}

@@ -1,0 +1,18 @@
+{
+  "utc": "2026-11-09T05:51:44.961930+00:00",
+  "logged_training_steps": 51,
+  "last_logged": {
+    "epoch": 0,
+    "step": 510,
+    "iter_num": 509,
+    "lr": 0.00035495118549511856,
+    "instruction_loss": 0.2113572061061859,
+    "text_loss": 3.151822328567505
+  },
+  "checkpoint_audited": false,
+  "completed_comparison": false,
+  "evaluation": {
+    "new": [],
+    "official": []
+  }
+}

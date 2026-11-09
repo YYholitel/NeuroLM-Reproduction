@@ -4,3 +4,4 @@
 patches/0011-inference-lm-head-small-batch.patch -text -whitespace
 # Preserve exported experiment evidence byte-for-byte for SHA256 verification.
 results/pretrain_full20_20261109/** -text
+results/stage3_new_pretrain_20261109/** -text -whitespace

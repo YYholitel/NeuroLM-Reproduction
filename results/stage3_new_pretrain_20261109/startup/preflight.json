@@ -1,0 +1,67 @@
+{
+  "ok": true,
+  "diagnostic_only": true,
+  "training_samples_only": true,
+  "model_architecture_matches_official": true,
+  "input_checkpoint": "/mnt/cfs-omni/lhy/neurolm-reproduction/pretrain-full20-20261109-r1/run/checkpoints/NeuroLM-B/ckpt.pt",
+  "input_checkpoint_sha256": "b13d1acdea4ed32fa1a3e6c7163c6fde6a03857eda131e36b10cc1380a3c5353",
+  "counts": {
+    "TUAB/processed/train": 298511,
+    "TUAB/processed/val": 73627,
+    "TUAB/processed/test": 36945,
+    "TUEV/processed_train": 68270,
+    "TUEV/processed_eval": 15662,
+    "TUEV/processed_test": 28305,
+    "HMC/train": 91248,
+    "HMC/eval": 22124,
+    "HMC/test": 23871,
+    "EEGWorkload/train": 1508,
+    "EEGWorkload/eval": 290,
+    "EEGWorkload/test": 290,
+    "TUSL/train": 119,
+    "TUSL/eval": 66,
+    "TUSL/test": 60
+  },
+  "cases": [
+    {
+      "task": "TUAB",
+      "classes": 2,
+      "answer_targets": 3,
+      "instruction_loss": 11.632583618164062,
+      "legal_constrained_answer": true
+    },
+    {
+      "task": "TUEV",
+      "classes": 6,
+      "answer_targets": 5,
+      "instruction_loss": 15.968238830566406,
+      "legal_constrained_answer": true
+    },
+    {
+      "task": "HMC",
+      "classes": 5,
+      "answer_targets": 5,
+      "instruction_loss": 16.52718734741211,
+      "legal_constrained_answer": true
+    },
+    {
+      "task": "Workload",
+      "classes": 2,
+      "answer_targets": 3,
+      "instruction_loss": 15.40996265411377,
+      "legal_constrained_answer": true
+    },
+    {
+      "task": "TUSL",
+      "classes": 3,
+      "answer_targets": 4,
+      "instruction_loss": 13.715629577636719,
+      "legal_constrained_answer": true
+    }
+  ],
+  "frozen_encoder_unchanged": true,
+  "gpt_update_verified": true,
+  "gradient_norm": 171.07916259765625,
+  "runtime_files": 27,
+  "note": "Disposable CPU optimizer update; production starts from untouched full-20 checkpoint."
+}

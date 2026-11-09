@@ -1,4 +1,4 @@
-"""Inference-only TUSL/TUAB evaluation with strict parsing and token-trie decoding.
+"""Inference-only five-task evaluation with strict parsing and token-trie decoding.
 
 Loads an entire NeuroLM checkpoint strictly. An optional VQ encoder override is
 an explicitly labelled, unaligned encoder-swap diagnostic, never retraining.
@@ -16,7 +16,14 @@ import sys
 from checkpoint_eval_io import clean_state, sha256, tensor_digest, write_json
 from downstream_eval_core import build_candidates, classification_metrics, generate_constrained, record_prediction
 
-EXPECTED = {'TUAB': {'val': 73627, 'test': 36945}, 'TUSL': {'val': 66, 'test': 60}}
+EXPECTED = {'TUAB': {'val': 73627, 'test': 36945}, 'TUSL': {'val': 66, 'test': 60},
+            'TUEV': {'val': 15662, 'test': 28305}, 'HMC': {'val': 22124, 'test': 23871},
+            'Workload': {'val': 290, 'test': 290}}
+SPLIT_PATHS = {'TUAB': {'val': 'TUAB/processed/val', 'test': 'TUAB/processed/test'},
+               'TUSL': {'val': 'TUSL/eval', 'test': 'TUSL/test'},
+               'TUEV': {'val': 'TUEV/processed_eval', 'test': 'TUEV/processed_test'},
+               'HMC': {'val': 'HMC/eval', 'test': 'HMC/test'},
+               'Workload': {'val': 'EEGWorkload/eval', 'test': 'EEGWorkload/test'}}
 
 
 def main():
@@ -59,7 +66,8 @@ def main():
     if world > 1:
         dist.barrier()
     sys.path.insert(0, str(args.author_dir.resolve()))
-    from downstream_dataset import TUABLoader, TUSLLoader
+    from downstream_dataset import TUABLoader, TUSLLoader, TUEVLoader, HMCLoader, WorkloadLoader
+    loader_types = dict(TUAB=TUABLoader, TUSL=TUSLLoader, TUEV=TUEVLoader, HMC=HMCLoader, Workload=WorkloadLoader)
     from model.model import GPTConfig
     from model.model_neurolm import NeuroLM
     checkpoint_hash = sha256(args.checkpoint)
@@ -95,8 +103,7 @@ def main():
     reports = []
     for task in args.tasks:
         for split in args.splits:
-            root = args.dataset_dir / ('TUAB/processed' if task == 'TUAB' else 'TUSL')
-            root = root / ('eval' if task == 'TUSL' and split == 'val' else split)
+            root = args.dataset_dir / SPLIT_PATHS[task][split]
             with os.scandir(root) as entries:
                 # Do not stat every CFS entry before reading it. Every selected
                 # path must subsequently load successfully; errors are fatal.
@@ -104,7 +111,7 @@ def main():
             if len(files) != EXPECTED[task][split]:
                 raise ValueError(f'{task}/{split}: expected {EXPECTED[task][split]} files, got {len(files)}')
             selected = files[:args.limit] if args.limit else files
-            loader_cls = TUABLoader if task == 'TUAB' else TUSLLoader
+            loader_cls = loader_types[task]
             dataset = loader_cls(str(root), selected, is_instruct=True, is_val=True, eeg_max_len=276, text_max_len=80)
             candidates, answers = build_candidates(dataset, enc.decode)
             indices = list(range(rank, len(dataset), world))
@@ -151,7 +158,7 @@ def main():
                 metrics = classification_metrics([r['label'] for r in rows], [r['prediction'] for r in rows], len(candidates))
                 metrics['roc_auc'] = None
                 metrics['roc_auc_note'] = 'Unavailable without valid scores; never computed from generated hard labels or a filtered subset.'
-                if task == 'TUAB' and all('conditional_first_token_probabilities' in r for r in rows) and len(set(r['label'] for r in rows)) == 2:
+                if task in ('TUAB', 'Workload') and all('conditional_first_token_probabilities' in r for r in rows) and len(set(r['label'] for r in rows)) == 2:
                     from sklearn.metrics import roc_auc_score
                     metrics['roc_auc'] = float(roc_auc_score([r['label'] for r in rows], [r['conditional_first_token_probabilities'][1] for r in rows]))
                     metrics['roc_auc_note'] = 'Conditional probability of Yes among legal first tokens; modified constrained-decoding protocol.'

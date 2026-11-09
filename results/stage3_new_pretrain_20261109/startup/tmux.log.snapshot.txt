@@ -1,0 +1,19 @@
+SUBMITTED={"ok": true, "mode": "submit", "submitted_id": "train-1713786859836016384", "tasks": [{"name": "neurolm-stage3-new-pretrain-e1-20261109-r1", "id": "train-1713786859836016384", "status": "SUBMITTING"}], "temporary_probe_kernel_removed": true}
+2026-11-09T05:48:39.725337+00:00 {"name": "neurolm-stage3-new-pretrain-e1-20261109-r1", "id": "train-1713786859836016384", "status": "SUBMITTING"}
+{"utc": "2026-11-09T05:48:39.762021+00:00", "logged_training_steps": 0, "last_logged": null, "checkpoint_audited": false, "completed_comparison": false, "evaluation": {"new": [], "official": []}}
+2026-11-09T05:49:41.208199+00:00 {"name": "neurolm-stage3-new-pretrain-e1-20261109-r1", "id": "train-1713786859836016384", "status": "RUNNING"}
+{"utc": "2026-11-09T05:49:41.244003+00:00", "logged_training_steps": 0, "last_logged": null, "checkpoint_audited": false, "completed_comparison": false, "evaluation": {"new": [], "official": []}}
+2026-11-09T05:50:42.694962+00:00 {"name": "neurolm-stage3-new-pretrain-e1-20261109-r1", "id": "train-1713786859836016384", "status": "RUNNING"}
+{"utc": "2026-11-09T05:50:42.731910+00:00", "logged_training_steps": 24, "last_logged": {"epoch": 0, "step": 240, "iter_num": 239, "lr": 0.0001666666666666667, "instruction_loss": 0.29093611240386963, "text_loss": 3.2322938442230225}, "checkpoint_audited": false, "completed_comparison": false, "evaluation": {"new": [], "official": []}}
+2026-11-09T05:51:44.927580+00:00 {"name": "neurolm-stage3-new-pretrain-e1-20261109-r1", "id": "train-1713786859836016384", "status": "RUNNING"}
+{"utc": "2026-11-09T05:51:44.961930+00:00", "logged_training_steps": 51, "last_logged": {"epoch": 0, "step": 510, "iter_num": 509, "lr": 0.00035495118549511856, "instruction_loss": 0.2113572061061859, "text_loss": 3.151822328567505}, "checkpoint_audited": false, "completed_comparison": false, "evaluation": {"new": [], "official": []}}
+--- tail ---
+SUBMITTED={"ok": true, "mode": "submit", "submitted_id": "train-1713786859836016384", "tasks": [{"name": "neurolm-stage3-new-pretrain-e1-20261109-r1", "id": "train-1713786859836016384", "status": "SUBMITTING"}], "temporary_probe_kernel_removed": true}
+2026-11-09T05:48:39.725337+00:00 {"name": "neurolm-stage3-new-pretrain-e1-20261109-r1", "id": "train-1713786859836016384", "status": "SUBMITTING"}
+{"utc": "2026-11-09T05:48:39.762021+00:00", "logged_training_steps": 0, "last_logged": null, "checkpoint_audited": false, "completed_comparison": false, "evaluation": {"new": [], "official": []}}
+2026-11-09T05:49:41.208199+00:00 {"name": "neurolm-stage3-new-pretrain-e1-20261109-r1", "id": "train-1713786859836016384", "status": "RUNNING"}
+{"utc": "2026-11-09T05:49:41.244003+00:00", "logged_training_steps": 0, "last_logged": null, "checkpoint_audited": false, "completed_comparison": false, "evaluation": {"new": [], "official": []}}
+2026-11-09T05:50:42.694962+00:00 {"name": "neurolm-stage3-new-pretrain-e1-20261109-r1", "id": "train-1713786859836016384", "status": "RUNNING"}
+{"utc": "2026-11-09T05:50:42.731910+00:00", "logged_training_steps": 24, "last_logged": {"epoch": 0, "step": 240, "iter_num": 239, "lr": 0.0001666666666666667, "instruction_loss": 0.29093611240386963, "text_loss": 3.2322938442230225}, "checkpoint_audited": false, "completed_comparison": false, "evaluation": {"new": [], "official": []}}
+2026-11-09T05:51:44.927580+00:00 {"name": "neurolm-stage3-new-pretrain-e1-20261109-r1", "id": "train-1713786859836016384", "status": "RUNNING"}
+{"utc": "2026-11-09T05:51:44.961930+00:00", "logged_training_steps": 51, "last_logged": {"epoch": 0, "step": 510, "iter_num": 509, "lr": 0.00035495118549511856, "instruction_loss": 0.2113572061061859, "text_loss": 3.151822328567505}, "checkpoint_audited": false, "completed_comparison": false, "evaluation": {"new": [], "official": []}}

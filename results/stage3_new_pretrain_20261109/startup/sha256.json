@@ -1,0 +1,17 @@
+{
+  "author/bundle_manifest.json": "483f31c0a9e98b9275b0a443d257a5564fbd4552b6917a9e08115165e8cdf60f",
+  "cpu_checks.log": "f97c2d10fdb64e981c95fd95a5cc4e758bdfeaf21a2360f9b3b7a7fbdf4febf9",
+  "export.json": "f9bc70f8b2c45cb61eb81f75893aa513017da3f9c68fdec6115d4d46b5c221a1",
+  "gpu_metrics.csv": "d90576e73cf5aa08c727fc6270e7d0a1c834a8210ea85f443f9e65c265e45114",
+  "monitor/status.json": "999cdbbdb50ac7efedc1031f431b6694ade3209cd181d79266d15526e60ce293",
+  "monitor/training_curves.png": "4e7d5de6214d3e5d4ccf8009186ac4727ceb9936acb12e2adfff5aa639ba7797",
+  "platform_status.json": "87a44cd876da7cc10f6613da5e557a8c003f4619229bd3279e65c6c97b4e740e",
+  "pre_submit_resources.json": "38bdd57d7dd5f7a8a65153b2e9f193a23849ca51e3febea254a875ec610d3a93",
+  "preflight.json": "0d03b9b2dd056f9d9e0c197e3eaf59c2dec7641d12fe61e688ce687bcb746166",
+  "source_manifest.json": "e32d58efb3dcb9c5809a7ab46417572d91cebea5393a35db22f3b7a659e489b2",
+  "submitted.json": "75489ba77cd16e8f56693938aeac3f63568303239dcfae3b312beedb8d1fc5d0",
+  "tmux.log.snapshot.txt": "6282cb70d29ddbd96d13874449a9dd4ae5ec7a380e37fda4db552bbd8332f389",
+  "train/run_manifest.json": "ecbc41c60a9d29f13514c5e6c062e73c7e5d9354b78e4002fa93d5e989643b3d",
+  "train/train_steps.jsonl": "bcedffa5eaebd8865eafe2ca3d2b1b0eee03692b42c5e04942cfec486f578b22",
+  "worker.log.snapshot.txt": "785a52d1b92678f32f663ac8270e2bb2896e4a57b12707c5c3d55e61dbfcf92b"
+}

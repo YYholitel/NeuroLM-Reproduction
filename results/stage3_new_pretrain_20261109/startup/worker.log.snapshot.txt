@@ -1,0 +1,61 @@
+Mon Nov  9 05:49:03 UTC 2026
+WORKER_PREFLIGHT={"ok": true, "gpus": ["NVIDIA H20, 3", "NVIDIA H20, 3"], "torch": "2.2.2"}
+298511 73627 36945
+298511 73627 36945
+298511 73627 36945
+298511 73627 36945
+68270 15662 28305
+68270 15662 28305
+91248 22124 23871
+91248 22124 23871
+9124891248  2212422124  2387123871
+
+1508 290 290
+1508 290 290
+1508 290 290
+1508 290 290
+119119  66 66 6060
+
+119 66 60
+119 66 60
+Initializing training from /mnt/cfs-omni/lhy/neurolm-reproduction/pretrain-full20-20261109-r1/run/checkpoints/NeuroLM-B/ckpt.ptInitializing training from /mnt/cfs-omni/lhy/neurolm-reproduction/pretrain-full20-20261109-r1/run/checkpoints/NeuroLM-B/ckpt.pt
+
+number of parameters: 123.69M
+number of parameters: 123.69M
+num decayed parameter tensors: 52, with 169,476,096 parameters
+num non-decayed parameter tensors: 98, with 121,344 parameters
+num decayed parameter tensors: 52, with 169,476,096 parameters
+num non-decayed parameter tensors: 98, with 121,344 parameters
+using fused AdamW: True
+using fused AdamW: True
+--- tail ---
+epoch 0 step [190/7182]: train total loss 3.7720, instruction loss 0.4820, text loss 3.2899
+epoch 0 step [200/7182]: train total loss 3.6578, instruction loss 0.4567, text loss 3.2011
+epoch 0 step [210/7182]: train total loss 3.3616, instruction loss 0.3072, text loss 3.0544
+epoch 0 step [220/7182]: train total loss 3.3585, instruction loss 0.3067, text loss 3.0518
+epoch 0 step [230/7182]: train total loss 3.2061, instruction loss 0.2617, text loss 2.9443
+epoch 0 step [240/7182]: train total loss 3.5232, instruction loss 0.2909, text loss 3.2323
+epoch 0 step [250/7182]: train total loss 3.3302, instruction loss 0.2301, text loss 3.1001
+epoch 0 step [260/7182]: train total loss 3.4896, instruction loss 0.3023, text loss 3.1873
+epoch 0 step [270/7182]: train total loss 3.4299, instruction loss 0.2412, text loss 3.1887
+epoch 0 step [280/7182]: train total loss 3.4637, instruction loss 0.3069, text loss 3.1568
+epoch 0 step [290/7182]: train total loss 3.3647, instruction loss 0.1861, text loss 3.1786
+epoch 0 step [300/7182]: train total loss 3.1063, instruction loss 0.2357, text loss 2.8706
+epoch 0 step [310/7182]: train total loss 3.4934, instruction loss 0.3256, text loss 3.1678
+epoch 0 step [320/7182]: train total loss 3.3079, instruction loss 0.2276, text loss 3.0803
+epoch 0 step [330/7182]: train total loss 3.4014, instruction loss 0.3039, text loss 3.0975
+epoch 0 step [340/7182]: train total loss 3.1094, instruction loss 0.1999, text loss 2.9095
+epoch 0 step [350/7182]: train total loss 3.2080, instruction loss 0.2250, text loss 2.9830
+epoch 0 step [360/7182]: train total loss 3.3068, instruction loss 0.2195, text loss 3.0873
+epoch 0 step [370/7182]: train total loss 3.2088, instruction loss 0.2516, text loss 2.9573
+epoch 0 step [380/7182]: train total loss 3.4086, instruction loss 0.2120, text loss 3.1966
+epoch 0 step [390/7182]: train total loss 3.4517, instruction loss 0.2597, text loss 3.1920
+epoch 0 step [400/7182]: train total loss 2.9938, instruction loss 0.1439, text loss 2.8499
+epoch 0 step [410/7182]: train total loss 3.3338, instruction loss 0.2257, text loss 3.1081
+epoch 0 step [420/7182]: train total loss 3.4641, instruction loss 0.2911, text loss 3.1730
+epoch 0 step [430/7182]: train total loss 3.3424, instruction loss 0.2387, text loss 3.1037
+epoch 0 step [440/7182]: train total loss 3.2041, instruction loss 0.2556, text loss 2.9485
+epoch 0 step [450/7182]: train total loss 3.3384, instruction loss 0.2424, text loss 3.0959
+epoch 0 step [460/7182]: train total loss 3.3478, instruction loss 0.2175, text loss 3.1304
+epoch 0 step [470/7182]: train total loss 3.3209, instruction loss 0.2314, text loss 3.0895
+epoch 0 step [480/7182]: train total loss 3.5888, instruction loss 0.1974, text loss 3.3914

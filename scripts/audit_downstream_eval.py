@@ -13,7 +13,9 @@ def audit(run):
     assert summary['status'] == 'completed' and not summary['training_performed']
     reports = []
     seen_splits = set()
-    expected_counts = {'TUSL': {'val': 66, 'test': 60}, 'TUAB': {'val': 73627, 'test': 36945}}
+    expected_counts = {'TUSL': {'val': 66, 'test': 60}, 'TUAB': {'val': 73627, 'test': 36945},
+                       'TUEV': {'val': 15662, 'test': 28305}, 'HMC': {'val': 22124, 'test': 23871},
+                       'Workload': {'val': 290, 'test': 290}}
     for split in summary['results']:
         task, name = split['task'], split['split']
         assert (task, name) not in seen_splits, 'Duplicate split report'
