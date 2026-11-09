@@ -1,0 +1,12 @@
+{
+  "ok": true,
+  "mode": "status",
+  "tasks": [
+    {
+      "name": "neurolm-stage3-new-pretrain-e1-20261109-r1",
+      "id": "train-1713786859836016384",
+      "status": "RUNNING"
+    }
+  ],
+  "temporary_probe_kernel_removed": true
+}

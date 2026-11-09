@@ -2,11 +2,17 @@
 
 ## 当前状态（2026-11-09，北京时间）
 
-阶段二完成 20 epoch 后，新模型已进入阶段三。TI-ONE 任务 `train-1713786859836016384` 已实际启动，当前处于训练中；**尚无本次完整测试成绩，不能据训练 loss 宣称优于官方模型**。
+阶段二完成 20 epoch 后，新模型已完成阶段三的一轮指令微调，TI-ONE 任务 `train-1713786859836016384` 当前正在评估。**尚无本次完整对照结果，不能据训练 loss 宣称优于官方模型**。
 
 13:51:44 的只读快照记录了第 510/7182 个 microstep：instruction CE 0.211357，text CE 3.151822，学习率 0.000354951。完整配置、启动日志、GPU 采样、CPU 检查和训练曲线见 [启动证据](../results/stage3_new_pretrain_20261109/startup/)。快照来自运行中的文件，不代表最终状态。
 
-![启动训练曲线](../results/stage3_new_pretrain_20261109/startup/monitor/training_curves.png)
+14:18 的完成检查确认：1 epoch、7,182 microstep、898 optimizer update，全部模型张量有限，冻结编码器 SHA 保持不变，GPT 权重已经更新。新 instruction checkpoint SHA-256 为 `39a53023b4d6b77b5264ec9d7461f202ab023938a0d9804ead493115a2bc50af`，大小 2,377,398,188 字节。完整路径为 `/mnt/cfs-omni/lhy/neurolm-reproduction/stage3-new-pretrain-20261109-r1/train/checkpoints/instruction-B/ckpt.pt`。
+
+初步 TUSL test：60 例，accuracy 25.0%、balanced accuracy 27.1465%、非法答案 0。此时新模型其他任务及官方基线重评尚未结束，完整预测审计尚待执行。见[训练完成快照](../results/stage3_new_pretrain_20261109/trained/)，不要将其中的部分评估文件当作最终对照结果。
+
+![完整一轮训练曲线](../results/stage3_new_pretrain_20261109/trained/monitor/training_curves.png)
+
+loss 是每 10 个 microstep 记录的 rank-0 microbatch 值，不是全数据集 epoch 均值；最后日志点是 7,180，实际完成步数 7,182 由 checkpoint 独立核验。
 
 ## 固定比较条件
 

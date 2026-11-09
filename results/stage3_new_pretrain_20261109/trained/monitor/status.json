@@ -1,0 +1,123 @@
+{
+  "utc": "2026-11-09T06:19:46.749039+00:00",
+  "logged_training_steps": 718,
+  "last_logged": {
+    "epoch": 0,
+    "step": 7180,
+    "iter_num": 7179,
+    "lr": 5.0000239161905404e-05,
+    "instruction_loss": 0.12774591147899628,
+    "text_loss": 3.0003223419189453
+  },
+  "checkpoint_audited": true,
+  "completed_comparison": false,
+  "evaluation": {
+    "new": [
+      {
+        "task": "TUSL",
+        "split": "test",
+        "metrics": {
+          "samples": 60,
+          "parse_failures": 0,
+          "accuracy": 0.25,
+          "balanced_accuracy": 0.27146464646464646,
+          "weighted_f1": 0.32404647514462204,
+          "cohen_kappa": -0.012373453318335195,
+          "class_support": [
+            33,
+            3,
+            24
+          ],
+          "class_recall": [
+            0.2727272727272727,
+            0.3333333333333333,
+            0.20833333333333334
+          ],
+          "missing_true_classes": [],
+          "confusion_matrix": [
+            [
+              9,
+              8,
+              16,
+              0
+            ],
+            [
+              0,
+              1,
+              2,
+              0
+            ],
+            [
+              0,
+              19,
+              5,
+              0
+            ]
+          ],
+          "confusion_columns": [
+            0,
+            1,
+            2,
+            "invalid"
+          ],
+          "invalid_policy": "retain_in_denominator_and_count_wrong",
+          "roc_auc": null,
+          "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+        }
+      },
+      {
+        "task": "TUSL",
+        "split": "val",
+        "metrics": {
+          "samples": 66,
+          "parse_failures": 0,
+          "accuracy": 0.4696969696969697,
+          "balanced_accuracy": 0.45743745774171735,
+          "weighted_f1": 0.46675246675246673,
+          "cohen_kappa": 0.17822838847385275,
+          "class_support": [
+            17,
+            20,
+            29
+          ],
+          "class_recall": [
+            0.47058823529411764,
+            0.35,
+            0.5517241379310345
+          ],
+          "missing_true_classes": [],
+          "confusion_matrix": [
+            [
+              8,
+              3,
+              6,
+              0
+            ],
+            [
+              4,
+              7,
+              9,
+              0
+            ],
+            [
+              6,
+              7,
+              16,
+              0
+            ]
+          ],
+          "confusion_columns": [
+            0,
+            1,
+            2,
+            "invalid"
+          ],
+          "invalid_policy": "retain_in_denominator_and_count_wrong",
+          "roc_auc": null,
+          "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+        }
+      }
+    ],
+    "official": []
+  }
+}

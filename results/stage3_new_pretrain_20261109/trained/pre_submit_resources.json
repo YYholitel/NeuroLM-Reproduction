@@ -1,0 +1,9 @@
+{
+  "ok": true,
+  "resource_group_id": "rsg-b227f5pp",
+  "eligible_two_gpu_nodes": 34,
+  "required_nodes": 1,
+  "capacity_available": true,
+  "request_id": "5b18fadf-ba7e-4c8d-9027-ab364b549f7f",
+  "temporary_probe_kernel_removed": true
+}

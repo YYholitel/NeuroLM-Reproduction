@@ -9,10 +9,12 @@ import tarfile
 
 ROOT = Path('/mnt/cfs-omni/lhy/neurolm-reproduction/stage3-new-pretrain-20261109-r1')
 parser = argparse.ArgumentParser(__doc__)
-parser.add_argument('phase', choices=('startup', 'final'))
+parser.add_argument('phase', choices=('startup', 'trained', 'final'))
 args = parser.parse_args()
 out = ROOT / 'monitor' / 'exports' / args.phase
 out.mkdir(parents=True, exist_ok=False)
+if args.phase in ('trained', 'final'):
+    assert json.loads((ROOT / 'checkpoint_audit.json').read_text())['ok']
 if args.phase == 'final':
     assert json.loads((ROOT / 'comparison.json').read_text())['status'] == 'completed'
     assert (ROOT / 'exit_code.txt').read_text().strip() == '0'
@@ -22,7 +24,7 @@ names = [
     'pre_submit_resources.json', 'platform_status.json', 'platform_final_status.json',
     'checkpoint_audit.json', 'comparison.json', 'audit-new.json', 'audit-official.json',
     'exit_code.txt', 'monitor/status.json', 'monitor/training_curves.png',
-    'monitor/comparison.png', 'train/run_manifest.json', 'train/train_steps.jsonl',
+    'monitor/comparison.png', 'monitor/training_summary.json', 'train/run_manifest.json', 'train/train_steps.jsonl',
     'author/bundle_manifest.json', 'gpu_metrics.csv',
 ]
 for variant in ('new', 'official'):

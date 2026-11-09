@@ -1,0 +1,21 @@
+{
+  "author/bundle_manifest.json": "483f31c0a9e98b9275b0a443d257a5564fbd4552b6917a9e08115165e8cdf60f",
+  "checkpoint_audit.json": "60b723d24872ff631a989e2bbbdbcbad5b863a53f2723ba4f7cd704ea6018872",
+  "cpu_checks.log": "f97c2d10fdb64e981c95fd95a5cc4e758bdfeaf21a2360f9b3b7a7fbdf4febf9",
+  "eval-new/TUAB-val-metrics.json": "05c645c436377b530affabd5efaa012d38d0bad9074a98bf1bdbaf5919d78508",
+  "eval-new/TUSL-test-metrics.json": "10b98bfa3c2bbe75857adba53fc230bc84a515dc131bf3e7935d7b98fcbd55b4",
+  "eval-new/TUSL-val-metrics.json": "dbc23bd3429992dda4dc96c187e932af145abecd31026b80b87010dd72235625",
+  "export.json": "aa63ced711d9821d32406f49ca7fc4a5ba9faad34181a9d5009ae833773addb0",
+  "gpu_metrics.csv": "1b841250e2b51730634453c3faa4ee804f5a0b0d9e1bfe527972309cfc8b2cd5",
+  "monitor/status.json": "d04793cf637e839777ef564431fc81fbffb676ae01f11fc995e2da6f5e7de346",
+  "monitor/training_curves.png": "d6af1eda7872de7bd2b59f14b7f6f1c434251d57bd9f3034813924b4749cebbd",
+  "platform_status.json": "87a44cd876da7cc10f6613da5e557a8c003f4619229bd3279e65c6c97b4e740e",
+  "pre_submit_resources.json": "38bdd57d7dd5f7a8a65153b2e9f193a23849ca51e3febea254a875ec610d3a93",
+  "preflight.json": "0d03b9b2dd056f9d9e0c197e3eaf59c2dec7641d12fe61e688ce687bcb746166",
+  "source_manifest.json": "e32d58efb3dcb9c5809a7ab46417572d91cebea5393a35db22f3b7a659e489b2",
+  "submitted.json": "75489ba77cd16e8f56693938aeac3f63568303239dcfae3b312beedb8d1fc5d0",
+  "tmux.log.snapshot.txt": "313b539df9b4cd6f38a836a5f6754a0f8f867c5869eeee01ce9a728ae60ddc25",
+  "train/run_manifest.json": "ecbc41c60a9d29f13514c5e6c062e73c7e5d9354b78e4002fa93d5e989643b3d",
+  "train/train_steps.jsonl": "d36e1a93a6d7076fd6ba4cf8239eeb25d2868b77b518c3ed436e8841fdc2d4cd",
+  "worker.log.snapshot.txt": "197edbdad0221b385d3afb61a4f11fa99e12d3b5265eb107456955b7c52b2a80"
+}

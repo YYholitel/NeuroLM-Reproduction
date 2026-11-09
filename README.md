@@ -2,7 +2,7 @@
 
 复现 ICLR 2025 论文 [NeuroLM: A Universal Multi-task Foundation Model for Bridging the Gap between Language and EEG Signals](https://arxiv.org/pdf/2409.00101) 的实验结果。本仓库记录实验配置、数据来源、运行日志和与论文的对照；作者实现位于 [935963004/NeuroLM](https://github.com/935963004/NeuroLM)。
 
-> 当前状态（2026-11-09）：我们的 VQ + GPT-2 初始化模型已完成 [20 epoch 阶段二预训练](docs/pretrain_stage2_log.md)，正在执行[阶段三匹配对照](docs/stage3_new_pretrain_comparison.md)：五任务、1 epoch、seed 42，与既有官方初始化指令基线统一采用选项约束解码评估。当前尚无本轮最终测试成绩。早期[自由生成基线](results/INSTRUCTION_FIVE_TASK_20261108.md)的 TUSL 解析失败与[后续修正评估](docs/Downstream_eval_log.md)分别记录，不混合比较。论文六任务、5 epochs、三种子复现仍未完成。
+> 当前状态（2026-11-09）：我们的 VQ + GPT-2 初始化模型已完成 [20 epoch 阶段二预训练](docs/pretrain_stage2_log.md)和[阶段三一轮指令微调](docs/stage3_new_pretrain_comparison.md)。新权重已核验，正在与既有官方初始化基线进行五任务完整评估，统一采用选项约束解码；尚无本轮最终对照结论。早期[自由生成基线](results/INSTRUCTION_FIVE_TASK_20261108.md)的 TUSL 解析失败与[后续修正评估](docs/Downstream_eval_log.md)分别记录，不混合比较。论文六任务、5 epochs、三种子复现仍未完成。
 
 ## 目标与进度
 
