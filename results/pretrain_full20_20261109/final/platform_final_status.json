@@ -1,0 +1,12 @@
+{
+  "ok": true,
+  "mode": "status",
+  "tasks": [
+    {
+      "name": "neurolm-pretrain-b16-e20-20261109-r1",
+      "id": "train-1713134905275320064",
+      "status": "SUCCEED"
+    }
+  ],
+  "temporary_probe_kernel_removed": true
+}

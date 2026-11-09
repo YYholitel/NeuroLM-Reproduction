@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "audit_utc": "2026-11-09T01:56:16.016279+00:00",
+  "steps": 19140,
+  "epochs": 20,
+  "start_beijing": "2026-11-08T16:14:50.859524+08:00",
+  "completed_beijing": "2026-11-08T19:57:12.509183+08:00",
+  "elapsed_seconds": 13341.649659,
+  "first_epoch": {
+    "epoch_completed": 1,
+    "step": 957,
+    "eeg_loss": 7.273152566130507,
+    "text_loss": 6.667094806144977,
+    "seconds": 780.9084499683231,
+    "frozen_state_unchanged": true,
+    "gpt_weights_updated": true,
+    "utc": "2026-11-08T08:27:44.276333+00:00"
+  },
+  "last_epoch": {
+    "epoch_completed": 20,
+    "step": 19140,
+    "eeg_loss": 4.719688522653769,
+    "text_loss": 3.1109404895248334,
+    "seconds": 540.1866265442222,
+    "frozen_state_unchanged": true,
+    "gpt_weights_updated": true,
+    "utc": "2026-11-08T11:57:12.490249+00:00"
+  },
+  "last100": {
+    "eeg_loss": 4.712023105621338,
+    "text_loss": 3.110540964603424,
+    "eeg_accuracy": 0.14557612620294094,
+    "text_accuracy": 0.419736328125
+  },
+  "all_metrics_finite": true,
+  "all_saved_model_tensors_finite": true,
+  "frozen_encoder_unchanged": true,
+  "gpt_weights_updated": true,
+  "complete_input_streams": {
+    "0": 19140,
+    "1": 19140,
+    "2": 19140,
+    "3": 19140,
+    "4": 19140,
+    "5": 19140,
+    "6": 19140,
+    "7": 19140,
+    "8": 19140,
+    "9": 19140,
+    "10": 19140,
+    "11": 19140,
+    "12": 19140,
+    "13": 19140,
+    "14": 19140,
+    "15": 19140
+  },
+  "checkpoint_sha256": "b13d1acdea4ed32fa1a3e6c7163c6fde6a03857eda131e36b10cc1380a3c5353",
+  "checkpoint_bytes": 2377436251,
+  "checkpoint_epoch": 19,
+  "checkpoint_iter": 19140,
+  "tokenizer_shape": [
+    8192,
+    128
+  ],
+  "model_args": {
+    "block_size": 1024,
+    "vocab_size": 50304,
+    "n_layer": 12,
+    "n_head": 12,
+    "n_embd": 768,
+    "dropout": 0.0,
+    "bias": true
+  },
+  "checkpoint_path": "/mnt/cfs-omni/lhy/neurolm-reproduction/pretrain-full20-20261109-r1/run/checkpoints/NeuroLM-B/ckpt.pt",
+  "saved_encoder_sha256": "c7cdbc311544d5cc72003611788cea28c98a52778922b7a8e7d76710b314876a",
+  "saved_gpt_block_sha256": "efea62dedb0c7f07c93559753e7f1a6d629ba708aa5dcaa6e43fc930798fa516"
+}

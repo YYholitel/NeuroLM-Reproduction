@@ -17,7 +17,8 @@ files=['task.json','submitted.json','resource_capacity.json','preflight.json','p
        'monitor/live_health.json','monitor/pretrain_curves.png']
 if args.phase=='final':
     files+=['platform_final_status.json','run/completed.json','monitor/final_checkpoint.json',
-            'node-0/exit_code.txt','node-1/exit_code.txt','run/metrics.jsonl']
+            'node-0/exit_code.txt','node-1/exit_code.txt','run/metrics.jsonl',
+            'monitor/final_audit_20261109.json','monitor/result_query_20261109.json']
 for name in files:
     source=ROOT/name;target=out/name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(source,target)
 log=(ROOT/'run/pretrain.log').read_text().splitlines()
