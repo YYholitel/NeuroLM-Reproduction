@@ -1,0 +1,64 @@
+{
+  "task": "TUAB",
+  "split": "test",
+  "full_split": true,
+  "available_samples": 36945,
+  "selected_file_list_sha256": "f63f367e01d87a14cff56dbc9320cbac4945d855df0ac725b03446debbfb165e",
+  "metrics": {
+    "samples": 36945,
+    "parse_failures": 0,
+    "accuracy": 0.7702801461632156,
+    "balanced_accuracy": 0.7652216743766485,
+    "weighted_f1": 0.7689167447570378,
+    "cohen_kappa": 0.5343599429833681,
+    "class_support": [
+      19907,
+      17038
+    ],
+    "class_recall": [
+      0.8303611794846034,
+      0.7000821692686935
+    ],
+    "missing_true_classes": [],
+    "confusion_matrix": [
+      [
+        16530,
+        3377,
+        0
+      ],
+      [
+        5110,
+        11928,
+        0
+      ]
+    ],
+    "confusion_columns": [
+      0,
+      1,
+      "invalid"
+    ],
+    "invalid_policy": "retain_in_denominator_and_count_wrong",
+    "roc_auc": 0.843693486662741,
+    "roc_auc_note": "Conditional probability of Yes among legal first tokens; modified constrained-decoding protocol."
+  },
+  "candidate_token_ids": {
+    "1": [
+      3363,
+      220,
+      50256
+    ],
+    "0": [
+      1400,
+      220,
+      50256
+    ]
+  },
+  "answers": {
+    "Yes": 1,
+    "No": 0
+  },
+  "prediction_sha256": {
+    "TUAB-test-rank0.jsonl": "f3f4c6d4da4bca2b27af5e3e05a38193d8224bcdffcb6d0602e56ad752a223a3",
+    "TUAB-test-rank1.jsonl": "25cab57ed7f2db2081ff3916cbf298678f64baaf325fb987ef6ff6f2c1d79846"
+  }
+}

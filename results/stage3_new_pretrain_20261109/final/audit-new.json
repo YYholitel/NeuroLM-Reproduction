@@ -1,0 +1,193 @@
+{
+  "status": "passed",
+  "summary_sha256": "bf3a07a612178cc6732e2b6b678bbb7ff129265ee3c0eeea404e033b56d86796",
+  "total_samples": 201240,
+  "splits": [
+    {
+      "task": "TUSL",
+      "split": "val",
+      "samples": 66,
+      "parse_failures": 0,
+      "independent_metrics": {
+        "accuracy": 0.4696969696969697,
+        "balanced_accuracy": 0.45743745774171735,
+        "weighted_f1": 0.46675246675246673,
+        "cohen_kappa": 0.1782283884738528
+      },
+      "artifact_sha256": {
+        "TUSL-val-rank0.jsonl": "95d695e5bcd8bf1895956d44864144d4ea5de70a98cbc99d778dafa235c32a7c",
+        "TUSL-val-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "TUSL-val-rank1.jsonl": "2f03ceefc97f59ba0c53737a29562f6583e2d3ec251d8db58fe851be051dbf24",
+        "TUSL-val-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "task": "TUSL",
+      "split": "test",
+      "samples": 60,
+      "parse_failures": 0,
+      "independent_metrics": {
+        "accuracy": 0.25,
+        "balanced_accuracy": 0.27146464646464646,
+        "weighted_f1": 0.32404647514462204,
+        "cohen_kappa": -0.01237345331833506
+      },
+      "artifact_sha256": {
+        "TUSL-test-rank0.jsonl": "1c88f29c4ee6e8ad804a4cbb933e4106056ab043dcace5175e620dd7a661941c",
+        "TUSL-test-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "TUSL-test-rank1.jsonl": "fbc09cdabdb2fbd7a96ea55f761d8f3df251a9751d2de6d97de7062f70eec87d",
+        "TUSL-test-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "task": "TUAB",
+      "split": "val",
+      "samples": 73627,
+      "parse_failures": 0,
+      "independent_metrics": {
+        "accuracy": 0.7603868146196369,
+        "balanced_accuracy": 0.7636478725525586,
+        "weighted_f1": 0.7601862372988484,
+        "cohen_kappa": 0.5230389213573889,
+        "roc_auc": 0.8435735247932117
+      },
+      "artifact_sha256": {
+        "TUAB-val-rank0.jsonl": "8598616c9defcf26c5114a311bfc47d0b293dfccd5be027f130ce78f6d92d7a8",
+        "TUAB-val-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "TUAB-val-rank1.jsonl": "027313a5993ea0217c276c94c7aea14e6e44c1f5b0b21681f86870d1891a7d3a",
+        "TUAB-val-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "task": "TUAB",
+      "split": "test",
+      "samples": 36945,
+      "parse_failures": 0,
+      "independent_metrics": {
+        "accuracy": 0.7702801461632156,
+        "balanced_accuracy": 0.7652216743766485,
+        "weighted_f1": 0.7689167447570378,
+        "cohen_kappa": 0.5343599429833681,
+        "roc_auc": 0.843693486662741
+      },
+      "artifact_sha256": {
+        "TUAB-test-rank0.jsonl": "f3f4c6d4da4bca2b27af5e3e05a38193d8224bcdffcb6d0602e56ad752a223a3",
+        "TUAB-test-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "TUAB-test-rank1.jsonl": "25cab57ed7f2db2081ff3916cbf298678f64baaf325fb987ef6ff6f2c1d79846",
+        "TUAB-test-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "task": "TUEV",
+      "split": "val",
+      "samples": 15662,
+      "parse_failures": 0,
+      "independent_metrics": {
+        "accuracy": 0.740135359468778,
+        "balanced_accuracy": 0.5238165752095364,
+        "weighted_f1": 0.7601049692637338,
+        "cohen_kappa": 0.5105186030196811
+      },
+      "artifact_sha256": {
+        "TUEV-val-rank0.jsonl": "05f7fe4709fc6b2f792d5654427730ffc7d23724c028a19d590fe09ba96395c3",
+        "TUEV-val-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "TUEV-val-rank1.jsonl": "c6ccf81d566659d56319e8928c1ea702fba3612cef5111aae2f460326dce19f5",
+        "TUEV-val-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "task": "TUEV",
+      "split": "test",
+      "samples": 28305,
+      "parse_failures": 0,
+      "independent_metrics": {
+        "accuracy": 0.7084967320261438,
+        "balanced_accuracy": 0.4699977603443239,
+        "weighted_f1": 0.7191361038716818,
+        "cohen_kappa": 0.4373549895030351
+      },
+      "artifact_sha256": {
+        "TUEV-test-rank0.jsonl": "bca8b8dece0acf3d24a166c30a53575978ac642b544be433d8a23c89a1b0aa13",
+        "TUEV-test-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "TUEV-test-rank1.jsonl": "d0e835e0f68d7073f97d7c3687dccdd732b3c972c4afb1786b29edca9cb9b430",
+        "TUEV-test-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "task": "HMC",
+      "split": "val",
+      "samples": 22124,
+      "parse_failures": 0,
+      "independent_metrics": {
+        "accuracy": 0.6657024046284578,
+        "balanced_accuracy": 0.5700303077106466,
+        "weighted_f1": 0.6461678557276647,
+        "cohen_kappa": 0.5438137343836338
+      },
+      "artifact_sha256": {
+        "HMC-val-rank0.jsonl": "4f9e4821da69c7e1f75a71c8e3b6f6bfd431d10929cb550a257ba094562edf88",
+        "HMC-val-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "HMC-val-rank1.jsonl": "eab809b3dfeb18a5652db09cd6eada52faddb8e2da6635a3bd5f2083c1159beb",
+        "HMC-val-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "task": "HMC",
+      "split": "test",
+      "samples": 23871,
+      "parse_failures": 0,
+      "independent_metrics": {
+        "accuracy": 0.6530937120355242,
+        "balanced_accuracy": 0.5780219836903762,
+        "weighted_f1": 0.6303085014292324,
+        "cohen_kappa": 0.5239888561777772
+      },
+      "artifact_sha256": {
+        "HMC-test-rank0.jsonl": "de2e200a7b518f8b988af8e65472b99afe1fdd219113c6b3aa79e86773d8f4f1",
+        "HMC-test-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "HMC-test-rank1.jsonl": "296f086b55cb73f51dd6d198eeefacb541df9ab55def986ff07311269f486217",
+        "HMC-test-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "task": "Workload",
+      "split": "val",
+      "samples": 290,
+      "parse_failures": 0,
+      "independent_metrics": {
+        "accuracy": 0.6172413793103448,
+        "balanced_accuracy": 0.6172413793103448,
+        "weighted_f1": 0.6007144717746435,
+        "cohen_kappa": 0.23448275862068968,
+        "roc_auc": 0.6768608799048751
+      },
+      "artifact_sha256": {
+        "Workload-val-rank0.jsonl": "79c1cf05ff79623a341920df268e95ed106a29688412300d8de9f2a4400f4243",
+        "Workload-val-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "Workload-val-rank1.jsonl": "6d693bd80d6281197c2cf19456c8317cdd4e67c07b2f5b4698c17f19b26c366d",
+        "Workload-val-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "task": "Workload",
+      "split": "test",
+      "samples": 290,
+      "parse_failures": 0,
+      "independent_metrics": {
+        "accuracy": 0.5103448275862069,
+        "balanced_accuracy": 0.5103448275862069,
+        "weighted_f1": 0.4913788844424683,
+        "cohen_kappa": 0.020689655172413834,
+        "roc_auc": 0.515101070154578
+      },
+      "artifact_sha256": {
+        "Workload-test-rank0.jsonl": "077b0ecb4ad02ddf9cac48dc9bf6bda9bd19d8ee72ca65d3c373d5ef285c6f55",
+        "Workload-test-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "Workload-test-rank1.jsonl": "e2ca4cb416c359b29e4c582df4150bf421f5752927bb31bd4d9ff54e1522fbf9",
+        "Workload-test-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "independent_strict_parser": true,
+  "invalid_log_matches_all_failures": true
+}

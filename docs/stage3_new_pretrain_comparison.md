@@ -1,18 +1,58 @@
 # 阶段三：新预训练模型与官方初始化的匹配比较
 
-## 当前状态（2026-11-09，北京时间）
+## 最终结果（2026-11-09，北京时间）
 
-阶段二完成 20 epoch 后，新模型已完成阶段三的一轮指令微调，TI-ONE 任务 `train-1713786859836016384` 当前正在评估。**尚无本次完整对照结果，不能据训练 loss 宣称优于官方模型**。
+**本次新模型未超过官方初始化基线：五个测试集的平衡准确率（BA）全部下降，准确率（Acc）四项下降、一项持平。** 这是相同五任务、1 epoch、seed 42 指令微调及相同约束解码条件下的结果。
 
-13:51:44 的只读快照记录了第 510/7182 个 microstep：instruction CE 0.211357，text CE 3.151822，学习率 0.000354951。完整配置、启动日志、GPU 采样、CPU 检查和训练曲线见 [启动证据](../results/stage3_new_pretrain_20261109/startup/)。快照来自运行中的文件，不代表最终状态。
+TI-ONE 任务 `train-1713786859836016384` 已完成，平台状态 `SUCCEED`、worker 退出码 0、tmux 驱动输出 `STAGE3_COMPLETE`。运行时间为 **13:49:01–14:27:05，共 38 分 04 秒**，包含训练、两模型评估与独立复核；实际计算使用两张 H20。
 
-14:18 的完成检查确认：1 epoch、7,182 microstep、898 optimizer update，全部模型张量有限，冻结编码器 SHA 保持不变，GPT 权重已经更新。新 instruction checkpoint SHA-256 为 `39a53023b4d6b77b5264ec9d7461f202ab023938a0d9804ead493115a2bc50af`，大小 2,377,398,188 字节。完整路径为 `/mnt/cfs-omni/lhy/neurolm-reproduction/stage3-new-pretrain-20261109-r1/train/checkpoints/instruction-B/ckpt.pt`。
+### 完整测试集
 
-初步 TUSL test：60 例，accuracy 25.0%、balanced accuracy 27.1465%、非法答案 0。此时新模型其他任务及官方基线重评尚未结束，完整预测审计尚待执行。见[训练完成快照](../results/stage3_new_pretrain_20261109/trained/)，不要将其中的部分评估文件当作最终对照结果。
+| 任务 | 样本数 | 官方 Acc (%) | 新模型 Acc (%) | 官方 BA (%) | 新模型 BA (%) | BA 差值 (百分点) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| TUAB | 36,945 | 79.0472 | 77.0280 | 78.1112 | 76.5222 | -1.5891 |
+| TUEV | 28,305 | 75.4284 | 70.8497 | 53.4281 | 46.9998 | -6.4283 |
+| HMC | 23,871 | 69.9007 | 65.3094 | 66.0270 | 57.8022 | -8.2248 |
+| Workload | 290 | 51.7241 | 51.0345 | 51.7241 | 51.0345 | -0.6897 |
+| TUSL | 60 | 25.0000 | 25.0000 | 46.9697 | 27.1465 | -19.8232 |
 
-![完整一轮训练曲线](../results/stage3_new_pretrain_20261109/trained/monitor/training_curves.png)
+![新旧模型测试对比](../results/stage3_new_pretrain_20261109/final/monitor/comparison.png)
 
-loss 是每 10 个 microstep 记录的 rank-0 microbatch 值，不是全数据集 epoch 均值；最后日志点是 7,180，实际完成步数 7,182 由 checkpoint 独立核验。
+这轮没有验证“更多预训练让单选题能力更强”。末段训练 loss 较低、答案格式合法，都不能替代测试分类成绩。部分辅助指标存在上升：TUSL 和 Workload 的 weighted F1 分别由 26.15%→32.40%、47.30%→49.14%；因此结论限定为主要指标没有提升，不应写成所有指标均下降。
+
+TUSL test 只有 60 例，三类支持数为 33/3/24。仅有 3 例的第二类由官方模型答对 3 例降为新模型答对 1 例，是 BA 下降的主要来源；另外两类各多答对 1 例，总准确率仍为 25%。这项小测试集的变化不能被当作多次重复实验的稳定效应。
+
+### 完整验证集
+
+| 任务 | 样本数 | 官方 Acc (%) | 新模型 Acc (%) | 官方 BA (%) | 新模型 BA (%) | BA 差值 (百分点) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| TUAB | 73,627 | 78.8434 | 76.0387 | 79.5218 | 76.3648 | -3.1570 |
+| TUEV | 15,662 | 75.6736 | 74.0135 | 55.7399 | 52.3817 | -3.3582 |
+| HMC | 22,124 | 70.7783 | 66.5702 | 65.8053 | 57.0030 | -8.8023 |
+| Workload | 290 | 56.8966 | 61.7241 | 56.8966 | 61.7241 | +4.8276 |
+| TUSL | 66 | 50.0000 | 46.9697 | 51.8053 | 45.7437 | -6.0615 |
+
+Workload validation 有提升，但 test 没有提升；未据验证或测试成绩挑选额外 checkpoint、加训或修改配置。
+
+### 训练、权重与审计
+
+训练完成 **1 epoch、7,182 microstep、898 optimizer update**。全部模型张量有限，冻结编码器 SHA 保持不变，GPT 权重已经更新。最后 20 个日志点的平均 instruction CE 为 **0.123337**，text CE 为 **3.065316**；这些是每 10 microstep 记录的 rank-0 microbatch 值，不是全数据集 epoch 均值。最后日志点为 7,180，实际完成步数 7,182 由 checkpoint 独立核验。
+
+![完整训练曲线](../results/stage3_new_pretrain_20261109/final/monitor/training_curves.png)
+
+新 instruction checkpoint：
+
+```text
+/mnt/cfs-omni/lhy/neurolm-reproduction/stage3-new-pretrain-20261109-r1/train/checkpoints/instruction-B/ckpt.pt
+SHA256: 39a53023b4d6b77b5264ec9d7461f202ab023938a0d9804ead493115a2bc50af
+Bytes: 2377398188
+```
+
+两模型分别完成全部 10 个 val/test 划分、201,240 条预测，合计 **402,480 条**；覆盖率、唯一索引、严格答案解析及 sklearn 独立指标复算全部通过，非法答案均为 0。比较脚本进一步核对了源码哈希、推理脚本哈希、精度、GPU 数、batch、文件列表、选项 token 与提示词一致。重新计算的官方 TUAB/TUSL 结果也与之前修正评估一致。
+
+本次结论针对“我们的 VQ + 20 epoch 预训练”整体初始化，不能仅凭这一次对照定位是 VQ、预训练语料或其他因素造成差距；也不代表论文六任务、多 seed 复现已经完成。
+
+最终证据包括：[机器可读比较](../results/stage3_new_pretrain_20261109/final/comparison.json)、[新模型审计](../results/stage3_new_pretrain_20261109/final/audit-new.json)、[官方基线审计](../results/stage3_new_pretrain_20261109/final/audit-official.json)、[权重审计](../results/stage3_new_pretrain_20261109/final/checkpoint_audit.json)、[平台终态与运行时间](../results/stage3_new_pretrain_20261109/final/monitor/platform_completion.json)、[46 项导出证据的 SHA-256](../results/stage3_new_pretrain_20261109/final/sha256.json)。[启动快照](../results/stage3_new_pretrain_20261109/startup/)和[训练完成时快照](../results/stage3_new_pretrain_20261109/trained/)保留为历史过程记录，最终结果以 `final/` 为准。
 
 ## 固定比较条件
 

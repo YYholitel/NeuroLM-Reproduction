@@ -1,0 +1,64 @@
+{
+  "task": "Workload",
+  "split": "val",
+  "full_split": true,
+  "available_samples": 290,
+  "selected_file_list_sha256": "d6cb39f8b9c0e4ac4e9ae52ce5249f40e05e345abaf4bb12fce7fbf9f38aa75e",
+  "metrics": {
+    "samples": 290,
+    "parse_failures": 0,
+    "accuracy": 0.6172413793103448,
+    "balanced_accuracy": 0.6172413793103448,
+    "weighted_f1": 0.6007144717746435,
+    "cohen_kappa": 0.23448275862068968,
+    "class_support": [
+      145,
+      145
+    ],
+    "class_recall": [
+      0.8206896551724138,
+      0.41379310344827586
+    ],
+    "missing_true_classes": [],
+    "confusion_matrix": [
+      [
+        119,
+        26,
+        0
+      ],
+      [
+        85,
+        60,
+        0
+      ]
+    ],
+    "confusion_columns": [
+      0,
+      1,
+      "invalid"
+    ],
+    "invalid_policy": "retain_in_denominator_and_count_wrong",
+    "roc_auc": 0.6768608799048751,
+    "roc_auc_note": "Conditional probability of Yes among legal first tokens; modified constrained-decoding protocol."
+  },
+  "candidate_token_ids": {
+    "1": [
+      3363,
+      220,
+      50256
+    ],
+    "0": [
+      1400,
+      220,
+      50256
+    ]
+  },
+  "answers": {
+    "Yes": 1,
+    "No": 0
+  },
+  "prediction_sha256": {
+    "Workload-val-rank0.jsonl": "79c1cf05ff79623a341920df268e95ed106a29688412300d8de9f2a4400f4243",
+    "Workload-val-rank1.jsonl": "6d693bd80d6281197c2cf19456c8317cdd4e67c07b2f5b4698c17f19b26c366d"
+  }
+}

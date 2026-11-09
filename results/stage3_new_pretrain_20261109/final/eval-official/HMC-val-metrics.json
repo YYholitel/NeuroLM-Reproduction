@@ -1,0 +1,126 @@
+{
+  "task": "HMC",
+  "split": "val",
+  "full_split": true,
+  "available_samples": 22124,
+  "selected_file_list_sha256": "8f46bad3f0d8af8fc481dd4066670d66de696d1f5172899601c96e10af632403",
+  "metrics": {
+    "samples": 22124,
+    "parse_failures": 0,
+    "accuracy": 0.7077834026396673,
+    "balanced_accuracy": 0.6580532476763223,
+    "weighted_f1": 0.7064605272391714,
+    "cohen_kappa": 0.6143135934716741,
+    "class_support": [
+      4186,
+      2136,
+      7772,
+      4961,
+      3069
+    ],
+    "class_recall": [
+      0.8225035833731486,
+      0.3586142322097378,
+      0.7573340195573854,
+      0.7480346704293489,
+      0.6037797328119908
+    ],
+    "missing_true_classes": [],
+    "confusion_matrix": [
+      [
+        3443,
+        477,
+        179,
+        5,
+        82,
+        0
+      ],
+      [
+        568,
+        766,
+        441,
+        22,
+        339,
+        0
+      ],
+      [
+        124,
+        414,
+        5886,
+        690,
+        658,
+        0
+      ],
+      [
+        19,
+        18,
+        1176,
+        3711,
+        37,
+        0
+      ],
+      [
+        58,
+        305,
+        621,
+        232,
+        1853,
+        0
+      ]
+    ],
+    "confusion_columns": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      "invalid"
+    ],
+    "invalid_policy": "retain_in_denominator_and_count_wrong",
+    "roc_auc": null,
+    "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+  },
+  "candidate_token_ids": {
+    "0": [
+      32,
+      8,
+      220,
+      50256
+    ],
+    "1": [
+      33,
+      8,
+      220,
+      50256
+    ],
+    "2": [
+      34,
+      8,
+      220,
+      50256
+    ],
+    "3": [
+      35,
+      8,
+      220,
+      50256
+    ],
+    "4": [
+      36,
+      8,
+      220,
+      50256
+    ]
+  },
+  "answers": {
+    "(A)": 0,
+    "(B)": 1,
+    "(C)": 2,
+    "(D)": 3,
+    "(E)": 4
+  },
+  "prediction_sha256": {
+    "HMC-val-rank0.jsonl": "c36241f8161b2e2904b418f4a05fc999c819c63d5f30d49dcf9048f5d6a623c1",
+    "HMC-val-rank1.jsonl": "611310ff3f726e3121a272beff1a1176c985f6a7332e471aca1108f9c61f66fe"
+  }
+}

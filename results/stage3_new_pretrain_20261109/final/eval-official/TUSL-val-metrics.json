@@ -1,0 +1,84 @@
+{
+  "task": "TUSL",
+  "split": "val",
+  "full_split": true,
+  "available_samples": 66,
+  "selected_file_list_sha256": "5355d4c0940875a87cc39ca7cb27b07c2b202337368d65561871ca156a5e1a96",
+  "metrics": {
+    "samples": 66,
+    "parse_failures": 0,
+    "accuracy": 0.5,
+    "balanced_accuracy": 0.5180527383367141,
+    "weighted_f1": 0.4938513969521721,
+    "cohen_kappa": 0.2461059190031153,
+    "class_support": [
+      17,
+      20,
+      29
+    ],
+    "class_recall": [
+      0.7058823529411765,
+      0.4,
+      0.4482758620689655
+    ],
+    "missing_true_classes": [],
+    "confusion_matrix": [
+      [
+        12,
+        3,
+        2,
+        0
+      ],
+      [
+        2,
+        8,
+        10,
+        0
+      ],
+      [
+        12,
+        4,
+        13,
+        0
+      ]
+    ],
+    "confusion_columns": [
+      0,
+      1,
+      2,
+      "invalid"
+    ],
+    "invalid_policy": "retain_in_denominator_and_count_wrong",
+    "roc_auc": null,
+    "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+  },
+  "candidate_token_ids": {
+    "0": [
+      32,
+      8,
+      220,
+      50256
+    ],
+    "1": [
+      33,
+      8,
+      220,
+      50256
+    ],
+    "2": [
+      34,
+      8,
+      220,
+      50256
+    ]
+  },
+  "answers": {
+    "(A)": 0,
+    "(B)": 1,
+    "(C)": 2
+  },
+  "prediction_sha256": {
+    "TUSL-val-rank0.jsonl": "fdf4a96222c4470d6012937c06c409fb03c519c12a51672b532f9d07ee50273c",
+    "TUSL-val-rank1.jsonl": "dff10b65b38007755119c2fc96e6f8d7db9475abee0e92ce8eaced4748d8f16d"
+  }
+}

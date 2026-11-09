@@ -2,7 +2,7 @@
 
 复现 ICLR 2025 论文 [NeuroLM: A Universal Multi-task Foundation Model for Bridging the Gap between Language and EEG Signals](https://arxiv.org/pdf/2409.00101) 的实验结果。本仓库记录实验配置、数据来源、运行日志和与论文的对照；作者实现位于 [935963004/NeuroLM](https://github.com/935963004/NeuroLM)。
 
-> 当前状态（2026-11-09）：我们的 VQ + GPT-2 初始化模型已完成 [20 epoch 阶段二预训练](docs/pretrain_stage2_log.md)和[阶段三一轮指令微调](docs/stage3_new_pretrain_comparison.md)。新权重已核验，正在与既有官方初始化基线进行五任务完整评估，统一采用选项约束解码；尚无本轮最终对照结论。早期[自由生成基线](results/INSTRUCTION_FIVE_TASK_20261108.md)的 TUSL 解析失败与[后续修正评估](docs/Downstream_eval_log.md)分别记录，不混合比较。论文六任务、5 epochs、三种子复现仍未完成。
+> 当前状态（2026-11-09）：我们的 VQ + GPT-2 初始化模型已完成 [20 epoch 阶段二预训练](docs/pretrain_stage2_log.md)和[阶段三匹配对照](docs/stage3_new_pretrain_comparison.md)。相同五任务、1 epoch、seed 42 下，新模型五项测试平衡准确率均低于官方初始化基线。两模型合计 402,480 条 val/test 预测通过独立审计，非法答案为 0；完整指标、对比图和权重哈希已归档。论文六任务、5 epochs、三种子复现仍未完成。
 
 ## 目标与进度
 
@@ -35,7 +35,7 @@ git -C upstream checkout 0cda9876d8ce6ee07ed0c43eee5e9a6f5c24b177
 | 数据与权重准备 | 部分完成 | 五项 EEG 数据与 OpenWebText 已预处理并保存清单；SEED 缺输入，见[数据清单](docs/DATASETS.md) |
 | 五任务指令微调 | 已完成 | 完整 1 epoch、898 次参数更新；全部验证/测试及 checkpoint SHA-256 通过[结果审计](results/INSTRUCTION_FIVE_TASK_20261108.md) |
 | 我们的阶段二预训练 | 已完成 | 20 epoch、16 H20，见[最终权重与训练曲线](docs/pretrain_stage2_log.md) |
-| 新模型阶段三匹配对照 | 运行中 | 相同五任务指令微调配置，随后对新旧模型各评估 201,240 个 val/test 窗口，见[运行记录](docs/stage3_new_pretrain_comparison.md) |
+| 新模型阶段三匹配对照 | 已完成 | 新旧模型各 201,240 条预测通过审计；五项测试 BA 均未提升，见[完整对照](docs/stage3_new_pretrain_comparison.md) |
 | 论文六任务结果 | 未产生 | 当前为不含 SEED 的五任务、单种子、1 epoch 修改协议 |
 
 所有结果都将附带数据划分、配置、随机种子、源码提交、运行命令和原始日志；缺少证据时保持“未复现”状态。

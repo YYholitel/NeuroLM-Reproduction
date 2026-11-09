@@ -1,0 +1,193 @@
+{
+  "status": "passed",
+  "summary_sha256": "b69192869657480ab9000a6d4e4c2038d7463598d432e7f0f5002172f5a91fb4",
+  "total_samples": 201240,
+  "splits": [
+    {
+      "task": "TUSL",
+      "split": "val",
+      "samples": 66,
+      "parse_failures": 0,
+      "independent_metrics": {
+        "accuracy": 0.5,
+        "balanced_accuracy": 0.5180527383367141,
+        "weighted_f1": 0.4938513969521721,
+        "cohen_kappa": 0.24610591900311518
+      },
+      "artifact_sha256": {
+        "TUSL-val-rank0.jsonl": "fdf4a96222c4470d6012937c06c409fb03c519c12a51672b532f9d07ee50273c",
+        "TUSL-val-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "TUSL-val-rank1.jsonl": "dff10b65b38007755119c2fc96e6f8d7db9475abee0e92ce8eaced4748d8f16d",
+        "TUSL-val-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "task": "TUSL",
+      "split": "test",
+      "samples": 60,
+      "parse_failures": 0,
+      "independent_metrics": {
+        "accuracy": 0.25,
+        "balanced_accuracy": 0.4696969696969697,
+        "weighted_f1": 0.2615297157622739,
+        "cohen_kappa": -0.07526881720430101
+      },
+      "artifact_sha256": {
+        "TUSL-test-rank0.jsonl": "a15ae91666589afdcd224d604abae4fe38aa38e5a5273027f121afae08df1f26",
+        "TUSL-test-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "TUSL-test-rank1.jsonl": "7d799e57260570919ac8c28bbbebb4c0fa202b38359902f8fb9658d502d49a8e",
+        "TUSL-test-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "task": "TUAB",
+      "split": "val",
+      "samples": 73627,
+      "parse_failures": 0,
+      "independent_metrics": {
+        "accuracy": 0.7884335909381069,
+        "balanced_accuracy": 0.795217755399191,
+        "weighted_f1": 0.7864906842383488,
+        "cohen_kappa": 0.5817123641538848,
+        "roc_auc": 0.8854124148812849
+      },
+      "artifact_sha256": {
+        "TUAB-val-rank0.jsonl": "596f2a7e8c35976f953ebf8bdb0db1443170e37c316ac02e3e66302e372f0fa3",
+        "TUAB-val-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "TUAB-val-rank1.jsonl": "f6aa10b066ab584acf76f88e810ce499089e803614ffba87134388cb18ccea55",
+        "TUAB-val-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "task": "TUAB",
+      "split": "test",
+      "samples": 36945,
+      "parse_failures": 0,
+      "independent_metrics": {
+        "accuracy": 0.7904723237244553,
+        "balanced_accuracy": 0.7811124331144872,
+        "weighted_f1": 0.7864084143139531,
+        "cohen_kappa": 0.5714697359958643,
+        "roc_auc": 0.8803663322747525
+      },
+      "artifact_sha256": {
+        "TUAB-test-rank0.jsonl": "56eb663d6cae238153483ee8c2b1289fad3927f5765e7ec841a64926eb53f87b",
+        "TUAB-test-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "TUAB-test-rank1.jsonl": "a09a414642a01efebebcd087d7516204c140a6d56a230d2f10f1b979c21afff0",
+        "TUAB-test-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "task": "TUEV",
+      "split": "val",
+      "samples": 15662,
+      "parse_failures": 0,
+      "independent_metrics": {
+        "accuracy": 0.756736049035883,
+        "balanced_accuracy": 0.5573987095746221,
+        "weighted_f1": 0.7687800223490733,
+        "cohen_kappa": 0.5267245274307658
+      },
+      "artifact_sha256": {
+        "TUEV-val-rank0.jsonl": "d440c7d8cbd7137f9573a097d1be46670e923ac8550eac0b095b5a7a0d02d5f1",
+        "TUEV-val-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "TUEV-val-rank1.jsonl": "24ddb048012828a952395ac28611ae6268f7aa2a92a6c0bf1ecc9d39098dfe40",
+        "TUEV-val-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "task": "TUEV",
+      "split": "test",
+      "samples": 28305,
+      "parse_failures": 0,
+      "independent_metrics": {
+        "accuracy": 0.754283695460166,
+        "balanced_accuracy": 0.5342808704629335,
+        "weighted_f1": 0.7630982787606514,
+        "cohen_kappa": 0.5415950918159687
+      },
+      "artifact_sha256": {
+        "TUEV-test-rank0.jsonl": "60986411aa9258f0bde7df2d89f4e7d0ed4a61f24b8e84e6dabe527b19342976",
+        "TUEV-test-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "TUEV-test-rank1.jsonl": "39b62be171ac7c7020398b78e26420ec5d500d6179315ba043bcf97af69d2224",
+        "TUEV-test-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "task": "HMC",
+      "split": "val",
+      "samples": 22124,
+      "parse_failures": 0,
+      "independent_metrics": {
+        "accuracy": 0.7077834026396673,
+        "balanced_accuracy": 0.6580532476763223,
+        "weighted_f1": 0.7064605272391714,
+        "cohen_kappa": 0.6143135934716741
+      },
+      "artifact_sha256": {
+        "HMC-val-rank0.jsonl": "c36241f8161b2e2904b418f4a05fc999c819c63d5f30d49dcf9048f5d6a623c1",
+        "HMC-val-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "HMC-val-rank1.jsonl": "611310ff3f726e3121a272beff1a1176c985f6a7332e471aca1108f9c61f66fe",
+        "HMC-val-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "task": "HMC",
+      "split": "test",
+      "samples": 23871,
+      "parse_failures": 0,
+      "independent_metrics": {
+        "accuracy": 0.6990071635038331,
+        "balanced_accuracy": 0.6602695802733943,
+        "weighted_f1": 0.6918538181246955,
+        "cohen_kappa": 0.6011712385088154
+      },
+      "artifact_sha256": {
+        "HMC-test-rank0.jsonl": "cccd8721e10dfb9872ee2109bb744be2a91220f419262f72e0e0076a01f9da41",
+        "HMC-test-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "HMC-test-rank1.jsonl": "6280d11b415a2db9c49f84d379b096d7d266482f4c927ded7f64093dc569860b",
+        "HMC-test-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "task": "Workload",
+      "split": "val",
+      "samples": 290,
+      "parse_failures": 0,
+      "independent_metrics": {
+        "accuracy": 0.5689655172413793,
+        "balanced_accuracy": 0.5689655172413793,
+        "weighted_f1": 0.49805452858666,
+        "cohen_kappa": 0.13793103448275867,
+        "roc_auc": 0.6865636147443519
+      },
+      "artifact_sha256": {
+        "Workload-val-rank0.jsonl": "dcb39f8b3df1e4da6d88134c3d98ba27d17f54f6289d368465812c414d765e6a",
+        "Workload-val-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "Workload-val-rank1.jsonl": "c7aaf1368810532c66d3464fc7701546c9122e64fe16fb33fd2b33f7463893f1",
+        "Workload-val-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "task": "Workload",
+      "split": "test",
+      "samples": 290,
+      "parse_failures": 0,
+      "independent_metrics": {
+        "accuracy": 0.5172413793103449,
+        "balanced_accuracy": 0.5172413793103448,
+        "weighted_f1": 0.473028399356212,
+        "cohen_kappa": 0.03448275862068961,
+        "roc_auc": 0.6041379310344828
+      },
+      "artifact_sha256": {
+        "Workload-test-rank0.jsonl": "2c85fd41eed2c7092d2181168e13b2f876e51ea69a025e076db27d988cf2c1f0",
+        "Workload-test-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "Workload-test-rank1.jsonl": "61ae0964ac184b9a4c8f3832eac2cf5b3ad786e426e8e54671406754dad2a95b",
+        "Workload-test-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "independent_strict_parser": true,
+  "invalid_log_matches_all_failures": true
+}

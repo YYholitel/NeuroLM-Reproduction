@@ -271,3 +271,10 @@ Evidence: [new-encoder summary](../results/downstream_constrained_newvq_gpu_2026
 [matched-protocol comparison](../results/downstream_encoder_swap_comparison_20261108.json).
 Raw predictions and EEG inputs remain on the authorized server; only code,
 configuration, hashes and aggregate measurements are published.
+
+
+## 2026-11-09: matched stage-two/three comparison completed
+
+The new VQ + completed 20-epoch pretraining checkpoint has now undergone matched five-task instruction tuning (one epoch, seed 42, two H20 GPUs). Both it and the official-initialized instruction baseline were evaluated with identical constrained decoding over all five validation/test datasets. Each model's 201,240 predictions passed the independent audit with zero invalid answers. The new model's test balanced accuracy is lower on all five tasks. This is the aligned end-to-end comparison; it does not reuse the earlier unaligned encoder-swap diagnostic.
+
+See [complete matched results, training curves, checkpoint hashes and limitations](stage3_new_pretrain_comparison.md). TI-ONE task `train-1713786859836016384` finished `SUCCEED`, worker exit 0, on 2026-11-09 at 06:27:05 UTC.

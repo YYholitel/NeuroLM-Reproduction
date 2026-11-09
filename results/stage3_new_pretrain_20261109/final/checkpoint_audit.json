@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "epochs_completed": 1,
+  "microsteps": 7182,
+  "optimizer_steps": 898,
+  "all_model_tensors_finite": true,
+  "frozen_encoder_unchanged": true,
+  "gpt_weights_updated": true,
+  "checkpoint_sha256": "39a53023b4d6b77b5264ec9d7461f202ab023938a0d9804ead493115a2bc50af",
+  "checkpoint_bytes": 2377398188,
+  "checkpoint_path": "/mnt/cfs-omni/lhy/neurolm-reproduction/stage3-new-pretrain-20261109-r1/train/checkpoints/instruction-B/ckpt.pt",
+  "encoder_sha256": "c7cdbc311544d5cc72003611788cea28c98a52778922b7a8e7d76710b314876a"
+}

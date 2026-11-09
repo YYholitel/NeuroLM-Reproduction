@@ -1,0 +1,150 @@
+{
+  "task": "TUEV",
+  "split": "val",
+  "full_split": true,
+  "available_samples": 15662,
+  "selected_file_list_sha256": "36269e385461c8ceec5a3dfeef84b0ad16ef0a6917fe38323c62ae1f1de68c83",
+  "metrics": {
+    "samples": 15662,
+    "parse_failures": 0,
+    "accuracy": 0.756736049035883,
+    "balanced_accuracy": 0.5573987095746221,
+    "weighted_f1": 0.7687800223490733,
+    "cohen_kappa": 0.5267245274307657,
+    "class_support": [
+      229,
+      515,
+      1528,
+      59,
+      2309,
+      11022
+    ],
+    "class_recall": [
+      0.0,
+      0.9029126213592233,
+      0.2846858638743455,
+      0.6610169491525424,
+      0.6396708531831962,
+      0.856105969878425
+    ],
+    "missing_true_classes": [],
+    "confusion_matrix": [
+      [
+        0,
+        41,
+        70,
+        19,
+        0,
+        99,
+        0
+      ],
+      [
+        0,
+        465,
+        8,
+        0,
+        35,
+        7,
+        0
+      ],
+      [
+        10,
+        975,
+        435,
+        45,
+        50,
+        13,
+        0
+      ],
+      [
+        0,
+        0,
+        2,
+        39,
+        8,
+        10,
+        0
+      ],
+      [
+        0,
+        171,
+        129,
+        28,
+        1477,
+        504,
+        0
+      ],
+      [
+        44,
+        355,
+        142,
+        26,
+        1019,
+        9436,
+        0
+      ]
+    ],
+    "confusion_columns": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      "invalid"
+    ],
+    "invalid_policy": "retain_in_denominator_and_count_wrong",
+    "roc_auc": null,
+    "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+  },
+  "candidate_token_ids": {
+    "0": [
+      32,
+      8,
+      220,
+      50256
+    ],
+    "1": [
+      33,
+      8,
+      220,
+      50256
+    ],
+    "2": [
+      34,
+      8,
+      220,
+      50256
+    ],
+    "3": [
+      35,
+      8,
+      220,
+      50256
+    ],
+    "4": [
+      36,
+      8,
+      220,
+      50256
+    ],
+    "5": [
+      37,
+      8,
+      220,
+      50256
+    ]
+  },
+  "answers": {
+    "(A)": 0,
+    "(B)": 1,
+    "(C)": 2,
+    "(D)": 3,
+    "(E)": 4,
+    "(F)": 5
+  },
+  "prediction_sha256": {
+    "TUEV-val-rank0.jsonl": "d440c7d8cbd7137f9573a097d1be46670e923ac8550eac0b095b5a7a0d02d5f1",
+    "TUEV-val-rank1.jsonl": "24ddb048012828a952395ac28611ae6268f7aa2a92a6c0bf1ecc9d39098dfe40"
+  }
+}

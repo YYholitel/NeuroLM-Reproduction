@@ -1,0 +1,1264 @@
+{
+  "utc": "2026-11-09T06:28:05.405564+00:00",
+  "logged_training_steps": 718,
+  "last_logged": {
+    "epoch": 0,
+    "step": 7180,
+    "iter_num": 7179,
+    "lr": 5.0000239161905404e-05,
+    "instruction_loss": 0.12774591147899628,
+    "text_loss": 3.0003223419189453
+  },
+  "checkpoint_audited": true,
+  "completed_comparison": true,
+  "evaluation": {
+    "new": [
+      {
+        "task": "HMC",
+        "split": "test",
+        "metrics": {
+          "samples": 23871,
+          "parse_failures": 0,
+          "accuracy": 0.6530937120355242,
+          "balanced_accuracy": 0.5780219836903762,
+          "weighted_f1": 0.6303085014292324,
+          "cohen_kappa": 0.5239888561777771,
+          "class_support": [
+            3805,
+            2868,
+            8843,
+            4710,
+            3645
+          ],
+          "class_recall": [
+            0.7174770039421814,
+            0.16213389121338911,
+            0.8097930566549814,
+            0.8050955414012739,
+            0.39561042524005485
+          ],
+          "missing_true_classes": [],
+          "confusion_matrix": [
+            [
+              2730,
+              320,
+              682,
+              14,
+              59,
+              0
+            ],
+            [
+              505,
+              465,
+              1463,
+              93,
+              342,
+              0
+            ],
+            [
+              98,
+              146,
+              7161,
+              1082,
+              356,
+              0
+            ],
+            [
+              17,
+              3,
+              894,
+              3792,
+              4,
+              0
+            ],
+            [
+              52,
+              170,
+              1795,
+              186,
+              1442,
+              0
+            ]
+          ],
+          "confusion_columns": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            "invalid"
+          ],
+          "invalid_policy": "retain_in_denominator_and_count_wrong",
+          "roc_auc": null,
+          "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+        }
+      },
+      {
+        "task": "HMC",
+        "split": "val",
+        "metrics": {
+          "samples": 22124,
+          "parse_failures": 0,
+          "accuracy": 0.6657024046284578,
+          "balanced_accuracy": 0.5700303077106466,
+          "weighted_f1": 0.6461678557276647,
+          "cohen_kappa": 0.5438137343836338,
+          "class_support": [
+            4186,
+            2136,
+            7772,
+            4961,
+            3069
+          ],
+          "class_recall": [
+            0.7391304347826086,
+            0.2045880149812734,
+            0.8239835306227483,
+            0.777464220923201,
+            0.30498533724340177
+          ],
+          "missing_true_classes": [],
+          "confusion_matrix": [
+            [
+              3094,
+              307,
+              644,
+              22,
+              119,
+              0
+            ],
+            [
+              592,
+              437,
+              916,
+              37,
+              154,
+              0
+            ],
+            [
+              139,
+              167,
+              6404,
+              773,
+              289,
+              0
+            ],
+            [
+              15,
+              4,
+              1079,
+              3857,
+              6,
+              0
+            ],
+            [
+              58,
+              185,
+              1629,
+              261,
+              936,
+              0
+            ]
+          ],
+          "confusion_columns": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            "invalid"
+          ],
+          "invalid_policy": "retain_in_denominator_and_count_wrong",
+          "roc_auc": null,
+          "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+        }
+      },
+      {
+        "task": "TUAB",
+        "split": "test",
+        "metrics": {
+          "samples": 36945,
+          "parse_failures": 0,
+          "accuracy": 0.7702801461632156,
+          "balanced_accuracy": 0.7652216743766485,
+          "weighted_f1": 0.7689167447570378,
+          "cohen_kappa": 0.5343599429833681,
+          "class_support": [
+            19907,
+            17038
+          ],
+          "class_recall": [
+            0.8303611794846034,
+            0.7000821692686935
+          ],
+          "missing_true_classes": [],
+          "confusion_matrix": [
+            [
+              16530,
+              3377,
+              0
+            ],
+            [
+              5110,
+              11928,
+              0
+            ]
+          ],
+          "confusion_columns": [
+            0,
+            1,
+            "invalid"
+          ],
+          "invalid_policy": "retain_in_denominator_and_count_wrong",
+          "roc_auc": 0.843693486662741,
+          "roc_auc_note": "Conditional probability of Yes among legal first tokens; modified constrained-decoding protocol."
+        }
+      },
+      {
+        "task": "TUAB",
+        "split": "val",
+        "metrics": {
+          "samples": 73627,
+          "parse_failures": 0,
+          "accuracy": 0.7603868146196369,
+          "balanced_accuracy": 0.7636478725525586,
+          "weighted_f1": 0.7601862372988484,
+          "cohen_kappa": 0.523038921357389,
+          "class_support": [
+            34679,
+            38948
+          ],
+          "class_recall": [
+            0.8198910003171949,
+            0.7074047447879224
+          ],
+          "missing_true_classes": [],
+          "confusion_matrix": [
+            [
+              28433,
+              6246,
+              0
+            ],
+            [
+              11396,
+              27552,
+              0
+            ]
+          ],
+          "confusion_columns": [
+            0,
+            1,
+            "invalid"
+          ],
+          "invalid_policy": "retain_in_denominator_and_count_wrong",
+          "roc_auc": 0.8435735247932117,
+          "roc_auc_note": "Conditional probability of Yes among legal first tokens; modified constrained-decoding protocol."
+        }
+      },
+      {
+        "task": "TUEV",
+        "split": "test",
+        "metrics": {
+          "samples": 28305,
+          "parse_failures": 0,
+          "accuracy": 0.7084967320261438,
+          "balanced_accuracy": 0.4699977603443239,
+          "weighted_f1": 0.7191361038716818,
+          "cohen_kappa": 0.43735498950303503,
+          "class_support": [
+            567,
+            3561,
+            1998,
+            329,
+            2204,
+            19646
+          ],
+          "class_recall": [
+            0.021164021164021163,
+            0.44397641112047176,
+            0.1871871871871872,
+            0.7446808510638298,
+            0.5798548094373865,
+            0.8431232820930469
+          ],
+          "missing_true_classes": [],
+          "confusion_matrix": [
+            [
+              12,
+              30,
+              73,
+              0,
+              407,
+              45,
+              0
+            ],
+            [
+              176,
+              1581,
+              456,
+              6,
+              698,
+              644,
+              0
+            ],
+            [
+              162,
+              382,
+              374,
+              39,
+              715,
+              326,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              245,
+              36,
+              48,
+              0
+            ],
+            [
+              44,
+              9,
+              29,
+              17,
+              1278,
+              827,
+              0
+            ],
+            [
+              137,
+              735,
+              641,
+              61,
+              1508,
+              16564,
+              0
+            ]
+          ],
+          "confusion_columns": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            "invalid"
+          ],
+          "invalid_policy": "retain_in_denominator_and_count_wrong",
+          "roc_auc": null,
+          "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+        }
+      },
+      {
+        "task": "TUEV",
+        "split": "val",
+        "metrics": {
+          "samples": 15662,
+          "parse_failures": 0,
+          "accuracy": 0.740135359468778,
+          "balanced_accuracy": 0.5238165752095364,
+          "weighted_f1": 0.7601049692637338,
+          "cohen_kappa": 0.5105186030196811,
+          "class_support": [
+            229,
+            515,
+            1528,
+            59,
+            2309,
+            11022
+          ],
+          "class_recall": [
+            0.004366812227074236,
+            0.6601941747572816,
+            0.41492146596858637,
+            0.5932203389830508,
+            0.6453009961022087,
+            0.8248956632190165
+          ],
+          "missing_true_classes": [],
+          "confusion_matrix": [
+            [
+              1,
+              42,
+              115,
+              0,
+              24,
+              47,
+              0
+            ],
+            [
+              95,
+              340,
+              15,
+              6,
+              59,
+              0,
+              0
+            ],
+            [
+              22,
+              820,
+              634,
+              7,
+              42,
+              3,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              35,
+              24,
+              0,
+              0
+            ],
+            [
+              40,
+              96,
+              163,
+              120,
+              1490,
+              400,
+              0
+            ],
+            [
+              0,
+              25,
+              411,
+              48,
+              1446,
+              9092,
+              0
+            ]
+          ],
+          "confusion_columns": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            "invalid"
+          ],
+          "invalid_policy": "retain_in_denominator_and_count_wrong",
+          "roc_auc": null,
+          "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+        }
+      },
+      {
+        "task": "TUSL",
+        "split": "test",
+        "metrics": {
+          "samples": 60,
+          "parse_failures": 0,
+          "accuracy": 0.25,
+          "balanced_accuracy": 0.27146464646464646,
+          "weighted_f1": 0.32404647514462204,
+          "cohen_kappa": -0.012373453318335195,
+          "class_support": [
+            33,
+            3,
+            24
+          ],
+          "class_recall": [
+            0.2727272727272727,
+            0.3333333333333333,
+            0.20833333333333334
+          ],
+          "missing_true_classes": [],
+          "confusion_matrix": [
+            [
+              9,
+              8,
+              16,
+              0
+            ],
+            [
+              0,
+              1,
+              2,
+              0
+            ],
+            [
+              0,
+              19,
+              5,
+              0
+            ]
+          ],
+          "confusion_columns": [
+            0,
+            1,
+            2,
+            "invalid"
+          ],
+          "invalid_policy": "retain_in_denominator_and_count_wrong",
+          "roc_auc": null,
+          "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+        }
+      },
+      {
+        "task": "TUSL",
+        "split": "val",
+        "metrics": {
+          "samples": 66,
+          "parse_failures": 0,
+          "accuracy": 0.4696969696969697,
+          "balanced_accuracy": 0.45743745774171735,
+          "weighted_f1": 0.46675246675246673,
+          "cohen_kappa": 0.17822838847385275,
+          "class_support": [
+            17,
+            20,
+            29
+          ],
+          "class_recall": [
+            0.47058823529411764,
+            0.35,
+            0.5517241379310345
+          ],
+          "missing_true_classes": [],
+          "confusion_matrix": [
+            [
+              8,
+              3,
+              6,
+              0
+            ],
+            [
+              4,
+              7,
+              9,
+              0
+            ],
+            [
+              6,
+              7,
+              16,
+              0
+            ]
+          ],
+          "confusion_columns": [
+            0,
+            1,
+            2,
+            "invalid"
+          ],
+          "invalid_policy": "retain_in_denominator_and_count_wrong",
+          "roc_auc": null,
+          "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+        }
+      },
+      {
+        "task": "Workload",
+        "split": "test",
+        "metrics": {
+          "samples": 290,
+          "parse_failures": 0,
+          "accuracy": 0.5103448275862069,
+          "balanced_accuracy": 0.5103448275862069,
+          "weighted_f1": 0.4913788844424683,
+          "cohen_kappa": 0.020689655172413834,
+          "class_support": [
+            145,
+            145
+          ],
+          "class_recall": [
+            0.7034482758620689,
+            0.31724137931034485
+          ],
+          "missing_true_classes": [],
+          "confusion_matrix": [
+            [
+              102,
+              43,
+              0
+            ],
+            [
+              99,
+              46,
+              0
+            ]
+          ],
+          "confusion_columns": [
+            0,
+            1,
+            "invalid"
+          ],
+          "invalid_policy": "retain_in_denominator_and_count_wrong",
+          "roc_auc": 0.515101070154578,
+          "roc_auc_note": "Conditional probability of Yes among legal first tokens; modified constrained-decoding protocol."
+        }
+      },
+      {
+        "task": "Workload",
+        "split": "val",
+        "metrics": {
+          "samples": 290,
+          "parse_failures": 0,
+          "accuracy": 0.6172413793103448,
+          "balanced_accuracy": 0.6172413793103448,
+          "weighted_f1": 0.6007144717746435,
+          "cohen_kappa": 0.23448275862068968,
+          "class_support": [
+            145,
+            145
+          ],
+          "class_recall": [
+            0.8206896551724138,
+            0.41379310344827586
+          ],
+          "missing_true_classes": [],
+          "confusion_matrix": [
+            [
+              119,
+              26,
+              0
+            ],
+            [
+              85,
+              60,
+              0
+            ]
+          ],
+          "confusion_columns": [
+            0,
+            1,
+            "invalid"
+          ],
+          "invalid_policy": "retain_in_denominator_and_count_wrong",
+          "roc_auc": 0.6768608799048751,
+          "roc_auc_note": "Conditional probability of Yes among legal first tokens; modified constrained-decoding protocol."
+        }
+      }
+    ],
+    "official": [
+      {
+        "task": "HMC",
+        "split": "test",
+        "metrics": {
+          "samples": 23871,
+          "parse_failures": 0,
+          "accuracy": 0.6990071635038331,
+          "balanced_accuracy": 0.6602695802733943,
+          "weighted_f1": 0.6918538181246955,
+          "cohen_kappa": 0.6011712385088154,
+          "class_support": [
+            3805,
+            2868,
+            8843,
+            4710,
+            3645
+          ],
+          "class_recall": [
+            0.776084099868594,
+            0.2764993026499303,
+            0.7495193938708583,
+            0.7955414012738854,
+            0.7037037037037037
+          ],
+          "missing_true_classes": [],
+          "confusion_matrix": [
+            [
+              2953,
+              520,
+              236,
+              7,
+              89,
+              0
+            ],
+            [
+              463,
+              793,
+              870,
+              52,
+              690,
+              0
+            ],
+            [
+              107,
+              239,
+              6628,
+              915,
+              954,
+              0
+            ],
+            [
+              6,
+              7,
+              925,
+              3747,
+              25,
+              0
+            ],
+            [
+              77,
+              265,
+              675,
+              63,
+              2565,
+              0
+            ]
+          ],
+          "confusion_columns": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            "invalid"
+          ],
+          "invalid_policy": "retain_in_denominator_and_count_wrong",
+          "roc_auc": null,
+          "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+        }
+      },
+      {
+        "task": "HMC",
+        "split": "val",
+        "metrics": {
+          "samples": 22124,
+          "parse_failures": 0,
+          "accuracy": 0.7077834026396673,
+          "balanced_accuracy": 0.6580532476763223,
+          "weighted_f1": 0.7064605272391714,
+          "cohen_kappa": 0.6143135934716741,
+          "class_support": [
+            4186,
+            2136,
+            7772,
+            4961,
+            3069
+          ],
+          "class_recall": [
+            0.8225035833731486,
+            0.3586142322097378,
+            0.7573340195573854,
+            0.7480346704293489,
+            0.6037797328119908
+          ],
+          "missing_true_classes": [],
+          "confusion_matrix": [
+            [
+              3443,
+              477,
+              179,
+              5,
+              82,
+              0
+            ],
+            [
+              568,
+              766,
+              441,
+              22,
+              339,
+              0
+            ],
+            [
+              124,
+              414,
+              5886,
+              690,
+              658,
+              0
+            ],
+            [
+              19,
+              18,
+              1176,
+              3711,
+              37,
+              0
+            ],
+            [
+              58,
+              305,
+              621,
+              232,
+              1853,
+              0
+            ]
+          ],
+          "confusion_columns": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            "invalid"
+          ],
+          "invalid_policy": "retain_in_denominator_and_count_wrong",
+          "roc_auc": null,
+          "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+        }
+      },
+      {
+        "task": "TUAB",
+        "split": "test",
+        "metrics": {
+          "samples": 36945,
+          "parse_failures": 0,
+          "accuracy": 0.7904723237244553,
+          "balanced_accuracy": 0.7811124331144872,
+          "weighted_f1": 0.7864084143139531,
+          "cohen_kappa": 0.5714697359958643,
+          "class_support": [
+            19907,
+            17038
+          ],
+          "class_recall": [
+            0.901642638267946,
+            0.6605822279610283
+          ],
+          "missing_true_classes": [],
+          "confusion_matrix": [
+            [
+              17949,
+              1958,
+              0
+            ],
+            [
+              5783,
+              11255,
+              0
+            ]
+          ],
+          "confusion_columns": [
+            0,
+            1,
+            "invalid"
+          ],
+          "invalid_policy": "retain_in_denominator_and_count_wrong",
+          "roc_auc": 0.8803663322747525,
+          "roc_auc_note": "Conditional probability of Yes among legal first tokens; modified constrained-decoding protocol."
+        }
+      },
+      {
+        "task": "TUAB",
+        "split": "val",
+        "metrics": {
+          "samples": 73627,
+          "parse_failures": 0,
+          "accuracy": 0.7884335909381069,
+          "balanced_accuracy": 0.795217755399191,
+          "weighted_f1": 0.7864906842383488,
+          "cohen_kappa": 0.5817123641538848,
+          "class_support": [
+            34679,
+            38948
+          ],
+          "class_recall": [
+            0.9122235358574353,
+            0.6782119749409469
+          ],
+          "missing_true_classes": [],
+          "confusion_matrix": [
+            [
+              31635,
+              3044,
+              0
+            ],
+            [
+              12533,
+              26415,
+              0
+            ]
+          ],
+          "confusion_columns": [
+            0,
+            1,
+            "invalid"
+          ],
+          "invalid_policy": "retain_in_denominator_and_count_wrong",
+          "roc_auc": 0.8854124148812849,
+          "roc_auc_note": "Conditional probability of Yes among legal first tokens; modified constrained-decoding protocol."
+        }
+      },
+      {
+        "task": "TUEV",
+        "split": "test",
+        "metrics": {
+          "samples": 28305,
+          "parse_failures": 0,
+          "accuracy": 0.754283695460166,
+          "balanced_accuracy": 0.5342808704629335,
+          "weighted_f1": 0.7630982787606514,
+          "cohen_kappa": 0.5415950918159688,
+          "class_support": [
+            567,
+            3561,
+            1998,
+            329,
+            2204,
+            19646
+          ],
+          "class_recall": [
+            0.005291005291005291,
+            0.7514743049705139,
+            0.4389389389389389,
+            0.5531914893617021,
+            0.6311252268602541,
+            0.8256642573551868
+          ],
+          "missing_true_classes": [],
+          "confusion_matrix": [
+            [
+              3,
+              304,
+              102,
+              0,
+              56,
+              102,
+              0
+            ],
+            [
+              18,
+              2676,
+              214,
+              16,
+              458,
+              179,
+              0
+            ],
+            [
+              19,
+              616,
+              877,
+              60,
+              187,
+              239,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              182,
+              74,
+              73,
+              0
+            ],
+            [
+              0,
+              16,
+              114,
+              21,
+              1391,
+              662,
+              0
+            ],
+            [
+              66,
+              806,
+              824,
+              179,
+              1550,
+              16221,
+              0
+            ]
+          ],
+          "confusion_columns": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            "invalid"
+          ],
+          "invalid_policy": "retain_in_denominator_and_count_wrong",
+          "roc_auc": null,
+          "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+        }
+      },
+      {
+        "task": "TUEV",
+        "split": "val",
+        "metrics": {
+          "samples": 15662,
+          "parse_failures": 0,
+          "accuracy": 0.756736049035883,
+          "balanced_accuracy": 0.5573987095746221,
+          "weighted_f1": 0.7687800223490733,
+          "cohen_kappa": 0.5267245274307657,
+          "class_support": [
+            229,
+            515,
+            1528,
+            59,
+            2309,
+            11022
+          ],
+          "class_recall": [
+            0.0,
+            0.9029126213592233,
+            0.2846858638743455,
+            0.6610169491525424,
+            0.6396708531831962,
+            0.856105969878425
+          ],
+          "missing_true_classes": [],
+          "confusion_matrix": [
+            [
+              0,
+              41,
+              70,
+              19,
+              0,
+              99,
+              0
+            ],
+            [
+              0,
+              465,
+              8,
+              0,
+              35,
+              7,
+              0
+            ],
+            [
+              10,
+              975,
+              435,
+              45,
+              50,
+              13,
+              0
+            ],
+            [
+              0,
+              0,
+              2,
+              39,
+              8,
+              10,
+              0
+            ],
+            [
+              0,
+              171,
+              129,
+              28,
+              1477,
+              504,
+              0
+            ],
+            [
+              44,
+              355,
+              142,
+              26,
+              1019,
+              9436,
+              0
+            ]
+          ],
+          "confusion_columns": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            "invalid"
+          ],
+          "invalid_policy": "retain_in_denominator_and_count_wrong",
+          "roc_auc": null,
+          "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+        }
+      },
+      {
+        "task": "TUSL",
+        "split": "test",
+        "metrics": {
+          "samples": 60,
+          "parse_failures": 0,
+          "accuracy": 0.25,
+          "balanced_accuracy": 0.4696969696969697,
+          "weighted_f1": 0.2615297157622739,
+          "cohen_kappa": -0.07526881720430106,
+          "class_support": [
+            33,
+            3,
+            24
+          ],
+          "class_recall": [
+            0.24242424242424243,
+            1.0,
+            0.16666666666666666
+          ],
+          "missing_true_classes": [],
+          "confusion_matrix": [
+            [
+              8,
+              10,
+              15,
+              0
+            ],
+            [
+              0,
+              3,
+              0,
+              0
+            ],
+            [
+              9,
+              11,
+              4,
+              0
+            ]
+          ],
+          "confusion_columns": [
+            0,
+            1,
+            2,
+            "invalid"
+          ],
+          "invalid_policy": "retain_in_denominator_and_count_wrong",
+          "roc_auc": null,
+          "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+        }
+      },
+      {
+        "task": "TUSL",
+        "split": "val",
+        "metrics": {
+          "samples": 66,
+          "parse_failures": 0,
+          "accuracy": 0.5,
+          "balanced_accuracy": 0.5180527383367141,
+          "weighted_f1": 0.4938513969521721,
+          "cohen_kappa": 0.2461059190031153,
+          "class_support": [
+            17,
+            20,
+            29
+          ],
+          "class_recall": [
+            0.7058823529411765,
+            0.4,
+            0.4482758620689655
+          ],
+          "missing_true_classes": [],
+          "confusion_matrix": [
+            [
+              12,
+              3,
+              2,
+              0
+            ],
+            [
+              2,
+              8,
+              10,
+              0
+            ],
+            [
+              12,
+              4,
+              13,
+              0
+            ]
+          ],
+          "confusion_columns": [
+            0,
+            1,
+            2,
+            "invalid"
+          ],
+          "invalid_policy": "retain_in_denominator_and_count_wrong",
+          "roc_auc": null,
+          "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+        }
+      },
+      {
+        "task": "Workload",
+        "split": "test",
+        "metrics": {
+          "samples": 290,
+          "parse_failures": 0,
+          "accuracy": 0.5172413793103449,
+          "balanced_accuracy": 0.5172413793103448,
+          "weighted_f1": 0.473028399356212,
+          "cohen_kappa": 0.034482758620689724,
+          "class_support": [
+            145,
+            145
+          ],
+          "class_recall": [
+            0.8068965517241379,
+            0.22758620689655173
+          ],
+          "missing_true_classes": [],
+          "confusion_matrix": [
+            [
+              117,
+              28,
+              0
+            ],
+            [
+              112,
+              33,
+              0
+            ]
+          ],
+          "confusion_columns": [
+            0,
+            1,
+            "invalid"
+          ],
+          "invalid_policy": "retain_in_denominator_and_count_wrong",
+          "roc_auc": 0.6041379310344828,
+          "roc_auc_note": "Conditional probability of Yes among legal first tokens; modified constrained-decoding protocol."
+        }
+      },
+      {
+        "task": "Workload",
+        "split": "val",
+        "metrics": {
+          "samples": 290,
+          "parse_failures": 0,
+          "accuracy": 0.5689655172413793,
+          "balanced_accuracy": 0.5689655172413793,
+          "weighted_f1": 0.49805452858666,
+          "cohen_kappa": 0.13793103448275867,
+          "class_support": [
+            145,
+            145
+          ],
+          "class_recall": [
+            0.9448275862068966,
+            0.19310344827586207
+          ],
+          "missing_true_classes": [],
+          "confusion_matrix": [
+            [
+              137,
+              8,
+              0
+            ],
+            [
+              117,
+              28,
+              0
+            ]
+          ],
+          "confusion_columns": [
+            0,
+            1,
+            "invalid"
+          ],
+          "invalid_policy": "retain_in_denominator_and_count_wrong",
+          "roc_auc": 0.6865636147443519,
+          "roc_auc_note": "Conditional probability of Yes among legal first tokens; modified constrained-decoding protocol."
+        }
+      }
+    ]
+  }
+}

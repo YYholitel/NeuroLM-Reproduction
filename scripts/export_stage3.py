@@ -24,7 +24,8 @@ names = [
     'pre_submit_resources.json', 'platform_status.json', 'platform_final_status.json',
     'checkpoint_audit.json', 'comparison.json', 'audit-new.json', 'audit-official.json',
     'exit_code.txt', 'monitor/status.json', 'monitor/training_curves.png',
-    'monitor/comparison.png', 'monitor/training_summary.json', 'train/run_manifest.json', 'train/train_steps.jsonl',
+    'monitor/comparison.png', 'monitor/training_summary.json', 'monitor/platform_completion.json',
+    'train/run_manifest.json', 'train/train_steps.jsonl',
     'author/bundle_manifest.json', 'gpu_metrics.csv',
 ]
 for variant in ('new', 'official'):

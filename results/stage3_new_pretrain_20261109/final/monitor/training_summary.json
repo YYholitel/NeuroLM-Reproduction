@@ -1,0 +1,13 @@
+{
+  "logged_points": 718,
+  "last_logged_microstep": 7180,
+  "loss_scope": "rank-0 microbatch, every 10 microsteps; not an epoch-wide metric",
+  "first_20_log_mean": {
+    "instruction_loss": 3.9374548137187957,
+    "text_loss": 3.0563812255859375
+  },
+  "last_20_log_mean": {
+    "instruction_loss": 0.1233365472406149,
+    "text_loss": 3.065315771102905
+  }
+}
