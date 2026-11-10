@@ -1,0 +1,1 @@
+{"epoch_completed": 1, "step": 957, "eeg_loss": 4.549146547088304, "text_loss": 3.256621056589587, "seconds": 726.2795814150013, "frozen_state_unchanged": true, "gpt_weights_updated": true, "utc": "2026-11-10T23:39:39.742516+00:00"}

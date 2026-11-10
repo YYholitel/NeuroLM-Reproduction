@@ -1,0 +1,57 @@
+{
+  "ok": true,
+  "raw_records": 112,
+  "processed_records": 112,
+  "skipped_records": 0,
+  "counts": {
+    "train": 174,
+    "test": 60,
+    "eval": 66
+  },
+  "labels": {
+    "slow": 100,
+    "bckg": 100,
+    "seiz": 100
+  },
+  "shapes": {
+    "(23, 2000)": 259,
+    "(21, 2000)": 41
+  },
+  "reused_exact_windows": 245,
+  "recovered_windows": 55,
+  "split": "original sorted-file 60/20/20; not patient-independent",
+  "mne_version": "1.7.1",
+  "numpy_version": "1.26.4",
+  "record_groups": [
+    {
+      "split": "eval",
+      "reference": "REF",
+      "channels": 23,
+      "records": 23
+    },
+    {
+      "split": "test",
+      "reference": "REF",
+      "channels": 23,
+      "records": 22
+    },
+    {
+      "split": "train",
+      "reference": "LE",
+      "channels": 21,
+      "records": 16
+    },
+    {
+      "split": "train",
+      "reference": "LE",
+      "channels": 23,
+      "records": 8
+    },
+    {
+      "split": "train",
+      "reference": "REF",
+      "channels": 23,
+      "records": 43
+    }
+  ]
+}

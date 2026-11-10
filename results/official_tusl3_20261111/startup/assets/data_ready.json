@@ -1,0 +1,19 @@
+{
+  "ready": true,
+  "diagnostic": false,
+  "total_samples": 459711,
+  "datasets": {
+    "HMC": 91248,
+    "TUAB": 298511,
+    "TUEV": 68270,
+    "Workload": 1508,
+    "TUSL": 174
+  },
+  "train_manifest_sha256": "12b97bdf8fff2b104242060e321d56f50d994b087d4e9e70c4379d9b9dd090b7",
+  "tusl_manifest_sha256": "05cc5b5d321c9cea78afaf175f54aa8af4db3560bbe19a08da4b6d838a088c95",
+  "reused_non_tusl_source": "/mnt/cfs-omni/lhy/neurolm-reproduction/pretrain-full20-20261109-r1/assets",
+  "original_source_plan_sha256": "17f3e061068a187b83dfad2b5beefacdfb3bc5e7de8e669d2f377849d8c0edaf",
+  "split": "train only; original validation/test excluded",
+  "tusl_records": 112,
+  "tusl_skipped_records": 0
+}

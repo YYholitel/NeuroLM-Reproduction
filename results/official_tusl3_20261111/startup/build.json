@@ -1,0 +1,19 @@
+{
+  "ok": true,
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "train_counts": {
+    "HMC": 91248,
+    "TUAB": 298511,
+    "TUEV": 68270,
+    "Workload": 1508,
+    "TUSL": 174
+  },
+  "models_unchanged": true,
+  "official_checkpoint_initialization": true,
+  "stage2_epochs": 20,
+  "stage3_epochs": 5
+}

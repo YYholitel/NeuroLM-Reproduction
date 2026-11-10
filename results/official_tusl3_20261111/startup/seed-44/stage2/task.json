@@ -1,0 +1,33 @@
+{
+  "name": "neurolm-official-tusl-s44-stage2-20261111-r1",
+  "region": "ap-beijing",
+  "image": {
+    "url": "omni-cr.tencentcloudcr.com/kexin/pretrain:0.0.4",
+    "type": "TCR",
+    "registry_id": "tcr-2mipw4e0",
+    "registry_region": "ap-beijing"
+  },
+  "resource": {
+    "cpu": 112,
+    "memory": 896,
+    "gpu": 8,
+    "gpu_type": "GPU-HCCPNV6",
+    "instance_num": 2,
+    "rdma": false,
+    "resource_group_id": "rsg-b227f5pp",
+    "charge_type": "PREPAID"
+  },
+  "mounts": [
+    {
+      "kind": "cfs",
+      "cfs_id": "cfs-ini8ib89",
+      "source_path": "/",
+      "target_path": "/mnt/cfs-omni"
+    }
+  ],
+  "cos_output": "omni-eeg-1442740494/lhy/neurolm-reproduction/outputs/neurolm-official-tusl-s44-stage2-20261111-r1/",
+  "training_mode": "DDP",
+  "restart_limit": 0,
+  "log_enable": false,
+  "command": "bash /mnt/cfs-omni/lhy/neurolm-reproduction/official-tusl3-20261111-r1/scripts/run_official_stage2.sh /mnt/cfs-omni/lhy/neurolm-reproduction/official-tusl3-20261111-r1/seed-44/stage2 44"
+}

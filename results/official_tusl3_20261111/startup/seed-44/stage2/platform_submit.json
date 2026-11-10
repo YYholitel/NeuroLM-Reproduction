@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "mode": "submit",
+  "submitted_id": "train-1715042690506959616",
+  "tasks": [
+    {
+      "name": "neurolm-official-tusl-s44-stage2-20261111-r1",
+      "id": "train-1715042690506959616",
+      "status": "SUBMITTING"
+    }
+  ],
+  "temporary_probe_kernel_removed": true
+}

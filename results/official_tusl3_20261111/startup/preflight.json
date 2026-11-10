@@ -1,0 +1,83 @@
+{
+  "ok": true,
+  "diagnostic_only": true,
+  "initialization": {
+    "source": "author released NeuroLM-B.pt",
+    "continued_pretraining": true,
+    "initial_neurolm_path": "/mnt/cfs-omni/lhy/neurolm-reproduction/checkpoints/NeuroLM-B.pt",
+    "tokenizer_path": "/mnt/cfs-omni/lhy/neurolm-reproduction/checkpoints/VQ.pt",
+    "expected_sha256": {
+      "NeuroLM-B.pt": "ffe098bc138b89f8817d3710a3604498d8ecd15135080e2ca27735d05c6d29ab",
+      "VQ.pt": "e792c39a6a9e6d1bf4604cf63090730424f1d37f942597883d0c0a1375a2663a"
+    },
+    "strict_full_checkpoint_load": true,
+    "fresh_optimizer": true,
+    "official_encoder_target_exact_match": true,
+    "codebook_shape": [
+      8192,
+      128
+    ],
+    "decoder_layers": 4,
+    "initialized_nonlearned_counters": [
+      "quantize.code_age",
+      "quantize.num_updates",
+      "quantize.total_replacements"
+    ]
+  },
+  "tusl_train_samples_checked": 174,
+  "channel_counts": [
+    21,
+    23
+  ],
+  "cases": [
+    {
+      "stage": 2,
+      "channels": 23,
+      "valid_tokens": 230,
+      "loss": 5.583923816680908
+    },
+    {
+      "stage": 2,
+      "channels": 21,
+      "valid_tokens": 210,
+      "loss": 6.263116359710693
+    },
+    {
+      "stage": 3,
+      "task": "TUAB",
+      "valid_tokens": 230,
+      "loss": 23.73004722595215
+    },
+    {
+      "stage": 3,
+      "task": "TUEV",
+      "valid_tokens": 115,
+      "loss": 28.231082916259766
+    },
+    {
+      "stage": 3,
+      "task": "HMC",
+      "valid_tokens": 120,
+      "loss": 8.951037406921387
+    },
+    {
+      "stage": 3,
+      "task": "Workload",
+      "valid_tokens": 76,
+      "loss": 13.790023803710938
+    },
+    {
+      "stage": 3,
+      "task": "TUSL",
+      "valid_tokens": 210,
+      "loss": 30.65387535095215
+    }
+  ],
+  "gradient_norm": 1546.3665771484375,
+  "frozen_encoder_unchanged": true,
+  "frozen_quantizer_unchanged": true,
+  "gpt_update_verified": true,
+  "train_samples": 459711,
+  "official_encoder_sha256": "9e1dfc249e23c209aa4b2abc11f05a1362bd47619102c2a2c9086c688e0462f7",
+  "initial_gpt_block_sha256": "2bee2731408592e7c29aceef86c5f31deef6246ae36760845a713f0d10d309f6"
+}

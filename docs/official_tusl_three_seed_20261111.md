@@ -75,3 +75,13 @@ Stage-two tasks were submitted on 2026-11-11 (Asia/Shanghai), and all three reac
 | 44 | `train-1715042690506959616` |
 
 Seed 44 needed approximately 2 minutes 24 seconds to pull the worker image before starting. Early training evidence is a startup check, not a completed 20-epoch or five-epoch result. See the timestamped evidence exports for measured progress.
+
+### Startup evidence: 2026-11-11 07:45:48 +08:00
+
+All three jobs have completed one epoch and passed repeated frozen-state checks. The snapshot contains 1,663 / 1,663 / 1,617 logged updates for seeds 42 / 43 / 44. All recorded EEG losses, text losses and gradient norms are finite. Each job has 16 distinct H20 GPUs; the three jobs use 48 distinct GPUs in total. Recent GPU utilization averages are 96.95% / 96.47% / 96.68%.
+
+EEG loss fell from about 5.9 at initialization to roughly 4.5–4.7. Text loss increased from about 3.2 to roughly 3.5–3.7 during the learning-rate warmup; this is explicitly visible in the curves and is not described as improvement. Final downstream quality remains unmeasured. Stage three has not started in this snapshot.
+
+[Verified startup evidence](../results/official_tusl3_20261111/startup/health.json) · [Artifact hashes](../results/official_tusl3_20261111/startup/sha256.json)
+
+![Early training curves; stage three pending](../results/official_tusl3_20261111/startup/training_curves.png)

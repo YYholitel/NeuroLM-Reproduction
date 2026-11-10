@@ -1,0 +1,12 @@
+{
+  "ok": true,
+  "mode": "status",
+  "tasks": [
+    {
+      "name": "neurolm-official-tusl-s42-stage2-20261111-r1",
+      "id": "train-1715042690757953280",
+      "status": "RUNNING"
+    }
+  ],
+  "temporary_probe_kernel_removed": true
+}

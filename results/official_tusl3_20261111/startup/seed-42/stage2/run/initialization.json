@@ -1,0 +1,23 @@
+{
+  "source": "author released NeuroLM-B.pt",
+  "continued_pretraining": true,
+  "initial_neurolm_path": "/mnt/cfs-omni/lhy/neurolm-reproduction/checkpoints/NeuroLM-B.pt",
+  "tokenizer_path": "/mnt/cfs-omni/lhy/neurolm-reproduction/checkpoints/VQ.pt",
+  "expected_sha256": {
+    "NeuroLM-B.pt": "ffe098bc138b89f8817d3710a3604498d8ecd15135080e2ca27735d05c6d29ab",
+    "VQ.pt": "e792c39a6a9e6d1bf4604cf63090730424f1d37f942597883d0c0a1375a2663a"
+  },
+  "strict_full_checkpoint_load": true,
+  "fresh_optimizer": true,
+  "official_encoder_target_exact_match": true,
+  "codebook_shape": [
+    8192,
+    128
+  ],
+  "decoder_layers": 4,
+  "initialized_nonlearned_counters": [
+    "quantize.code_age",
+    "quantize.num_updates",
+    "quantize.total_replacements"
+  ]
+}
