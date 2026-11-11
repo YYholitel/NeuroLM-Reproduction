@@ -1,0 +1,397 @@
+{
+  "scope": "Read-only diagnostic; all 300 TUSL windows and 112 annotation/header records; 60 independent training EDFs per TUAB/TUEV; original-EDF reconstruction of 3 selected windows per task.",
+  "tusl": {
+    "windows_checked": 300,
+    "raw_records_checked": 112,
+    "annotation_errors": 0,
+    "loader_errors": 0,
+    "train_shards_checked": 174,
+    "groups": [
+      {
+        "split": "eval",
+        "channels": 23,
+        "reference": "REF",
+        "label": 0,
+        "count": 17
+      },
+      {
+        "split": "eval",
+        "channels": 23,
+        "reference": "REF",
+        "label": 1,
+        "count": 20
+      },
+      {
+        "split": "eval",
+        "channels": 23,
+        "reference": "REF",
+        "label": 2,
+        "count": 29
+      },
+      {
+        "split": "test",
+        "channels": 23,
+        "reference": "REF",
+        "label": 0,
+        "count": 33
+      },
+      {
+        "split": "test",
+        "channels": 23,
+        "reference": "REF",
+        "label": 1,
+        "count": 3
+      },
+      {
+        "split": "test",
+        "channels": 23,
+        "reference": "REF",
+        "label": 2,
+        "count": 24
+      },
+      {
+        "split": "train",
+        "channels": 21,
+        "reference": "LE",
+        "label": 0,
+        "count": 14
+      },
+      {
+        "split": "train",
+        "channels": 21,
+        "reference": "LE",
+        "label": 1,
+        "count": 19
+      },
+      {
+        "split": "train",
+        "channels": 21,
+        "reference": "LE",
+        "label": 2,
+        "count": 8
+      },
+      {
+        "split": "train",
+        "channels": 23,
+        "reference": "LE",
+        "label": 0,
+        "count": 2
+      },
+      {
+        "split": "train",
+        "channels": 23,
+        "reference": "LE",
+        "label": 1,
+        "count": 11
+      },
+      {
+        "split": "train",
+        "channels": 23,
+        "reference": "LE",
+        "label": 2,
+        "count": 1
+      },
+      {
+        "split": "train",
+        "channels": 23,
+        "reference": "REF",
+        "label": 0,
+        "count": 34
+      },
+      {
+        "split": "train",
+        "channels": 23,
+        "reference": "REF",
+        "label": 1,
+        "count": 47
+      },
+      {
+        "split": "train",
+        "channels": 23,
+        "reference": "REF",
+        "label": 2,
+        "count": 38
+      }
+    ],
+    "splits": [
+      {
+        "split": "train",
+        "windows": 174,
+        "recordings": 67,
+        "patient_ids": 26,
+        "class_counts": {
+          "0": 50,
+          "1": 77,
+          "2": 47
+        },
+        "largest_patient_windows": 22,
+        "references": {
+          "REF": 119,
+          "LE": 55
+        }
+      },
+      {
+        "split": "eval",
+        "windows": 66,
+        "recordings": 23,
+        "patient_ids": 10,
+        "class_counts": {
+          "0": 17,
+          "1": 20,
+          "2": 29
+        },
+        "largest_patient_windows": 16,
+        "references": {
+          "REF": 66
+        }
+      },
+      {
+        "split": "test",
+        "windows": 60,
+        "recordings": 22,
+        "patient_ids": 3,
+        "class_counts": {
+          "0": 33,
+          "1": 3,
+          "2": 24
+        },
+        "largest_patient_windows": 45,
+        "references": {
+          "REF": 60
+        }
+      }
+    ],
+    "split_overlap": {
+      "train/eval": {
+        "filename_patient_id_overlap": 0,
+        "recording_overlap": 0
+      },
+      "train/test": {
+        "filename_patient_id_overlap": 0,
+        "recording_overlap": 0
+      },
+      "eval/test": {
+        "filename_patient_id_overlap": 1,
+        "recording_overlap": 0
+      }
+    },
+    "patient_identifier_definition": "EDF filename prefix before first underscore",
+    "duplicate_signal_groups": 0,
+    "zero_channels": 0,
+    "max_window_abs_p99": 1652.3244490410827
+  },
+  "paired_signal_summary": [
+    {
+      "task": "TUAB",
+      "samples": 60,
+      "distinct_records": 60,
+      "equal_float32": 0,
+      "median_rmse": 0.7811543008065625,
+      "median_60hz_ratio_stage2": 0.4084950089454651,
+      "median_60hz_ratio_stage3": 1.797997626692456
+    },
+    {
+      "task": "TUEV",
+      "samples": 60,
+      "distinct_records": 60,
+      "equal_float32": 0,
+      "median_rmse": 1.2233346563264575,
+      "median_60hz_ratio_stage2": 0.4317813962697983,
+      "median_60hz_ratio_stage3": 3.483369849247965
+    }
+  ],
+  "raw_notch_reconstruction": [
+    {
+      "task": "TUAB",
+      "sample_id_sha256": "3f77019739f4173c334755c07823cd413c6217a79c6675f1afdeb251dae34d15",
+      "ncc_downstream_signal_matches_tencent": true,
+      "routes": [
+        {
+          "notch_hz": 50.0,
+          "shape": [
+            23,
+            2000
+          ],
+          "reconstructed_signal_sha256_float32": "e55e7fabd4e945ee66d1ff5d42488995840b7e01bc02a65cc5b0e44b8e5ff02a",
+          "matches_stage2_float32": false,
+          "matches_stage3_float32": true,
+          "downstream_rmse": 0.0,
+          "downstream_max_abs_error": 0.0
+        },
+        {
+          "notch_hz": 60.0,
+          "shape": [
+            23,
+            2000
+          ],
+          "reconstructed_signal_sha256_float32": "0cb60bc17a05eb5d16bd26473b4cd0be4139928a509098fc030e95a458558dfd",
+          "matches_stage2_float32": true,
+          "matches_stage3_float32": false,
+          "downstream_rmse": 0.1650373331314948,
+          "downstream_max_abs_error": 0.9063325268640908
+        }
+      ]
+    },
+    {
+      "task": "TUAB",
+      "sample_id_sha256": "73f8dfec4e333ab7dd3c6f4a693a706301405830fd173e17668b87f2fac9ed86",
+      "ncc_downstream_signal_matches_tencent": true,
+      "routes": [
+        {
+          "notch_hz": 50.0,
+          "shape": [
+            23,
+            2000
+          ],
+          "reconstructed_signal_sha256_float32": "0d9b90e4854cef95b5f04b8a88f0765a5795c0f68c8125eb731baaed3b58636e",
+          "matches_stage2_float32": false,
+          "matches_stage3_float32": true,
+          "downstream_rmse": 0.0,
+          "downstream_max_abs_error": 0.0
+        },
+        {
+          "notch_hz": 60.0,
+          "shape": [
+            23,
+            2000
+          ],
+          "reconstructed_signal_sha256_float32": "91f787fa5bf2056c61e3bc2f00b3d7d6c42f4c2c7963e9ceeb0bd948d03e7070",
+          "matches_stage2_float32": true,
+          "matches_stage3_float32": false,
+          "downstream_rmse": 0.7909033071214335,
+          "downstream_max_abs_error": 2.8677348621320853
+        }
+      ]
+    },
+    {
+      "task": "TUAB",
+      "sample_id_sha256": "e1f12a9315b9603e07efad9257ff236542b2542fabd576eebef6483fd94f6ccf",
+      "ncc_downstream_signal_matches_tencent": true,
+      "routes": [
+        {
+          "notch_hz": 50.0,
+          "shape": [
+            23,
+            2000
+          ],
+          "reconstructed_signal_sha256_float32": "b614b67ceab085a3907a0687c8f1fc222e8f78ad17422349b0e47f4aebb8de29",
+          "matches_stage2_float32": false,
+          "matches_stage3_float32": true,
+          "downstream_rmse": 0.0,
+          "downstream_max_abs_error": 0.0
+        },
+        {
+          "notch_hz": 60.0,
+          "shape": [
+            23,
+            2000
+          ],
+          "reconstructed_signal_sha256_float32": "cab1b77cf05bdd5d10a14bd2fa73e4cd37604cf870939fc6fb8f09e8b2337d9c",
+          "matches_stage2_float32": true,
+          "matches_stage3_float32": false,
+          "downstream_rmse": 141.56007153667244,
+          "downstream_max_abs_error": 961.6694918279378
+        }
+      ]
+    },
+    {
+      "task": "TUEV",
+      "sample_id_sha256": "ef1aea41c46947a2c7c37c56efa6d5de0aab7341968df53c5a33e0f8ba3673f3",
+      "ncc_downstream_signal_matches_tencent": true,
+      "routes": [
+        {
+          "notch_hz": 50.0,
+          "shape": [
+            23,
+            1000
+          ],
+          "reconstructed_signal_sha256_float32": "5fa5c00b3f182ac26cdc3d8b6f25110ce1e21b834c6f95b96015cf763ed2c71d",
+          "matches_stage2_float32": false,
+          "matches_stage3_float32": true,
+          "downstream_rmse": 0.0,
+          "downstream_max_abs_error": 0.0
+        },
+        {
+          "notch_hz": 60.0,
+          "shape": [
+            23,
+            1000
+          ],
+          "reconstructed_signal_sha256_float32": "ed45689ccc0481d5129f7474319a7540d7e9500249f85f2336a06546be3b3103",
+          "matches_stage2_float32": true,
+          "matches_stage3_float32": false,
+          "downstream_rmse": 0.310299055622694,
+          "downstream_max_abs_error": 1.22578544670354
+        }
+      ]
+    },
+    {
+      "task": "TUEV",
+      "sample_id_sha256": "bf170c268dad8387fb4d1e8dba06cc10924b173934418b9fd3f19ded0453f05e",
+      "ncc_downstream_signal_matches_tencent": true,
+      "routes": [
+        {
+          "notch_hz": 50.0,
+          "shape": [
+            23,
+            1000
+          ],
+          "reconstructed_signal_sha256_float32": "e455c876d86114d65e214f2a81249c4ab66de429d42e913fc720d70d6fea9e31",
+          "matches_stage2_float32": false,
+          "matches_stage3_float32": true,
+          "downstream_rmse": 0.0,
+          "downstream_max_abs_error": 0.0
+        },
+        {
+          "notch_hz": 60.0,
+          "shape": [
+            23,
+            1000
+          ],
+          "reconstructed_signal_sha256_float32": "4fb757f54e442857dcc5380997a4f4935f4fff116e299c5660b9e8073ba212b9",
+          "matches_stage2_float32": true,
+          "matches_stage3_float32": false,
+          "downstream_rmse": 1.2337481259459635,
+          "downstream_max_abs_error": 3.785122520210246
+        }
+      ]
+    },
+    {
+      "task": "TUEV",
+      "sample_id_sha256": "7f3ffb07c089d43909961705f0b6ab96189daa80227eb1b9581f9c06a9e3f86c",
+      "ncc_downstream_signal_matches_tencent": true,
+      "routes": [
+        {
+          "notch_hz": 50.0,
+          "shape": [
+            23,
+            1000
+          ],
+          "reconstructed_signal_sha256_float32": "8848c3420d7b7a0e03d57dc892c4f3dfc4b954086343c3f837f0caa30c53cc45",
+          "matches_stage2_float32": false,
+          "matches_stage3_float32": true,
+          "downstream_rmse": 0.0,
+          "downstream_max_abs_error": 0.0
+        },
+        {
+          "notch_hz": 60.0,
+          "shape": [
+            23,
+            1000
+          ],
+          "reconstructed_signal_sha256_float32": "3a68861d53a48577f9466a64a10bb80102a851934abdcefd7ea979517326985c",
+          "matches_stage2_float32": true,
+          "matches_stage3_float32": false,
+          "downstream_rmse": 327.07554174501826,
+          "downstream_max_abs_error": 1840.9356374050994
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "No full raw EDF content rehash; raw annotations and EDF headers were checked.",
+    "TUAB/TUEV signal comparison is a training-split sample, not an exhaustive audit of all downstream files.",
+    "Amplitude extremes require separate waveform review; no samples were deleted or clipped.",
+    "These findings do not establish the cause of earlier loss spikes or all downstream errors."
+  ]
+}

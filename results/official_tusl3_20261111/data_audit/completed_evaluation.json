@@ -1,0 +1,3674 @@
+{
+  "checked_at": "2026-11-11T09:21:36.632008+00:00",
+  "platform": [
+    {
+      "seed": 42,
+      "tasks": [
+        {
+          "name": "neurolm-official-tusl-s42-stage3-20261111-r1",
+          "id": "train-1715145841041344256",
+          "status": "SUCCEED"
+        }
+      ]
+    },
+    {
+      "seed": 43,
+      "tasks": [
+        {
+          "name": "neurolm-official-tusl-s43-stage3-20261111-r1",
+          "id": "train-1715146431331576576",
+          "status": "SUCCEED"
+        }
+      ]
+    },
+    {
+      "seed": 44,
+      "tasks": [
+        {
+          "name": "neurolm-official-tusl-s44-stage3-20261111-r1",
+          "id": "train-1715146740342729472",
+          "status": "SUCCEED"
+        }
+      ]
+    }
+  ],
+  "seeds": [
+    {
+      "seed": 42,
+      "audit": {
+        "status": "passed",
+        "summary_sha256": "8ba457a2dc27966f5a7d897840fb7b96feba2c5ba93a6f848469ceb1cbf41adc",
+        "total_samples": 201240,
+        "splits": [
+          {
+            "task": "TUSL",
+            "split": "val",
+            "samples": 66,
+            "parse_failures": 0,
+            "independent_metrics": {
+              "accuracy": 0.3787878787878788,
+              "balanced_accuracy": 0.4046991210277214,
+              "weighted_f1": 0.3707723863707981,
+              "cohen_kappa": 0.0786516853932584
+            },
+            "artifact_sha256": {
+              "TUSL-val-rank0.jsonl": "4e2e806ab6be78777eab04439774f00167e18ce378b7a964f67b67a2b5bebce9",
+              "TUSL-val-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "TUSL-val-rank1.jsonl": "f1f9a41ad4d7d14d7adf6eee4f3aa800bc9758a06793a60387a091df1f82a326",
+              "TUSL-val-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          },
+          {
+            "task": "TUSL",
+            "split": "test",
+            "samples": 60,
+            "parse_failures": 0,
+            "independent_metrics": {
+              "accuracy": 0.2833333333333333,
+              "balanced_accuracy": 0.5050505050505051,
+              "weighted_f1": 0.3146689895470383,
+              "cohen_kappa": 0.05598243688254656
+            },
+            "artifact_sha256": {
+              "TUSL-test-rank0.jsonl": "a29e5899cd7f8eed97672d823bd9cf45eeda1a31c476c122a6bdd14d673ef1c6",
+              "TUSL-test-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "TUSL-test-rank1.jsonl": "01474de8e0178921bced60c232db89cc3736cb6f93695ae3570de7fe9c190c2f",
+              "TUSL-test-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          },
+          {
+            "task": "TUAB",
+            "split": "val",
+            "samples": 73627,
+            "parse_failures": 0,
+            "independent_metrics": {
+              "accuracy": 0.793241609735559,
+              "balanced_accuracy": 0.7951335254598992,
+              "weighted_f1": 0.7933656195022297,
+              "cohen_kappa": 0.5872259828803619,
+              "roc_auc": 0.8685538810986745
+            },
+            "artifact_sha256": {
+              "TUAB-val-rank0.jsonl": "665337ea2a26aac82a6822a98dbe5d42404beb2345c43984f743236818882cbf",
+              "TUAB-val-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "TUAB-val-rank1.jsonl": "51356c5c7b0da94d78e922d14402944d035da3cebfa05682771f2457a90a67c3",
+              "TUAB-val-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          },
+          {
+            "task": "TUAB",
+            "split": "test",
+            "samples": 36945,
+            "parse_failures": 0,
+            "independent_metrics": {
+              "accuracy": 0.7743131682230342,
+              "balanced_accuracy": 0.7714128842679913,
+              "weighted_f1": 0.7738789402445085,
+              "cohen_kappa": 0.544493042711152,
+              "roc_auc": 0.848565314567888
+            },
+            "artifact_sha256": {
+              "TUAB-test-rank0.jsonl": "016601b2fb96c11f31bb9a191c6feea4817d03e752ecdaba4d5e3f2ddaefa11c",
+              "TUAB-test-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "TUAB-test-rank1.jsonl": "8e341a607152a412aeaed76b0945606399f8152b4e3505e3e760007708aab5d9",
+              "TUAB-test-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          },
+          {
+            "task": "TUEV",
+            "split": "val",
+            "samples": 15662,
+            "parse_failures": 0,
+            "independent_metrics": {
+              "accuracy": 0.7789554335333929,
+              "balanced_accuracy": 0.5606146654410306,
+              "weighted_f1": 0.789865220918796,
+              "cohen_kappa": 0.5508369618389497
+            },
+            "artifact_sha256": {
+              "TUEV-val-rank0.jsonl": "5908acb33b9f1f5d5e4119fd0c03f289a3fcc0606516a51a62167558fe64a67f",
+              "TUEV-val-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "TUEV-val-rank1.jsonl": "7f82c368303108bc45bdb44046be8fdf9bc19c697445e18831856e26560a064b",
+              "TUEV-val-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          },
+          {
+            "task": "TUEV",
+            "split": "test",
+            "samples": 28305,
+            "parse_failures": 0,
+            "independent_metrics": {
+              "accuracy": 0.7809220985691574,
+              "balanced_accuracy": 0.5898489017944126,
+              "weighted_f1": 0.7879381207462296,
+              "cohen_kappa": 0.5790460208752652
+            },
+            "artifact_sha256": {
+              "TUEV-test-rank0.jsonl": "a3377664b9dc1839118a962ffe1ce45de78c310576a0cc953731ba09b1197b85",
+              "TUEV-test-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "TUEV-test-rank1.jsonl": "e88960d12761d03c1ff7e62cbd56cda9069948897cd7f20c395f51ced05334ee",
+              "TUEV-test-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          },
+          {
+            "task": "HMC",
+            "split": "val",
+            "samples": 22124,
+            "parse_failures": 0,
+            "independent_metrics": {
+              "accuracy": 0.7350388718134153,
+              "balanced_accuracy": 0.670577041161349,
+              "weighted_f1": 0.7281782143099417,
+              "cohen_kappa": 0.6470372927163537
+            },
+            "artifact_sha256": {
+              "HMC-val-rank0.jsonl": "e6afa8320c5e60ac784954979e3885bf6ca35e94ba778ea22ef10d3b50608924",
+              "HMC-val-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "HMC-val-rank1.jsonl": "d394fbe722805df5dcdc808ff012d2465ddec6486e15389a6096585d28c869ed",
+              "HMC-val-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          },
+          {
+            "task": "HMC",
+            "split": "test",
+            "samples": 23871,
+            "parse_failures": 0,
+            "independent_metrics": {
+              "accuracy": 0.7387625151857903,
+              "balanced_accuracy": 0.6908125982037673,
+              "weighted_f1": 0.7280139937984923,
+              "cohen_kappa": 0.6497056792971568
+            },
+            "artifact_sha256": {
+              "HMC-test-rank0.jsonl": "d2f834552f4a02629b9c4926d124253b36ce6612d833862fec2c49d9c791f992",
+              "HMC-test-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "HMC-test-rank1.jsonl": "e15fe35e115a540799e78e7141efa312a5f15efe83ec3ef59a1cdef585f6f802",
+              "HMC-test-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          },
+          {
+            "task": "Workload",
+            "split": "val",
+            "samples": 290,
+            "parse_failures": 0,
+            "independent_metrics": {
+              "accuracy": 0.6862068965517242,
+              "balanced_accuracy": 0.6862068965517242,
+              "weighted_f1": 0.6851248642779586,
+              "cohen_kappa": 0.37241379310344824,
+              "roc_auc": 0.7630677764565993
+            },
+            "artifact_sha256": {
+              "Workload-val-rank0.jsonl": "54e56c4bf4b466bf1925f48bed525c67dbd32020df10105b1b23aa2bef6f533f",
+              "Workload-val-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "Workload-val-rank1.jsonl": "244cc3e4d9fe928aa493b5af2ec779012e6b38a69204777f55a36f98486ee35a",
+              "Workload-val-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          },
+          {
+            "task": "Workload",
+            "split": "test",
+            "samples": 290,
+            "parse_failures": 0,
+            "independent_metrics": {
+              "accuracy": 0.6172413793103448,
+              "balanced_accuracy": 0.6172413793103448,
+              "weighted_f1": 0.6101914530328534,
+              "cohen_kappa": 0.23448275862068968,
+              "roc_auc": 0.6884185493460167
+            },
+            "artifact_sha256": {
+              "Workload-test-rank0.jsonl": "897a0801999c318d604aeb6d532bdbd160ce964707a32c40cb03f573cb54fc1e",
+              "Workload-test-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "Workload-test-rank1.jsonl": "0d0ce4c085531b9c95d0c6ee1aa780d890f43bebc3375b6fce8a4d96fe358be8",
+              "Workload-test-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          }
+        ],
+        "independent_strict_parser": true,
+        "invalid_log_matches_all_failures": true
+      },
+      "results": [
+        {
+          "task": "TUSL",
+          "split": "val",
+          "full_split": true,
+          "available_samples": 66,
+          "selected_file_list_sha256": "5355d4c0940875a87cc39ca7cb27b07c2b202337368d65561871ca156a5e1a96",
+          "metrics": {
+            "samples": 66,
+            "parse_failures": 0,
+            "accuracy": 0.3787878787878788,
+            "balanced_accuracy": 0.4046991210277214,
+            "weighted_f1": 0.3707723863707981,
+            "cohen_kappa": 0.07865168539325842,
+            "class_support": [
+              17,
+              20,
+              29
+            ],
+            "class_recall": [
+              0.5882352941176471,
+              0.35,
+              0.27586206896551724
+            ],
+            "missing_true_classes": [],
+            "confusion_matrix": [
+              [
+                10,
+                6,
+                1,
+                0
+              ],
+              [
+                3,
+                7,
+                10,
+                0
+              ],
+              [
+                11,
+                10,
+                8,
+                0
+              ]
+            ],
+            "confusion_columns": [
+              0,
+              1,
+              2,
+              "invalid"
+            ],
+            "invalid_policy": "retain_in_denominator_and_count_wrong",
+            "roc_auc": null,
+            "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+          },
+          "candidate_token_ids": {
+            "0": [
+              32,
+              8,
+              220,
+              50256
+            ],
+            "1": [
+              33,
+              8,
+              220,
+              50256
+            ],
+            "2": [
+              34,
+              8,
+              220,
+              50256
+            ]
+          },
+          "answers": {
+            "(A)": 0,
+            "(B)": 1,
+            "(C)": 2
+          },
+          "prediction_sha256": {
+            "TUSL-val-rank0.jsonl": "4e2e806ab6be78777eab04439774f00167e18ce378b7a964f67b67a2b5bebce9",
+            "TUSL-val-rank1.jsonl": "f1f9a41ad4d7d14d7adf6eee4f3aa800bc9758a06793a60387a091df1f82a326"
+          }
+        },
+        {
+          "task": "TUSL",
+          "split": "test",
+          "full_split": true,
+          "available_samples": 60,
+          "selected_file_list_sha256": "34f0bd3f8bb72c68808d1f2922522b66bc368501e8d849422bdec16d277de411",
+          "metrics": {
+            "samples": 60,
+            "parse_failures": 0,
+            "accuracy": 0.2833333333333333,
+            "balanced_accuracy": 0.5050505050505051,
+            "weighted_f1": 0.3146689895470383,
+            "cohen_kappa": 0.05598243688254663,
+            "class_support": [
+              33,
+              3,
+              24
+            ],
+            "class_recall": [
+              0.18181818181818182,
+              1.0,
+              0.3333333333333333
+            ],
+            "missing_true_classes": [],
+            "confusion_matrix": [
+              [
+                6,
+                18,
+                9,
+                0
+              ],
+              [
+                0,
+                3,
+                0,
+                0
+              ],
+              [
+                5,
+                11,
+                8,
+                0
+              ]
+            ],
+            "confusion_columns": [
+              0,
+              1,
+              2,
+              "invalid"
+            ],
+            "invalid_policy": "retain_in_denominator_and_count_wrong",
+            "roc_auc": null,
+            "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+          },
+          "candidate_token_ids": {
+            "0": [
+              32,
+              8,
+              220,
+              50256
+            ],
+            "1": [
+              33,
+              8,
+              220,
+              50256
+            ],
+            "2": [
+              34,
+              8,
+              220,
+              50256
+            ]
+          },
+          "answers": {
+            "(A)": 0,
+            "(B)": 1,
+            "(C)": 2
+          },
+          "prediction_sha256": {
+            "TUSL-test-rank0.jsonl": "a29e5899cd7f8eed97672d823bd9cf45eeda1a31c476c122a6bdd14d673ef1c6",
+            "TUSL-test-rank1.jsonl": "01474de8e0178921bced60c232db89cc3736cb6f93695ae3570de7fe9c190c2f"
+          }
+        },
+        {
+          "task": "TUAB",
+          "split": "val",
+          "full_split": true,
+          "available_samples": 73627,
+          "selected_file_list_sha256": "adfdd73e4d8800f8f31e630b57ba9194b0106ae5ab3d981b8efa5a674dd2d035",
+          "metrics": {
+            "samples": 73627,
+            "parse_failures": 0,
+            "accuracy": 0.793241609735559,
+            "balanced_accuracy": 0.7951335254598992,
+            "weighted_f1": 0.7933656195022297,
+            "cohen_kappa": 0.587225982880362,
+            "class_support": [
+              34679,
+              38948
+            ],
+            "class_recall": [
+              0.8277631996309005,
+              0.762503851288898
+            ],
+            "missing_true_classes": [],
+            "confusion_matrix": [
+              [
+                28706,
+                5973,
+                0
+              ],
+              [
+                9250,
+                29698,
+                0
+              ]
+            ],
+            "confusion_columns": [
+              0,
+              1,
+              "invalid"
+            ],
+            "invalid_policy": "retain_in_denominator_and_count_wrong",
+            "roc_auc": 0.8685538810986745,
+            "roc_auc_note": "Conditional probability of Yes among legal first tokens; modified constrained-decoding protocol."
+          },
+          "candidate_token_ids": {
+            "1": [
+              3363,
+              220,
+              50256
+            ],
+            "0": [
+              1400,
+              220,
+              50256
+            ]
+          },
+          "answers": {
+            "Yes": 1,
+            "No": 0
+          },
+          "prediction_sha256": {
+            "TUAB-val-rank0.jsonl": "665337ea2a26aac82a6822a98dbe5d42404beb2345c43984f743236818882cbf",
+            "TUAB-val-rank1.jsonl": "51356c5c7b0da94d78e922d14402944d035da3cebfa05682771f2457a90a67c3"
+          }
+        },
+        {
+          "task": "TUAB",
+          "split": "test",
+          "full_split": true,
+          "available_samples": 36945,
+          "selected_file_list_sha256": "f63f367e01d87a14cff56dbc9320cbac4945d855df0ac725b03446debbfb165e",
+          "metrics": {
+            "samples": 36945,
+            "parse_failures": 0,
+            "accuracy": 0.7743131682230342,
+            "balanced_accuracy": 0.7714128842679913,
+            "weighted_f1": 0.7738789402445085,
+            "cohen_kappa": 0.5444930427111518,
+            "class_support": [
+              19907,
+              17038
+            ],
+            "class_recall": [
+              0.8087607374290451,
+              0.7340650311069374
+            ],
+            "missing_true_classes": [],
+            "confusion_matrix": [
+              [
+                16100,
+                3807,
+                0
+              ],
+              [
+                4531,
+                12507,
+                0
+              ]
+            ],
+            "confusion_columns": [
+              0,
+              1,
+              "invalid"
+            ],
+            "invalid_policy": "retain_in_denominator_and_count_wrong",
+            "roc_auc": 0.848565314567888,
+            "roc_auc_note": "Conditional probability of Yes among legal first tokens; modified constrained-decoding protocol."
+          },
+          "candidate_token_ids": {
+            "1": [
+              3363,
+              220,
+              50256
+            ],
+            "0": [
+              1400,
+              220,
+              50256
+            ]
+          },
+          "answers": {
+            "Yes": 1,
+            "No": 0
+          },
+          "prediction_sha256": {
+            "TUAB-test-rank0.jsonl": "016601b2fb96c11f31bb9a191c6feea4817d03e752ecdaba4d5e3f2ddaefa11c",
+            "TUAB-test-rank1.jsonl": "8e341a607152a412aeaed76b0945606399f8152b4e3505e3e760007708aab5d9"
+          }
+        },
+        {
+          "task": "TUEV",
+          "split": "val",
+          "full_split": true,
+          "available_samples": 15662,
+          "selected_file_list_sha256": "36269e385461c8ceec5a3dfeef84b0ad16ef0a6917fe38323c62ae1f1de68c83",
+          "metrics": {
+            "samples": 15662,
+            "parse_failures": 0,
+            "accuracy": 0.7789554335333929,
+            "balanced_accuracy": 0.5606146654410306,
+            "weighted_f1": 0.789865220918796,
+            "cohen_kappa": 0.5508369618389498,
+            "class_support": [
+              229,
+              515,
+              1528,
+              59,
+              2309,
+              11022
+            ],
+            "class_recall": [
+              0.06550218340611354,
+              0.7048543689320388,
+              0.43782722513089006,
+              0.7288135593220338,
+              0.5296665223040277,
+              0.8970241335510797
+            ],
+            "missing_true_classes": [],
+            "confusion_matrix": [
+              [
+                15,
+                0,
+                80,
+                19,
+                0,
+                115,
+                0
+              ],
+              [
+                87,
+                363,
+                0,
+                0,
+                50,
+                15,
+                0
+              ],
+              [
+                35,
+                813,
+                669,
+                0,
+                9,
+                2,
+                0
+              ],
+              [
+                4,
+                0,
+                0,
+                43,
+                1,
+                11,
+                0
+              ],
+              [
+                0,
+                17,
+                246,
+                184,
+                1223,
+                639,
+                0
+              ],
+              [
+                153,
+                136,
+                201,
+                26,
+                619,
+                9887,
+                0
+              ]
+            ],
+            "confusion_columns": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              "invalid"
+            ],
+            "invalid_policy": "retain_in_denominator_and_count_wrong",
+            "roc_auc": null,
+            "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+          },
+          "candidate_token_ids": {
+            "0": [
+              32,
+              8,
+              220,
+              50256
+            ],
+            "1": [
+              33,
+              8,
+              220,
+              50256
+            ],
+            "2": [
+              34,
+              8,
+              220,
+              50256
+            ],
+            "3": [
+              35,
+              8,
+              220,
+              50256
+            ],
+            "4": [
+              36,
+              8,
+              220,
+              50256
+            ],
+            "5": [
+              37,
+              8,
+              220,
+              50256
+            ]
+          },
+          "answers": {
+            "(A)": 0,
+            "(B)": 1,
+            "(C)": 2,
+            "(D)": 3,
+            "(E)": 4,
+            "(F)": 5
+          },
+          "prediction_sha256": {
+            "TUEV-val-rank0.jsonl": "5908acb33b9f1f5d5e4119fd0c03f289a3fcc0606516a51a62167558fe64a67f",
+            "TUEV-val-rank1.jsonl": "7f82c368303108bc45bdb44046be8fdf9bc19c697445e18831856e26560a064b"
+          }
+        },
+        {
+          "task": "TUEV",
+          "split": "test",
+          "full_split": true,
+          "available_samples": 28305,
+          "selected_file_list_sha256": "9d5b50f6e8926027a35f5d226c746db7dd3e8896da1a99a2fd5504a44eeb93c1",
+          "metrics": {
+            "samples": 28305,
+            "parse_failures": 0,
+            "accuracy": 0.7809220985691574,
+            "balanced_accuracy": 0.5898489017944126,
+            "weighted_f1": 0.7879381207462296,
+            "cohen_kappa": 0.5790460208752654,
+            "class_support": [
+              567,
+              3561,
+              1998,
+              329,
+              2204,
+              19646
+            ],
+            "class_recall": [
+              0.07936507936507936,
+              0.8303847233923055,
+              0.4089089089089089,
+              0.8389057750759878,
+              0.5235934664246824,
+              0.8579354575995114
+            ],
+            "missing_true_classes": [],
+            "confusion_matrix": [
+              [
+                45,
+                183,
+                170,
+                0,
+                150,
+                19,
+                0
+              ],
+              [
+                29,
+                2957,
+                202,
+                14,
+                255,
+                104,
+                0
+              ],
+              [
+                163,
+                246,
+                817,
+                89,
+                387,
+                296,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                276,
+                6,
+                47,
+                0
+              ],
+              [
+                34,
+                16,
+                20,
+                28,
+                1154,
+                952,
+                0
+              ],
+              [
+                270,
+                634,
+                714,
+                169,
+                1004,
+                16855,
+                0
+              ]
+            ],
+            "confusion_columns": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              "invalid"
+            ],
+            "invalid_policy": "retain_in_denominator_and_count_wrong",
+            "roc_auc": null,
+            "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+          },
+          "candidate_token_ids": {
+            "0": [
+              32,
+              8,
+              220,
+              50256
+            ],
+            "1": [
+              33,
+              8,
+              220,
+              50256
+            ],
+            "2": [
+              34,
+              8,
+              220,
+              50256
+            ],
+            "3": [
+              35,
+              8,
+              220,
+              50256
+            ],
+            "4": [
+              36,
+              8,
+              220,
+              50256
+            ],
+            "5": [
+              37,
+              8,
+              220,
+              50256
+            ]
+          },
+          "answers": {
+            "(A)": 0,
+            "(B)": 1,
+            "(C)": 2,
+            "(D)": 3,
+            "(E)": 4,
+            "(F)": 5
+          },
+          "prediction_sha256": {
+            "TUEV-test-rank0.jsonl": "a3377664b9dc1839118a962ffe1ce45de78c310576a0cc953731ba09b1197b85",
+            "TUEV-test-rank1.jsonl": "e88960d12761d03c1ff7e62cbd56cda9069948897cd7f20c395f51ced05334ee"
+          }
+        },
+        {
+          "task": "HMC",
+          "split": "val",
+          "full_split": true,
+          "available_samples": 22124,
+          "selected_file_list_sha256": "8f46bad3f0d8af8fc481dd4066670d66de696d1f5172899601c96e10af632403",
+          "metrics": {
+            "samples": 22124,
+            "parse_failures": 0,
+            "accuracy": 0.7350388718134153,
+            "balanced_accuracy": 0.670577041161349,
+            "weighted_f1": 0.7281782143099417,
+            "cohen_kappa": 0.6470372927163538,
+            "class_support": [
+              4186,
+              2136,
+              7772,
+              4961,
+              3069
+            ],
+            "class_recall": [
+              0.8786430960344004,
+              0.33801498127340823,
+              0.8172928461142563,
+              0.772828058859101,
+              0.5461062235255784
+            ],
+            "missing_true_classes": [],
+            "confusion_matrix": [
+              [
+                3678,
+                267,
+                105,
+                3,
+                133,
+                0
+              ],
+              [
+                634,
+                722,
+                520,
+                21,
+                239,
+                0
+              ],
+              [
+                179,
+                391,
+                6352,
+                654,
+                196,
+                0
+              ],
+              [
+                19,
+                19,
+                1084,
+                3834,
+                5,
+                0
+              ],
+              [
+                84,
+                298,
+                793,
+                218,
+                1676,
+                0
+              ]
+            ],
+            "confusion_columns": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              "invalid"
+            ],
+            "invalid_policy": "retain_in_denominator_and_count_wrong",
+            "roc_auc": null,
+            "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+          },
+          "candidate_token_ids": {
+            "0": [
+              32,
+              8,
+              220,
+              50256
+            ],
+            "1": [
+              33,
+              8,
+              220,
+              50256
+            ],
+            "2": [
+              34,
+              8,
+              220,
+              50256
+            ],
+            "3": [
+              35,
+              8,
+              220,
+              50256
+            ],
+            "4": [
+              36,
+              8,
+              220,
+              50256
+            ]
+          },
+          "answers": {
+            "(A)": 0,
+            "(B)": 1,
+            "(C)": 2,
+            "(D)": 3,
+            "(E)": 4
+          },
+          "prediction_sha256": {
+            "HMC-val-rank0.jsonl": "e6afa8320c5e60ac784954979e3885bf6ca35e94ba778ea22ef10d3b50608924",
+            "HMC-val-rank1.jsonl": "d394fbe722805df5dcdc808ff012d2465ddec6486e15389a6096585d28c869ed"
+          }
+        },
+        {
+          "task": "HMC",
+          "split": "test",
+          "full_split": true,
+          "available_samples": 23871,
+          "selected_file_list_sha256": "8771e7ce81cb42a2f2b3aac278af1c775969d4fe05fb5a121eb44a3158a869f9",
+          "metrics": {
+            "samples": 23871,
+            "parse_failures": 0,
+            "accuracy": 0.7387625151857903,
+            "balanced_accuracy": 0.6908125982037673,
+            "weighted_f1": 0.7280139937984923,
+            "cohen_kappa": 0.6497056792971568,
+            "class_support": [
+              3805,
+              2868,
+              8843,
+              4710,
+              3645
+            ],
+            "class_recall": [
+              0.8822601839684625,
+              0.3023012552301255,
+              0.827547212484451,
+              0.7859872611464969,
+              0.6559670781893004
+            ],
+            "missing_true_classes": [],
+            "confusion_matrix": [
+              [
+                3357,
+                273,
+                94,
+                2,
+                79,
+                0
+              ],
+              [
+                490,
+                867,
+                1043,
+                38,
+                430,
+                0
+              ],
+              [
+                113,
+                238,
+                7318,
+                845,
+                329,
+                0
+              ],
+              [
+                11,
+                9,
+                987,
+                3702,
+                1,
+                0
+              ],
+              [
+                89,
+                261,
+                862,
+                42,
+                2391,
+                0
+              ]
+            ],
+            "confusion_columns": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              "invalid"
+            ],
+            "invalid_policy": "retain_in_denominator_and_count_wrong",
+            "roc_auc": null,
+            "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+          },
+          "candidate_token_ids": {
+            "0": [
+              32,
+              8,
+              220,
+              50256
+            ],
+            "1": [
+              33,
+              8,
+              220,
+              50256
+            ],
+            "2": [
+              34,
+              8,
+              220,
+              50256
+            ],
+            "3": [
+              35,
+              8,
+              220,
+              50256
+            ],
+            "4": [
+              36,
+              8,
+              220,
+              50256
+            ]
+          },
+          "answers": {
+            "(A)": 0,
+            "(B)": 1,
+            "(C)": 2,
+            "(D)": 3,
+            "(E)": 4
+          },
+          "prediction_sha256": {
+            "HMC-test-rank0.jsonl": "d2f834552f4a02629b9c4926d124253b36ce6612d833862fec2c49d9c791f992",
+            "HMC-test-rank1.jsonl": "e15fe35e115a540799e78e7141efa312a5f15efe83ec3ef59a1cdef585f6f802"
+          }
+        },
+        {
+          "task": "Workload",
+          "split": "val",
+          "full_split": true,
+          "available_samples": 290,
+          "selected_file_list_sha256": "d6cb39f8b9c0e4ac4e9ae52ce5249f40e05e345abaf4bb12fce7fbf9f38aa75e",
+          "metrics": {
+            "samples": 290,
+            "parse_failures": 0,
+            "accuracy": 0.6862068965517242,
+            "balanced_accuracy": 0.6862068965517242,
+            "weighted_f1": 0.6851248642779586,
+            "cohen_kappa": 0.37241379310344835,
+            "class_support": [
+              145,
+              145
+            ],
+            "class_recall": [
+              0.6275862068965518,
+              0.7448275862068966
+            ],
+            "missing_true_classes": [],
+            "confusion_matrix": [
+              [
+                91,
+                54,
+                0
+              ],
+              [
+                37,
+                108,
+                0
+              ]
+            ],
+            "confusion_columns": [
+              0,
+              1,
+              "invalid"
+            ],
+            "invalid_policy": "retain_in_denominator_and_count_wrong",
+            "roc_auc": 0.7630677764565993,
+            "roc_auc_note": "Conditional probability of Yes among legal first tokens; modified constrained-decoding protocol."
+          },
+          "candidate_token_ids": {
+            "1": [
+              3363,
+              220,
+              50256
+            ],
+            "0": [
+              1400,
+              220,
+              50256
+            ]
+          },
+          "answers": {
+            "Yes": 1,
+            "No": 0
+          },
+          "prediction_sha256": {
+            "Workload-val-rank0.jsonl": "54e56c4bf4b466bf1925f48bed525c67dbd32020df10105b1b23aa2bef6f533f",
+            "Workload-val-rank1.jsonl": "244cc3e4d9fe928aa493b5af2ec779012e6b38a69204777f55a36f98486ee35a"
+          }
+        },
+        {
+          "task": "Workload",
+          "split": "test",
+          "full_split": true,
+          "available_samples": 290,
+          "selected_file_list_sha256": "aa3bce5dc483d31ac1caf88ecbd5008abfea35d59778cfd22d044846ff9d8e9a",
+          "metrics": {
+            "samples": 290,
+            "parse_failures": 0,
+            "accuracy": 0.6172413793103448,
+            "balanced_accuracy": 0.6172413793103448,
+            "weighted_f1": 0.6101914530328534,
+            "cohen_kappa": 0.23448275862068968,
+            "class_support": [
+              145,
+              145
+            ],
+            "class_recall": [
+              0.4827586206896552,
+              0.7517241379310344
+            ],
+            "missing_true_classes": [],
+            "confusion_matrix": [
+              [
+                70,
+                75,
+                0
+              ],
+              [
+                36,
+                109,
+                0
+              ]
+            ],
+            "confusion_columns": [
+              0,
+              1,
+              "invalid"
+            ],
+            "invalid_policy": "retain_in_denominator_and_count_wrong",
+            "roc_auc": 0.6884185493460167,
+            "roc_auc_note": "Conditional probability of Yes among legal first tokens; modified constrained-decoding protocol."
+          },
+          "candidate_token_ids": {
+            "1": [
+              3363,
+              220,
+              50256
+            ],
+            "0": [
+              1400,
+              220,
+              50256
+            ]
+          },
+          "answers": {
+            "Yes": 1,
+            "No": 0
+          },
+          "prediction_sha256": {
+            "Workload-test-rank0.jsonl": "897a0801999c318d604aeb6d532bdbd160ce964707a32c40cb03f573cb54fc1e",
+            "Workload-test-rank1.jsonl": "0d0ce4c085531b9c95d0c6ee1aa780d890f43bebc3375b6fce8a4d96fe358be8"
+          }
+        }
+      ]
+    },
+    {
+      "seed": 43,
+      "audit": {
+        "status": "passed",
+        "summary_sha256": "acbc4cdd2a39f8e6b36952f16e7646120e3af7bc6648c5cbc8b271c72da98542",
+        "total_samples": 201240,
+        "splits": [
+          {
+            "task": "TUSL",
+            "split": "val",
+            "samples": 66,
+            "parse_failures": 0,
+            "independent_metrics": {
+              "accuracy": 0.4696969696969697,
+              "balanced_accuracy": 0.4884719405003381,
+              "weighted_f1": 0.46230081974762827,
+              "cohen_kappa": 0.21106557377049173
+            },
+            "artifact_sha256": {
+              "TUSL-val-rank0.jsonl": "14972ba7ec1c3fb69a75b5fc5eef1d18280a94c29127c4ad8e40d030decb494d",
+              "TUSL-val-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "TUSL-val-rank1.jsonl": "9324e28c1af814f87cdc9dec83ede857f06f0670e5e9f9da3cb633c983e99341",
+              "TUSL-val-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          },
+          {
+            "task": "TUSL",
+            "split": "test",
+            "samples": 60,
+            "parse_failures": 0,
+            "independent_metrics": {
+              "accuracy": 0.18333333333333332,
+              "balanced_accuracy": 0.417929292929293,
+              "weighted_f1": 0.21683899821109126,
+              "cohen_kappa": 0.05130687318489846
+            },
+            "artifact_sha256": {
+              "TUSL-test-rank0.jsonl": "c240af1c153fe10238757b498bdfb00deb78d5d9f138dacfcbd7a1a10180799f",
+              "TUSL-test-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "TUSL-test-rank1.jsonl": "b26ef31fc4ca0fc1bb3e7dbd4aa96f9a071a20f2bd28a710b1d1f395a5d45cbb",
+              "TUSL-test-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          },
+          {
+            "task": "TUAB",
+            "split": "val",
+            "samples": 73627,
+            "parse_failures": 0,
+            "independent_metrics": {
+              "accuracy": 0.7931736998655384,
+              "balanced_accuracy": 0.797463518780023,
+              "weighted_f1": 0.7926813187096949,
+              "cohen_kappa": 0.5890512711815901,
+              "roc_auc": 0.8722862023103585
+            },
+            "artifact_sha256": {
+              "TUAB-val-rank0.jsonl": "96c4c24dd2eccdb135b9dbb222768dbed086989e12d8da23743f71e86af4566a",
+              "TUAB-val-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "TUAB-val-rank1.jsonl": "59bfd1ade9b14555a12aa07dda3d3c0e0dda10885a477c78db0722c6e5cdb80b",
+              "TUAB-val-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          },
+          {
+            "task": "TUAB",
+            "split": "test",
+            "samples": 36945,
+            "parse_failures": 0,
+            "independent_metrics": {
+              "accuracy": 0.7738259575043984,
+              "balanced_accuracy": 0.7679114031201774,
+              "weighted_f1": 0.7720067038990805,
+              "cohen_kappa": 0.5407352213439234,
+              "roc_auc": 0.8428790645488491
+            },
+            "artifact_sha256": {
+              "TUAB-test-rank0.jsonl": "186b5af9c7db8352357f4e516bec7e19a1cef7dd046c30b8b2c12ac595e7a4f2",
+              "TUAB-test-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "TUAB-test-rank1.jsonl": "cddc3645c91522b3b432d874e2e59ea3d501dbbd9c8be9b6d6d4a191645a57ed",
+              "TUAB-test-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          },
+          {
+            "task": "TUEV",
+            "split": "val",
+            "samples": 15662,
+            "parse_failures": 0,
+            "independent_metrics": {
+              "accuracy": 0.8084535819180181,
+              "balanced_accuracy": 0.6459800139943784,
+              "weighted_f1": 0.8209466498498841,
+              "cohen_kappa": 0.6173623140757165
+            },
+            "artifact_sha256": {
+              "TUEV-val-rank0.jsonl": "e8424673992d7c64aa512deb2ad0ff98f28b0956b86e78a4b40bc16fdf656ed3",
+              "TUEV-val-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "TUEV-val-rank1.jsonl": "b39eae8462696bb1b26d8f3a1517d47648efba9fd488c026275af5ff31732a69",
+              "TUEV-val-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          },
+          {
+            "task": "TUEV",
+            "split": "test",
+            "samples": 28305,
+            "parse_failures": 0,
+            "independent_metrics": {
+              "accuracy": 0.7716304539833951,
+              "balanced_accuracy": 0.5819634461209224,
+              "weighted_f1": 0.7804417138536941,
+              "cohen_kappa": 0.5641665809892678
+            },
+            "artifact_sha256": {
+              "TUEV-test-rank0.jsonl": "a9d8edb2fa0332d36f34caa085bde480277ece3b5b952ff776132a6f5d139b30",
+              "TUEV-test-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "TUEV-test-rank1.jsonl": "7ec60d7df4bbd2f87b8d7ac550fb4e5fcb13d56bb24e95e34b133c4037c3d375",
+              "TUEV-test-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          },
+          {
+            "task": "HMC",
+            "split": "val",
+            "samples": 22124,
+            "parse_failures": 0,
+            "independent_metrics": {
+              "accuracy": 0.7288917013198337,
+              "balanced_accuracy": 0.6849577026393471,
+              "weighted_f1": 0.7306345554531757,
+              "cohen_kappa": 0.6431644079177969
+            },
+            "artifact_sha256": {
+              "HMC-val-rank0.jsonl": "d40150defe3d7cd9c0c06a3b3502b8be61d4de29593c3b6453cc1cf7cafbf203",
+              "HMC-val-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "HMC-val-rank1.jsonl": "c02fd366621ddddb4c0091be926124cd4f78c8a76b195f557a35f1698d4e5d94",
+              "HMC-val-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          },
+          {
+            "task": "HMC",
+            "split": "test",
+            "samples": 23871,
+            "parse_failures": 0,
+            "independent_metrics": {
+              "accuracy": 0.735285492857442,
+              "balanced_accuracy": 0.7029433837789545,
+              "weighted_f1": 0.7320255702299787,
+              "cohen_kappa": 0.6494444779024303
+            },
+            "artifact_sha256": {
+              "HMC-test-rank0.jsonl": "7c153e68cf89b397cfc8e43818f386f047a47e2da9108c197841666a89c12337",
+              "HMC-test-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "HMC-test-rank1.jsonl": "73efdcfb5460a5375eace5c0359e787ed9ce8d6afa49bf56d88016dd746de20e",
+              "HMC-test-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          },
+          {
+            "task": "Workload",
+            "split": "val",
+            "samples": 290,
+            "parse_failures": 0,
+            "independent_metrics": {
+              "accuracy": 0.6551724137931034,
+              "balanced_accuracy": 0.6551724137931034,
+              "weighted_f1": 0.6462724434035909,
+              "cohen_kappa": 0.31034482758620685,
+              "roc_auc": 0.727372175980975
+            },
+            "artifact_sha256": {
+              "Workload-val-rank0.jsonl": "55cc8a2f38cb9dd36982f88138d0de0fff61f9790fcceeabe5c962758e9e76ad",
+              "Workload-val-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "Workload-val-rank1.jsonl": "3fab65df68b9b9b9a66dec9b5d935e6cc41f91e1bcd84a5bf25bec96b0d149dc",
+              "Workload-val-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          },
+          {
+            "task": "Workload",
+            "split": "test",
+            "samples": 290,
+            "parse_failures": 0,
+            "independent_metrics": {
+              "accuracy": 0.6448275862068965,
+              "balanced_accuracy": 0.6448275862068966,
+              "weighted_f1": 0.6315757015109467,
+              "cohen_kappa": 0.2896551724137931,
+              "roc_auc": 0.6915338882282998
+            },
+            "artifact_sha256": {
+              "Workload-test-rank0.jsonl": "080c34cf21c52dd732af8a18ac786dc515e2f9b04031b8db82b42757e58c835a",
+              "Workload-test-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "Workload-test-rank1.jsonl": "eb7022306e67b2a342879052305f974aeacd49819d79f21271c097435f80c252",
+              "Workload-test-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          }
+        ],
+        "independent_strict_parser": true,
+        "invalid_log_matches_all_failures": true
+      },
+      "results": [
+        {
+          "task": "TUSL",
+          "split": "val",
+          "full_split": true,
+          "available_samples": 66,
+          "selected_file_list_sha256": "5355d4c0940875a87cc39ca7cb27b07c2b202337368d65561871ca156a5e1a96",
+          "metrics": {
+            "samples": 66,
+            "parse_failures": 0,
+            "accuracy": 0.4696969696969697,
+            "balanced_accuracy": 0.4884719405003381,
+            "weighted_f1": 0.46230081974762827,
+            "cohen_kappa": 0.21106557377049187,
+            "class_support": [
+              17,
+              20,
+              29
+            ],
+            "class_recall": [
+              0.47058823529411764,
+              0.65,
+              0.3448275862068966
+            ],
+            "missing_true_classes": [],
+            "confusion_matrix": [
+              [
+                8,
+                7,
+                2,
+                0
+              ],
+              [
+                1,
+                13,
+                6,
+                0
+              ],
+              [
+                9,
+                10,
+                10,
+                0
+              ]
+            ],
+            "confusion_columns": [
+              0,
+              1,
+              2,
+              "invalid"
+            ],
+            "invalid_policy": "retain_in_denominator_and_count_wrong",
+            "roc_auc": null,
+            "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+          },
+          "candidate_token_ids": {
+            "0": [
+              32,
+              8,
+              220,
+              50256
+            ],
+            "1": [
+              33,
+              8,
+              220,
+              50256
+            ],
+            "2": [
+              34,
+              8,
+              220,
+              50256
+            ]
+          },
+          "answers": {
+            "(A)": 0,
+            "(B)": 1,
+            "(C)": 2
+          },
+          "prediction_sha256": {
+            "TUSL-val-rank0.jsonl": "14972ba7ec1c3fb69a75b5fc5eef1d18280a94c29127c4ad8e40d030decb494d",
+            "TUSL-val-rank1.jsonl": "9324e28c1af814f87cdc9dec83ede857f06f0670e5e9f9da3cb633c983e99341"
+          }
+        },
+        {
+          "task": "TUSL",
+          "split": "test",
+          "full_split": true,
+          "available_samples": 60,
+          "selected_file_list_sha256": "34f0bd3f8bb72c68808d1f2922522b66bc368501e8d849422bdec16d277de411",
+          "metrics": {
+            "samples": 60,
+            "parse_failures": 0,
+            "accuracy": 0.18333333333333332,
+            "balanced_accuracy": 0.417929292929293,
+            "weighted_f1": 0.21683899821109126,
+            "cohen_kappa": 0.05130687318489834,
+            "class_support": [
+              33,
+              3,
+              24
+            ],
+            "class_recall": [
+              0.21212121212121213,
+              1.0,
+              0.041666666666666664
+            ],
+            "missing_true_classes": [],
+            "confusion_matrix": [
+              [
+                7,
+                26,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                20,
+                1,
+                0
+              ]
+            ],
+            "confusion_columns": [
+              0,
+              1,
+              2,
+              "invalid"
+            ],
+            "invalid_policy": "retain_in_denominator_and_count_wrong",
+            "roc_auc": null,
+            "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+          },
+          "candidate_token_ids": {
+            "0": [
+              32,
+              8,
+              220,
+              50256
+            ],
+            "1": [
+              33,
+              8,
+              220,
+              50256
+            ],
+            "2": [
+              34,
+              8,
+              220,
+              50256
+            ]
+          },
+          "answers": {
+            "(A)": 0,
+            "(B)": 1,
+            "(C)": 2
+          },
+          "prediction_sha256": {
+            "TUSL-test-rank0.jsonl": "c240af1c153fe10238757b498bdfb00deb78d5d9f138dacfcbd7a1a10180799f",
+            "TUSL-test-rank1.jsonl": "b26ef31fc4ca0fc1bb3e7dbd4aa96f9a071a20f2bd28a710b1d1f395a5d45cbb"
+          }
+        },
+        {
+          "task": "TUAB",
+          "split": "val",
+          "full_split": true,
+          "available_samples": 73627,
+          "selected_file_list_sha256": "adfdd73e4d8800f8f31e630b57ba9194b0106ae5ab3d981b8efa5a674dd2d035",
+          "metrics": {
+            "samples": 73627,
+            "parse_failures": 0,
+            "accuracy": 0.7931736998655384,
+            "balanced_accuracy": 0.797463518780023,
+            "weighted_f1": 0.7926813187096949,
+            "cohen_kappa": 0.58905127118159,
+            "class_support": [
+              34679,
+              38948
+            ],
+            "class_recall": [
+              0.8714495804377289,
+              0.7234774571223169
+            ],
+            "missing_true_classes": [],
+            "confusion_matrix": [
+              [
+                30221,
+                4458,
+                0
+              ],
+              [
+                10770,
+                28178,
+                0
+              ]
+            ],
+            "confusion_columns": [
+              0,
+              1,
+              "invalid"
+            ],
+            "invalid_policy": "retain_in_denominator_and_count_wrong",
+            "roc_auc": 0.8722862023103585,
+            "roc_auc_note": "Conditional probability of Yes among legal first tokens; modified constrained-decoding protocol."
+          },
+          "candidate_token_ids": {
+            "1": [
+              3363,
+              220,
+              50256
+            ],
+            "0": [
+              1400,
+              220,
+              50256
+            ]
+          },
+          "answers": {
+            "Yes": 1,
+            "No": 0
+          },
+          "prediction_sha256": {
+            "TUAB-val-rank0.jsonl": "96c4c24dd2eccdb135b9dbb222768dbed086989e12d8da23743f71e86af4566a",
+            "TUAB-val-rank1.jsonl": "59bfd1ade9b14555a12aa07dda3d3c0e0dda10885a477c78db0722c6e5cdb80b"
+          }
+        },
+        {
+          "task": "TUAB",
+          "split": "test",
+          "full_split": true,
+          "available_samples": 36945,
+          "selected_file_list_sha256": "f63f367e01d87a14cff56dbc9320cbac4945d855df0ac725b03446debbfb165e",
+          "metrics": {
+            "samples": 36945,
+            "parse_failures": 0,
+            "accuracy": 0.7738259575043984,
+            "balanced_accuracy": 0.7679114031201774,
+            "weighted_f1": 0.7720067038990805,
+            "cohen_kappa": 0.5407352213439234,
+            "class_support": [
+              19907,
+              17038
+            ],
+            "class_recall": [
+              0.8440749485105742,
+              0.6917478577297805
+            ],
+            "missing_true_classes": [],
+            "confusion_matrix": [
+              [
+                16803,
+                3104,
+                0
+              ],
+              [
+                5252,
+                11786,
+                0
+              ]
+            ],
+            "confusion_columns": [
+              0,
+              1,
+              "invalid"
+            ],
+            "invalid_policy": "retain_in_denominator_and_count_wrong",
+            "roc_auc": 0.8428790645488491,
+            "roc_auc_note": "Conditional probability of Yes among legal first tokens; modified constrained-decoding protocol."
+          },
+          "candidate_token_ids": {
+            "1": [
+              3363,
+              220,
+              50256
+            ],
+            "0": [
+              1400,
+              220,
+              50256
+            ]
+          },
+          "answers": {
+            "Yes": 1,
+            "No": 0
+          },
+          "prediction_sha256": {
+            "TUAB-test-rank0.jsonl": "186b5af9c7db8352357f4e516bec7e19a1cef7dd046c30b8b2c12ac595e7a4f2",
+            "TUAB-test-rank1.jsonl": "cddc3645c91522b3b432d874e2e59ea3d501dbbd9c8be9b6d6d4a191645a57ed"
+          }
+        },
+        {
+          "task": "TUEV",
+          "split": "val",
+          "full_split": true,
+          "available_samples": 15662,
+          "selected_file_list_sha256": "36269e385461c8ceec5a3dfeef84b0ad16ef0a6917fe38323c62ae1f1de68c83",
+          "metrics": {
+            "samples": 15662,
+            "parse_failures": 0,
+            "accuracy": 0.8084535819180181,
+            "balanced_accuracy": 0.6459800139943784,
+            "weighted_f1": 0.8209466498498841,
+            "cohen_kappa": 0.6173623140757164,
+            "class_support": [
+              229,
+              515,
+              1528,
+              59,
+              2309,
+              11022
+            ],
+            "class_recall": [
+              0.18777292576419213,
+              0.8310679611650486,
+              0.4201570680628272,
+              0.864406779661017,
+              0.6695539194456475,
+              0.9029214298675377
+            ],
+            "missing_true_classes": [],
+            "confusion_matrix": [
+              [
+                43,
+                0,
+                80,
+                19,
+                18,
+                69,
+                0
+              ],
+              [
+                35,
+                428,
+                0,
+                0,
+                52,
+                0,
+                0
+              ],
+              [
+                18,
+                790,
+                642,
+                10,
+                68,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                51,
+                1,
+                7,
+                0
+              ],
+              [
+                0,
+                102,
+                124,
+                138,
+                1546,
+                399,
+                0
+              ],
+              [
+                152,
+                68,
+                61,
+                136,
+                653,
+                9952,
+                0
+              ]
+            ],
+            "confusion_columns": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              "invalid"
+            ],
+            "invalid_policy": "retain_in_denominator_and_count_wrong",
+            "roc_auc": null,
+            "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+          },
+          "candidate_token_ids": {
+            "0": [
+              32,
+              8,
+              220,
+              50256
+            ],
+            "1": [
+              33,
+              8,
+              220,
+              50256
+            ],
+            "2": [
+              34,
+              8,
+              220,
+              50256
+            ],
+            "3": [
+              35,
+              8,
+              220,
+              50256
+            ],
+            "4": [
+              36,
+              8,
+              220,
+              50256
+            ],
+            "5": [
+              37,
+              8,
+              220,
+              50256
+            ]
+          },
+          "answers": {
+            "(A)": 0,
+            "(B)": 1,
+            "(C)": 2,
+            "(D)": 3,
+            "(E)": 4,
+            "(F)": 5
+          },
+          "prediction_sha256": {
+            "TUEV-val-rank0.jsonl": "e8424673992d7c64aa512deb2ad0ff98f28b0956b86e78a4b40bc16fdf656ed3",
+            "TUEV-val-rank1.jsonl": "b39eae8462696bb1b26d8f3a1517d47648efba9fd488c026275af5ff31732a69"
+          }
+        },
+        {
+          "task": "TUEV",
+          "split": "test",
+          "full_split": true,
+          "available_samples": 28305,
+          "selected_file_list_sha256": "9d5b50f6e8926027a35f5d226c746db7dd3e8896da1a99a2fd5504a44eeb93c1",
+          "metrics": {
+            "samples": 28305,
+            "parse_failures": 0,
+            "accuracy": 0.7716304539833951,
+            "balanced_accuracy": 0.5819634461209224,
+            "weighted_f1": 0.7804417138536941,
+            "cohen_kappa": 0.5641665809892676,
+            "class_support": [
+              567,
+              3561,
+              1998,
+              329,
+              2204,
+              19646
+            ],
+            "class_recall": [
+              0.019400352733686066,
+              0.7843302443133952,
+              0.3743743743743744,
+              0.8966565349544073,
+              0.5644283121597096,
+              0.8525908581899624
+            ],
+            "missing_true_classes": [],
+            "confusion_matrix": [
+              [
+                11,
+                310,
+                102,
+                0,
+                133,
+                11,
+                0
+              ],
+              [
+                75,
+                2793,
+                207,
+                20,
+                292,
+                174,
+                0
+              ],
+              [
+                150,
+                284,
+                748,
+                108,
+                350,
+                358,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                295,
+                14,
+                20,
+                0
+              ],
+              [
+                66,
+                6,
+                4,
+                45,
+                1244,
+                839,
+                0
+              ],
+              [
+                108,
+                324,
+                830,
+                387,
+                1247,
+                16750,
+                0
+              ]
+            ],
+            "confusion_columns": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              "invalid"
+            ],
+            "invalid_policy": "retain_in_denominator_and_count_wrong",
+            "roc_auc": null,
+            "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+          },
+          "candidate_token_ids": {
+            "0": [
+              32,
+              8,
+              220,
+              50256
+            ],
+            "1": [
+              33,
+              8,
+              220,
+              50256
+            ],
+            "2": [
+              34,
+              8,
+              220,
+              50256
+            ],
+            "3": [
+              35,
+              8,
+              220,
+              50256
+            ],
+            "4": [
+              36,
+              8,
+              220,
+              50256
+            ],
+            "5": [
+              37,
+              8,
+              220,
+              50256
+            ]
+          },
+          "answers": {
+            "(A)": 0,
+            "(B)": 1,
+            "(C)": 2,
+            "(D)": 3,
+            "(E)": 4,
+            "(F)": 5
+          },
+          "prediction_sha256": {
+            "TUEV-test-rank0.jsonl": "a9d8edb2fa0332d36f34caa085bde480277ece3b5b952ff776132a6f5d139b30",
+            "TUEV-test-rank1.jsonl": "7ec60d7df4bbd2f87b8d7ac550fb4e5fcb13d56bb24e95e34b133c4037c3d375"
+          }
+        },
+        {
+          "task": "HMC",
+          "split": "val",
+          "full_split": true,
+          "available_samples": 22124,
+          "selected_file_list_sha256": "8f46bad3f0d8af8fc481dd4066670d66de696d1f5172899601c96e10af632403",
+          "metrics": {
+            "samples": 22124,
+            "parse_failures": 0,
+            "accuracy": 0.7288917013198337,
+            "balanced_accuracy": 0.6849577026393471,
+            "weighted_f1": 0.7306345554531757,
+            "cohen_kappa": 0.643164407917797,
+            "class_support": [
+              4186,
+              2136,
+              7772,
+              4961,
+              3069
+            ],
+            "class_recall": [
+              0.7912087912087912,
+              0.46301498127340823,
+              0.7722593926917138,
+              0.8095142108445877,
+              0.588791137178234
+            ],
+            "missing_true_classes": [],
+            "confusion_matrix": [
+              [
+                3312,
+                570,
+                92,
+                5,
+                207,
+                0
+              ],
+              [
+                385,
+                989,
+                438,
+                31,
+                293,
+                0
+              ],
+              [
+                100,
+                556,
+                6002,
+                823,
+                291,
+                0
+              ],
+              [
+                13,
+                21,
+                905,
+                4016,
+                6,
+                0
+              ],
+              [
+                30,
+                349,
+                659,
+                224,
+                1807,
+                0
+              ]
+            ],
+            "confusion_columns": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              "invalid"
+            ],
+            "invalid_policy": "retain_in_denominator_and_count_wrong",
+            "roc_auc": null,
+            "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+          },
+          "candidate_token_ids": {
+            "0": [
+              32,
+              8,
+              220,
+              50256
+            ],
+            "1": [
+              33,
+              8,
+              220,
+              50256
+            ],
+            "2": [
+              34,
+              8,
+              220,
+              50256
+            ],
+            "3": [
+              35,
+              8,
+              220,
+              50256
+            ],
+            "4": [
+              36,
+              8,
+              220,
+              50256
+            ]
+          },
+          "answers": {
+            "(A)": 0,
+            "(B)": 1,
+            "(C)": 2,
+            "(D)": 3,
+            "(E)": 4
+          },
+          "prediction_sha256": {
+            "HMC-val-rank0.jsonl": "d40150defe3d7cd9c0c06a3b3502b8be61d4de29593c3b6453cc1cf7cafbf203",
+            "HMC-val-rank1.jsonl": "c02fd366621ddddb4c0091be926124cd4f78c8a76b195f557a35f1698d4e5d94"
+          }
+        },
+        {
+          "task": "HMC",
+          "split": "test",
+          "full_split": true,
+          "available_samples": 23871,
+          "selected_file_list_sha256": "8771e7ce81cb42a2f2b3aac278af1c775969d4fe05fb5a121eb44a3158a869f9",
+          "metrics": {
+            "samples": 23871,
+            "parse_failures": 0,
+            "accuracy": 0.735285492857442,
+            "balanced_accuracy": 0.7029433837789545,
+            "weighted_f1": 0.7320255702299787,
+            "cohen_kappa": 0.6494444779024303,
+            "class_support": [
+              3805,
+              2868,
+              8843,
+              4710,
+              3645
+            ],
+            "class_recall": [
+              0.8015768725361366,
+              0.3957461645746165,
+              0.776320253307701,
+              0.8307855626326964,
+              0.7102880658436214
+            ],
+            "missing_true_classes": [],
+            "confusion_matrix": [
+              [
+                3050,
+                537,
+                103,
+                8,
+                107,
+                0
+              ],
+              [
+                298,
+                1135,
+                874,
+                51,
+                510,
+                0
+              ],
+              [
+                46,
+                374,
+                6865,
+                1127,
+                431,
+                0
+              ],
+              [
+                7,
+                11,
+                775,
+                3913,
+                4,
+                0
+              ],
+              [
+                40,
+                281,
+                674,
+                61,
+                2589,
+                0
+              ]
+            ],
+            "confusion_columns": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              "invalid"
+            ],
+            "invalid_policy": "retain_in_denominator_and_count_wrong",
+            "roc_auc": null,
+            "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+          },
+          "candidate_token_ids": {
+            "0": [
+              32,
+              8,
+              220,
+              50256
+            ],
+            "1": [
+              33,
+              8,
+              220,
+              50256
+            ],
+            "2": [
+              34,
+              8,
+              220,
+              50256
+            ],
+            "3": [
+              35,
+              8,
+              220,
+              50256
+            ],
+            "4": [
+              36,
+              8,
+              220,
+              50256
+            ]
+          },
+          "answers": {
+            "(A)": 0,
+            "(B)": 1,
+            "(C)": 2,
+            "(D)": 3,
+            "(E)": 4
+          },
+          "prediction_sha256": {
+            "HMC-test-rank0.jsonl": "7c153e68cf89b397cfc8e43818f386f047a47e2da9108c197841666a89c12337",
+            "HMC-test-rank1.jsonl": "73efdcfb5460a5375eace5c0359e787ed9ce8d6afa49bf56d88016dd746de20e"
+          }
+        },
+        {
+          "task": "Workload",
+          "split": "val",
+          "full_split": true,
+          "available_samples": 290,
+          "selected_file_list_sha256": "d6cb39f8b9c0e4ac4e9ae52ce5249f40e05e345abaf4bb12fce7fbf9f38aa75e",
+          "metrics": {
+            "samples": 290,
+            "parse_failures": 0,
+            "accuracy": 0.6551724137931034,
+            "balanced_accuracy": 0.6551724137931034,
+            "weighted_f1": 0.6462724434035909,
+            "cohen_kappa": 0.31034482758620685,
+            "class_support": [
+              145,
+              145
+            ],
+            "class_recall": [
+              0.8137931034482758,
+              0.496551724137931
+            ],
+            "missing_true_classes": [],
+            "confusion_matrix": [
+              [
+                118,
+                27,
+                0
+              ],
+              [
+                73,
+                72,
+                0
+              ]
+            ],
+            "confusion_columns": [
+              0,
+              1,
+              "invalid"
+            ],
+            "invalid_policy": "retain_in_denominator_and_count_wrong",
+            "roc_auc": 0.727372175980975,
+            "roc_auc_note": "Conditional probability of Yes among legal first tokens; modified constrained-decoding protocol."
+          },
+          "candidate_token_ids": {
+            "1": [
+              3363,
+              220,
+              50256
+            ],
+            "0": [
+              1400,
+              220,
+              50256
+            ]
+          },
+          "answers": {
+            "Yes": 1,
+            "No": 0
+          },
+          "prediction_sha256": {
+            "Workload-val-rank0.jsonl": "55cc8a2f38cb9dd36982f88138d0de0fff61f9790fcceeabe5c962758e9e76ad",
+            "Workload-val-rank1.jsonl": "3fab65df68b9b9b9a66dec9b5d935e6cc41f91e1bcd84a5bf25bec96b0d149dc"
+          }
+        },
+        {
+          "task": "Workload",
+          "split": "test",
+          "full_split": true,
+          "available_samples": 290,
+          "selected_file_list_sha256": "aa3bce5dc483d31ac1caf88ecbd5008abfea35d59778cfd22d044846ff9d8e9a",
+          "metrics": {
+            "samples": 290,
+            "parse_failures": 0,
+            "accuracy": 0.6448275862068965,
+            "balanced_accuracy": 0.6448275862068966,
+            "weighted_f1": 0.6315757015109467,
+            "cohen_kappa": 0.289655172413793,
+            "class_support": [
+              145,
+              145
+            ],
+            "class_recall": [
+              0.8344827586206897,
+              0.45517241379310347
+            ],
+            "missing_true_classes": [],
+            "confusion_matrix": [
+              [
+                121,
+                24,
+                0
+              ],
+              [
+                79,
+                66,
+                0
+              ]
+            ],
+            "confusion_columns": [
+              0,
+              1,
+              "invalid"
+            ],
+            "invalid_policy": "retain_in_denominator_and_count_wrong",
+            "roc_auc": 0.6915338882282998,
+            "roc_auc_note": "Conditional probability of Yes among legal first tokens; modified constrained-decoding protocol."
+          },
+          "candidate_token_ids": {
+            "1": [
+              3363,
+              220,
+              50256
+            ],
+            "0": [
+              1400,
+              220,
+              50256
+            ]
+          },
+          "answers": {
+            "Yes": 1,
+            "No": 0
+          },
+          "prediction_sha256": {
+            "Workload-test-rank0.jsonl": "080c34cf21c52dd732af8a18ac786dc515e2f9b04031b8db82b42757e58c835a",
+            "Workload-test-rank1.jsonl": "eb7022306e67b2a342879052305f974aeacd49819d79f21271c097435f80c252"
+          }
+        }
+      ]
+    },
+    {
+      "seed": 44,
+      "audit": {
+        "status": "passed",
+        "summary_sha256": "78147be6a6e482e3d16b17561c465593b935f79840cb3fcdfa50683bddcff3c9",
+        "total_samples": 201240,
+        "splits": [
+          {
+            "task": "TUSL",
+            "split": "val",
+            "samples": 66,
+            "parse_failures": 0,
+            "independent_metrics": {
+              "accuracy": 0.45454545454545453,
+              "balanced_accuracy": 0.4858012170385395,
+              "weighted_f1": 0.4454010042245336,
+              "cohen_kappa": 0.18434603501544788
+            },
+            "artifact_sha256": {
+              "TUSL-val-rank0.jsonl": "49e00916599e53420c7f7a0103f0c73444940fe5c5212b5a7f8dca5caecbb4ea",
+              "TUSL-val-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "TUSL-val-rank1.jsonl": "16021cc8f66dcd76d2969c8127180f611cc6ae40af1d47c3bce1cd100a403725",
+              "TUSL-val-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          },
+          {
+            "task": "TUSL",
+            "split": "test",
+            "samples": 60,
+            "parse_failures": 0,
+            "independent_metrics": {
+              "accuracy": 0.16666666666666666,
+              "balanced_accuracy": 0.4078282828282829,
+              "weighted_f1": 0.1917142857142857,
+              "cohen_kappa": 0.021526418786692925
+            },
+            "artifact_sha256": {
+              "TUSL-test-rank0.jsonl": "e2ecfd37514df567e38bf8e3615bd1d5d951eac2b7d87dd09e251e5ec48501c6",
+              "TUSL-test-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "TUSL-test-rank1.jsonl": "197fb93b4c68bebcbcf714afb92655a46b20741d965ab907379dda64baa28a6b",
+              "TUSL-test-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          },
+          {
+            "task": "TUAB",
+            "split": "val",
+            "samples": 73627,
+            "parse_failures": 0,
+            "independent_metrics": {
+              "accuracy": 0.7981447023510397,
+              "balanced_accuracy": 0.8003510470357276,
+              "weighted_f1": 0.7982283858639081,
+              "cohen_kappa": 0.5972532662869844,
+              "roc_auc": 0.8710145066199849
+            },
+            "artifact_sha256": {
+              "TUAB-val-rank0.jsonl": "e24057b5be18f51f2390c29c6080b69ad9acaa0e9992d0d5fffb569d70cae3b1",
+              "TUAB-val-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "TUAB-val-rank1.jsonl": "3afe7dfafbd75985b2712cd670256b66380d8b53e8e25343fda2c484b8592e7a",
+              "TUAB-val-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          },
+          {
+            "task": "TUAB",
+            "split": "test",
+            "samples": 36945,
+            "parse_failures": 0,
+            "independent_metrics": {
+              "accuracy": 0.7739612938151306,
+              "balanced_accuracy": 0.7703885191979067,
+              "weighted_f1": 0.773279597771135,
+              "cohen_kappa": 0.5431684890221389,
+              "roc_auc": 0.8468230585404429
+            },
+            "artifact_sha256": {
+              "TUAB-test-rank0.jsonl": "74674890faac61bffc8b29b16cf6c432f8bf5087305829637bcd4a924d1e8b1a",
+              "TUAB-test-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "TUAB-test-rank1.jsonl": "93558f461aafd57cb5a913260a820d437387cc8ff03deba368e977df242511af",
+              "TUAB-test-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          },
+          {
+            "task": "TUEV",
+            "split": "val",
+            "samples": 15662,
+            "parse_failures": 0,
+            "independent_metrics": {
+              "accuracy": 0.8053888392287064,
+              "balanced_accuracy": 0.5921213188441775,
+              "weighted_f1": 0.8170583282166576,
+              "cohen_kappa": 0.6010701311771598
+            },
+            "artifact_sha256": {
+              "TUEV-val-rank0.jsonl": "207ea6357e395828db57160f048f29b16810dfd832473f956dc5b3366e85051b",
+              "TUEV-val-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "TUEV-val-rank1.jsonl": "594353d9377a7ecea2e52b4a4b9320f6fceccfe8e6e0f04c1d0a50245211dbce",
+              "TUEV-val-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          },
+          {
+            "task": "TUEV",
+            "split": "test",
+            "samples": 28305,
+            "parse_failures": 0,
+            "independent_metrics": {
+              "accuracy": 0.7555202261084614,
+              "balanced_accuracy": 0.5413467484575998,
+              "weighted_f1": 0.7622492611174301,
+              "cohen_kappa": 0.5141448093768739
+            },
+            "artifact_sha256": {
+              "TUEV-test-rank0.jsonl": "73d5e840624553547192e4445813856b046e1e93994186cebdde4bd6740e0709",
+              "TUEV-test-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "TUEV-test-rank1.jsonl": "34dd706e5a64f7bf7cca72b190dac5eabbc12b5736e87a474cdf97b3080af3fb",
+              "TUEV-test-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          },
+          {
+            "task": "HMC",
+            "split": "val",
+            "samples": 22124,
+            "parse_failures": 0,
+            "independent_metrics": {
+              "accuracy": 0.7354004700777437,
+              "balanced_accuracy": 0.6810525914777736,
+              "weighted_f1": 0.7282704005369797,
+              "cohen_kappa": 0.6509586534706326
+            },
+            "artifact_sha256": {
+              "HMC-val-rank0.jsonl": "e6af337f8aeecec5b45ca4068b9000f984d9eac2fc0e1856f6c9a56fcdb270d0",
+              "HMC-val-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "HMC-val-rank1.jsonl": "750e6a2008d7183648cf1862e112dec57596dcead405542a4839166f117d8b29",
+              "HMC-val-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          },
+          {
+            "task": "HMC",
+            "split": "test",
+            "samples": 23871,
+            "parse_failures": 0,
+            "independent_metrics": {
+              "accuracy": 0.7413179171379498,
+              "balanced_accuracy": 0.7085491287903442,
+              "weighted_f1": 0.7312888621563399,
+              "cohen_kappa": 0.6578223808347063
+            },
+            "artifact_sha256": {
+              "HMC-test-rank0.jsonl": "6a07fa6330b0f309f7be58807aab95cd65b1270ee4ae2f79c3e28871e8b1452f",
+              "HMC-test-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "HMC-test-rank1.jsonl": "f76b69f8f7e7beccc63be2b943dc4f4348b376890d176787a73d9452df886186",
+              "HMC-test-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          },
+          {
+            "task": "Workload",
+            "split": "val",
+            "samples": 290,
+            "parse_failures": 0,
+            "independent_metrics": {
+              "accuracy": 0.7,
+              "balanced_accuracy": 0.7,
+              "weighted_f1": 0.6997107797045906,
+              "cohen_kappa": 0.4,
+              "roc_auc": 0.785398335315101
+            },
+            "artifact_sha256": {
+              "Workload-val-rank0.jsonl": "cf358356ac02e2088c0a10b7d24febc52047f75c8310e360204ee20a59dc863d",
+              "Workload-val-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "Workload-val-rank1.jsonl": "a5da8290f8ae3a50a8985ede44d2a6f7ab163879958a13e9e0e4e25af15c3079",
+              "Workload-val-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          },
+          {
+            "task": "Workload",
+            "split": "test",
+            "samples": 290,
+            "parse_failures": 0,
+            "independent_metrics": {
+              "accuracy": 0.7068965517241379,
+              "balanced_accuracy": 0.7068965517241379,
+              "weighted_f1": 0.7025641025641025,
+              "cohen_kappa": 0.4137931034482759,
+              "roc_auc": 0.7617598097502972
+            },
+            "artifact_sha256": {
+              "Workload-test-rank0.jsonl": "cc5001428678970bc26633cdb98ddf0eb93b3cd91c5e3984f64e6d5898759746",
+              "Workload-test-rank0-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "Workload-test-rank1.jsonl": "5d38f9525b067ed62534a9d1ed34ee53671e8278dbacd73206939e1c2ddb828d",
+              "Workload-test-rank1-invalid.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          }
+        ],
+        "independent_strict_parser": true,
+        "invalid_log_matches_all_failures": true
+      },
+      "results": [
+        {
+          "task": "TUSL",
+          "split": "val",
+          "full_split": true,
+          "available_samples": 66,
+          "selected_file_list_sha256": "5355d4c0940875a87cc39ca7cb27b07c2b202337368d65561871ca156a5e1a96",
+          "metrics": {
+            "samples": 66,
+            "parse_failures": 0,
+            "accuracy": 0.45454545454545453,
+            "balanced_accuracy": 0.4858012170385395,
+            "weighted_f1": 0.4454010042245336,
+            "cohen_kappa": 0.184346035015448,
+            "class_support": [
+              17,
+              20,
+              29
+            ],
+            "class_recall": [
+              0.6470588235294118,
+              0.5,
+              0.3103448275862069
+            ],
+            "missing_true_classes": [],
+            "confusion_matrix": [
+              [
+                11,
+                1,
+                5,
+                0
+              ],
+              [
+                2,
+                10,
+                8,
+                0
+              ],
+              [
+                12,
+                8,
+                9,
+                0
+              ]
+            ],
+            "confusion_columns": [
+              0,
+              1,
+              2,
+              "invalid"
+            ],
+            "invalid_policy": "retain_in_denominator_and_count_wrong",
+            "roc_auc": null,
+            "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+          },
+          "candidate_token_ids": {
+            "0": [
+              32,
+              8,
+              220,
+              50256
+            ],
+            "1": [
+              33,
+              8,
+              220,
+              50256
+            ],
+            "2": [
+              34,
+              8,
+              220,
+              50256
+            ]
+          },
+          "answers": {
+            "(A)": 0,
+            "(B)": 1,
+            "(C)": 2
+          },
+          "prediction_sha256": {
+            "TUSL-val-rank0.jsonl": "49e00916599e53420c7f7a0103f0c73444940fe5c5212b5a7f8dca5caecbb4ea",
+            "TUSL-val-rank1.jsonl": "16021cc8f66dcd76d2969c8127180f611cc6ae40af1d47c3bce1cd100a403725"
+          }
+        },
+        {
+          "task": "TUSL",
+          "split": "test",
+          "full_split": true,
+          "available_samples": 60,
+          "selected_file_list_sha256": "34f0bd3f8bb72c68808d1f2922522b66bc368501e8d849422bdec16d277de411",
+          "metrics": {
+            "samples": 60,
+            "parse_failures": 0,
+            "accuracy": 0.16666666666666666,
+            "balanced_accuracy": 0.4078282828282829,
+            "weighted_f1": 0.1917142857142857,
+            "cohen_kappa": 0.021526418786692734,
+            "class_support": [
+              33,
+              3,
+              24
+            ],
+            "class_recall": [
+              0.18181818181818182,
+              1.0,
+              0.041666666666666664
+            ],
+            "missing_true_classes": [],
+            "confusion_matrix": [
+              [
+                6,
+                24,
+                3,
+                0
+              ],
+              [
+                0,
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                20,
+                1,
+                0
+              ]
+            ],
+            "confusion_columns": [
+              0,
+              1,
+              2,
+              "invalid"
+            ],
+            "invalid_policy": "retain_in_denominator_and_count_wrong",
+            "roc_auc": null,
+            "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+          },
+          "candidate_token_ids": {
+            "0": [
+              32,
+              8,
+              220,
+              50256
+            ],
+            "1": [
+              33,
+              8,
+              220,
+              50256
+            ],
+            "2": [
+              34,
+              8,
+              220,
+              50256
+            ]
+          },
+          "answers": {
+            "(A)": 0,
+            "(B)": 1,
+            "(C)": 2
+          },
+          "prediction_sha256": {
+            "TUSL-test-rank0.jsonl": "e2ecfd37514df567e38bf8e3615bd1d5d951eac2b7d87dd09e251e5ec48501c6",
+            "TUSL-test-rank1.jsonl": "197fb93b4c68bebcbcf714afb92655a46b20741d965ab907379dda64baa28a6b"
+          }
+        },
+        {
+          "task": "TUAB",
+          "split": "val",
+          "full_split": true,
+          "available_samples": 73627,
+          "selected_file_list_sha256": "adfdd73e4d8800f8f31e630b57ba9194b0106ae5ab3d981b8efa5a674dd2d035",
+          "metrics": {
+            "samples": 73627,
+            "parse_failures": 0,
+            "accuracy": 0.7981447023510397,
+            "balanced_accuracy": 0.8003510470357276,
+            "weighted_f1": 0.7982283858639081,
+            "cohen_kappa": 0.5972532662869845,
+            "class_support": [
+              34679,
+              38948
+            ],
+            "class_recall": [
+              0.8384036448571182,
+              0.7622984492143371
+            ],
+            "missing_true_classes": [],
+            "confusion_matrix": [
+              [
+                29075,
+                5604,
+                0
+              ],
+              [
+                9258,
+                29690,
+                0
+              ]
+            ],
+            "confusion_columns": [
+              0,
+              1,
+              "invalid"
+            ],
+            "invalid_policy": "retain_in_denominator_and_count_wrong",
+            "roc_auc": 0.8710145066199849,
+            "roc_auc_note": "Conditional probability of Yes among legal first tokens; modified constrained-decoding protocol."
+          },
+          "candidate_token_ids": {
+            "1": [
+              3363,
+              220,
+              50256
+            ],
+            "0": [
+              1400,
+              220,
+              50256
+            ]
+          },
+          "answers": {
+            "Yes": 1,
+            "No": 0
+          },
+          "prediction_sha256": {
+            "TUAB-val-rank0.jsonl": "e24057b5be18f51f2390c29c6080b69ad9acaa0e9992d0d5fffb569d70cae3b1",
+            "TUAB-val-rank1.jsonl": "3afe7dfafbd75985b2712cd670256b66380d8b53e8e25343fda2c484b8592e7a"
+          }
+        },
+        {
+          "task": "TUAB",
+          "split": "test",
+          "full_split": true,
+          "available_samples": 36945,
+          "selected_file_list_sha256": "f63f367e01d87a14cff56dbc9320cbac4945d855df0ac725b03446debbfb165e",
+          "metrics": {
+            "samples": 36945,
+            "parse_failures": 0,
+            "accuracy": 0.7739612938151306,
+            "balanced_accuracy": 0.7703885191979067,
+            "weighted_f1": 0.773279597771135,
+            "cohen_kappa": 0.5431684890221389,
+            "class_support": [
+              19907,
+              17038
+            ],
+            "class_recall": [
+              0.816396242527754,
+              0.7243807958680596
+            ],
+            "missing_true_classes": [],
+            "confusion_matrix": [
+              [
+                16252,
+                3655,
+                0
+              ],
+              [
+                4696,
+                12342,
+                0
+              ]
+            ],
+            "confusion_columns": [
+              0,
+              1,
+              "invalid"
+            ],
+            "invalid_policy": "retain_in_denominator_and_count_wrong",
+            "roc_auc": 0.8468230585404429,
+            "roc_auc_note": "Conditional probability of Yes among legal first tokens; modified constrained-decoding protocol."
+          },
+          "candidate_token_ids": {
+            "1": [
+              3363,
+              220,
+              50256
+            ],
+            "0": [
+              1400,
+              220,
+              50256
+            ]
+          },
+          "answers": {
+            "Yes": 1,
+            "No": 0
+          },
+          "prediction_sha256": {
+            "TUAB-test-rank0.jsonl": "74674890faac61bffc8b29b16cf6c432f8bf5087305829637bcd4a924d1e8b1a",
+            "TUAB-test-rank1.jsonl": "93558f461aafd57cb5a913260a820d437387cc8ff03deba368e977df242511af"
+          }
+        },
+        {
+          "task": "TUEV",
+          "split": "val",
+          "full_split": true,
+          "available_samples": 15662,
+          "selected_file_list_sha256": "36269e385461c8ceec5a3dfeef84b0ad16ef0a6917fe38323c62ae1f1de68c83",
+          "metrics": {
+            "samples": 15662,
+            "parse_failures": 0,
+            "accuracy": 0.8053888392287064,
+            "balanced_accuracy": 0.5921213188441775,
+            "weighted_f1": 0.8170583282166576,
+            "cohen_kappa": 0.6010701311771598,
+            "class_support": [
+              229,
+              515,
+              1528,
+              59,
+              2309,
+              11022
+            ],
+            "class_recall": [
+              0.06550218340611354,
+              0.7320388349514563,
+              0.46924083769633507,
+              0.7796610169491526,
+              0.5902988306626246,
+              0.915986209399383
+            ],
+            "missing_true_classes": [],
+            "confusion_matrix": [
+              [
+                15,
+                0,
+                80,
+                19,
+                0,
+                115,
+                0
+              ],
+              [
+                93,
+                377,
+                0,
+                5,
+                40,
+                0,
+                0
+              ],
+              [
+                42,
+                713,
+                717,
+                16,
+                38,
+                2,
+                0
+              ],
+              [
+                4,
+                0,
+                0,
+                46,
+                3,
+                6,
+                0
+              ],
+              [
+                0,
+                100,
+                155,
+                119,
+                1363,
+                572,
+                0
+              ],
+              [
+                152,
+                134,
+                101,
+                114,
+                425,
+                10096,
+                0
+              ]
+            ],
+            "confusion_columns": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              "invalid"
+            ],
+            "invalid_policy": "retain_in_denominator_and_count_wrong",
+            "roc_auc": null,
+            "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+          },
+          "candidate_token_ids": {
+            "0": [
+              32,
+              8,
+              220,
+              50256
+            ],
+            "1": [
+              33,
+              8,
+              220,
+              50256
+            ],
+            "2": [
+              34,
+              8,
+              220,
+              50256
+            ],
+            "3": [
+              35,
+              8,
+              220,
+              50256
+            ],
+            "4": [
+              36,
+              8,
+              220,
+              50256
+            ],
+            "5": [
+              37,
+              8,
+              220,
+              50256
+            ]
+          },
+          "answers": {
+            "(A)": 0,
+            "(B)": 1,
+            "(C)": 2,
+            "(D)": 3,
+            "(E)": 4,
+            "(F)": 5
+          },
+          "prediction_sha256": {
+            "TUEV-val-rank0.jsonl": "207ea6357e395828db57160f048f29b16810dfd832473f956dc5b3366e85051b",
+            "TUEV-val-rank1.jsonl": "594353d9377a7ecea2e52b4a4b9320f6fceccfe8e6e0f04c1d0a50245211dbce"
+          }
+        },
+        {
+          "task": "TUEV",
+          "split": "test",
+          "full_split": true,
+          "available_samples": 28305,
+          "selected_file_list_sha256": "9d5b50f6e8926027a35f5d226c746db7dd3e8896da1a99a2fd5504a44eeb93c1",
+          "metrics": {
+            "samples": 28305,
+            "parse_failures": 0,
+            "accuracy": 0.7555202261084614,
+            "balanced_accuracy": 0.5413467484575998,
+            "weighted_f1": 0.7622492611174301,
+            "cohen_kappa": 0.5141448093768737,
+            "class_support": [
+              567,
+              3561,
+              1998,
+              329,
+              2204,
+              19646
+            ],
+            "class_recall": [
+              0.12345679012345678,
+              0.5549003089019938,
+              0.3308308308308308,
+              0.8328267477203647,
+              0.528584392014519,
+              0.8774814211544335
+            ],
+            "missing_true_classes": [],
+            "confusion_matrix": [
+              [
+                70,
+                171,
+                83,
+                12,
+                198,
+                33,
+                0
+              ],
+              [
+                131,
+                1976,
+                313,
+                109,
+                442,
+                590,
+                0
+              ],
+              [
+                261,
+                220,
+                661,
+                111,
+                374,
+                371,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                274,
+                21,
+                34,
+                0
+              ],
+              [
+                46,
+                12,
+                13,
+                30,
+                1165,
+                938,
+                0
+              ],
+              [
+                206,
+                284,
+                851,
+                200,
+                866,
+                17239,
+                0
+              ]
+            ],
+            "confusion_columns": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              "invalid"
+            ],
+            "invalid_policy": "retain_in_denominator_and_count_wrong",
+            "roc_auc": null,
+            "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+          },
+          "candidate_token_ids": {
+            "0": [
+              32,
+              8,
+              220,
+              50256
+            ],
+            "1": [
+              33,
+              8,
+              220,
+              50256
+            ],
+            "2": [
+              34,
+              8,
+              220,
+              50256
+            ],
+            "3": [
+              35,
+              8,
+              220,
+              50256
+            ],
+            "4": [
+              36,
+              8,
+              220,
+              50256
+            ],
+            "5": [
+              37,
+              8,
+              220,
+              50256
+            ]
+          },
+          "answers": {
+            "(A)": 0,
+            "(B)": 1,
+            "(C)": 2,
+            "(D)": 3,
+            "(E)": 4,
+            "(F)": 5
+          },
+          "prediction_sha256": {
+            "TUEV-test-rank0.jsonl": "73d5e840624553547192e4445813856b046e1e93994186cebdde4bd6740e0709",
+            "TUEV-test-rank1.jsonl": "34dd706e5a64f7bf7cca72b190dac5eabbc12b5736e87a474cdf97b3080af3fb"
+          }
+        },
+        {
+          "task": "HMC",
+          "split": "val",
+          "full_split": true,
+          "available_samples": 22124,
+          "selected_file_list_sha256": "8f46bad3f0d8af8fc481dd4066670d66de696d1f5172899601c96e10af632403",
+          "metrics": {
+            "samples": 22124,
+            "parse_failures": 0,
+            "accuracy": 0.7354004700777437,
+            "balanced_accuracy": 0.6810525914777736,
+            "weighted_f1": 0.7282704005369797,
+            "cohen_kappa": 0.6509586534706326,
+            "class_support": [
+              4186,
+              2136,
+              7772,
+              4961,
+              3069
+            ],
+            "class_recall": [
+              0.8946488294314381,
+              0.3094569288389513,
+              0.7560473494595985,
+              0.820802257609353,
+              0.6243075920495276
+            ],
+            "missing_true_classes": [],
+            "confusion_matrix": [
+              [
+                3745,
+                210,
+                104,
+                7,
+                120,
+                0
+              ],
+              [
+                717,
+                661,
+                431,
+                34,
+                293,
+                0
+              ],
+              [
+                181,
+                423,
+                5876,
+                866,
+                426,
+                0
+              ],
+              [
+                19,
+                10,
+                850,
+                4072,
+                10,
+                0
+              ],
+              [
+                126,
+                260,
+                572,
+                195,
+                1916,
+                0
+              ]
+            ],
+            "confusion_columns": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              "invalid"
+            ],
+            "invalid_policy": "retain_in_denominator_and_count_wrong",
+            "roc_auc": null,
+            "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+          },
+          "candidate_token_ids": {
+            "0": [
+              32,
+              8,
+              220,
+              50256
+            ],
+            "1": [
+              33,
+              8,
+              220,
+              50256
+            ],
+            "2": [
+              34,
+              8,
+              220,
+              50256
+            ],
+            "3": [
+              35,
+              8,
+              220,
+              50256
+            ],
+            "4": [
+              36,
+              8,
+              220,
+              50256
+            ]
+          },
+          "answers": {
+            "(A)": 0,
+            "(B)": 1,
+            "(C)": 2,
+            "(D)": 3,
+            "(E)": 4
+          },
+          "prediction_sha256": {
+            "HMC-val-rank0.jsonl": "e6af337f8aeecec5b45ca4068b9000f984d9eac2fc0e1856f6c9a56fcdb270d0",
+            "HMC-val-rank1.jsonl": "750e6a2008d7183648cf1862e112dec57596dcead405542a4839166f117d8b29"
+          }
+        },
+        {
+          "task": "HMC",
+          "split": "test",
+          "full_split": true,
+          "available_samples": 23871,
+          "selected_file_list_sha256": "8771e7ce81cb42a2f2b3aac278af1c775969d4fe05fb5a121eb44a3158a869f9",
+          "metrics": {
+            "samples": 23871,
+            "parse_failures": 0,
+            "accuracy": 0.7413179171379498,
+            "balanced_accuracy": 0.7085491287903442,
+            "weighted_f1": 0.7312888621563399,
+            "cohen_kappa": 0.6578223808347063,
+            "class_support": [
+              3805,
+              2868,
+              8843,
+              4710,
+              3645
+            ],
+            "class_recall": [
+              0.8791064388961892,
+              0.30718270571827055,
+              0.7687436390365261,
+              0.8307855626326964,
+              0.7569272976680385
+            ],
+            "missing_true_classes": [],
+            "confusion_matrix": [
+              [
+                3345,
+                282,
+                82,
+                5,
+                91,
+                0
+              ],
+              [
+                501,
+                881,
+                874,
+                59,
+                553,
+                0
+              ],
+              [
+                79,
+                289,
+                6798,
+                1117,
+                560,
+                0
+              ],
+              [
+                5,
+                8,
+                779,
+                3913,
+                5,
+                0
+              ],
+              [
+                110,
+                178,
+                543,
+                55,
+                2759,
+                0
+              ]
+            ],
+            "confusion_columns": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              "invalid"
+            ],
+            "invalid_policy": "retain_in_denominator_and_count_wrong",
+            "roc_auc": null,
+            "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+          },
+          "candidate_token_ids": {
+            "0": [
+              32,
+              8,
+              220,
+              50256
+            ],
+            "1": [
+              33,
+              8,
+              220,
+              50256
+            ],
+            "2": [
+              34,
+              8,
+              220,
+              50256
+            ],
+            "3": [
+              35,
+              8,
+              220,
+              50256
+            ],
+            "4": [
+              36,
+              8,
+              220,
+              50256
+            ]
+          },
+          "answers": {
+            "(A)": 0,
+            "(B)": 1,
+            "(C)": 2,
+            "(D)": 3,
+            "(E)": 4
+          },
+          "prediction_sha256": {
+            "HMC-test-rank0.jsonl": "6a07fa6330b0f309f7be58807aab95cd65b1270ee4ae2f79c3e28871e8b1452f",
+            "HMC-test-rank1.jsonl": "f76b69f8f7e7beccc63be2b943dc4f4348b376890d176787a73d9452df886186"
+          }
+        },
+        {
+          "task": "Workload",
+          "split": "val",
+          "full_split": true,
+          "available_samples": 290,
+          "selected_file_list_sha256": "d6cb39f8b9c0e4ac4e9ae52ce5249f40e05e345abaf4bb12fce7fbf9f38aa75e",
+          "metrics": {
+            "samples": 290,
+            "parse_failures": 0,
+            "accuracy": 0.7,
+            "balanced_accuracy": 0.7,
+            "weighted_f1": 0.6997107797045906,
+            "cohen_kappa": 0.3999999999999999,
+            "class_support": [
+              145,
+              145
+            ],
+            "class_recall": [
+              0.7310344827586207,
+              0.6689655172413793
+            ],
+            "missing_true_classes": [],
+            "confusion_matrix": [
+              [
+                106,
+                39,
+                0
+              ],
+              [
+                48,
+                97,
+                0
+              ]
+            ],
+            "confusion_columns": [
+              0,
+              1,
+              "invalid"
+            ],
+            "invalid_policy": "retain_in_denominator_and_count_wrong",
+            "roc_auc": 0.785398335315101,
+            "roc_auc_note": "Conditional probability of Yes among legal first tokens; modified constrained-decoding protocol."
+          },
+          "candidate_token_ids": {
+            "1": [
+              3363,
+              220,
+              50256
+            ],
+            "0": [
+              1400,
+              220,
+              50256
+            ]
+          },
+          "answers": {
+            "Yes": 1,
+            "No": 0
+          },
+          "prediction_sha256": {
+            "Workload-val-rank0.jsonl": "cf358356ac02e2088c0a10b7d24febc52047f75c8310e360204ee20a59dc863d",
+            "Workload-val-rank1.jsonl": "a5da8290f8ae3a50a8985ede44d2a6f7ab163879958a13e9e0e4e25af15c3079"
+          }
+        },
+        {
+          "task": "Workload",
+          "split": "test",
+          "full_split": true,
+          "available_samples": 290,
+          "selected_file_list_sha256": "aa3bce5dc483d31ac1caf88ecbd5008abfea35d59778cfd22d044846ff9d8e9a",
+          "metrics": {
+            "samples": 290,
+            "parse_failures": 0,
+            "accuracy": 0.7068965517241379,
+            "balanced_accuracy": 0.7068965517241379,
+            "weighted_f1": 0.7025641025641025,
+            "cohen_kappa": 0.4137931034482758,
+            "class_support": [
+              145,
+              145
+            ],
+            "class_recall": [
+              0.8275862068965517,
+              0.5862068965517241
+            ],
+            "missing_true_classes": [],
+            "confusion_matrix": [
+              [
+                120,
+                25,
+                0
+              ],
+              [
+                60,
+                85,
+                0
+              ]
+            ],
+            "confusion_columns": [
+              0,
+              1,
+              "invalid"
+            ],
+            "invalid_policy": "retain_in_denominator_and_count_wrong",
+            "roc_auc": 0.7617598097502972,
+            "roc_auc_note": "Conditional probability of Yes among legal first tokens; modified constrained-decoding protocol."
+          },
+          "candidate_token_ids": {
+            "1": [
+              3363,
+              220,
+              50256
+            ],
+            "0": [
+              1400,
+              220,
+              50256
+            ]
+          },
+          "answers": {
+            "Yes": 1,
+            "No": 0
+          },
+          "prediction_sha256": {
+            "Workload-test-rank0.jsonl": "cc5001428678970bc26633cdb98ddf0eb93b3cd91c5e3984f64e6d5898759746",
+            "Workload-test-rank1.jsonl": "5d38f9525b067ed62534a9d1ed34ee53671e8278dbacd73206939e1c2ddb828d"
+          }
+        }
+      ]
+    }
+  ],
+  "test_aggregate": [
+    {
+      "task": "TUAB",
+      "metrics": {
+        "accuracy": {
+          "mean": 0.7740334731808544,
+          "sample_sd": 0.00025149744872586326
+        },
+        "balanced_accuracy": {
+          "mean": 0.7699042688620251,
+          "sample_sd": 0.0018002684099808935
+        },
+        "weighted_f1": {
+          "mean": 0.7730550806382414,
+          "sample_sd": 0.0009560978979725187
+        },
+        "cohen_kappa": {
+          "mean": 0.5427989176924047,
+          "sample_sd": 0.0019059754937618737
+        },
+        "roc_auc": {
+          "mean": 0.8460891458857267,
+          "sample_sd": 0.0029133023630099637
+        }
+      }
+    },
+    {
+      "task": "TUEV",
+      "metrics": {
+        "accuracy": {
+          "mean": 0.7693575928870047,
+          "sample_sd": 0.012852556333273974
+        },
+        "balanced_accuracy": {
+          "mean": 0.5710530321243116,
+          "sample_sd": 0.02602676640998661
+        },
+        "weighted_f1": {
+          "mean": 0.776876365239118,
+          "sample_sd": 0.013210342929486602
+        },
+        "cohen_kappa": {
+          "mean": 0.5524524704138022,
+          "sample_sd": 0.03399936916209498
+        }
+      }
+    },
+    {
+      "task": "HMC",
+      "metrics": {
+        "accuracy": {
+          "mean": 0.7384553083937274,
+          "sample_sd": 0.0030279229984978297
+        },
+        "balanced_accuracy": {
+          "mean": 0.7007683702576887,
+          "sample_sd": 0.009066098509028632
+        },
+        "weighted_f1": {
+          "mean": 0.7304428087282703,
+          "sample_sd": 0.002135425289907278
+        },
+        "cohen_kappa": {
+          "mean": 0.6523241793447645,
+          "sample_sd": 0.0047633728869521455
+        }
+      }
+    },
+    {
+      "task": "Workload",
+      "metrics": {
+        "accuracy": {
+          "mean": 0.6563218390804597,
+          "sample_sd": 0.04591950426537511
+        },
+        "balanced_accuracy": {
+          "mean": 0.6563218390804598,
+          "sample_sd": 0.0459195042653751
+        },
+        "weighted_f1": {
+          "mean": 0.6481104190359676,
+          "sample_sd": 0.048355188533185545
+        },
+        "cohen_kappa": {
+          "mean": 0.3126436781609195,
+          "sample_sd": 0.09183900853075022
+        },
+        "roc_auc": {
+          "mean": 0.7139040824415379,
+          "sample_sd": 0.04147353748205737
+        }
+      }
+    },
+    {
+      "task": "TUSL",
+      "metrics": {
+        "accuracy": {
+          "mean": 0.2111111111111111,
+          "sample_sd": 0.06309898162000305
+        },
+        "balanced_accuracy": {
+          "mean": 0.44360269360269367,
+          "sample_sd": 0.053454492328143165
+        },
+        "weighted_f1": {
+          "mean": 0.24107409115747175,
+          "sample_sd": 0.06496129306163598
+        },
+        "cohen_kappa": {
+          "mean": 0.042938576284712565,
+          "sample_sd": 0.01869025389107106
+        }
+      }
+    }
+  ]
+}

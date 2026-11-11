@@ -1,0 +1,879 @@
+{
+  "source_sha256": "d1bc08cf7b47b92452ea73b4f63b600ffb06ecd386606b1a7ba654b3c4b04d4f",
+  "scope": "all_text_templates_and_exact_label_assignments; no_EEG_or_model_execution",
+  "tasks": {
+    "SEED": {
+      "label_source": [
+        "Y_text = torch.full_like(text, fill_value=-1)",
+        "prompt_len = self.__prompt.size(0)",
+        "Y_text[prompt_len - 1:valid_text_len - 1] = text[prompt_len:valid_text_len]"
+      ],
+      "cases": [
+        {
+          "class": 0,
+          "prompt_tokens": 15,
+          "valid_text_tokens": 18,
+          "loss_positions": [
+            14,
+            16
+          ],
+          "target_source_start": 15,
+          "supervised_tokens": 3,
+          "supervised_text": " Positive <|endoftext|>",
+          "prompt_tail_tokens": [
+            {
+              "id": 30,
+              "text": "?"
+            },
+            {
+              "id": 23998,
+              "text": " Answer"
+            },
+            {
+              "id": 25,
+              "text": ":"
+            }
+          ],
+          "first_target_token": {
+            "id": 33733,
+            "text": " Positive"
+          },
+          "checks": {
+            "prompt_is_exact_token_prefix": true,
+            "answer_header_is_exact_token_prefix": true,
+            "targets_match_next_tokens": true,
+            "targets_are_after_Answer_colon": true,
+            "target_positions_contiguous": true,
+            "padding_ignored": true,
+            "ends_with_eot": true
+          }
+        },
+        {
+          "class": 2,
+          "prompt_tokens": 15,
+          "valid_text_tokens": 18,
+          "loss_positions": [
+            14,
+            16
+          ],
+          "target_source_start": 15,
+          "supervised_tokens": 3,
+          "supervised_text": " Negative <|endoftext|>",
+          "prompt_tail_tokens": [
+            {
+              "id": 30,
+              "text": "?"
+            },
+            {
+              "id": 23998,
+              "text": " Answer"
+            },
+            {
+              "id": 25,
+              "text": ":"
+            }
+          ],
+          "first_target_token": {
+            "id": 36183,
+            "text": " Negative"
+          },
+          "checks": {
+            "prompt_is_exact_token_prefix": true,
+            "answer_header_is_exact_token_prefix": true,
+            "targets_match_next_tokens": true,
+            "targets_are_after_Answer_colon": true,
+            "target_positions_contiguous": true,
+            "padding_ignored": true,
+            "ends_with_eot": true
+          }
+        },
+        {
+          "class": 1,
+          "prompt_tokens": 15,
+          "valid_text_tokens": 18,
+          "loss_positions": [
+            14,
+            16
+          ],
+          "target_source_start": 15,
+          "supervised_tokens": 3,
+          "supervised_text": " Neutral <|endoftext|>",
+          "prompt_tail_tokens": [
+            {
+              "id": 30,
+              "text": "?"
+            },
+            {
+              "id": 23998,
+              "text": " Answer"
+            },
+            {
+              "id": 25,
+              "text": ":"
+            }
+          ],
+          "first_target_token": {
+            "id": 25627,
+            "text": " Neutral"
+          },
+          "checks": {
+            "prompt_is_exact_token_prefix": true,
+            "answer_header_is_exact_token_prefix": true,
+            "targets_match_next_tokens": true,
+            "targets_are_after_Answer_colon": true,
+            "target_positions_contiguous": true,
+            "padding_ignored": true,
+            "ends_with_eot": true
+          }
+        }
+      ]
+    },
+    "TUAB": {
+      "label_source": [
+        "Y_text = torch.full_like(text, fill_value=-1)",
+        "prompt_len = self.prompt.size(0)",
+        "Y_text[prompt_len - 1:valid_text_len - 1] = text[prompt_len:valid_text_len]"
+      ],
+      "cases": [
+        {
+          "class": 1,
+          "prompt_tokens": 11,
+          "valid_text_tokens": 14,
+          "loss_positions": [
+            10,
+            12
+          ],
+          "target_source_start": 11,
+          "supervised_tokens": 3,
+          "supervised_text": " Yes <|endoftext|>",
+          "prompt_tail_tokens": [
+            {
+              "id": 30,
+              "text": "?"
+            },
+            {
+              "id": 23998,
+              "text": " Answer"
+            },
+            {
+              "id": 25,
+              "text": ":"
+            }
+          ],
+          "first_target_token": {
+            "id": 3363,
+            "text": " Yes"
+          },
+          "checks": {
+            "prompt_is_exact_token_prefix": true,
+            "answer_header_is_exact_token_prefix": true,
+            "targets_match_next_tokens": true,
+            "targets_are_after_Answer_colon": true,
+            "target_positions_contiguous": true,
+            "padding_ignored": true,
+            "ends_with_eot": true
+          }
+        },
+        {
+          "class": 0,
+          "prompt_tokens": 11,
+          "valid_text_tokens": 14,
+          "loss_positions": [
+            10,
+            12
+          ],
+          "target_source_start": 11,
+          "supervised_tokens": 3,
+          "supervised_text": " No <|endoftext|>",
+          "prompt_tail_tokens": [
+            {
+              "id": 30,
+              "text": "?"
+            },
+            {
+              "id": 23998,
+              "text": " Answer"
+            },
+            {
+              "id": 25,
+              "text": ":"
+            }
+          ],
+          "first_target_token": {
+            "id": 1400,
+            "text": " No"
+          },
+          "checks": {
+            "prompt_is_exact_token_prefix": true,
+            "answer_header_is_exact_token_prefix": true,
+            "targets_match_next_tokens": true,
+            "targets_are_after_Answer_colon": true,
+            "target_positions_contiguous": true,
+            "padding_ignored": true,
+            "ends_with_eot": true
+          }
+        }
+      ]
+    },
+    "TUEV": {
+      "label_source": [
+        "Y_text = torch.full_like(text, fill_value=-1)",
+        "prompt_len = self.prompt.size(0) - 1",
+        "Y_text[prompt_len - 1:valid_text_len - 1] = text[prompt_len:valid_text_len]"
+      ],
+      "cases": [
+        {
+          "class": 0,
+          "prompt_tokens": 63,
+          "valid_text_tokens": 67,
+          "loss_positions": [
+            61,
+            65
+          ],
+          "target_source_start": 62,
+          "supervised_tokens": 5,
+          "supervised_text": " (A) <|endoftext|>",
+          "prompt_tail_tokens": [
+            {
+              "id": 23998,
+              "text": " Answer"
+            },
+            {
+              "id": 25,
+              "text": ":"
+            },
+            {
+              "id": 357,
+              "text": " ("
+            }
+          ],
+          "first_target_token": {
+            "id": 357,
+            "text": " ("
+          },
+          "checks": {
+            "prompt_is_exact_token_prefix": true,
+            "answer_header_is_exact_token_prefix": true,
+            "targets_match_next_tokens": true,
+            "targets_are_after_Answer_colon": true,
+            "target_positions_contiguous": true,
+            "padding_ignored": true,
+            "ends_with_eot": true
+          }
+        },
+        {
+          "class": 1,
+          "prompt_tokens": 63,
+          "valid_text_tokens": 67,
+          "loss_positions": [
+            61,
+            65
+          ],
+          "target_source_start": 62,
+          "supervised_tokens": 5,
+          "supervised_text": " (B) <|endoftext|>",
+          "prompt_tail_tokens": [
+            {
+              "id": 23998,
+              "text": " Answer"
+            },
+            {
+              "id": 25,
+              "text": ":"
+            },
+            {
+              "id": 357,
+              "text": " ("
+            }
+          ],
+          "first_target_token": {
+            "id": 357,
+            "text": " ("
+          },
+          "checks": {
+            "prompt_is_exact_token_prefix": true,
+            "answer_header_is_exact_token_prefix": true,
+            "targets_match_next_tokens": true,
+            "targets_are_after_Answer_colon": true,
+            "target_positions_contiguous": true,
+            "padding_ignored": true,
+            "ends_with_eot": true
+          }
+        },
+        {
+          "class": 2,
+          "prompt_tokens": 63,
+          "valid_text_tokens": 67,
+          "loss_positions": [
+            61,
+            65
+          ],
+          "target_source_start": 62,
+          "supervised_tokens": 5,
+          "supervised_text": " (C) <|endoftext|>",
+          "prompt_tail_tokens": [
+            {
+              "id": 23998,
+              "text": " Answer"
+            },
+            {
+              "id": 25,
+              "text": ":"
+            },
+            {
+              "id": 357,
+              "text": " ("
+            }
+          ],
+          "first_target_token": {
+            "id": 357,
+            "text": " ("
+          },
+          "checks": {
+            "prompt_is_exact_token_prefix": true,
+            "answer_header_is_exact_token_prefix": true,
+            "targets_match_next_tokens": true,
+            "targets_are_after_Answer_colon": true,
+            "target_positions_contiguous": true,
+            "padding_ignored": true,
+            "ends_with_eot": true
+          }
+        },
+        {
+          "class": 3,
+          "prompt_tokens": 63,
+          "valid_text_tokens": 67,
+          "loss_positions": [
+            61,
+            65
+          ],
+          "target_source_start": 62,
+          "supervised_tokens": 5,
+          "supervised_text": " (D) <|endoftext|>",
+          "prompt_tail_tokens": [
+            {
+              "id": 23998,
+              "text": " Answer"
+            },
+            {
+              "id": 25,
+              "text": ":"
+            },
+            {
+              "id": 357,
+              "text": " ("
+            }
+          ],
+          "first_target_token": {
+            "id": 357,
+            "text": " ("
+          },
+          "checks": {
+            "prompt_is_exact_token_prefix": true,
+            "answer_header_is_exact_token_prefix": true,
+            "targets_match_next_tokens": true,
+            "targets_are_after_Answer_colon": true,
+            "target_positions_contiguous": true,
+            "padding_ignored": true,
+            "ends_with_eot": true
+          }
+        },
+        {
+          "class": 4,
+          "prompt_tokens": 63,
+          "valid_text_tokens": 67,
+          "loss_positions": [
+            61,
+            65
+          ],
+          "target_source_start": 62,
+          "supervised_tokens": 5,
+          "supervised_text": " (E) <|endoftext|>",
+          "prompt_tail_tokens": [
+            {
+              "id": 23998,
+              "text": " Answer"
+            },
+            {
+              "id": 25,
+              "text": ":"
+            },
+            {
+              "id": 357,
+              "text": " ("
+            }
+          ],
+          "first_target_token": {
+            "id": 357,
+            "text": " ("
+          },
+          "checks": {
+            "prompt_is_exact_token_prefix": true,
+            "answer_header_is_exact_token_prefix": true,
+            "targets_match_next_tokens": true,
+            "targets_are_after_Answer_colon": true,
+            "target_positions_contiguous": true,
+            "padding_ignored": true,
+            "ends_with_eot": true
+          }
+        },
+        {
+          "class": 5,
+          "prompt_tokens": 63,
+          "valid_text_tokens": 67,
+          "loss_positions": [
+            61,
+            65
+          ],
+          "target_source_start": 62,
+          "supervised_tokens": 5,
+          "supervised_text": " (F) <|endoftext|>",
+          "prompt_tail_tokens": [
+            {
+              "id": 23998,
+              "text": " Answer"
+            },
+            {
+              "id": 25,
+              "text": ":"
+            },
+            {
+              "id": 357,
+              "text": " ("
+            }
+          ],
+          "first_target_token": {
+            "id": 357,
+            "text": " ("
+          },
+          "checks": {
+            "prompt_is_exact_token_prefix": true,
+            "answer_header_is_exact_token_prefix": true,
+            "targets_match_next_tokens": true,
+            "targets_are_after_Answer_colon": true,
+            "target_positions_contiguous": true,
+            "padding_ignored": true,
+            "ends_with_eot": true
+          }
+        }
+      ]
+    },
+    "TUSL": {
+      "label_source": [
+        "Y_text = torch.full_like(text, fill_value=-1)",
+        "prompt_len = self.prompt.size(0)",
+        "Y_text[prompt_len - 1:valid_text_len - 1] = text[prompt_len:valid_text_len]"
+      ],
+      "cases": [
+        {
+          "class": 0,
+          "prompt_tokens": 32,
+          "valid_text_tokens": 36,
+          "loss_positions": [
+            31,
+            34
+          ],
+          "target_source_start": 32,
+          "supervised_tokens": 4,
+          "supervised_text": "A) <|endoftext|>",
+          "prompt_tail_tokens": [
+            {
+              "id": 23998,
+              "text": " Answer"
+            },
+            {
+              "id": 25,
+              "text": ":"
+            },
+            {
+              "id": 357,
+              "text": " ("
+            }
+          ],
+          "first_target_token": {
+            "id": 32,
+            "text": "A"
+          },
+          "checks": {
+            "prompt_is_exact_token_prefix": true,
+            "answer_header_is_exact_token_prefix": true,
+            "targets_match_next_tokens": true,
+            "targets_are_after_Answer_colon": true,
+            "target_positions_contiguous": true,
+            "padding_ignored": true,
+            "ends_with_eot": true
+          }
+        },
+        {
+          "class": 1,
+          "prompt_tokens": 32,
+          "valid_text_tokens": 36,
+          "loss_positions": [
+            31,
+            34
+          ],
+          "target_source_start": 32,
+          "supervised_tokens": 4,
+          "supervised_text": "B) <|endoftext|>",
+          "prompt_tail_tokens": [
+            {
+              "id": 23998,
+              "text": " Answer"
+            },
+            {
+              "id": 25,
+              "text": ":"
+            },
+            {
+              "id": 357,
+              "text": " ("
+            }
+          ],
+          "first_target_token": {
+            "id": 33,
+            "text": "B"
+          },
+          "checks": {
+            "prompt_is_exact_token_prefix": true,
+            "answer_header_is_exact_token_prefix": true,
+            "targets_match_next_tokens": true,
+            "targets_are_after_Answer_colon": true,
+            "target_positions_contiguous": true,
+            "padding_ignored": true,
+            "ends_with_eot": true
+          }
+        },
+        {
+          "class": 2,
+          "prompt_tokens": 32,
+          "valid_text_tokens": 36,
+          "loss_positions": [
+            31,
+            34
+          ],
+          "target_source_start": 32,
+          "supervised_tokens": 4,
+          "supervised_text": "C) <|endoftext|>",
+          "prompt_tail_tokens": [
+            {
+              "id": 23998,
+              "text": " Answer"
+            },
+            {
+              "id": 25,
+              "text": ":"
+            },
+            {
+              "id": 357,
+              "text": " ("
+            }
+          ],
+          "first_target_token": {
+            "id": 34,
+            "text": "C"
+          },
+          "checks": {
+            "prompt_is_exact_token_prefix": true,
+            "answer_header_is_exact_token_prefix": true,
+            "targets_match_next_tokens": true,
+            "targets_are_after_Answer_colon": true,
+            "target_positions_contiguous": true,
+            "padding_ignored": true,
+            "ends_with_eot": true
+          }
+        }
+      ]
+    },
+    "HMC": {
+      "label_source": [
+        "Y_text = torch.full_like(text, fill_value=-1)",
+        "prompt_len = self.prompt.size(0) - 1",
+        "Y_text[prompt_len - 1:valid_text_len - 1] = text[prompt_len:valid_text_len]"
+      ],
+      "cases": [
+        {
+          "class": 0,
+          "prompt_tokens": 52,
+          "valid_text_tokens": 56,
+          "loss_positions": [
+            50,
+            54
+          ],
+          "target_source_start": 51,
+          "supervised_tokens": 5,
+          "supervised_text": " (A) <|endoftext|>",
+          "prompt_tail_tokens": [
+            {
+              "id": 23998,
+              "text": " Answer"
+            },
+            {
+              "id": 25,
+              "text": ":"
+            },
+            {
+              "id": 357,
+              "text": " ("
+            }
+          ],
+          "first_target_token": {
+            "id": 357,
+            "text": " ("
+          },
+          "checks": {
+            "prompt_is_exact_token_prefix": true,
+            "answer_header_is_exact_token_prefix": true,
+            "targets_match_next_tokens": true,
+            "targets_are_after_Answer_colon": true,
+            "target_positions_contiguous": true,
+            "padding_ignored": true,
+            "ends_with_eot": true
+          }
+        },
+        {
+          "class": 1,
+          "prompt_tokens": 52,
+          "valid_text_tokens": 56,
+          "loss_positions": [
+            50,
+            54
+          ],
+          "target_source_start": 51,
+          "supervised_tokens": 5,
+          "supervised_text": " (B) <|endoftext|>",
+          "prompt_tail_tokens": [
+            {
+              "id": 23998,
+              "text": " Answer"
+            },
+            {
+              "id": 25,
+              "text": ":"
+            },
+            {
+              "id": 357,
+              "text": " ("
+            }
+          ],
+          "first_target_token": {
+            "id": 357,
+            "text": " ("
+          },
+          "checks": {
+            "prompt_is_exact_token_prefix": true,
+            "answer_header_is_exact_token_prefix": true,
+            "targets_match_next_tokens": true,
+            "targets_are_after_Answer_colon": true,
+            "target_positions_contiguous": true,
+            "padding_ignored": true,
+            "ends_with_eot": true
+          }
+        },
+        {
+          "class": 2,
+          "prompt_tokens": 52,
+          "valid_text_tokens": 56,
+          "loss_positions": [
+            50,
+            54
+          ],
+          "target_source_start": 51,
+          "supervised_tokens": 5,
+          "supervised_text": " (C) <|endoftext|>",
+          "prompt_tail_tokens": [
+            {
+              "id": 23998,
+              "text": " Answer"
+            },
+            {
+              "id": 25,
+              "text": ":"
+            },
+            {
+              "id": 357,
+              "text": " ("
+            }
+          ],
+          "first_target_token": {
+            "id": 357,
+            "text": " ("
+          },
+          "checks": {
+            "prompt_is_exact_token_prefix": true,
+            "answer_header_is_exact_token_prefix": true,
+            "targets_match_next_tokens": true,
+            "targets_are_after_Answer_colon": true,
+            "target_positions_contiguous": true,
+            "padding_ignored": true,
+            "ends_with_eot": true
+          }
+        },
+        {
+          "class": 3,
+          "prompt_tokens": 52,
+          "valid_text_tokens": 56,
+          "loss_positions": [
+            50,
+            54
+          ],
+          "target_source_start": 51,
+          "supervised_tokens": 5,
+          "supervised_text": " (D) <|endoftext|>",
+          "prompt_tail_tokens": [
+            {
+              "id": 23998,
+              "text": " Answer"
+            },
+            {
+              "id": 25,
+              "text": ":"
+            },
+            {
+              "id": 357,
+              "text": " ("
+            }
+          ],
+          "first_target_token": {
+            "id": 357,
+            "text": " ("
+          },
+          "checks": {
+            "prompt_is_exact_token_prefix": true,
+            "answer_header_is_exact_token_prefix": true,
+            "targets_match_next_tokens": true,
+            "targets_are_after_Answer_colon": true,
+            "target_positions_contiguous": true,
+            "padding_ignored": true,
+            "ends_with_eot": true
+          }
+        },
+        {
+          "class": 4,
+          "prompt_tokens": 52,
+          "valid_text_tokens": 56,
+          "loss_positions": [
+            50,
+            54
+          ],
+          "target_source_start": 51,
+          "supervised_tokens": 5,
+          "supervised_text": " (E) <|endoftext|>",
+          "prompt_tail_tokens": [
+            {
+              "id": 23998,
+              "text": " Answer"
+            },
+            {
+              "id": 25,
+              "text": ":"
+            },
+            {
+              "id": 357,
+              "text": " ("
+            }
+          ],
+          "first_target_token": {
+            "id": 357,
+            "text": " ("
+          },
+          "checks": {
+            "prompt_is_exact_token_prefix": true,
+            "answer_header_is_exact_token_prefix": true,
+            "targets_match_next_tokens": true,
+            "targets_are_after_Answer_colon": true,
+            "target_positions_contiguous": true,
+            "padding_ignored": true,
+            "ends_with_eot": true
+          }
+        }
+      ]
+    },
+    "Workload": {
+      "label_source": [
+        "Y_text = torch.full_like(text, fill_value=-1)",
+        "prompt_len = self.prompt.size(0)",
+        "Y_text[prompt_len - 1:valid_text_len - 1] = text[prompt_len:valid_text_len]"
+      ],
+      "cases": [
+        {
+          "class": 1,
+          "prompt_tokens": 13,
+          "valid_text_tokens": 16,
+          "loss_positions": [
+            12,
+            14
+          ],
+          "target_source_start": 13,
+          "supervised_tokens": 3,
+          "supervised_text": " Yes <|endoftext|>",
+          "prompt_tail_tokens": [
+            {
+              "id": 30,
+              "text": "?"
+            },
+            {
+              "id": 23998,
+              "text": " Answer"
+            },
+            {
+              "id": 25,
+              "text": ":"
+            }
+          ],
+          "first_target_token": {
+            "id": 3363,
+            "text": " Yes"
+          },
+          "checks": {
+            "prompt_is_exact_token_prefix": true,
+            "answer_header_is_exact_token_prefix": true,
+            "targets_match_next_tokens": true,
+            "targets_are_after_Answer_colon": true,
+            "target_positions_contiguous": true,
+            "padding_ignored": true,
+            "ends_with_eot": true
+          }
+        },
+        {
+          "class": 0,
+          "prompt_tokens": 13,
+          "valid_text_tokens": 16,
+          "loss_positions": [
+            12,
+            14
+          ],
+          "target_source_start": 13,
+          "supervised_tokens": 3,
+          "supervised_text": " No <|endoftext|>",
+          "prompt_tail_tokens": [
+            {
+              "id": 30,
+              "text": "?"
+            },
+            {
+              "id": 23998,
+              "text": " Answer"
+            },
+            {
+              "id": 25,
+              "text": ":"
+            }
+          ],
+          "first_target_token": {
+            "id": 1400,
+            "text": " No"
+          },
+          "checks": {
+            "prompt_is_exact_token_prefix": true,
+            "answer_header_is_exact_token_prefix": true,
+            "targets_match_next_tokens": true,
+            "targets_are_after_Answer_colon": true,
+            "target_positions_contiguous": true,
+            "padding_ignored": true,
+            "ends_with_eot": true
+          }
+        }
+      ]
+    }
+  }
+}

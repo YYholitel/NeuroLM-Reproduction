@@ -2,6 +2,8 @@
 
 This experiment continues pretraining from the author's released `NeuroLM-B.pt`, then performs five epochs of instruction tuning. Seeds 42, 43 and 44 have independent optimizers, samplers, outputs and TI-ONE tasks. Stage one is unchanged. This is a five-dataset experiment, not a reproduction of the paper's 25,000-hour pretraining corpus.
 
+**Latest status, 2026-11-11:** all three full evaluations completed successfully. The subsequent [data audit](data_audit_20261111.md) identified a TUAB/TUEV preprocessing mismatch between stages and one TUSL patient identifier shared by validation/test. These limitations must accompany the scores below; successful execution and coverage audits do not establish patient-independent evaluation or consistent preprocessing.
+
 ## TUSL correction
 
 | Split | EDF records | Old windows | Corrected windows |
@@ -145,3 +147,19 @@ The six allocated H20 GPUs are transitioning from training to inference. The 13:
 [Complete training curves and logs](../results/official_tusl3_20261111/stage3_trained/training_snapshot/status.json) · [Checkpoint audits, partial evaluation and GPU snapshot](../results/official_tusl3_20261111/stage3_trained/evaluation_started/evaluation_started.json)
 
 ![Complete stage-two and stage-three training curves](../results/official_tusl3_20261111/stage3_trained/training_snapshot/training_curves.png)
+
+### Full evaluation completed and data limitations verified
+
+Fresh queries during the 2026-11-11 afternoon data audit report all three stage-three tasks `SUCCEED`. Each exited with code 0 and passed the independent five-task validation/test coverage and metric audit, with 201,240 predictions per seed. Results below use mean ± sample standard deviation across seeds 42/43/44.
+
+| Task | Test balanced accuracy | Test weighted F1 |
+| --- | ---: | ---: |
+| TUAB | 76.99% ± 0.18 pp | 77.31% ± 0.10 pp |
+| TUEV | 57.11% ± 2.60 pp | 77.69% ± 1.32 pp |
+| HMC | 70.08% ± 0.91 pp | 73.04% ± 0.21 pp |
+| Workload | 65.63% ± 4.59 pp | 64.81% ± 4.84 pp |
+| TUSL | 44.36% ± 5.35 pp | 24.11% ± 6.50 pp |
+
+The data audit checked every TUSL annotation/window/loader mapping and found no label, channel, normalization or padding mismatch. It also found that validation/test share one filename patient identifier, and 45/60 test windows belong to one patient identifier. Separately, all 120 sampled TUAB/TUEV training-window pairs differ between stages. Six original-EDF reconstructions exactly match stage-two signals with a 60 Hz notch and stage-three signals with a 50 Hz notch. These are concrete data limitations, not proof that they caused the earlier loss spike or all classification errors. No data, architecture or training configuration was modified during the audit.
+
+[Final per-seed metrics, platform status and evaluation audits](../results/official_tusl3_20261111/data_audit/completed_evaluation.json) · [Data audit and correction priorities](data_audit_20261111.md)
