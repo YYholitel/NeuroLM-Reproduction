@@ -1,0 +1,449 @@
+{
+  "checked_at": "2026-11-11T13:29:42.002736+00:00",
+  "source_root": "/mnt/cfs-omni/lhy/neurolm-reproduction/official-tusl3-20261111-r1/data",
+  "total_checked": 660951,
+  "errors": 0,
+  "all_counts_match": true,
+  "splits": [
+    {
+      "task": "TUAB",
+      "split": "train",
+      "total": 298511,
+      "expected_count": 298511,
+      "count_matches": true,
+      "checked": 298511,
+      "classes": {
+        "1": 149481,
+        "0": 149030
+      },
+      "failures": {},
+      "logical_bytes_read": 47164738,
+      "signal_bytes_not_read": 109852048000,
+      "error_examples": [],
+      "chunk_row_digests": [
+        "538125dfdca56b4a451fc0a578004b4fd7e6a47e6bd4dafce1651b78949c3ffd",
+        "c55d7eebfb66835ae6faf02a73889c6b5a55e29b069da9fca9cbb3a1f9f93811",
+        "bf5b70c2a3d9a7f8c6eeabcb5f1c131ea291bb2854018285b8c7f91fc9b8903e",
+        "2277aba40c11cca18cf26d7ae1d1fa9162704d82462575133ff4610cfc54cd10",
+        "64bb91480a78d5d0e291f551770ad89aed02d0f20111f22953f815289d6d08d7",
+        "ddac1bcfc35ff0a5398403fd12b98b0965a2a0fd6e2721cb456af0136258c492",
+        "b742e1e0e58ab1510dd2222354dd5a98ede7852a0695bb233eaba7f17a279e2e",
+        "0525bb2f4cfd20b97819447888713351e925a5066f38091ec87a7300f9d6b2b0",
+        "98fd75f3a46731bfc133debd7f2931ecd25c9851ce72094f7f72b097fb5aee3d",
+        "bd3d919403890e459149e1b36ce588b6ac23f54bd3e15ceea6ab2a891ce5e2dc",
+        "93e59ab7f8ca978ef9887a7a7ceb4e526bfb74b344304a84cec121f42eed5df0",
+        "fa9e4f5b30381075a591ca758434627cc2a4482d5f1bf1df0acaa61fb7f4d4b4",
+        "bc1cf8e50325465270d6fa239ed3fa4bb70a0203f6fa3bb02d418f116b6cb36f",
+        "48a47b643b146ebb1984998ab91cf6a8a236b459a9c4213962a76e83491a69ed",
+        "2e14367f94dedb39bbc42c884c2cd870e3440363b250d3bae87873f24361083b",
+        "b23afd4f28e66a5d5edfb22b5651a895078769013e4783a7cb773bfec141bde6",
+        "57d2f6cf977850e81f2fd08e3596ffdd0de881deadcc6340f6b3678658159178",
+        "1f1df21304b997a4f54de8d265cfb9b811f97a3fc93da7706fb049035e64cdff",
+        "7cce5272c0fd72833a6fd27c48f818c121f28fa85c97e5efb9f603a10efa8224",
+        "0e0078bc6d7a6e54665447933c7c2768fd34694392b4fea2bb5ce50446932fee",
+        "887b5dce8fca191160adddc090df46c0f95da428065aebc56aeacb76d7a8cc5d",
+        "c273c4eb9f913e95eb5c49aaf1c4f7fddcb4b854d97a320450078886e9d26e6a",
+        "24c315a5f589fd26215f438afac020ffb2759d06a4594cda32a19749fcc15365",
+        "dbe2fe94b7b7edd0b8428fddcb62ba4682337b5c01516bed7d1a78d68ef07cc9",
+        "7f2b62170208b2731a3d115bd63a7543f27471be1f2909e90e2208b75bb48a56",
+        "6dbabaf9c7e8f373459fe04752e63cc1e67e0fced3bc7a4a9d5d81c656e3a303",
+        "1a2474d9f3e3985af3e93bcbe2a41e433defccae5807f0d1f635556a4c90d156",
+        "d09940684efb73b2c2ff9e4edaf3fd89171ee06efa88959263708f43fbfffd51",
+        "39d1609df9581f0f1efd29af7706aee27cb5e5a83f97ef8229ce08886e90fe19",
+        "fb41e3a5a3eca5b772e70d84f6b1c05fe42c22b18fede30489a6234a20a6d720",
+        "bd791fc97a9031bb33ff537ec94f28eefdcf7dc4c2619db08e8f6806d91e2295",
+        "5183f16e9efc3ecbc2c6a29c9e006a93b9df57dde10cd618db6a52617f66d28b",
+        "5f2b95bb4cbdcde566209af4ef487cd3bced779587937adeb7252172a5cd68bf",
+        "983dad68a4f31a49f793a25e332e398de429ed10343d73fd23de3a59f5b9f8e4",
+        "88822cb1ca75953372f302f0aa9bfd14a39a1836c21248c28826498c560d7f99",
+        "ac1d4f771ff5ccd9785dc6e4580e3e4c19dc032d4f7452b23f8e080741ceb283",
+        "85f979d8f09980b89156c03d9f73380d47b699f81e31d58355c40f703c3e5a2c",
+        "1ff56042fbc6ed3db28a50af4b1b687f59fa191cd5c2fce519ced73a3ec6ea01",
+        "c8b4d5731e8ba49bdb7b3109523b94fe13ed5cd03ca7e4a3fc96ac6232e77898",
+        "e260687e79a5d214eb845d261d5f2bc35a5a078ece80c876b5bbd69337cea7cf",
+        "af8e927b3af58234bff0b8ffde06c42734a6f57868d03429a0a39cd84de0ab63",
+        "7f5920f869c3cebf25e0384bcc54ddfcb4eebfd249d310d58f6154afe29a8799",
+        "d86d8cb85a8c1efcb08e268a2aea23061d4ea56ca4fef1b3d10748328d7d1561",
+        "c0e87a7979ca703c87ca759890ff2d983984acb0084f19029f35f217c1d831a2",
+        "24a762a3e26931f5dc1aae613bd08dd4bb5606ddfe0b051cb180344860f532b2",
+        "50ed96d0e7c0b45f081171cc18bac0de7409fe6211085d1438ca612a7110362c",
+        "2212e9b078288163919152f19469112d18f0e7ea6add14541825562c9e967739",
+        "1cd46e4b05e434f339769d517e93233862a2380e23a99d7e3e809c2f5a79ed05",
+        "e4c23208f89063cf1ecd0081c6873ead747437f59b4eb1db230bd67cbbee1a79",
+        "782ee594705e04e2be3e65be6b7a01bf859cf82a97c6d2d7733d023863f16a1a",
+        "6524b8550d9b86a76d6851fe984f70256b9cd91a10ba5c6b400d843998eef5f9",
+        "aa9f1d60121ac191450ffb77bbc78a53bb213bce7dd2e671afcce5683cb13331",
+        "fea9557a3bf0877b7461c176be6b534e8a22a4cb8ab8d9cd68bfc164306fc5c9",
+        "f1e8dd0369480bc0954d19506badd9a441e2ae8a38f853c37790ccfe371a48b4",
+        "9a4855bb82b3a704ec66b83af87c7d310ace974e7c7abaa09b5b94813c52cd54",
+        "f79569290b20cf8e42bbb695c9ca42f9e682e565166b421c3b53bcd2dc25a4c9",
+        "384062038eec14b9d8be95de136d9e4efbe0d16ec67140d275cb3cc8f88a1cf2",
+        "4307e9d0030fa66d37b7c9987ac53afec0c5c3e77753094807e59cee8f9b8c6c",
+        "f74e8cd0fbf16d2caddc70ee370134794e6a6b5585121effdb5654210184e3cc",
+        "aa4beffd455bf27ccce4c9ad688791a7fd9e1c686fa6ce5feb65a1bc3d4c8c87"
+      ]
+    },
+    {
+      "task": "TUAB",
+      "split": "val",
+      "total": 73627,
+      "expected_count": 73627,
+      "count_matches": true,
+      "checked": 73627,
+      "classes": {
+        "1": 38948,
+        "0": 34679
+      },
+      "failures": {},
+      "logical_bytes_read": 11633066,
+      "signal_bytes_not_read": 27094736000,
+      "error_examples": [],
+      "chunk_row_digests": [
+        "92e69ab6e9273b6f1bf2ed35f4ca88611c89362ead0c9ac8863b0ebfe37b5358",
+        "a1ff30120b5130f5213ea46a8b9bf57281d40ce8d8d0c13763b6e5f152dd0820",
+        "6e133b927b28750d7bc2dfb299c848b71f4c4878cb2187d32c3821c11f7d2c65",
+        "a85e6793efdba1afa6e67701ab1c52e427ee572bb259e0500fe3d8aa76f4d590",
+        "88b2026e6b1e889d5fdb9aadc1d1029c5c28063fb56bf0057704019aa0ca5587",
+        "aec89b403d91e321b17a2b7896f3cf7a93fdf1434657faf1eb85006a0cb78b94",
+        "e5d5dda3b855038285a0691f1ffec6ef7ddbedc8860d3b73eba27ff3d1ab883d",
+        "193d4dcc1b6fcf7817aadc38d931a9807e759a35b31832bbbeed11031bba74a5",
+        "057d7aa96a3770395eeec70c5d2263a99646a4414d279d72c4bf491831a53075",
+        "a857cd7fbc22be4f69e41df64858e0929e16c65605d379cd12d36d6d09513b51",
+        "0997a22bea043b866e249912742f9828a8db765b109041a6f4cea4d58b910408",
+        "a5882864c4280811ba0470413c6a9b0521ad14e4781721658f0b2d56399add1e",
+        "40fc3aee8e676032294db225a8b80422fff24626e41b191bf5ff7cb97655c10f",
+        "836f2341275471e5200c089acec4a989753ae71f683c884f2e21e887bd4b503a",
+        "2dd3ce4fe3e59f5f200e5c2d48110c340cbbda775e4028778c00f1274c5e307f"
+      ]
+    },
+    {
+      "task": "TUAB",
+      "split": "test",
+      "total": 36945,
+      "expected_count": 36945,
+      "count_matches": true,
+      "checked": 36945,
+      "classes": {
+        "0": 19907,
+        "1": 17038
+      },
+      "failures": {},
+      "logical_bytes_read": 5837310,
+      "signal_bytes_not_read": 13595760000,
+      "error_examples": [],
+      "chunk_row_digests": [
+        "86e39fbdcd3d88d130906b15cedac39709733deb9b8ddc9c4ba40041be86fb0d",
+        "8b9977b2b0174b6e728d853cbb35f3167710fc75692bcfa9e8192497928503d5",
+        "12f97627dec4911f030279b5a35eb5c38d2ad0c2dbf703696bcce8d42e3e025f",
+        "e4048552b78361a39c388dbbfe15efc39bfcaff3a6680f93970ced1481055d86",
+        "f20027d8fc1c512df44e7b25e5dcf41b1eba4224fb018a0bb908902aea3d481f",
+        "b68628000d0f4f42f56c137df624f72932b8b3aa47b315d8f14d3db27cfd6d83",
+        "9bd984e246f2ba6a28a25d3be3df26d83e3334373ce2dfb130c5e14f911040a2",
+        "655c5fd29ad6c69eddcb0c84088b8371d0a0bb447fde22907770c3f653780f94"
+      ]
+    },
+    {
+      "task": "TUEV",
+      "split": "train",
+      "total": 68270,
+      "expected_count": 68270,
+      "count_matches": true,
+      "checked": 68270,
+      "classes": {
+        "6": 42704,
+        "5": 8744,
+        "4": 1011,
+        "1": 416,
+        "3": 4656,
+        "2": 10739
+      },
+      "failures": {},
+      "logical_bytes_read": 17818470,
+      "signal_bytes_not_read": 12561680000,
+      "error_examples": [],
+      "chunk_row_digests": [
+        "08fcd30fa93ebf1d99fe42cbab11d71269c80cf039d38b56480b4e396dbe3534",
+        "552613695cb712bd92617f1a150458e2edb8b9222d5547989391e3db17cca7e3",
+        "62ae24eab3b41d5c2f525b8183dfaccddeca5b45e3d20eb22c1c7147738eccdd",
+        "e00deb7dd5ca61e8bc9d8c99d5710c0f4f7ac597b2f40bb913e534ffed3ce8d2",
+        "eef163c909e19678f85337d6d026c870fc126e941bcede4a2ef9623d71b5ad3c",
+        "702fd8557ac262a0857d45037fb403d8f0cd18b57c7ad1d364fb2585829fb68f",
+        "6fccf7588a9c2a4ae9bb8915253cffb0860901dda4ed0d22b81053326552905c",
+        "e49cb7d91163c7a9a15cb530b6b33daa238a59fabd311a69b4158b847f96d4b9",
+        "4406197b1844d164763d3baf2c2ee5946f7133e310f12913faf8734a042e7ad1",
+        "5e53aa585d2cb5630c45ea08b4388098260cf13299cbc11dce552e9ca9b698ca",
+        "c489d9ec9c2e165a381d7cb960d3626ccf53f6dfaba4653b8c492aac51f33fa8",
+        "0a5a3aae2c9bc679f503581a7844bd13faa12caf7efc6ecd2ad9f838c4f6bee6",
+        "126afd3c4a1c820ec443cc8eceb820a00437e6732644e42a742b114a2904f22d",
+        "e3c9ac0a9373f7e07a470ef6978ce58c8e921bc0303644434f4006b4aca40408"
+      ]
+    },
+    {
+      "task": "TUEV",
+      "split": "val",
+      "total": 15662,
+      "expected_count": 15662,
+      "count_matches": true,
+      "checked": 15662,
+      "classes": {
+        "5": 2309,
+        "6": 11022,
+        "4": 59,
+        "1": 229,
+        "2": 515,
+        "3": 1528
+      },
+      "failures": {},
+      "logical_bytes_read": 4087782,
+      "signal_bytes_not_read": 2881808000,
+      "error_examples": [],
+      "chunk_row_digests": [
+        "a0b13b443dd29d37d92d21a42030a4c7f35838ba5138d8be3a66527314cba201",
+        "af5bcdda046ebf87c81467e08e876e886627cefd654ef8860a1bbb1422bdab8e",
+        "fa2f2e4daa4441b0868c0d63a70bb7f52b8e60accaae524d7d1795e398d7397c",
+        "9792881e2bf7b038ec566937ffb08f5f46732cd9a732c78f976dfcd4b9f571bb"
+      ]
+    },
+    {
+      "task": "TUEV",
+      "split": "test",
+      "total": 28305,
+      "expected_count": 28305,
+      "count_matches": true,
+      "checked": 28305,
+      "classes": {
+        "6": 19646,
+        "5": 2204,
+        "4": 329,
+        "3": 1998,
+        "2": 3561,
+        "1": 567
+      },
+      "failures": {},
+      "logical_bytes_read": 7387605,
+      "signal_bytes_not_read": 5208120000,
+      "error_examples": [],
+      "chunk_row_digests": [
+        "91b247b5ce582dd39dab8b7e65284b3f583190bbdc6d98106fd66c5b8470363b",
+        "0c043eafdfd4fbe94eaf567c13db42ae18f58a99fdd3f4e2d91cf4692ce49ff4",
+        "31632555b67212c4c0c24faafb72d62b6cbb431e1f3304ab8ba7372995d4b9af",
+        "d117b49fc4af0a79ca8cb254a0506c55cef44e144b48b285f1506472785f6f5e",
+        "9ec7b184cd7588f4cc19f3331f502b70df26c1c8ff6ab72b2546f1fe2f6c75c9",
+        "93b65300ad7f12b1108cac688e86ad7a00a97d92093c75e871a5c1e6684df699"
+      ]
+    },
+    {
+      "task": "HMC",
+      "split": "train",
+      "total": 91248,
+      "expected_count": 91248,
+      "count_matches": true,
+      "checked": 91248,
+      "classes": {
+        "0": 15695,
+        "1": 10544,
+        "2": 33468,
+        "3": 17000,
+        "4": 14541
+      },
+      "failures": {},
+      "logical_bytes_read": 20895792,
+      "signal_bytes_not_read": 17519616000,
+      "error_examples": [],
+      "chunk_row_digests": [
+        "36416019b22a70a9ccbf8088fc43813e1cbeadae523278c5ea92d92f82462f86",
+        "2be303500f09592ea27c576cc7e5348005c9c7dde87a13d1a3892293962fcfe1",
+        "5a114d5865c9c3124848d7e0098e2752dcaf19488ee7ec0fa8ae6135b56abf96",
+        "28b0b98d7f8ecea08c837b9221d7c84cb8c1da74f2ff3123cd62037a82ec8587",
+        "5a74fc65b82b24200bcf91f8b25b1277ae50d19b64f451620cf56f2102ab5782",
+        "583b0b2a66dcfcc5b18a16ae83de53df4ae74c48e5890820dd7d401097327c43",
+        "a4012868c4a3fc4960291675a540d1d15ffa0b28a0b20895cd201ad71e5d75c7",
+        "8cda942bb1a336e3a65c5a555fec87ccceff88e2595ff5539daaf18cc2e53ca9",
+        "5ef1b1f63be2098d96edf2f472b706570e690aa8b5055a6ab8671d4ae76b0f82",
+        "4c077bfb25444f05bb75bfaf5f43f795ed92247bb20a2127ce86b128a6111db0",
+        "5c4bc0bbe74e77dd1b589390acf4c3cdc4c7797fc1965fc04747d9faf01b0b1e",
+        "c1b26c1d43df33cf4d538326e72b5b2602e757077d0d52e173d0f2ece60e089e",
+        "cc99291f2529f7f51f95de1a3a502707d917a2c5adf1d106371b1e7a5c1b992b",
+        "b492bad3827ad11e9384cfa9b659264d9e9fc142137c0a8926157534f1c4987c",
+        "e7d7f2e040914b1b73a5ea045590c225bad185457aa35737dce08347494f5787",
+        "282faa645c9a6467f6c9172fcfa25778b3ffcacf5cc2cc47779af888db98a223",
+        "0af84669084229d21cc02dd968525b025e29d43fcf7ccea3cd3c908c65613ecb",
+        "51a4f33574dea598c0b531c7c87ff877e1bfdbcae40cd14efc840ad44ccdd65d",
+        "dc53b2b70e932ccb2cb2eba2a5cb4ee070d2660cd33cc84a6d25fe36b24f59f9"
+      ]
+    },
+    {
+      "task": "HMC",
+      "split": "val",
+      "total": 22124,
+      "expected_count": 22124,
+      "count_matches": true,
+      "checked": 22124,
+      "classes": {
+        "0": 4186,
+        "3": 4961,
+        "1": 2136,
+        "2": 7772,
+        "4": 3069
+      },
+      "failures": {},
+      "logical_bytes_read": 5066396,
+      "signal_bytes_not_read": 4247808000,
+      "error_examples": [],
+      "chunk_row_digests": [
+        "c7aa07bee04966c8ceca061a7baa76180e20a61926056f62772e032bba764cfb",
+        "b1c364d8ca573129825dd4a985a7c70422be38f35b211564937bc96df64a940d",
+        "22566353181f5b978d2200e2a096fd67c1dddae1b5b2b585104780dccb90fe88",
+        "997466b68916514a74aa616c96776e6e439a20291be51776cfc108c90fd0b04b",
+        "2f864d6bcbe63037745e99ba16bc616bdfda7b5d5f013db660b94ac35a1e2e41"
+      ]
+    },
+    {
+      "task": "HMC",
+      "split": "test",
+      "total": 23871,
+      "expected_count": 23871,
+      "count_matches": true,
+      "checked": 23871,
+      "classes": {
+        "0": 3805,
+        "1": 2868,
+        "4": 3645,
+        "2": 8843,
+        "3": 4710
+      },
+      "failures": {},
+      "logical_bytes_read": 5466459,
+      "signal_bytes_not_read": 4583232000,
+      "error_examples": [],
+      "chunk_row_digests": [
+        "c4918e7f0d7e1b1748802c00a4015dcd094ccd2a78e1b9be812dc54f00420398",
+        "7b87d411960416a6076c98d66cfcaf9a2a49794247f51669cf43d261d4ea40f9",
+        "46673de5119cb2c73d005b2c27626db710b0c981f65c8ed931cf9b9a8cfdcb5d",
+        "47951ff8a0fafb28740a77f54a0e1fe8fe91ec56845ce9baa47f2f0326e3d659",
+        "30f3c891339fd4819ae1e61899c3e616d3bc97719e0612f299f929f36b2cdb6c"
+      ]
+    },
+    {
+      "task": "Workload",
+      "split": "train",
+      "total": 1508,
+      "expected_count": 1508,
+      "count_matches": true,
+      "checked": 1508,
+      "classes": {
+        "0": 754,
+        "1": 754
+      },
+      "failures": {},
+      "logical_bytes_read": 407160,
+      "signal_bytes_not_read": 183372800,
+      "error_examples": [],
+      "chunk_row_digests": [
+        "6c2e2b04634d5d319c3ccdc1b7b3ef4b39289d06e0da2c2d191b056fb6b8c193"
+      ]
+    },
+    {
+      "task": "Workload",
+      "split": "val",
+      "total": 290,
+      "expected_count": 290,
+      "count_matches": true,
+      "checked": 290,
+      "classes": {
+        "0": 145,
+        "1": 145
+      },
+      "failures": {},
+      "logical_bytes_read": 78300,
+      "signal_bytes_not_read": 35264000,
+      "error_examples": [],
+      "chunk_row_digests": [
+        "b76cde2a2ce47e29c4ffd1bd253fddbd68a3960a3e7c3afc58799376d25af78a"
+      ]
+    },
+    {
+      "task": "Workload",
+      "split": "test",
+      "total": 290,
+      "expected_count": 290,
+      "count_matches": true,
+      "checked": 290,
+      "classes": {
+        "0": 145,
+        "1": 145
+      },
+      "failures": {},
+      "logical_bytes_read": 78300,
+      "signal_bytes_not_read": 35264000,
+      "error_examples": [],
+      "chunk_row_digests": [
+        "0341a9e8ea92b274b728f3e2d1479a79eb3294ef72ad04ef0e4d7eabe4088251"
+      ]
+    },
+    {
+      "task": "TUSL",
+      "split": "train",
+      "total": 174,
+      "expected_count": 174,
+      "count_matches": true,
+      "checked": 174,
+      "classes": {
+        "2": 47,
+        "0": 50,
+        "1": 77
+      },
+      "failures": {},
+      "logical_bytes_read": 152190,
+      "signal_bytes_not_read": 62720000,
+      "error_examples": [],
+      "chunk_row_digests": [
+        "881ceaa5764aced516bff36fca3ec7bfe5b39412a9a582590c9a704f5a927d40"
+      ]
+    },
+    {
+      "task": "TUSL",
+      "split": "val",
+      "total": 66,
+      "expected_count": 66,
+      "count_matches": true,
+      "checked": 66,
+      "classes": {
+        "2": 29,
+        "0": 17,
+        "1": 20
+      },
+      "failures": {},
+      "logical_bytes_read": 59466,
+      "signal_bytes_not_read": 24288000,
+      "error_examples": [],
+      "chunk_row_digests": [
+        "26b967eb1a464beb8ac9b9020ccffae6e7f92ca4fd1fabdd5d030116d4ec756d"
+      ]
+    },
+    {
+      "task": "TUSL",
+      "split": "test",
+      "total": 60,
+      "expected_count": 60,
+      "count_matches": true,
+      "checked": 60,
+      "classes": {
+        "2": 24,
+        "0": 33,
+        "1": 3
+      },
+      "failures": {},
+      "logical_bytes_read": 54060,
+      "signal_bytes_not_read": 22080000,
+      "error_examples": [],
+      "chunk_row_digests": [
+        "5ce7ebeb1102c9259ea87574abeab021a97482bebdfa3c0935beea95274b3fe8"
+      ]
+    }
+  ],
+  "scope": "All source pickle labels vs raw annotations or source directory/task labels. No EEG clinical relabelling.",
+  "labels_only_reader": true,
+  "source_catalog_sha256": "c44a49c3e13b609ff6acea025b2f9a334cbdb7fb41dbcdd2d7545a7bb0edae7b",
+  "integrity_scope": "Label-envelope digests only; large EEG byte buffers replaced in memory, input files read-only. Full EEG content/hash is not audited."
+}

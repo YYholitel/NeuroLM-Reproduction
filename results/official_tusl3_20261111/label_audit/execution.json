@@ -1,0 +1,26 @@
+{
+  "execution": "Read-only CPU label audit on the actual TI-ONE CFS input root",
+  "workers": 64,
+  "notebook_cgroup_cpu_quota": 64,
+  "notebook_cgroup_memory_bytes": 137438953472,
+  "reader_constructed_cases": 60,
+  "reader_real_cases": 1060,
+  "code_sha256": {
+    "audit_all_labels.py": "537f72b0646471512257587905800377a65e209bc6e5d7d46c0134ca69a17dc4",
+    "label_only_pickle.py": "e101519d08c3e8e2646629f5c2d70e3b126195825a87d3d1af42e28e9904a446",
+    "audit_cloud_labels.py": "8b69f6629a7044d852805eb9b0469986aab4b6d8bc69daf0cb67493965d98328"
+  },
+  "private_evidence_sha256": {
+    "raw_label_catalog.private.json": "c44a49c3e13b609ff6acea025b2f9a334cbdb7fb41dbcdd2d7545a7bb0edae7b",
+    "cloud_samples_independent.json": "7e2b533624b1fd31e5c43ef0110d66901deebddf7460f464e894bd544a01f969",
+    "tusl-split-proposal/manifest.private.json": "17a40c93e30fa3c9329aeff4efe9c6276c79475099b3413b5b8c5408472bf384",
+    "partial_source_summary.json": "cc21db54671b20c4938d900c0d425e8d94347ffdde7cbab1273e343b35ce8388"
+  },
+  "full_source_copy_scan_completed": false,
+  "full_actual_cfs_label_scan_completed": true,
+  "full_actual_cfs_exit_code": 0,
+  "full_actual_cfs_checked_at": "2026-11-11T13:29:42.002736+00:00",
+  "full_actual_cfs_files": 660951,
+  "full_actual_cfs_errors": 0,
+  "full_actual_cfs_tmux_session": "label_audit_cloud64 (exited after successful completion)"
+}

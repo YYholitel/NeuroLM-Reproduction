@@ -1,0 +1,107 @@
+{
+  "checked_at": "2026-11-11T12:57:07.719909+00:00",
+  "scope": "Filename-based subject/recording split overlap; no external identity registry",
+  "tasks": {
+    "TUAB": {
+      "splits": {
+        "train": {
+          "windows": 298511,
+          "subjects_or_recordings": 1659,
+          "max_windows_per_group": 2585
+        },
+        "val": {
+          "windows": 73627,
+          "subjects_or_recordings": 416,
+          "max_windows_per_group": 1886
+        },
+        "test": {
+          "windows": 36945,
+          "subjects_or_recordings": 253,
+          "max_windows_per_group": 515
+        }
+      },
+      "overlap": {
+        "train/val": 0,
+        "train/test": 0,
+        "val/test": 0
+      }
+    },
+    "TUEV": {
+      "splits": {
+        "train": {
+          "windows": 68270,
+          "raw_directory_groups": 232,
+          "max_windows_per_group": 4001
+        },
+        "val": {
+          "windows": 15662,
+          "raw_directory_groups": 58,
+          "max_windows_per_group": 968
+        },
+        "test": {
+          "windows": 28305,
+          "raw_directory_groups": 80,
+          "max_windows_per_group": 1642
+        }
+      },
+      "raw_directory_identifier_overlap": {
+        "train/val": 0,
+        "train/test": 0,
+        "val/test": 0
+      },
+      "limitation": "TUEV eval filename prefix is event type, not patient ID. Grouped by original EDF parent directory. Train/eval anonymization schemes differ; no external patient identity linkage was verified."
+    },
+    "HMC": {
+      "splits": {
+        "train": {
+          "windows": 91248,
+          "subjects_or_recordings": 100,
+          "max_windows_per_group": 1256
+        },
+        "val": {
+          "windows": 22124,
+          "subjects_or_recordings": 25,
+          "max_windows_per_group": 1202
+        },
+        "test": {
+          "windows": 23871,
+          "subjects_or_recordings": 26,
+          "max_windows_per_group": 1311
+        }
+      },
+      "overlap": {
+        "train/val": 0,
+        "train/test": 0,
+        "val/test": 0
+      }
+    },
+    "Workload": {
+      "splits": {
+        "train": {
+          "windows": 1508,
+          "subjects_or_recordings": 26,
+          "max_windows_per_group": 58
+        },
+        "val": {
+          "windows": 290,
+          "subjects_or_recordings": 5,
+          "max_windows_per_group": 58
+        },
+        "test": {
+          "windows": 290,
+          "subjects_or_recordings": 5,
+          "max_windows_per_group": 58
+        }
+      },
+      "overlap": {
+        "train/val": 0,
+        "train/test": 0,
+        "val/test": 0
+      }
+    }
+  },
+  "hmc_allocation_check": {
+    "recordings_checked": 151,
+    "num_events_minus_two_mismatches": []
+  }
+}

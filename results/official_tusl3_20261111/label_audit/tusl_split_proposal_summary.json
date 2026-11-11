@@ -1,0 +1,74 @@
+{
+  "status": "PROPOSAL_ONLY_NOT_APPLIED",
+  "seed": 20261111,
+  "windows_retained": 300,
+  "patients": 38,
+  "patient_overlap": 0,
+  "gold_sha256": "715c9c964cfd286391bd5eef23903616902835613e9cdca0e3030e796f588450",
+  "method": "Fixed 23/7/8 patient groups; 10000 random candidates then 30000 pair swaps; metadata-only objective.",
+  "objective_score": 0.06970116471865073,
+  "splits": {
+    "train": {
+      "windows": 185,
+      "patients": 23,
+      "classes": {
+        "2": 62,
+        "0": 61,
+        "1": 62
+      },
+      "references": {
+        "REF": 153,
+        "LE": 32
+      },
+      "channels": {
+        "23": 160,
+        "21": 25
+      },
+      "largest_patient_windows": 46,
+      "largest_patient_fraction": 0.24864864864864866,
+      "previous_train_windows": 91
+    },
+    "val": {
+      "windows": 57,
+      "patients": 7,
+      "classes": {
+        "1": 19,
+        "0": 19,
+        "2": 19
+      },
+      "references": {
+        "LE": 12,
+        "REF": 45
+      },
+      "channels": {
+        "23": 49,
+        "21": 8
+      },
+      "largest_patient_windows": 16,
+      "largest_patient_fraction": 0.2807017543859649,
+      "previous_train_windows": 28
+    },
+    "test": {
+      "windows": 58,
+      "patients": 8,
+      "classes": {
+        "0": 20,
+        "1": 19,
+        "2": 19
+      },
+      "references": {
+        "REF": 47,
+        "LE": 11
+      },
+      "channels": {
+        "23": 50,
+        "21": 8
+      },
+      "largest_patient_windows": 19,
+      "largest_patient_fraction": 0.3275862068965517,
+      "previous_train_windows": 55
+    }
+  },
+  "weight_reuse_warning": "If old training patients enter new validation/test, restart the adapted stage 2 from the original official checkpoint. This only prevents leakage from our adaptation; official checkpoint provenance still applies.",
+  "private_manifest_sha256": "17a40c93e30fa3c9329aeff4efe9c6276c79475099b3413b5b8c5408472bf384"
+}

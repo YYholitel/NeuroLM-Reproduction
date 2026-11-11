@@ -1,0 +1,7 @@
+{
+  "passed": 1060,
+  "errors": 0,
+  "seconds": 0.3984506590059027,
+  "skipped_signal_bytes": 241088000,
+  "method": "Normal full-file SHA+pickle load compared to metadata reader for labels, signal shape and channel names; all 5 tasks and 15 splits sampled."
+}

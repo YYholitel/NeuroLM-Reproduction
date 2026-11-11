@@ -1,0 +1,425 @@
+{
+  "checked_at": "2026-11-11T13:02:54.876332+00:00",
+  "scope": "Stratified sample of actual CFS stage-3 inputs: source SHA, raw label, eval integer, training answer tokens and decoding mapping.",
+  "sampling": "Up to 20 examples per source-annotation class per split; uniformly sampled within each stratum without replacement, random seed 20261111. Full source audit is reported separately.",
+  "requested": 1060,
+  "passed": 1060,
+  "error_count": 0,
+  "errors": [],
+  "training_extra_supervised_prompt_suffix": {
+    "TUAB": "",
+    "TUEV": " (",
+    "HMC": " (",
+    "Workload": "",
+    "TUSL": ""
+  },
+  "row_digest_sha256": "b6f974834613e346054ef5fa84e4111864a0539ad1095bd857d3af125288d992",
+  "sample_manifest_sha256": "7e2b533624b1fd31e5c43ef0110d66901deebddf7460f464e894bd544a01f969",
+  "code_sha256": {
+    "author/downstream_dataset.py": "d1bc08cf7b47b92452ea73b4f63b600ffb06ecd386606b1a7ba654b3c4b04d4f",
+    "scripts/downstream_eval_core.py": "1c1089ab75935e564cd26fa495c46b60ca72039267fd72526b73fcc9b0b14cb1"
+  },
+  "coverage": [
+    {
+      "task": "HMC",
+      "split": "test",
+      "passed": 100
+    },
+    {
+      "task": "HMC",
+      "split": "train",
+      "passed": 100
+    },
+    {
+      "task": "HMC",
+      "split": "val",
+      "passed": 100
+    },
+    {
+      "task": "TUAB",
+      "split": "test",
+      "passed": 40
+    },
+    {
+      "task": "TUAB",
+      "split": "train",
+      "passed": 40
+    },
+    {
+      "task": "TUAB",
+      "split": "val",
+      "passed": 40
+    },
+    {
+      "task": "TUEV",
+      "split": "test",
+      "passed": 120
+    },
+    {
+      "task": "TUEV",
+      "split": "train",
+      "passed": 120
+    },
+    {
+      "task": "TUEV",
+      "split": "val",
+      "passed": 120
+    },
+    {
+      "task": "TUSL",
+      "split": "test",
+      "passed": 43
+    },
+    {
+      "task": "TUSL",
+      "split": "train",
+      "passed": 60
+    },
+    {
+      "task": "TUSL",
+      "split": "val",
+      "passed": 57
+    },
+    {
+      "task": "Workload",
+      "split": "test",
+      "passed": 40
+    },
+    {
+      "task": "Workload",
+      "split": "train",
+      "passed": 40
+    },
+    {
+      "task": "Workload",
+      "split": "val",
+      "passed": 40
+    }
+  ],
+  "classes": [
+    {
+      "task": "HMC",
+      "split": "test",
+      "raw_label": 0,
+      "passed": 20
+    },
+    {
+      "task": "HMC",
+      "split": "test",
+      "raw_label": 1,
+      "passed": 20
+    },
+    {
+      "task": "HMC",
+      "split": "test",
+      "raw_label": 2,
+      "passed": 20
+    },
+    {
+      "task": "HMC",
+      "split": "test",
+      "raw_label": 3,
+      "passed": 20
+    },
+    {
+      "task": "HMC",
+      "split": "test",
+      "raw_label": 4,
+      "passed": 20
+    },
+    {
+      "task": "HMC",
+      "split": "train",
+      "raw_label": 0,
+      "passed": 20
+    },
+    {
+      "task": "HMC",
+      "split": "train",
+      "raw_label": 1,
+      "passed": 20
+    },
+    {
+      "task": "HMC",
+      "split": "train",
+      "raw_label": 2,
+      "passed": 20
+    },
+    {
+      "task": "HMC",
+      "split": "train",
+      "raw_label": 3,
+      "passed": 20
+    },
+    {
+      "task": "HMC",
+      "split": "train",
+      "raw_label": 4,
+      "passed": 20
+    },
+    {
+      "task": "HMC",
+      "split": "val",
+      "raw_label": 0,
+      "passed": 20
+    },
+    {
+      "task": "HMC",
+      "split": "val",
+      "raw_label": 1,
+      "passed": 20
+    },
+    {
+      "task": "HMC",
+      "split": "val",
+      "raw_label": 2,
+      "passed": 20
+    },
+    {
+      "task": "HMC",
+      "split": "val",
+      "raw_label": 3,
+      "passed": 20
+    },
+    {
+      "task": "HMC",
+      "split": "val",
+      "raw_label": 4,
+      "passed": 20
+    },
+    {
+      "task": "TUAB",
+      "split": "test",
+      "raw_label": 0,
+      "passed": 20
+    },
+    {
+      "task": "TUAB",
+      "split": "test",
+      "raw_label": 1,
+      "passed": 20
+    },
+    {
+      "task": "TUAB",
+      "split": "train",
+      "raw_label": 0,
+      "passed": 20
+    },
+    {
+      "task": "TUAB",
+      "split": "train",
+      "raw_label": 1,
+      "passed": 20
+    },
+    {
+      "task": "TUAB",
+      "split": "val",
+      "raw_label": 0,
+      "passed": 20
+    },
+    {
+      "task": "TUAB",
+      "split": "val",
+      "raw_label": 1,
+      "passed": 20
+    },
+    {
+      "task": "TUEV",
+      "split": "test",
+      "raw_label": 1,
+      "passed": 20
+    },
+    {
+      "task": "TUEV",
+      "split": "test",
+      "raw_label": 2,
+      "passed": 20
+    },
+    {
+      "task": "TUEV",
+      "split": "test",
+      "raw_label": 3,
+      "passed": 20
+    },
+    {
+      "task": "TUEV",
+      "split": "test",
+      "raw_label": 4,
+      "passed": 20
+    },
+    {
+      "task": "TUEV",
+      "split": "test",
+      "raw_label": 5,
+      "passed": 20
+    },
+    {
+      "task": "TUEV",
+      "split": "test",
+      "raw_label": 6,
+      "passed": 20
+    },
+    {
+      "task": "TUEV",
+      "split": "train",
+      "raw_label": 1,
+      "passed": 20
+    },
+    {
+      "task": "TUEV",
+      "split": "train",
+      "raw_label": 2,
+      "passed": 20
+    },
+    {
+      "task": "TUEV",
+      "split": "train",
+      "raw_label": 3,
+      "passed": 20
+    },
+    {
+      "task": "TUEV",
+      "split": "train",
+      "raw_label": 4,
+      "passed": 20
+    },
+    {
+      "task": "TUEV",
+      "split": "train",
+      "raw_label": 5,
+      "passed": 20
+    },
+    {
+      "task": "TUEV",
+      "split": "train",
+      "raw_label": 6,
+      "passed": 20
+    },
+    {
+      "task": "TUEV",
+      "split": "val",
+      "raw_label": 1,
+      "passed": 20
+    },
+    {
+      "task": "TUEV",
+      "split": "val",
+      "raw_label": 2,
+      "passed": 20
+    },
+    {
+      "task": "TUEV",
+      "split": "val",
+      "raw_label": 3,
+      "passed": 20
+    },
+    {
+      "task": "TUEV",
+      "split": "val",
+      "raw_label": 4,
+      "passed": 20
+    },
+    {
+      "task": "TUEV",
+      "split": "val",
+      "raw_label": 5,
+      "passed": 20
+    },
+    {
+      "task": "TUEV",
+      "split": "val",
+      "raw_label": 6,
+      "passed": 20
+    },
+    {
+      "task": "TUSL",
+      "split": "test",
+      "raw_label": 0,
+      "passed": 20
+    },
+    {
+      "task": "TUSL",
+      "split": "test",
+      "raw_label": 1,
+      "passed": 3
+    },
+    {
+      "task": "TUSL",
+      "split": "test",
+      "raw_label": 2,
+      "passed": 20
+    },
+    {
+      "task": "TUSL",
+      "split": "train",
+      "raw_label": 0,
+      "passed": 20
+    },
+    {
+      "task": "TUSL",
+      "split": "train",
+      "raw_label": 1,
+      "passed": 20
+    },
+    {
+      "task": "TUSL",
+      "split": "train",
+      "raw_label": 2,
+      "passed": 20
+    },
+    {
+      "task": "TUSL",
+      "split": "val",
+      "raw_label": 0,
+      "passed": 17
+    },
+    {
+      "task": "TUSL",
+      "split": "val",
+      "raw_label": 1,
+      "passed": 20
+    },
+    {
+      "task": "TUSL",
+      "split": "val",
+      "raw_label": 2,
+      "passed": 20
+    },
+    {
+      "task": "Workload",
+      "split": "test",
+      "raw_label": 0,
+      "passed": 20
+    },
+    {
+      "task": "Workload",
+      "split": "test",
+      "raw_label": 1,
+      "passed": 20
+    },
+    {
+      "task": "Workload",
+      "split": "train",
+      "raw_label": 0,
+      "passed": 20
+    },
+    {
+      "task": "Workload",
+      "split": "train",
+      "raw_label": 1,
+      "passed": 20
+    },
+    {
+      "task": "Workload",
+      "split": "val",
+      "raw_label": 0,
+      "passed": 20
+    },
+    {
+      "task": "Workload",
+      "split": "val",
+      "raw_label": 1,
+      "passed": 20
+    }
+  ]
+}
