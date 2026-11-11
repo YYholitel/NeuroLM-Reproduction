@@ -1,0 +1,17 @@
+{
+  "seed-42-stage3-metrics.jsonl": "98a04c6321f6024d17347af8cf4f1264ada7591816716fe15749813f3b893fac",
+  "seed-42-stage2-audit.json": "d29da74bbf21720a37b76b1d01b7b1f3bdfbaf7924be2a5b3b8388b1dfbd153b",
+  "seed-42-stage3-config.json": "44d85b88c9419679c224b9c766cab68b0818f92f8216a0dc4afeac66b543f216",
+  "seed-43-stage3-metrics.jsonl": "70a39f18876f7797a6a7ba2d4a2e5f926d767c0f82d1691ab2f35ee0b06fcaed",
+  "seed-43-stage2-audit.json": "63dfbcf2eed772f7f3f528808f5e9e33883996d7ca4db11351bb5df3c2222573",
+  "seed-43-stage3-config.json": "0073ca7f675192cd4c1d34cd6fcb8d25fffdd3494741e50e48f2c003de5dba6e",
+  "seed-44-stage3-metrics.jsonl": "e02e163df661909de339a53bdc521f38479b1ad04c04e31a7f605688580897bf",
+  "seed-44-stage2-audit.json": "fd5d088146e65a336c11862af57821abee4a20618caec98b420d01df6ef3aed0",
+  "seed-44-stage3-config.json": "08f1e47084a403d13eb9f1462748170feb73b91e68d6e20c4cdeb650d525f22e",
+  "status.json": "0e7f843d786571f8e05862de322ec10bb186773fd133573e30b8cceb9a332477",
+  "seed-42-stage2-epochs.jsonl": "a87c8efc3889be7a411037837de1691b595a05b04a13231390e87ff73aff633f",
+  "seed-43-stage2-epochs.jsonl": "914ca7ed6d7f0ca37163449a7aaf2ad8856ce61975f16aee16f1359acf8a6d73",
+  "seed-44-stage2-epochs.jsonl": "571365582784d5ac66694bf6659a3edd5c2704bda4fb87085c27dedc64ac4577",
+  "latest_training_curves.png": "0e0f3062858992bd3968d3cf4d29410c7c473f2900fe9abd9543ec722eebf5b7",
+  "source_log_sha256.json": "9b89c40977ec66abee6ede4187f7261ded022451283526553246053c41f4bd40"
+}

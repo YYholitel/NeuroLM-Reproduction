@@ -85,3 +85,27 @@ EEG loss fell from about 5.9 at initialization to roughly 4.5–4.7. Text loss i
 [Verified startup evidence](../results/official_tusl3_20261111/startup/health.json) · [Artifact hashes](../results/official_tusl3_20261111/startup/sha256.json)
 
 ![Early training curves; stage three pending](../results/official_tusl3_20261111/startup/training_curves.png)
+
+### Stage two completed; downstream instruction training started
+
+Fresh TI-ONE queries at 2026-11-11 11:10 +08:00 report all three stage-two tasks `SUCCEED` and all three stage-three tasks `RUNNING`. Each stage-two run completed exactly 20 epochs / 19,140 optimizer updates. Independent checkpoint checks passed: every model tensor is finite, the frozen encoder is unchanged, and GPT weights have updated.
+
+| Seed | Final epoch EEG loss | Final epoch text loss | Stage-three task ID |
+| --- | ---: | ---: | --- |
+| 42 | 3.233950 | 3.273237 | `train-1715145841041344256` |
+| 43 | 3.233643 | 3.273342 | `train-1715146431331576576` |
+| 44 | 3.232064 | 3.271887 | `train-1715146740342729472` |
+
+Stage-two final checkpoint SHA-256 values:
+
+- Seed 42: `44b4d06f0649043f782b7555425a85d7ec6a601ef7458593a5a9bf53ce6c15ff`.
+- Seed 43: `e1975c9c94155d0779e08c6c26adc10f150ea31dfe981096c6b1684ee9e06d9e`.
+- Seed 44: `599cc0493fe65b5afc24fd7bf38bb0a83cf5269bd88814d86ed7066a07370096`.
+
+Each downstream task passed strict checkpoint loading against its corresponding hash and includes all 174 TUSL training windows. The three five-epoch jobs now use two H20 GPUs each (six active GPUs total). The 11:10 snapshot records microsteps 3,900 / 3,910 / 3,920 out of 35,910, approximately 54% of the first epoch. Recent GPU utilization averages are 84.91% / 88.14% / 89.29%, with approximately 25.0 GiB allocated per device.
+
+Instruction loss averaged over the last 20 logged observations is 0.1134 / 0.2719 / 0.1387. Observations are logged every ten microsteps and are rank-zero training diagnostics, not validation or test scores. Seed 43 currently has higher instruction loss; all logged losses remain finite. The common configuration is retained to complete the three-seed baseline. No downstream validation/test results have been produced yet, so no claim about improvement over the official model is made.
+
+[Stage-transition snapshot](../results/official_tusl3_20261111/stage3_started/status.json) · [Checkpoint audits and evidence hashes](../results/official_tusl3_20261111/stage3_started/sha256.json)
+
+![Complete stage-two curves and early instruction training](../results/official_tusl3_20261111/stage3_started/latest_training_curves.png)

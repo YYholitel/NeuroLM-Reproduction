@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "stage": 2,
+  "epochs_completed": 20,
+  "microsteps": 19140,
+  "optimizer_steps": 19140,
+  "frozen_encoder_unchanged": true,
+  "gpt_weights_updated": true,
+  "all_model_tensors_finite": true,
+  "checkpoint_path": "/mnt/cfs-omni/lhy/neurolm-reproduction/official-tusl3-20261111-r1/seed-44/stage2/run/checkpoints/NeuroLM-B/ckpt.pt",
+  "checkpoint_sha256": "599cc0493fe65b5afc24fd7bf38bb0a83cf5269bd88814d86ed7066a07370096",
+  "checkpoint_bytes": 2377436187,
+  "encoder_sha256": "9e1dfc249e23c209aa4b2abc11f05a1362bd47619102c2a2c9086c688e0462f7"
+}

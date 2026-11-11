@@ -1,0 +1,161 @@
+{
+  "captured_at": "2026-11-11T11:10:27.740726+08:00",
+  "platform": [
+    {
+      "seed": 42,
+      "stage": 2,
+      "tasks": [
+        {
+          "name": "neurolm-official-tusl-s42-stage2-20261111-r1",
+          "id": "train-1715042690757953280",
+          "status": "SUCCEED"
+        }
+      ]
+    },
+    {
+      "seed": 42,
+      "stage": 3,
+      "tasks": [
+        {
+          "name": "neurolm-official-tusl-s42-stage3-20261111-r1",
+          "id": "train-1715145841041344256",
+          "status": "RUNNING"
+        }
+      ]
+    },
+    {
+      "seed": 43,
+      "stage": 2,
+      "tasks": [
+        {
+          "name": "neurolm-official-tusl-s43-stage2-20261111-r1",
+          "id": "train-1715042690531460864",
+          "status": "SUCCEED"
+        }
+      ]
+    },
+    {
+      "seed": 43,
+      "stage": 3,
+      "tasks": [
+        {
+          "name": "neurolm-official-tusl-s43-stage3-20261111-r1",
+          "id": "train-1715146431331576576",
+          "status": "RUNNING"
+        }
+      ]
+    },
+    {
+      "seed": 44,
+      "stage": 2,
+      "tasks": [
+        {
+          "name": "neurolm-official-tusl-s44-stage2-20261111-r1",
+          "id": "train-1715042690506959616",
+          "status": "SUCCEED"
+        }
+      ]
+    },
+    {
+      "seed": 44,
+      "stage": 3,
+      "tasks": [
+        {
+          "name": "neurolm-official-tusl-s44-stage3-20261111-r1",
+          "id": "train-1715146740342729472",
+          "status": "RUNNING"
+        }
+      ]
+    }
+  ],
+  "active_gpus": 6,
+  "seeds": [
+    {
+      "seed": 42,
+      "stage2_epochs": 20,
+      "stage2_final_epoch_eeg_loss": 3.2339500165160047,
+      "stage2_final_epoch_text_loss": 3.2732373360182425,
+      "stage2_checkpoint_audit_ok": true,
+      "stage3_current_epoch": 1,
+      "stage3_step": 3900,
+      "stage3_total_microsteps": 35910,
+      "stage3_epoch_fraction": 0.5430242272347535,
+      "stage3_latest": {
+        "epoch": 0,
+        "step": 3900,
+        "iter_num": 3899,
+        "lr": 0.0004998991663632966,
+        "instruction_loss": 0.1409139484167099,
+        "text_loss": 3.343932867050171
+      },
+      "stage3_recent20_logs_mean": {
+        "instruction_loss": 0.11338474247604609,
+        "text_loss": 3.3993316173553465
+      },
+      "all_logged_losses_finite": true,
+      "stage3_initial_checkpoint_verified": true,
+      "tusl_train_samples": 174,
+      "gpu_last60s_util_pct": 84.9090909090909,
+      "memory_GiB_max": 25.0009765625,
+      "gpu_count": 2
+    },
+    {
+      "seed": 43,
+      "stage2_epochs": 20,
+      "stage2_final_epoch_eeg_loss": 3.2336432871524567,
+      "stage2_final_epoch_text_loss": 3.2733420618150926,
+      "stage2_checkpoint_audit_ok": true,
+      "stage3_current_epoch": 1,
+      "stage3_step": 3910,
+      "stage3_total_microsteps": 35910,
+      "stage3_epoch_fraction": 0.544416597048176,
+      "stage3_latest": {
+        "epoch": 0,
+        "step": 3910,
+        "iter_num": 3909,
+        "lr": 0.0004998925129615481,
+        "instruction_loss": 0.31816133856773376,
+        "text_loss": 3.631899356842041
+      },
+      "stage3_recent20_logs_mean": {
+        "instruction_loss": 0.2718641124665737,
+        "text_loss": 3.365486133098602
+      },
+      "all_logged_losses_finite": true,
+      "stage3_initial_checkpoint_verified": true,
+      "tusl_train_samples": 174,
+      "gpu_last60s_util_pct": 88.13636363636364,
+      "memory_GiB_max": 25.0009765625,
+      "gpu_count": 2
+    },
+    {
+      "seed": 44,
+      "stage2_epochs": 20,
+      "stage2_final_epoch_eeg_loss": 3.232064140752316,
+      "stage2_final_epoch_text_loss": 3.271887181570039,
+      "stage2_checkpoint_audit_ok": true,
+      "stage3_current_epoch": 1,
+      "stage3_step": 3920,
+      "stage3_total_microsteps": 35910,
+      "stage3_epoch_fraction": 0.5458089668615984,
+      "stage3_latest": {
+        "epoch": 0,
+        "step": 3920,
+        "iter_num": 3919,
+        "lr": 0.0004998856470598264,
+        "instruction_loss": 0.1465149074792862,
+        "text_loss": 3.313616991043091
+      },
+      "stage3_recent20_logs_mean": {
+        "instruction_loss": 0.1386726438999176,
+        "text_loss": 3.4049637794494627
+      },
+      "all_logged_losses_finite": true,
+      "stage3_initial_checkpoint_verified": true,
+      "tusl_train_samples": 174,
+      "gpu_last60s_util_pct": 89.29166666666667,
+      "memory_GiB_max": 25.0009765625,
+      "gpu_count": 2
+    }
+  ]
+}
