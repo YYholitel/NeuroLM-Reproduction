@@ -1,0 +1,18 @@
+{
+  "pipeline_status.json": "396ca78a2f4e79289e96aa60869c6bc75e56d85a400eb9b358114eeb8d345d3c",
+  "seed-42-gpu-last60s.csv": "bb85e717aa60777e533701a66c0a8c3990b25fa128e4f4ea67a17895f95b252e",
+  "seed-42-preflight.json": "b39ec1f164172529c30e957a34e66239c14d01a8c1b50ebdf5570c8bf30b2628",
+  "seed-42-run_manifest.json": "44d85b88c9419679c224b9c766cab68b0818f92f8216a0dc4afeac66b543f216",
+  "seed-42-stage3-metrics.jsonl": "74a782ff1cbb81c0007c28b19d56a7d8bae145887382558b148a831de9613d3c",
+  "seed-43-gpu-last60s.csv": "669c89771f37c3ea5cdd23069a89bcb200d139c389585c88d75555a4675cf065",
+  "seed-43-preflight.json": "7a77c931a315e226ab57f8cecb9d4a4cd8a575ade7955cf639abfba1104988c3",
+  "seed-43-run_manifest.json": "0073ca7f675192cd4c1d34cd6fcb8d25fffdd3494741e50e48f2c003de5dba6e",
+  "seed-43-stage3-metrics.jsonl": "3c13442109c0fa4e75bfe7609471662e84acce525f6d4f23d1a058b6a699952d",
+  "seed-44-checkpoint_audit.json": "f4f085d6bcfdb8e950cb86e996cb6277cf1ea38a71e32bac7e0292b0fc903ebf",
+  "seed-44-gpu-last60s.csv": "956d4135640671b1c84357700a8f3b39b0866c164d5a4d26988fc21a6e04046d",
+  "seed-44-preflight.json": "3bdea6dfc6b83ab8cc1ccabbac85e6d54ee98d2142b5e1fde3e82c3ab73cd694",
+  "seed-44-run_manifest.json": "08f1e47084a403d13eb9f1462748170feb73b91e68d6e20c4cdeb650d525f22e",
+  "seed-44-stage3-metrics.jsonl": "ebe18cf9602e48c1eeea7ada5e650314f45fc1ab29aecb10e4afa08413dc33c3",
+  "status.json": "dc0c112ec9e5bfbf5576c0df1cf726cab8c4581e04e759c33257bf6dc763286b",
+  "training_curves.png": "e1e2e4c5b23672ec897128c91277372bc6144a7d1f8aa7cbda15f7b4a086e165"
+}

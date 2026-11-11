@@ -1,0 +1,78 @@
+{
+  "category": "modified_protocol_exploratory",
+  "paper_comparable": false,
+  "args": {
+    "out_dir": "/mnt/cfs-omni/lhy/neurolm-reproduction/official-tusl3-20261111-r1/seed-42/stage3/train",
+    "dataset_dir": "/mnt/cfs-omni/lhy/neurolm-reproduction/official-tusl3-20261111-r1/data",
+    "tokenizer_path": "/mnt/cfs-omni/lhy/neurolm-reproduction/checkpoints/VQ.pt",
+    "NeuroLM_path": "/mnt/cfs-omni/lhy/neurolm-reproduction/official-tusl3-20261111-r1/seed-42/stage3/../stage2/run/checkpoints/NeuroLM-B/ckpt.pt",
+    "datasets": [
+      "TUAB",
+      "TUEV",
+      "HMC",
+      "Workload",
+      "TUSL"
+    ],
+    "num_workers": 4,
+    "log_interval": 10,
+    "eval_only": false,
+    "skip_evaluation": true,
+    "wandb_log": false,
+    "wandb_project": "NeuroLM",
+    "wandb_runname": "instruction-B",
+    "wandb_api_key": null,
+    "gradient_accumulation_steps": 8,
+    "eeg_batch_size": 32,
+    "text_batch_size": 8,
+    "epochs": 5,
+    "warmup_epochs": 1,
+    "warmup_ratio": 0.1,
+    "save_ckpt_freq": 5,
+    "block_size": 1024,
+    "learning_rate": 0.0005,
+    "min_lr": 5e-05,
+    "weight_decay": 0.1,
+    "beta1": 0.9,
+    "beta2": 0.95,
+    "grad_clip": 1.0,
+    "decay_lr": true,
+    "seed": 42,
+    "compile": false
+  },
+  "world_size": 2,
+  "torch": "2.2.2",
+  "cuda": "12.1",
+  "dtype": "bfloat16",
+  "gpu": "NVIDIA H20",
+  "global_eeg_batch": 512,
+  "global_text_batch": 128,
+  "microsteps_per_epoch": 7182,
+  "dataset_counts": {
+    "TUAB": {
+      "train": 298511,
+      "val": 73627,
+      "test": 36945
+    },
+    "TUEV": {
+      "train": 68270,
+      "val": 15662,
+      "test": 28305
+    },
+    "HMC": {
+      "train": 91248,
+      "val": 22124,
+      "test": 23871
+    },
+    "Workload": {
+      "train": 1508,
+      "val": 290,
+      "test": 290
+    },
+    "TUSL": {
+      "train": 174,
+      "val": 66,
+      "test": 60
+    }
+  },
+  "evaluation": "deferred_constrained"
+}

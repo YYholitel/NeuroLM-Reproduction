@@ -1,0 +1,427 @@
+{
+  "time": "2026-11-11T13:25:47.889989+08:00",
+  "platform": [
+    {
+      "seed": 42,
+      "tasks": [
+        {
+          "name": "neurolm-official-tusl-s42-stage3-20261111-r1",
+          "id": "train-1715145841041344256",
+          "status": "RUNNING"
+        }
+      ]
+    },
+    {
+      "seed": 43,
+      "tasks": [
+        {
+          "name": "neurolm-official-tusl-s43-stage3-20261111-r1",
+          "id": "train-1715146431331576576",
+          "status": "RUNNING"
+        }
+      ]
+    },
+    {
+      "seed": 44,
+      "tasks": [
+        {
+          "name": "neurolm-official-tusl-s44-stage3-20261111-r1",
+          "id": "train-1715146740342729472",
+          "status": "RUNNING"
+        }
+      ]
+    }
+  ],
+  "seeds": [
+    {
+      "seed": 42,
+      "checkpoint_audit": {
+        "ok": true,
+        "stage": 3,
+        "epochs_completed": 5,
+        "microsteps": 35910,
+        "optimizer_steps": 4490,
+        "frozen_encoder_unchanged": true,
+        "gpt_weights_updated": true,
+        "all_model_tensors_finite": true,
+        "checkpoint_path": "/mnt/cfs-omni/lhy/neurolm-reproduction/official-tusl3-20261111-r1/seed-42/stage3/train/checkpoints/instruction-B/ckpt.pt",
+        "checkpoint_sha256": "695a845e87c6d2c0a731d01650815c6a272607a48a9ad3fdc8018866d7caf88e",
+        "checkpoint_bytes": 2377398188,
+        "encoder_sha256": "9e1dfc249e23c209aa4b2abc11f05a1362bd47619102c2a2c9086c688e0462f7"
+      },
+      "completed_splits": [
+        {
+          "task": "TUSL",
+          "split": "test",
+          "metrics": {
+            "samples": 60,
+            "parse_failures": 0,
+            "accuracy": 0.2833333333333333,
+            "balanced_accuracy": 0.5050505050505051,
+            "weighted_f1": 0.3146689895470383,
+            "cohen_kappa": 0.05598243688254663,
+            "class_support": [
+              33,
+              3,
+              24
+            ],
+            "class_recall": [
+              0.18181818181818182,
+              1.0,
+              0.3333333333333333
+            ],
+            "missing_true_classes": [],
+            "confusion_matrix": [
+              [
+                6,
+                18,
+                9,
+                0
+              ],
+              [
+                0,
+                3,
+                0,
+                0
+              ],
+              [
+                5,
+                11,
+                8,
+                0
+              ]
+            ],
+            "confusion_columns": [
+              0,
+              1,
+              2,
+              "invalid"
+            ],
+            "invalid_policy": "retain_in_denominator_and_count_wrong",
+            "roc_auc": null,
+            "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+          }
+        },
+        {
+          "task": "TUSL",
+          "split": "val",
+          "metrics": {
+            "samples": 66,
+            "parse_failures": 0,
+            "accuracy": 0.3787878787878788,
+            "balanced_accuracy": 0.4046991210277214,
+            "weighted_f1": 0.3707723863707981,
+            "cohen_kappa": 0.07865168539325842,
+            "class_support": [
+              17,
+              20,
+              29
+            ],
+            "class_recall": [
+              0.5882352941176471,
+              0.35,
+              0.27586206896551724
+            ],
+            "missing_true_classes": [],
+            "confusion_matrix": [
+              [
+                10,
+                6,
+                1,
+                0
+              ],
+              [
+                3,
+                7,
+                10,
+                0
+              ],
+              [
+                11,
+                10,
+                8,
+                0
+              ]
+            ],
+            "confusion_columns": [
+              0,
+              1,
+              2,
+              "invalid"
+            ],
+            "invalid_policy": "retain_in_denominator_and_count_wrong",
+            "roc_auc": null,
+            "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+          }
+        }
+      ],
+      "full_evaluation_audit_exists": false,
+      "gpu_last60s": {
+        "mean_util_pct": 0.0,
+        "max_GiB": 2.5791015625,
+        "newest_age_s": 6.103989,
+        "gpu_count": 2
+      }
+    },
+    {
+      "seed": 43,
+      "checkpoint_audit": {
+        "ok": true,
+        "stage": 3,
+        "epochs_completed": 5,
+        "microsteps": 35910,
+        "optimizer_steps": 4490,
+        "frozen_encoder_unchanged": true,
+        "gpt_weights_updated": true,
+        "all_model_tensors_finite": true,
+        "checkpoint_path": "/mnt/cfs-omni/lhy/neurolm-reproduction/official-tusl3-20261111-r1/seed-43/stage3/train/checkpoints/instruction-B/ckpt.pt",
+        "checkpoint_sha256": "b54b159ebb998fa86ce525a9a36c2bfad3ce96e734181ed1746cdad863fec3e2",
+        "checkpoint_bytes": 2377398188,
+        "encoder_sha256": "9e1dfc249e23c209aa4b2abc11f05a1362bd47619102c2a2c9086c688e0462f7"
+      },
+      "completed_splits": [
+        {
+          "task": "TUSL",
+          "split": "test",
+          "metrics": {
+            "samples": 60,
+            "parse_failures": 0,
+            "accuracy": 0.18333333333333332,
+            "balanced_accuracy": 0.417929292929293,
+            "weighted_f1": 0.21683899821109126,
+            "cohen_kappa": 0.05130687318489834,
+            "class_support": [
+              33,
+              3,
+              24
+            ],
+            "class_recall": [
+              0.21212121212121213,
+              1.0,
+              0.041666666666666664
+            ],
+            "missing_true_classes": [],
+            "confusion_matrix": [
+              [
+                7,
+                26,
+                0,
+                0
+              ],
+              [
+                0,
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                20,
+                1,
+                0
+              ]
+            ],
+            "confusion_columns": [
+              0,
+              1,
+              2,
+              "invalid"
+            ],
+            "invalid_policy": "retain_in_denominator_and_count_wrong",
+            "roc_auc": null,
+            "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+          }
+        },
+        {
+          "task": "TUSL",
+          "split": "val",
+          "metrics": {
+            "samples": 66,
+            "parse_failures": 0,
+            "accuracy": 0.4696969696969697,
+            "balanced_accuracy": 0.4884719405003381,
+            "weighted_f1": 0.46230081974762827,
+            "cohen_kappa": 0.21106557377049187,
+            "class_support": [
+              17,
+              20,
+              29
+            ],
+            "class_recall": [
+              0.47058823529411764,
+              0.65,
+              0.3448275862068966
+            ],
+            "missing_true_classes": [],
+            "confusion_matrix": [
+              [
+                8,
+                7,
+                2,
+                0
+              ],
+              [
+                1,
+                13,
+                6,
+                0
+              ],
+              [
+                9,
+                10,
+                10,
+                0
+              ]
+            ],
+            "confusion_columns": [
+              0,
+              1,
+              2,
+              "invalid"
+            ],
+            "invalid_policy": "retain_in_denominator_and_count_wrong",
+            "roc_auc": null,
+            "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+          }
+        }
+      ],
+      "full_evaluation_audit_exists": false,
+      "gpu_last60s": {
+        "mean_util_pct": 1.3181818181818181,
+        "max_GiB": 3.3466796875,
+        "newest_age_s": 8.309989,
+        "gpu_count": 2
+      }
+    },
+    {
+      "seed": 44,
+      "checkpoint_audit": {
+        "ok": true,
+        "stage": 3,
+        "epochs_completed": 5,
+        "microsteps": 35910,
+        "optimizer_steps": 4490,
+        "frozen_encoder_unchanged": true,
+        "gpt_weights_updated": true,
+        "all_model_tensors_finite": true,
+        "checkpoint_path": "/mnt/cfs-omni/lhy/neurolm-reproduction/official-tusl3-20261111-r1/seed-44/stage3/train/checkpoints/instruction-B/ckpt.pt",
+        "checkpoint_sha256": "61b14a915d668517db7d7ac74237b6157e298be3927b9650d98ce104f8ba524d",
+        "checkpoint_bytes": 2377398188,
+        "encoder_sha256": "9e1dfc249e23c209aa4b2abc11f05a1362bd47619102c2a2c9086c688e0462f7"
+      },
+      "completed_splits": [
+        {
+          "task": "TUSL",
+          "split": "test",
+          "metrics": {
+            "samples": 60,
+            "parse_failures": 0,
+            "accuracy": 0.16666666666666666,
+            "balanced_accuracy": 0.4078282828282829,
+            "weighted_f1": 0.1917142857142857,
+            "cohen_kappa": 0.021526418786692734,
+            "class_support": [
+              33,
+              3,
+              24
+            ],
+            "class_recall": [
+              0.18181818181818182,
+              1.0,
+              0.041666666666666664
+            ],
+            "missing_true_classes": [],
+            "confusion_matrix": [
+              [
+                6,
+                24,
+                3,
+                0
+              ],
+              [
+                0,
+                3,
+                0,
+                0
+              ],
+              [
+                3,
+                20,
+                1,
+                0
+              ]
+            ],
+            "confusion_columns": [
+              0,
+              1,
+              2,
+              "invalid"
+            ],
+            "invalid_policy": "retain_in_denominator_and_count_wrong",
+            "roc_auc": null,
+            "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+          }
+        },
+        {
+          "task": "TUSL",
+          "split": "val",
+          "metrics": {
+            "samples": 66,
+            "parse_failures": 0,
+            "accuracy": 0.45454545454545453,
+            "balanced_accuracy": 0.4858012170385395,
+            "weighted_f1": 0.4454010042245336,
+            "cohen_kappa": 0.184346035015448,
+            "class_support": [
+              17,
+              20,
+              29
+            ],
+            "class_recall": [
+              0.6470588235294118,
+              0.5,
+              0.3103448275862069
+            ],
+            "missing_true_classes": [],
+            "confusion_matrix": [
+              [
+                11,
+                1,
+                5,
+                0
+              ],
+              [
+                2,
+                10,
+                8,
+                0
+              ],
+              [
+                12,
+                8,
+                9,
+                0
+              ]
+            ],
+            "confusion_columns": [
+              0,
+              1,
+              2,
+              "invalid"
+            ],
+            "invalid_policy": "retain_in_denominator_and_count_wrong",
+            "roc_auc": null,
+            "roc_auc_note": "Unavailable without valid scores; never computed from generated hard labels or a filtered subset."
+          }
+        }
+      ],
+      "full_evaluation_audit_exists": false,
+      "gpu_last60s": {
+        "mean_util_pct": 15.772727272727273,
+        "max_GiB": 3.3466796875,
+        "newest_age_s": 5.490989,
+        "gpu_count": 2
+      }
+    }
+  ]
+}

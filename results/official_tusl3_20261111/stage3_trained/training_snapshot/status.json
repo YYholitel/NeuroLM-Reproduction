@@ -1,0 +1,184 @@
+{
+  "time": "2026-11-11T13:24:36.974862+08:00",
+  "seeds": [
+    {
+      "seed": 42,
+      "last": {
+        "epoch": 4,
+        "step": 7182,
+        "iter_num": 35909,
+        "lr": 5.000000106300776e-05,
+        "instruction_loss": 0.015346337109804153,
+        "text_loss": 3.2965269088745117
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "logs": 718,
+          "instruction_loss": 0.24149543825215283,
+          "text_loss": 3.3492188845504294
+        },
+        {
+          "epoch": 2,
+          "logs": 718,
+          "instruction_loss": 0.08867060766921153,
+          "text_loss": 3.3333475118227986
+        },
+        {
+          "epoch": 3,
+          "logs": 718,
+          "instruction_loss": 0.06220189585353048,
+          "text_loss": 3.2629698073299482
+        },
+        {
+          "epoch": 4,
+          "logs": 718,
+          "instruction_loss": 0.042380574732321034,
+          "text_loss": 3.1926338835347
+        },
+        {
+          "epoch": 5,
+          "logs": 719,
+          "instruction_loss": 0.02678991321433876,
+          "text_loss": 3.1409727167519477
+        }
+      ],
+      "all_logged_losses_finite": true,
+      "recent20": {
+        "instruction_loss": 0.02103560590185225,
+        "text_loss": 3.1416695594787596
+      },
+      "gpu_last60s": {
+        "samples": 20,
+        "gpus": 2,
+        "mean_util_pct": 30.3,
+        "max_memory_GiB": 25.0009765625,
+        "newest_sample_age_s": 8.071862
+      }
+    },
+    {
+      "seed": 43,
+      "last": {
+        "epoch": 4,
+        "step": 7182,
+        "iter_num": 35909,
+        "lr": 5.000000106300776e-05,
+        "instruction_loss": 0.028530336916446686,
+        "text_loss": 3.2681918144226074
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "logs": 718,
+          "instruction_loss": 0.30549793461633423,
+          "text_loss": 3.3514772062514155
+        },
+        {
+          "epoch": 2,
+          "logs": 718,
+          "instruction_loss": 0.09330511849612247,
+          "text_loss": 3.3393484696040248
+        },
+        {
+          "epoch": 3,
+          "logs": 718,
+          "instruction_loss": 0.06895687673526263,
+          "text_loss": 3.2673370137520155
+        },
+        {
+          "epoch": 4,
+          "logs": 718,
+          "instruction_loss": 0.04411630284509422,
+          "text_loss": 3.20776419553252
+        },
+        {
+          "epoch": 5,
+          "logs": 719,
+          "instruction_loss": 0.027072297086241696,
+          "text_loss": 3.151684427460311
+        }
+      ],
+      "all_logged_losses_finite": true,
+      "recent20": {
+        "instruction_loss": 0.020058060996234417,
+        "text_loss": 3.145572340488434
+      },
+      "gpu_last60s": {
+        "samples": 22,
+        "gpus": 2,
+        "mean_util_pct": 18.0,
+        "max_memory_GiB": 25.0009765625,
+        "newest_sample_age_s": 4.237862
+      }
+    },
+    {
+      "seed": 44,
+      "last": {
+        "epoch": 4,
+        "step": 7182,
+        "iter_num": 35909,
+        "lr": 5.000000106300776e-05,
+        "instruction_loss": 0.05498567223548889,
+        "text_loss": 3.047499418258667
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "logs": 718,
+          "instruction_loss": 0.2861179508486747,
+          "text_loss": 3.4941833769710615
+        },
+        {
+          "epoch": 2,
+          "logs": 718,
+          "instruction_loss": 0.09113645194679457,
+          "text_loss": 3.339476980538753
+        },
+        {
+          "epoch": 3,
+          "logs": 718,
+          "instruction_loss": 0.06718067094245225,
+          "text_loss": 3.2680598540558456
+        },
+        {
+          "epoch": 4,
+          "logs": 718,
+          "instruction_loss": 0.04641908955433429,
+          "text_loss": 3.196514627063507
+        },
+        {
+          "epoch": 5,
+          "logs": 719,
+          "instruction_loss": 0.029367454779610103,
+          "text_loss": 3.1459329735088746
+        }
+      ],
+      "all_logged_losses_finite": true,
+      "recent20": {
+        "instruction_loss": 0.025406926625873894,
+        "text_loss": 3.0920562386512755
+      },
+      "checkpoint_audit.json": {
+        "ok": true,
+        "stage": 3,
+        "epochs_completed": 5,
+        "microsteps": 35910,
+        "optimizer_steps": 4490,
+        "frozen_encoder_unchanged": true,
+        "gpt_weights_updated": true,
+        "all_model_tensors_finite": true,
+        "checkpoint_path": "/mnt/cfs-omni/lhy/neurolm-reproduction/official-tusl3-20261111-r1/seed-44/stage3/train/checkpoints/instruction-B/ckpt.pt",
+        "checkpoint_sha256": "61b14a915d668517db7d7ac74237b6157e298be3927b9650d98ce104f8ba524d",
+        "checkpoint_bytes": 2377398188,
+        "encoder_sha256": "9e1dfc249e23c209aa4b2abc11f05a1362bd47619102c2a2c9086c688e0462f7"
+      },
+      "gpu_last60s": {
+        "samples": 22,
+        "gpus": 2,
+        "mean_util_pct": 3.727272727272727,
+        "max_memory_GiB": 3.3466796875,
+        "newest_sample_age_s": 2.208862
+      }
+    }
+  ]
+}

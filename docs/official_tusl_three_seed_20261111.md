@@ -109,3 +109,39 @@ Instruction loss averaged over the last 20 logged observations is 0.1134 / 0.271
 [Stage-transition snapshot](../results/official_tusl3_20261111/stage3_started/status.json) · [Checkpoint audits and evidence hashes](../results/official_tusl3_20261111/stage3_started/sha256.json)
 
 ![Complete stage-two curves and early instruction training](../results/official_tusl3_20261111/stage3_started/latest_training_curves.png)
+
+### All instruction training completed; full evaluation in progress
+
+At 2026-11-11 13:25:47 +08:00, all three stage-three checkpoints passed their independent checks: five completed epochs, 35,910 microsteps, 4,490 optimizer updates, finite model tensors, an unchanged frozen encoder, and updated GPT weights. Fresh TI-ONE queries still report `RUNNING` because the same tasks are now evaluating all five validation/test sets. The tmux driver remains alive. Full evaluation audits and final task success are still pending.
+
+The complete training snapshot was captured at 13:24:36 +08:00. All logged instruction/text losses are finite. The table below averages the rank-zero observations recorded every ten microsteps; these are training diagnostics, not dataset-level evaluation scores.
+
+| Seed | Epoch 1 instruction loss | Epoch 5 instruction loss | Epoch 5 text loss |
+| --- | ---: | ---: | ---: |
+| 42 | 0.241495 | 0.026790 | 3.140973 |
+| 43 | 0.305498 | 0.027072 | 3.151684 |
+| 44 | 0.286118 | 0.029367 | 3.145933 |
+
+There were transient spikes during the first instruction epoch, including seed 44's text loss. The subsequent trajectory recovered; the curves retain these spikes rather than concealing them.
+
+Stage-three checkpoint SHA-256 values:
+
+- Seed 42: `695a845e87c6d2c0a731d01650815c6a272607a48a9ad3fdc8018866d7caf88e`.
+- Seed 43: `b54b159ebb998fa86ce525a9a36c2bfad3ce96e734181ed1746cdad863fec3e2`.
+- Seed 44: `61b14a915d668517db7d7ac74237b6157e298be3927b9650d98ce104f8ba524d`.
+
+TUSL is the first completed evaluation task. Each seed includes all 66 validation and 60 test windows with zero parsing failures. These per-split metrics are provisional until the complete five-task independent evaluation audit finishes.
+
+| Seed | TUSL validation balanced accuracy | TUSL test accuracy | TUSL test balanced accuracy | TUSL test weighted F1 |
+| --- | ---: | ---: | ---: | ---: |
+| 42 | 40.47% | 28.33% | 50.51% | 31.47% |
+| 43 | 48.85% | 18.33% | 41.79% | 21.68% |
+| 44 | 48.58% | 16.67% | 40.78% | 19.17% |
+
+TUSL performance is poor despite decreasing training loss. The test split has class supports 33 / 3 / 24; the three models predict class 1 for 32 / 49 / 47 of 60 samples respectively. This observed prediction imbalance does not by itself establish its cause. No improvement over the official model is claimed, and test metrics are not used to select hyperparameters. The fixed three-seed baseline continues through the remaining four datasets before any validation-based tuning decision.
+
+The six allocated H20 GPUs are transitioning from training to inference. The 13:25:47 snapshot's preceding-minute utilization was 0.00% / 1.32% / 15.77% by seed, with peak sampled memory 2.58 / 3.35 / 3.35 GiB per GPU. These are evaluation-transition measurements, not steady-state training throughput.
+
+[Complete training curves and logs](../results/official_tusl3_20261111/stage3_trained/training_snapshot/status.json) · [Checkpoint audits, partial evaluation and GPU snapshot](../results/official_tusl3_20261111/stage3_trained/evaluation_started/evaluation_started.json)
+
+![Complete stage-two and stage-three training curves](../results/official_tusl3_20261111/stage3_trained/training_snapshot/training_curves.png)

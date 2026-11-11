@@ -1,0 +1,15 @@
+{
+  "seed-42-checkpoint-audit.json": "1518cd03b7fad014f916bab2e7cbd3da3ce2e7f5ef024a9f3741b1ebd532f085",
+  "seed-42-TUSL-test-metrics.json": "43ad127eccbb5a7c5906074ebb2cb49b9abd1a5b3c8723a2ae6624ccb8d50b3c",
+  "seed-42-TUSL-val-metrics.json": "56c14191bbbd66bf8080753275c4c970b71ad51440667e00d8290ef671b16aad",
+  "seed-42-gpu-last60s.csv": "4baee88ff4eb31163d1355076f07a6624d9f1e4e12ce580babeca41fe9ee2902",
+  "seed-43-checkpoint-audit.json": "607e193cdd9c89556ffb1d06b5a33fca90779c7fbc2fd36160764114bdbbc9f2",
+  "seed-43-TUSL-test-metrics.json": "49cd15fd83b870ac1c3dc4a2e8acdb024e14a0ce0175bfeb8b9aed8c071f9ddb",
+  "seed-43-TUSL-val-metrics.json": "71f69c4ad90506511ebf7dd38d710bd9bd5ec14ac989d9ecd321caf33c27a352",
+  "seed-43-gpu-last60s.csv": "3cc174f26d41019f7ca60224f256b14025c9718d4485b1e0f56308332150342f",
+  "seed-44-checkpoint-audit.json": "f4f085d6bcfdb8e950cb86e996cb6277cf1ea38a71e32bac7e0292b0fc903ebf",
+  "seed-44-TUSL-test-metrics.json": "dda4213ff1649cad43d76690e5d5d39615e0bda1e43585534eb2096c92dd28dc",
+  "seed-44-TUSL-val-metrics.json": "032bd293164a8f9aafd946c3683cad007c33763af7cb5c1dfba12a484e7981d5",
+  "seed-44-gpu-last60s.csv": "afce27c62769401bd11daf28b68e072f6f7352392052f9fa3b11ab198cb9b93f",
+  "evaluation_started.json": "14feda20a76242f4a0dcc5c30ffdf5c4cfa6bffacc488b144a544b975b7013a3"
+}

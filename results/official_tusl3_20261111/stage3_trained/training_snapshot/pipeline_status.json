@@ -1,0 +1,23 @@
+{
+  "utc": "2026-11-11T05:24:25.873007+00:00",
+  "seeds": {
+    "42": {
+      "stage": 3,
+      "status": "ACTIVE",
+      "id": "train-1715145841041344256",
+      "platform_status": "RUNNING"
+    },
+    "43": {
+      "stage": 3,
+      "status": "ACTIVE",
+      "id": "train-1715146431331576576",
+      "platform_status": "RUNNING"
+    },
+    "44": {
+      "stage": 3,
+      "status": "ACTIVE",
+      "id": "train-1715146740342729472",
+      "platform_status": "RUNNING"
+    }
+  }
+}

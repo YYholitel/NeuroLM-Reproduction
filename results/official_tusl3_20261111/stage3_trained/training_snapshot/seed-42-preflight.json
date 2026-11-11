@@ -1,0 +1,18 @@
+{
+  "ok": true,
+  "initial_checkpoint": "/mnt/cfs-omni/lhy/neurolm-reproduction/official-tusl3-20261111-r1/seed-42/stage2/run/checkpoints/NeuroLM-B/ckpt.pt",
+  "initial_checkpoint_sha256": "44b4d06f0649043f782b7555425a85d7ec6a601ef7458593a5a9bf53ce6c15ff",
+  "frozen_encoder": true,
+  "strict_load": true,
+  "epochs": 5,
+  "counts": {
+    "HMC": 91248,
+    "TUAB": 298511,
+    "TUEV": 68270,
+    "Workload": 1508,
+    "TUSL": 174
+  },
+  "microsteps_per_epoch": 7182,
+  "sampler_drop_last": true,
+  "seed": 42
+}
